@@ -1,0 +1,106 @@
+\section{二元关系}
+\subsection{二元关系的定义}
+\begin{definition}[关系 Relation]
+    设 $ X_1, X_2, \cdots, X_{n} $ 为集合，存在属性 $ P $，使得有序数组 $ (x_1, x_2, \cdots, x_n) $ 满足该属性，
+    则称 $ P $ 为 $ X_1, X_2, \cdots, X_n $ 上的一个 $ n $ 元关系（$ n $-ary Relation），记为 $R$，那么
+    \[
+        R = \{(x_1, x_2, \cdots, x_n)\in \prod^n_{i=1}X_i : P(x_1, x_2, \cdots, x_n)\}
+    \]  
+    特别的，当 $ n=2 $，称为\textbf{二元关系（Binary Relation）}。若 $ (a,b)\in R $，记为 $ aRb $。
+    二元关系 $ R $ 中所有有序对的第一个元素构成的集合称为 $ R $ 的\textbf{定义域（Domain）}，记为 $ \mathrm{dom}R $；
+    二元关系 $ R $ 中所有有序对的第二个元素构成的集合称为 $ R $ 的\textbf{值域（Range）}，记为 $ \mathrm{ran}R $。
+\end{definition}
+\vspace{1em}
+
+\begin{definition}[二元关系的逆 Inverse]
+    设 $ R $ 为集合 $ X, Y $ 上的二元关系，则 $ R $ 的\textbf{逆（Inverse）}，记为 $ R^{-1} $，定义为
+    \[
+        R^{-1} = \{(y,x)\in Y\times X : (x,y)\in R\}
+    \]
+\end{definition}
+\vspace{1em}
+
+\begin{definition}[二元关系的复合 Composition]
+    设 $ R $ 为集合 $ X, Y $ 上的二元关系，$ S $ 为集合 $ Y, Z $ 上的二元关系，则 $ R, S $ 的\textbf{复合（Composition）}，记为 $ S\circ R $，定义为
+    \[
+        S\circ R = \{(x,z)\in X\times Z : \exists y\in Y[(x,y)\in R \land (y,z)\in S]\}
+    \]
+\end{definition}
+\vspace{1em}
+
+\begin{definition}[恒等关系 Identity Relation]
+    设 $ X $ 为集合，则 $ X $ 上的\textbf{恒等关系（Identity Relation）}，记为 $ I_X $，定义为
+    \[
+        I_X = \{(x,x) : x\in X\}
+    \]
+\end{definition}
+
+\begin{proposition}
+    设 $ R, S, T $ 为适当集合上的二元关系，则有
+    \begin{enumerate}
+        \item $ (R^{-1})^{-1} = R $
+        \item $ (S\circ R)^{-1} = R^{-1}\circ S^{-1} $
+        \item $ T\circ (S\circ R) = (T\circ S)\circ R $
+        \item $ F\circ (S \cup R) = (F\circ S) \cup (F\circ R) $
+        \item $ (S \cup R)\circ F = (S\circ F) \cup (R\circ F) $
+        \item $ F\circ (S \cap R) \subseteq (F\circ S) \cap (F\circ R) $
+        \item $ (S \cap R)\circ F \subseteq (S\circ F) \cap (R\circ F) $
+    \end{enumerate}
+\end{proposition}
+\vspace{1em}
+
+\subsection{关系矩阵与关系图}
+
+\begin{definition}[关系矩阵]
+    设 $ R $ 为有限集 $ X, Y $ 上的二元关系，则称 $ R $ 的\textbf{关系矩阵（Relation Matrix）}为
+    \[
+        m_{i,j} = \begin{cases}
+            1, & \text{如果 } (x_i,y_j)\in R \\
+            0, & \text{如果 } (x_i,y_j)\notin R
+        \end{cases}
+    \]
+    其中 $ X=\{x_1, x_2, \ldots, x_n\} $，$ Y=\{y_1, y_2, \ldots, y_m\} $。
+\end{definition}
+\vspace{0.5em}
+
+\begin{definition}[关系图]
+    设 $ X $ 是有限集合，$ R $ 是 $ X $ 上的二元关系，则称 $ R $ 的\textbf{关系图（Relation Graph）}为一个有向图 $ G_R = (V,E) $，其中
+    \begin{itemize}
+        \item 顶点集 $ V = X $；
+        \item 边集 $ E = \{(x_i,x_j) : (x_i,x_j)\in R\} $。
+    \end{itemize}
+\end{definition}
+
+\vspace{1em}
+\subsection{自反性与反自反性}
+
+\begin{definition}
+    设 $ R $ 为集合 $ X $ 上的二元关系，
+    \begin{enumerate}
+        \item \textbf{自反性 Reflexivity}：若对任意 $ x\in X $，$ (x,x)\in R $，则称 $ R $ 具有自反性。
+        \item \textbf{反自反性 Irreflexivity}：若对任意 $ x\in X $， $ (x,x)\notin R $，则称 $ R $ 具有反自反性。
+    \end{enumerate}
+\end{definition}
+% \vspace{0.3em}
+
+\begin{proposition}
+    设 $ R $ 为集合 $ X $ 上的二元关系，则有
+    \begin{enumerate}
+        \item $ R $ 是自反的，当且仅当，$ I_X \subseteq R $
+        \item $ R $ 是反自反的，当且仅当，$ I_X \cap R = \varnothing $
+    \end{enumerate}
+\end{proposition}
+
+\begin{note}
+    如果 $ X $ 是有穷集合，通过关系矩阵或关系图可以更直观的判断该二元关系是否具有自反性或反自反性：
+    \begin{enumerate}
+        \item 关系矩阵：自反性对应矩阵的主对角线全为 1；反自反性对应矩阵的主对角线全为 0
+        \item 关系图：自反性对应每个节点都有一个指向自身的环；反自反性对应没有节点有指向自身的环
+    \end{enumerate}
+    自反性说明该集合中任意一个元素与其自身的都有关系，比如实数集上的等于关系，
+    自然数集上的整除关系等；反之，如果如果集合中任意一个元素与其自身没有关系，
+    那么这种二元关系具有反自反性，比如实数集上的大于关系。不具有自反关系的二元关系不一定是反自反的，
+    比如一个二元关系：a 与 a 的乘积是偶数，这个二元关系在偶数集上是自反的、在奇数集上是反自反的、在自然数集上既不是自反的，也不是反自反的。
+\end{note}
+
+\newpage
