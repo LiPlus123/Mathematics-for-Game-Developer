@@ -1,1 +1,361 @@
-\section{序结构}
+\section{代数结构}
+
+\begin{definition}[代数运算 Algebraic Operation]
+    设 $ X $ 为集合，$ n\in \mathbb{N}^+ $，函数 $ f:X^n \to X $ 称为 $ X $ 上的 $ n $ 元运算，当且仅当，$f$ 满足：
+    \begin{enumerate}
+        \item 封闭性：$ \mathrm{dom}f = X^n $
+    \end{enumerate}
+    特别地，当 $ n=1 $ 时，称 $ f $ 为一元运算；当 $ n=2 $ 时，称 $ f $ 为二元运算。二元运算常用符号 $ \ast,\circ,\cdot $ 等表示，$ f(x,y) $ 简记为 $ x \ast y $。
+\end{definition}
+
+    
+\begin{definition}[代数结构 Algebraic Structure]
+    设 $ X $ 为集合，$ O $ 为 $ X $ 上的运算集，则二元组 $ (X,O) $ 称为代数结构。
+\end{definition}
+
+\begin{definition}[子代数 Subalgebra]
+    设 $ (X,O) $ 为代数结构，$ Y\subseteq X $。二元组 $ (Y,O) $ 称为代数结构 $ (X,O) $ 的子代数，当且仅当，对于任意 $ n $ 元运算 $ f\in O $，满足封闭性 $ \mathrm{dom}f = Y^n $。
+\end{definition}
+\vspace{1em}
+
+\begin{note}
+    代数运算要求函数满足封闭性，也即集合中任意 n 个元素经过运算后仍然属于该集合。
+    代数结构是集合与运算的结合体，在某些代数结构中存在特殊元素，比如单位元、零元，它们属于该代数系统的性质，称为代数常数。
+    集合、运算和代数常数是构成一个代数结构的三要素，它们的性质是代数学研究的主要对象。
+    子代数会从原始结构中继承相关的运算性质，且含有相同的代数常数，因此具有相同的代数结构。
+\end{note}
+\vspace{1em}
+
+\subsection{代数常数}
+
+\begin{definition}[单位元 Identity Element]
+    设 $ (X,\ast) $ 为代数结构。如果存在 $ e_l\in X $，当对任意 $ x\in X $，均有
+    \[
+        e_l \ast x = x
+    \]
+    时，称 $ e_l $ 为 $ (X,\ast) $ 的左单位元。如果存在 $ e_r\in X $，当对任意 $ x\in X $，均有
+    \[
+        x \ast e_r = x
+    \]
+    时，称 $ e_r $ 为 $ (X,\ast) $ 的右单位元。如果 $ e_l = e_r $，则称 $ e_l $（或 $ e_r $）为 $ (X,\ast) $ 的单位元，记为 $ e $。
+\end{definition}
+
+\vspace{1em}
+
+\begin{definition}[零元 Zero Element]
+    设 $ (X,\ast) $ 为代数结构。如果存在 $ z_l\in X $，当对任意 $ x\in X $，均有
+    \[
+        z_l \ast x = z_l
+    \]
+    时，称 $ z_l $ 为 $ (X,\ast) $ 的左零元。如果存在 $ z_r\in X $，当对任意 $ x\in X $，均有
+    \[
+        x \ast z_r = z_r
+    \]
+    时，称 $ z_r $ 为 $ (X,\ast) $ 的右零元。如果 $ z_l = z_r $，则称 $ z_l $（或 $ z_r $）为 $ (X,\ast) $ 的零元，记为 $ z $。
+\end{definition}
+
+\vspace{1em}
+
+\begin{definition}[逆元 Inverse Element]
+    设 $ (X,\ast) $ 为代数结构，$ e $ 为 $ (X,\ast) $ 的单位元。如果对任意 $ x\in X $，均存在 $ y\in X $，使得
+    \[
+        x \ast y = e
+    \]
+    则称 $ y $ 为 $ x $ 关于运算 $ \ast $ 的右逆元，记为 $ x^{-1}_r $。如果对任意 $ x\in X $，均存在 $ y\in X $，使得
+    \[
+        y \ast x = e
+    \]
+    则称 $ y $ 为 $ x $ 关于运算 $ \ast $ 的左逆元，记为 $ x^{-1}_l $。如果对任意 $ x\in X $，均存在 $ y\in X $，使得
+    \[
+        x \ast y = y \ast x = e
+    \]
+    则称 $ y $ 为 $ x $ 关于运算 $ \ast $ 的逆元，记为 $ x^{-1} $。
+\end{definition}
+
+\vspace{1em}
+
+\begin{definition}[反元 Additive Inverse]
+    设 $ (X,+) $ 为代数结构，$ z $ 为 $ (X,+) $ 的零元。如果对任意 $ x\in X $，均存在 $ y\in X $，使得
+    \[
+        x + y = z
+    \]
+    则称 $ y $ 为 $ x $ 关于加法的反元，记为 $ -x $。
+\end{definition}
+
+\vspace{1em}
+
+\subsection{代数算律}
+\begin{definition}[交换律 Commutative Law]
+    设 $ (X,\ast) $ 为代数结构。如果对任意 $ x,y\in X $，均有
+    \[
+        x \ast y = y \ast x
+    \]
+    则称运算 $ \ast $ 满足交换律。
+\end{definition}
+\vspace{1em}
+
+\begin{definition}[结合律 Associative Law]
+    设 $ (X,\ast) $ 为代数结构。如果对任意 $ x,y,z\in X $，均有
+    \[
+        (x \ast y) \ast z = x \ast (y \ast z)
+    \]
+    则称运算 $ \ast $ 满足结合律。
+\end{definition}
+\vspace{1em}
+
+\begin{definition} [分配律 Distributive Law]
+    设 $ (X,+,\cdot) $ 为代数结构。如果对任意 $ x,y,z\in X $，均有
+    \[
+        x \cdot (y + z) = x \cdot y + x \cdot z
+    \]
+    则称运算 $ \cdot $ 对运算 $ + $ 满足左分配律；如果对任意 $ x,y,z\in X $，均有
+    \[
+        (y + z) \cdot x = y \cdot x + z \cdot x
+    \]
+    则称运算 $ \cdot $ 对运算 $ + $ 满足右分配律；如果运算 $ \cdot $ 对运算 $ + $ 同时满足左、右分配律，则称运算 $ \cdot $ 对运算 $ + $ 满足分配律。
+\end{definition}
+\vspace{1em}
+
+\begin{definition}[消去律 Cancellation Law]
+    设 $ (X,\ast) $ 为代数结构。如果对任意 $ a,b,c\in X $，$a\neq z$ 不是零元。当 $ a\ast b = a\ast c $ 时，必有 $ b=c $，则称运算 $ \ast $ 满足左消去律；如果对任意 $ a,b,c\in X $，当 $ b\ast a = c\ast a $ 时，必有 $ b=c $，则称运算 $ \ast $ 满足右消去律；如果运算 $ \ast $ 同时满足左、右消去律，则称运算 $ \ast $ 满足消去律。
+\end{definition}
+\vspace{1em}
+
+\subsection{同态与同构}
+\begin{definition}[同态 Homomorphism]
+    设 $ (X,\ast) $ 和 $ (Y,\circ) $ 为代数结构。如果映射 $ f:X\to Y $ 满足对任意 $ x_1,x_2\in X $，均有
+    \[
+        f(x_1 \ast x_2) = f(x_1) \circ f(x_2)
+    \]
+    则称映射 $ f $ 为从代数结构 $ (X,\ast) $ 到代数结构 $ (Y,\circ) $ 的同态。另外，
+    \begin{enumerate}
+        \item 如果 $ f $ 是单射，则称 $ f $ 为\textbf{单同态 Monomorphism}；
+        \item 如果 $ f $ 是满射，则称 $ f $ 为\textbf{满同态 Epimorphism}；
+        \item 如果 $ f $ 是双射，则称 $ f $ 为\textbf{同构 Isomorphism}。
+    \end{enumerate}
+\end{definition}
+
+\begin{note}
+    同态映射反应了两个同类型代数结构的“相似性”，它可以将一个代数结构里的运算与另一个同类型代数结构的对应运算相关联。
+    如果是同构映射，那么这两个代数结构是等价的，比如，三维空间中全体有向箭头与三维实向量集合同构，那么三维空间中有向箭头的相加和缩放可以归结为三维实向量的相加和数乘，这是解析几何的重要基础。
+\end{note}
+\vspace{1em}
+
+\subsection{群}
+
+\begin{definition}[半群 Semigroup]
+    设 $ (G,\ast) $ 为代数结构。如果运算 $ \ast $ 满足结合律，则称 $ (G,\ast) $ 为半群。也即，$ (G,\ast) $ 是半群，当且仅当，二元运算 $ \ast $ 满足：
+    \begin{enumerate}
+        \item 封闭性：对任意 $ a,b\in G $，有 $ a\ast b\in G $；
+        \item 结合律：对任意 $ a,b,c\in G $，有 $ (a\ast b)\ast c = a\ast (b\ast c) $。
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[幺半群 Monoid]
+    设 $ (M,\ast) $ 为半群。如果存在单位元，则称 $ (M,\ast) $ 为幺半群。也即，$ (M,\ast) $ 是幺半群，当且仅当，二元运算 $ \ast $ 满足：
+    \begin{enumerate}
+        \item 封闭性：对任意 $ a,b\in M $，有 $ a\ast b\in M $；
+        \item 结合律：对任意 $ a,b,c\in M $，有 $ (a\ast b)\ast c = a\ast (b\ast c) $；
+        \item 存在单位元：存在 $ e\in M $，使得对任意 $ a\in M $，有 $ e\ast a = a\ast e = a $。
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[群 Group]
+    设 $ (G,\ast) $ 为幺半群。如果每个元素均有逆元，则称 $ (G,\ast) $ 为群。也即，$ (G,\ast) $ 是群，当且仅当，二元运算 $ \ast $ 满足：
+    \begin{enumerate}
+        \item 封闭性：对任意 $ a,b\in G $，有 $ a\ast b\in G $；
+        \item 结合律：对任意 $ a,b,c\in G $，有 $ (a\ast b)\ast c = a\ast (b\ast c) $；
+        \item 存在单位元：存在 $ e\in G $，使得对任意 $ a\in G $，有 $ e\ast a = a\ast e = a $；
+        \item 存在逆元：对任意 $ a\in G $，存在 $ b\in G $，使得 $ a\ast b = b\ast a = e $。
+    \end{enumerate}
+    只含有单位元的群称为\textbf{平凡群 Trivial Group}，记为 $ \{e\} $；反之，含有除单位元外其他元素的群称为\textbf{非平凡群 Non-Trivial Group}。
+\end{definition}
+
+\begin{definition}[阿贝尔群 Abelian Group]
+    设 $ (G,\ast) $ 为群。如果运算 $ \ast $ 满足交换律，则称 $ (G,\ast) $ 为阿贝尔群或交换群。也即，$ (G,\ast) $ 是交换群，当且仅当，二元运算 $ \ast $ 满足：
+    \begin{enumerate}
+        \item 封闭性：对任意 $ a,b\in G $，有 $ a\ast b\in G $；
+        \item 结合律：对任意 $ a,b,c\in G $，有 $ (a\ast b)\ast c = a\ast (b\ast c) $；
+        \item 存在单位元：存在 $ e\in G $，使得对任意 $ a\in G $，有 $ e\ast a = a\ast e = a $；
+        \item 存在逆元：对任意 $ a\in G $，存在 $ b\in G $，使得 $ a\ast b = b\ast a = e $；
+        \item 交换律：对任意 $ a,b\in G $，有 $ a\ast b = b\ast a $。
+    \end{enumerate}
+\end{definition}
+
+\vspace{1em}
+
+\begin{note}
+    用一幅图展示各种群之间的关系：
+    \begin{center}
+        \begin{tikzpicture}[scale=0.95, transform shape,
+            >=Stealth,
+            node distance=28mm,
+            box/.style={rounded corners, draw, align=center, inner sep=3pt, font=\small}]
+
+            \node[box] (S) {半群\\Semigroup};
+            \node[box, right=of S] (M) {幺半群\\Monoid};
+            \node[box, right=of M] (G) {群\\Group};
+            \node[box, right=of G] (A) {交换群\\Abelian Group};
+
+            \draw[->] (S) -- (M) node[midway, above, yshift=1mm, font=\footnotesize] {+ 单位元};        
+            \draw[->] (M) -- (G) node[midway, above, yshift=1mm, font=\footnotesize] {+ 逆元};
+            \draw[->] (G) -- (A) node[midway, above, yshift=1mm, font=\footnotesize] {+ 交换律};
+
+            \node[below=4mm of S, align=center, font=\scriptsize, inner sep=1pt] {封闭性 + 结合律};
+        \end{tikzpicture}
+        % {\footnotesize 注：从左到右结构逐渐“增强”。幺半群=半群+单位元；群=幺半群+逆元；交换群=群+交换律。}
+    \end{center}
+\end{note}
+
+\vspace{1em}
+
+\begin{example}
+    正整数集上定义普通加法的代数结构 $ ( \mathbb{Z}^+, +) $ 是半群；自然数集上定义普通加法的代数结构 $ (  \mathbb{N}, +) $ 是幺半群；整数集上定义普通加法的代数结构 $ ( \mathbb{Z}, +) $ 是群（交换群），称为整数加群。
+\end{example}
+
+\vspace{1em}
+
+\subsection{环与域}
+
+\begin{definition}[环 Ring]
+    设 $ (R,+,\cdot) $ 为代数结构。如果
+    \begin{enumerate}
+        \item $ (R,+) $ 是交换群；
+        \item $ (R,\cdot) $ 是半群；
+        \item 乘法对加法满足分配律；
+    \end{enumerate}
+    则称 $ (R,+,\cdot) $ 为环。群 $ (R,+) $ 中的单位元记为 $0$，称为加法零元。如果环只有一个元素，则称为\textbf{零环 Zero Ring}，记为 $ \{0\} $；反之，含有两个及以上元素的环称为\textbf{非零环 Non-Zero Ring}。
+\end{definition}
+\vspace{1em}
+
+\begin{definition}[无零因子环 Ring without Zero Divisors]
+    设 $ (R,+,\cdot) $ 为环。如果对任意 $ a,b\in R $，$ a\neq 0 $，$ b\neq 0 $，均有 $ a\cdot b \neq 0 $，则称环 $ (R,+,\cdot) $ 为无零因子环。
+\end{definition}
+\vspace{1em}
+
+\begin{definition}[含幺环 Ring with identity]
+    设 $ (R,+,\cdot) $ 为环。如果存在乘法单位元，则称环 $ (R,+,\cdot) $ 为含幺环。也即 $(R,\cdot)$ 是幺半群，$ (R,+,\cdot) $ 为含幺环。其中，乘法单位元记为 $ e $ 或 $ 1 $，且 $ e\neq 0 $。
+\end{definition}
+
+\vspace{1em}
+
+\begin{definition}[整环 Integral Domain]
+    设 $ (R,+,\cdot) $ 为含幺环。如果 $ (R,+,\cdot) $ 是无零因子环，则称 $ (R,+,\cdot) $ 为整环。
+\end{definition}
+
+\vspace{1em}
+
+\begin{definition}[交换环 Commutative Ring]
+    设 $ (R,+,\cdot) $ 为环。如果乘法 $\cdot$ 满足交换律，则称 $ (R,+,\cdot) $ 为交换环。
+\end{definition}
+
+\vspace{1em}
+
+\begin{definition}[除环 Division Ring]
+    设 $ (R,+,\cdot) $ 为含幺环。如果对任意 $ a\in R $，$ a\neq 0 $，均存在 $ a^{-1}\in R $，使得 $ a\cdot a^{-1} = a^{-1}\cdot a = e $，则称 $ (R,+,\cdot) $ 为除环。也即  $(R-\{0\},\cdot)$ 是群，$ (R,+,\cdot) $ 为含幺环。
+\end{definition}
+
+\vspace{1em}
+
+\begin{example}
+    常见的环有：整数环 $ (\mathbb{Z},+,\cdot) $ 是含幺交换环和整环，但不是除环，因为除法不封闭；
+    多项式环 $ (P[x],+,\cdot) $ 是含幺交换环和整环，但不是除环，因为除法不封闭；
+    矩阵环 $ (M_n(\mathbb{R}),+,\cdot) $ 是含幺环，但不是交换环，因为矩阵乘法不满足交换律，也不是整环，因为存在零因子（非零矩阵相乘可能得零矩阵），但它是除环当且仅当 $ n=1 $；
+    四元数环 $ (\mathbb{H},+,\cdot) $ 是含幺环和除环，但不是交换环，因为四元数乘法不满足交换律。
+\end{example}
+
+\vspace{1em}
+
+\begin{definition}[域 Field]
+    设 $ (F,+,\cdot) $ 为代数结构。如果
+    \begin{enumerate}
+        \item $ (F,+) $ 是交换群；
+        \item $ (F,\cdot) $ 是交换群；
+        \item 乘法对加法满足分配律；
+        \item 除零法则：对任意 $ a\in F $，$ a\neq 0 $，存在 $ b\in F $，使得 $ a\cdot b = 1 $。
+    \end{enumerate}
+    则称 $ (F,+,\cdot) $ 为域。也即，域 $ (F,+,\cdot) $ 是含幺交换环且是除环。
+\end{definition}
+
+\vspace{1em}
+
+\begin{example}
+    常见的域有：有理数域 $ (\mathbb{Q},+,\cdot) $、实数域 $ (\mathbb{R},+,\cdot) $ 和复数域 $ (\mathbb{C},+,\cdot) $
+\end{example}
+
+\vspace{1em}
+
+\begin{note}
+    用一幅图展示各种环之间的关系：
+    \begin{center}
+        \begin{tikzpicture}[scale=0.95, transform shape,
+            >=Stealth,
+            node distance=28mm,
+            box/.style={rounded corners, draw, align=center, inner sep=3pt, font=\small}]
+
+            \node[box] (R) {环\\Ring};
+            \node[box, right=of R] (CR) {交换环\\Commutative Ring};
+            \node[box, below=of R] (IR) {含幺环\\Ring with identity};
+            \node[box, right=of IR] (ID) {整环\\Integral Domain};
+            \node[box, right=of ID] (F) {域\\Field};
+            \node[box, below=of ID] (DR) {除环\\Division Ring};
+
+            \draw[->] (R) -- (CR) node[midway, above, yshift=1mm, font=\footnotesize] {乘法交换律};        
+            \draw[->] (R) -- (IR) node[midway, left, xshift=-1mm, font=\footnotesize] {乘法单位元};
+            \draw[->] (IR) -- (ID) node[midway, above, yshift=1mm, font=\footnotesize] {无零因子};
+            \draw[->] (ID) -- (F) node[midway, above, yshift=1mm, font=\footnotesize] {除零法则};
+            \draw[->] (IR) -- (DR) node[midway, right, xshift=1mm, font=\footnotesize] {乘法逆元};
+            \draw[->] (DR) -- (F) node[midway, right, xshift=1mm, font=\footnotesize] {乘法交换律};
+
+            % \node[below=4mm of R, align=center, font=\scriptsize, inner sep=1pt] {封闭性 + 结合律 + 分配律};
+        \end{tikzpicture}
+        % {\footnotesize 注：从左到右、从上到下结构逐渐“增强”。交换环=环+交换律；含幺环=环+单位元；整环=含幺环+无零因子
+        % ；除环=含幺环+逆元；域=整环+除零法则=除环+交换律。}
+    \end{center}
+\end{note}
+
+\subsection{模与线性空间}
+
+\begin{definition}[模 Module]
+    设 $ (R,+,\cdot) $ 为含幺环，$ (G,+) $ 为阿贝尔群。如果存在一个标量乘法 $ *: R\times G \to G $，满足以下条件：
+    \begin{enumerate}
+        \item 对任意 $ r,s\in R $，$ g\in G $，有 $ (r+s)*g = r*g + s*g $；
+        \item 对任意 $ r\in R $，$ g,h\in G $，有 $ r*(g+h) = r*g + r*h $；
+        \item 对任意 $ r,s\in R $，$ g\in G $，有 $ (r*s)*g = r*(s*g) $；
+        \item 对任意 $ g\in G $，有 $ 1*g = g $。
+    \end{enumerate}
+    则称 $ (G,+) $ 为\textbf{左$ R $-模}。
+    如果存在一个标量乘法 $ *: G\times R \to G $，满足以下条件：
+    \begin{enumerate}
+        \item 对任意 $ r,s\in R $，$ g\in G $，有 $ g*(r+s) = g*r + g*s $；
+        \item 对任意 $ r\in R $，$ g,h\in G $，有 $ (g+h)*r = g*r + h*r $；
+        \item 对任意 $ r,s\in R $，$ g\in G $，有 $ g*(r*s) = (g*r)*s $；
+        \item 对任意 $ g\in G $，有 $ g*1 = g $。
+    \end{enumerate}
+    则称 $ (G,+) $ 为\textbf{右$ R $-模}。
+    如果 $ (R,+,\cdot) $ 是含幺交换环，左、右 $ R $-模没有区别，对任意 $ r\in R $，$ g\in G $，均有 $ r*g = g*r $，则称 $ (G,+) $ 为\textbf{双边$R$-模}，或 \textbf{$R$-模}。
+\end{definition}
+
+\vspace{1em}
+
+\begin{definition}[线性空间 Linear Space]
+    设 $ (F,+,\cdot) $ 为域，$ (V,+) $ 为阿贝尔群。如果存在一个标量乘法 $ \cdot: F\times V \to V $，满足以下条件：
+    \begin{enumerate}
+        \item 对任意 $ r,s\in F $，$ \mathbf{v}\in V $，有 $ (r+s)\cdot \mathbf{v} = r\cdot \mathbf{v} + s\cdot \mathbf{v} $；
+        \item 对任意 $ r\in F $，$ \mathbf{u},\mathbf{v}\in V $，有 $ r\cdot (\mathbf{u}+\mathbf{v}) = r\cdot \mathbf{u} + r\cdot \mathbf{v} $；
+        \item 对任意 $ r,s\in F $，$ \mathbf{v}\in V $，有 $ (r\cdot s)\cdot \mathbf{v} = r\cdot (s\cdot \mathbf{v}) $；
+        \item 对任意 $ \mathbf{v}\in V $，有 $ 1\cdot \mathbf{v} = \mathbf{v} $。
+    \end{enumerate}
+    则称 $ (V,+,\cdot) $ 为 $ F $-线性空间，或向量空间 Vector Space。$V$ 中的元素称为向量 Vector，$F$ 中的元素称为标量 Scalar。
+\end{definition}
+
+\vspace{1em}
+
+\begin{note}
+    线性空间是模的特例，线性空间是定义在域上的模，而模是定义在环上的。
+    线性空间是非常重要的代数结构，是线性代数研究的对象。
+    线性空间中“空间”二字，强调了线性空间的几何意义，解析几何中常用向量表示空间中的点、线、面等几何对象。
+    在线性空间上定义度量结构后，称为赋范线性空间，是泛函分析的研究对象。可以说线性空间是现代数学的基础。
+\end{note}
+
+\newpage

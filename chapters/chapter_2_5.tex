@@ -1,1 +1,99 @@
-\section{拓扑结构}
+\section{序结构}
+
+\begin{definition}[偏序关系 Partial Order Relation]
+    设 $ R $ 为非空集合 $X$ 上的二元关系。称 $ R $ 为 $ X $ 上的偏序关系，当且仅当，$ R $ 满足：对 $ x,y,z\in X $
+    \begin{enumerate}
+        \item 自反性（Reflexivity）：$ (x,x)\in R $；
+        \item 反对称性（Antisymmetry）：若 $ (x,y)\in R $ 且 $ (y,x)\in R $，则 $ x=y $；
+        \item 传递性（Transitivity）：若 $ (x,y)\in R $ 且 $ (y,z)\in R $，则 $ (x,z)\in R $。
+    \end{enumerate}
+    偏序关系常用符号 $ \preceq $ 表示，$ (x,y)\in R $ 简记为 $ x\preceq y $。二元组 $ (X,\preceq) $ 称为偏序集。
+\end{definition}
+\vspace{1em}
+
+\begin{definition}[严格偏序关系 Strict Partial Order Relation]
+    设 $ R $ 为非空集合 $X$ 上的二元关系。称 $ R $ 为 $ X $ 上的严格偏序关系，当且仅当，$ R $ 满足：对 $ x,y,z\in X $
+    \begin{enumerate}
+        \item 反自反性（Irreflexivity）：$ (x,x)\notin R $；
+        \item 反对称性（Antisymmetry）：若 $ (x,y)\in R $ 且 $ (y,x)\in R $，则 $ x=y $；
+        \item 传递性（Transitivity）：若 $ (x,y)\in R $ 且 $ (y,z)\in R $，则 $ (x,z)\in R $。
+    \end{enumerate}
+    严格偏序关系常用符号 $ \prec $ 表示，$ (x,y)\in R $ 简记为 $ x\prec y $。
+\end{definition}
+\vspace{1em}
+
+\begin{definition}[全序关系 Total Order Relation]
+    设 $ \preceq $ 为非空集合 $X$ 上的偏序关系。称 $ \preceq $ 为 $ X $ 上的全序关系，当且仅当，$ \preceq $ 满足：
+    \begin{enumerate}
+        \item 全序性（Totality）：对任意 $ x,y\in X $，要么 $ x \preceq y $，要么 $ y\preceq x $。
+    \end{enumerate}
+    全序关系也称为线序关系，全序关系常用符号 $ \leq $ 表示，二元组 $ (X,\leq) $ 称为全序集或线序集。
+\end{definition}
+
+\vspace{1em}
+
+\begin{note}
+    在集合论中，集合中的元素是没有顺序的概念的，当定义了集合中元素之间的某种顺序关系后，集合才具有了序结构。如果是全序关系，那么这个集合中任意两个元素都是可比的。
+    序关系强调集合元素之间的可比性，如果集合中的元素是也是一些集合，那么集合之间的包含关系是一种偏序关系，集合之间的优势关系也是一种偏序关系。
+\end{note}
+\vspace{1em}
+
+\subsection{上下界}
+
+\begin{definition}[上界 Upper Bound]
+    设 $ (X,\preceq) $ 为偏序集，$ Y\subseteq X $。若存在 $ b\in X $，使得对任意 $ y\in Y $，均有 $ y\preceq b $，则称 $ b $ 为子集 $ Y $ 的上界。
+\end{definition}
+
+\begin{definition}[下界 Lower Bound]
+    设 $ (X,\preceq) $ 为偏序集，$ Y\subseteq X $。若存在 $ a\in X $，使得对任意 $ y\in Y $，均有 $ a\preceq y $，则称 $ a $ 为子集 $ Y $ 的下界。
+\end{definition}
+
+\begin{note}
+    如果子集 $Y$ 存在上界（下界），但不唯一，且不一定属于子集 $ Y $；如果 $ Y $  没有上界（下界），则称 $ Y $ 无界。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[下确界 Infimum]
+    设 $ (X,\preceq) $ 为偏序集，$ Y\subseteq X $。
+    若 $ Y $ 存在下界，且存在 $ i\in X $，使得对任意 $ y\in Y $，均有 $ i\preceq y $，
+    且对任意 $ a\in X $，若 $ a\preceq y $，则有 $ a\preceq i $，则称 $ i $ 为子集 $ Y $ 的下确界，记为 $ i=\inf Y $。
+\end{definition}
+
+\begin{definition}[上确界 Supremum]
+    设 $ (X,\preceq) $ 为偏序集，$ Y\subseteq X $。
+    若 $ Y $ 存在上界，且存在 $ s\in X $，使得对任意 $ y\in Y $，均有 $ y\preceq s $，
+    且对任意 $ b\in X $，若 $ y\preceq b $，则有 $ s\preceq b $，则称 $ s $ 为子集 $ Y $ 的上确界，记为 $ s=\sup Y $。
+\end{definition}
+
+\begin{note}
+    如果 $Y$ 存在上界，那么上确界是所有上界中最小的一个；如果 $Y$ 存在下界，那么下确界是所有下界中最大的一个。
+\end{note}
+
+\vspace{1em}
+
+\begin{theorem}[确界唯一性]
+    设 $ (X,\preceq) $ 为偏序集，$ Y\subseteq X $。若 $ Y $ 存在上确界（下确界），则上确界（下确界）唯一。
+\end{theorem}
+
+\begin{proof}
+    假设 $ s_1,s_2\in X $ 均为子集 $ Y $ 的上确界，且 $ s_1\neq s_2 $。由上确界定义可知，对任意 $ y\in Y $，均有 $ y\preceq s_1 $ 且 $ y\preceq s_2 $，且对任意 $ b\in X $，若 $ y\preceq b $，则有 $ s_1\preceq b $ 且 $ s_2\preceq b $。取 $ b=s_2 $，则有 $ s_1\preceq s_2 $；取 $ b=s_1 $，则有 $ s_2\preceq s_1 $。由反对称性可知，$ s_1=s_2 $，与假设矛盾，因此上确界唯一。下确界唯一的证明类似。
+\end{proof}
+
+\vspace{1em}
+
+\begin{definition}[最小元 Minimal Element]
+    设 $ (X,\preceq) $ 为偏序集，$ Y\subseteq X $。若存在 $ m\in Y $，使得对任意 $ y\in Y $，均有 $ m\preceq y $，则称 $ m $ 为子集 $ Y $ 的最小元。
+\end{definition}
+
+\begin{definition}[最大元 Maximal Element]
+    设 $ (X,\preceq) $ 为偏序集，$ Y\subseteq X $。若存在 $ M\in Y $，使得对任意 $ y\in Y $，均有 $ y\preceq M $，则称 $ M $ 为子集 $ Y $ 的最大元。
+\end{definition}
+
+% \begin{proposition}
+%     设 $ (X,\preceq) $ 为偏序集，$ Y\subseteq X $。若 $ Y $ 存在最小元（最大元），则最小元（最大元）唯一。
+% \end{proposition}
+
+
+\vspace{1em}
+
+\newpage

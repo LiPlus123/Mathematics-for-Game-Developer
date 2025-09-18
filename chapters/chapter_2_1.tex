@@ -34,6 +34,7 @@
         I_X = \{(x,x) : x\in X\}
     \]
 \end{definition}
+\vspace{1em}
 
 \begin{proposition}
     设 $ R, S, T $ 为适当集合上的二元关系，则有
@@ -52,24 +53,56 @@
 \subsection{关系矩阵与关系图}
 
 \begin{definition}[关系矩阵]
-    设 $ R $ 为有限集 $ X, Y $ 上的二元关系，则称 $ R $ 的\textbf{关系矩阵（Relation Matrix）}为
+    设 $ R $ 为有限集 $ X, Y $ 上的二元关系，则 $ R $ 的\textbf{关系矩阵（Relation Matrix）}记为 $ M_R $，其中每一个分量定义为：
     \[
         m_{i,j} = \begin{cases}
-            1, & \text{如果 } (x_i,y_j)\in R \\
-            0, & \text{如果 } (x_i,y_j)\notin R
+            1, & \text{if } (x_i,y_j)\in R \\
+            0, & \text{if } (x_i,y_j)\notin R
         \end{cases}
     \]
     其中 $ X=\{x_1, x_2, \ldots, x_n\} $，$ Y=\{y_1, y_2, \ldots, y_m\} $。
 \end{definition}
-\vspace{0.5em}
+
+\begin{example}
+    设一个二元关系 $ R=\{\left \langle1,1 \right \rangle,\left \langle1,2 \right \rangle,\left \langle2,3 \right \rangle,\left \langle2,4 \right \rangle,\left \langle4,2 \right \rangle\} $，其关系矩阵为
+    \[
+        M_R = \begin{bmatrix}
+            1 & 1 & 0 & 0 \\
+            0 & 0 & 1 & 1 \\
+            0 & 0 & 0 & 0 \\
+            0 & 1 & 0 & 0
+        \end{bmatrix}
+    \]
+    \label{ex:relation_matrix}
+\end{example}
+
+\vspace{1em}
 
 \begin{definition}[关系图]
-    设 $ X $ 是有限集合，$ R $ 是 $ X $ 上的二元关系，则称 $ R $ 的\textbf{关系图（Relation Graph）}为一个有向图 $ G_R = (V,E) $，其中
+    设 $ R $ 为有限集 $ X, Y $ 上的二元关系，则 $ R $ 的\textbf{关系图（Relation Graph）}为一个有向图 $ G_R = (V,E) $，其中
     \begin{itemize}
         \item 顶点集 $ V = X $；
         \item 边集 $ E = \{(x_i,x_j) : (x_i,x_j)\in R\} $。
     \end{itemize}
 \end{definition}
+
+\begin{example}
+    在例 \ref{ex:relation_matrix} 中，关系 $ R $ 的关系图为：
+    \begin{center}
+        \begin{tikzpicture}[>=stealth, node distance=2cm, on grid]
+            \node[circle, draw] (1) {1};
+            \node[circle, draw] (2) [right=of 1] {2};
+            \node[circle, draw] (3) [below=of 2] {3};
+            \node[circle, draw] (4) [left=of 3] {4};
+
+            \draw[->] (1) to [loop above] (1);
+            \draw[->] (1) -- (2);
+            \draw[->] (2) -- (3);
+            \draw[->] (2) -- (4);
+            \draw[->] (4) -- (2);
+        \end{tikzpicture}
+    \end{center}
+\end{example}
 
 \vspace{1em}
 \subsection{自反性与反自反性}
@@ -77,8 +110,8 @@
 \begin{definition}
     设 $ R $ 为集合 $ X $ 上的二元关系，
     \begin{enumerate}
-        \item \textbf{自反性 Reflexivity}：若对任意 $ x\in X $，$ (x,x)\in R $，则称 $ R $ 具有自反性。
-        \item \textbf{反自反性 Irreflexivity}：若对任意 $ x\in X $， $ (x,x)\notin R $，则称 $ R $ 具有反自反性。
+        \item 自反性 Reflexivity：若对任意 $ x\in X $，$ (x,x)\in R $，则称 $ R $ 具有自反性。
+        \item 反自反性 Irreflexivity：若对任意 $ x\in X $， $ (x,x)\notin R $，则称 $ R $ 具有反自反性。
     \end{enumerate}
 \end{definition}
 % \vspace{0.3em}
@@ -102,5 +135,50 @@
     那么这种二元关系具有反自反性，比如实数集上的大于关系。不具有自反关系的二元关系不一定是反自反的，
     比如一个二元关系：a 与 a 的乘积是偶数，这个二元关系在偶数集上是自反的、在奇数集上是反自反的、在自然数集上既不是自反的，也不是反自反的。
 \end{note}
+\vspace{1em}
 
+\subsection{对称性与反对称性}
+\begin{definition}
+    设 $ R $ 为集合 $ X $ 上的二元关系，
+    \begin{enumerate}
+        \item 对称性 Symmetry：任意 $ x,y\in X $，如果 $ (x,y)\in R $ 那么 $ (y,x)\in R $，则称 $ R $ 具有对称性。
+        \item 反对称性 Antisymmetry：任意 $ x,y\in X $ 如果 $ (x,y)\in R $ 且 $ (y,x)\in R $ 那么 $ x=y $，则称 $ R $ 具有反对称性。
+    \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    设 $ R $ 为集合 $ X $ 上的二元关系，则有
+    \begin{enumerate}
+        \item $ R $ 是对称的，当且仅当，$ R = R^{-1} $
+        \item $ R $ 是反对称的，当且仅当，$ R \cap R^{-1} \subseteq I_X $
+    \end{enumerate}
+\end{proposition}
+
+\begin{note}
+    如果 $ X $ 是有穷集合，通过关系矩阵或关系图可以更直观的判断该二元关系是否具有对称性或反对称性：
+    \begin{enumerate}
+        \item 关系矩阵：对称性对应矩阵关于主对角线对称；反对称性对应矩阵关于主对角线对称的位置上不同时为 1
+        \item 关系图：对称性对应每一条有向边 $ (x,y) $ 都有一条与之反向的边 $ (y,x) $；反对称性对应没有两个不同的节点之间有相互指向的边
+    \end{enumerate}
+    对称性说明二元关系与其逆关系是同一个集合，比如实数集上的相等关系是对称的；整数集上模 n 同余是对称的；一个二元关系：a 和 b 在 C 公司是同事也是对称的。
+    另一方面，整数集上的整除关系是反对称的，实数集上的大于等于关系也是反对称的。对称关系和反对称关系并不是互斥的，比如集合 A 上的恒等关系既是对称的，也是反对称的。
+\end{note}
+
+\subsection{传递性}
+\begin{definition}
+    设 $ R $ 为集合 $ X $ 上的二元关系，若对任意 $ x,y,z\in X $，如果 $ (x,y)\in R $ 且 $ (y,z)\in R $ 那么 $ (x,z)\in R $，则称 $ R $ 具有\textbf{传递性（Transitivity）}。
+\end{definition}
+
+\begin{proposition}
+    设 $ R $ 为集合 $ X $ 上的二元关系，则有 $ R $ 是传递的，当且仅当，$ R\circ R \subseteq R $
+\end{proposition}
+
+\begin{note}
+    如果 $ X $ 是有穷集合，通过关系矩阵或关系图可以更直观的判断该二元关系是否具有传递性：
+    \begin{enumerate}
+        \item 关系矩阵：传递性对应矩阵的平方中非零元素对应的位置在原矩阵中也为非零
+        \item 关系图：传递性对应如果存在从节点 $ x $ 到节点 $ y $ 的路径，且存在从节点 $ y $ 到节点 $ z $ 的路径，那么必然存在从节点 $ x $ 到节点 $ z $ 的路径
+    \end{enumerate}
+    实数集上的小于等于关系；整数集上的整除关系；集合的包含关系都具有传递性。集合 A 上的全域，恒等关系也是传递关系。
+\end{note}
 \newpage

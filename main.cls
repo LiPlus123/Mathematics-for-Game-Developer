@@ -5,6 +5,12 @@
 \LoadClass[12pt,a4paper]{book}
 \RequirePackage{ctex}                     % 中文支持
 \RequirePackage{amsmath, amssymb, amsthm} % 数学环境
+\RequirePackage{pgfplots}                 % 绘图支持
+\RequirePackage{tikz}                     % 绘图支持
+% TikZ 扩展库（常用）
+\usetikzlibrary{calc,arrows.meta,positioning}
+\usetikzlibrary{decorations.pathmorphing,shapes.geometric,shapes.misc}
+
 \RequirePackage{mathtools}                % 增强数学环境
 \RequirePackage{physics}                  % 物理学常用符号
 \RequirePackage{bm}                       % 粗体数学符号

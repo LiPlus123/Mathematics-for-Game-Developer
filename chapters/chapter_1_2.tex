@@ -101,6 +101,7 @@
 \begin{note}
 因为满足性质 $ x\neq x $ 的元素并不存在，所以 $ \varnothing $ 中不包含任何元素。根据定义，空集是任意集合的子集。
 \end{note}
+\vspace{1em}
 
 \subsubsection{交集}
 \begin{definition}[交集 Intersection]
@@ -116,10 +117,12 @@
     \caption{交集}
     \label{fig:chapter1_1}
 \end{figure}
+\vspace{1em}
 
 \begin{definition}[分离 Disjoint]
     两个集合 $ A $ 和 $ B $ 是分离的，当且仅当：$ A\cap B = \varnothing $
 \end{definition}
+\vspace{1em}
 
 \subsubsection{差集}
 
@@ -232,19 +235,21 @@
     \[
         (x_1,x_2,\cdots,x_n) \in \prod^n_{i=1}S_i
     \]
+    特别地，当 $ S_i = S $ 时，$ \prod^n_{i=1}S_i $ 记为 $ S^n $。
 \end{definition}
 
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.2\textwidth]{figures/chapter1/chapter1_6} 
-    \caption{笛卡尔积}
-    \label{fig:chapter1_6}
-\end{figure}
+% \begin{figure}[htbp]
+%     \centering
+%     \includegraphics[width=0.2\textwidth]{figures/chapter1/chapter1_6} 
+%     \caption{笛卡尔积}
+%     \label{fig:chapter1_6}
+% \end{figure}
 
 \begin{note}
-    笛卡尔积是构造有序对集合的基本方法。有了有序对的集合，再通过分离公理模式，从中分离出我们感兴趣的有序对，从而构建起集合元素之间的关系，从而为集合定义各种结构。
+    笛卡尔积是构造有序对集合的基本方法。有了有序对的集合，再通过分离公理模式，从中分离出我们感兴趣的有序对，从而构建起集合元素之间的关系，比如，等价关系、偏序关系、函数关系等。
+    集合+关系构成现代数学的基础。布尔巴基学派认为，现代数学的理论大多是集合与某种关系的组合的研究，比如，代数结构（群、环、域等）是集合与代数运算关系的组合，序结构（偏序集、全序集等）是集合与序关系的组合，拓扑结构（拓扑空间、度量空间等）是集合与邻近关系的组合。
 \end{note}
+\vspace{1em}
 
 \begin{proposition}[笛卡尔积的性质]
     设 $A, B, C$ 为集合，
@@ -266,6 +271,7 @@
         \end{enumerate}
     \end{enumerate}
 \end{proposition}
+\vspace{1em}
 
 \subsection{无穷公理}
 
@@ -291,7 +297,7 @@
     设 $ \forall m,n\in\mathbb{N} $ 是自然数，我们说 $ n $ 大于等于 $ m $，记作 $ n\ge m $ 或 $ m\le n $，当且仅当 $ m\subseteq n $。
 \end{definition}
 
-\begin{example}
+\begin{note}
     根据自然数的定义，
     \begin{align*}
         0 &= \{\} = \varnothing\\
@@ -300,7 +306,7 @@
         3 &= 2\cup \{2\} = \{0,1,2\} = \{\varnothing,\{\varnothing\},\{\varnothing,\{\varnothing\}\}\}\\
         \vdots
     \end{align*}
-\end{example}
+\end{note}
 
 \vspace{1em}
 

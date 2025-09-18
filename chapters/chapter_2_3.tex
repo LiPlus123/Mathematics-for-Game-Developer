@@ -1,1 +1,125 @@
-\section{代数结构}
+\section{等价关系}
+
+\begin{definition}[等价关系 Equivalence Relation]
+    设 $ X $ 为非空集合，$ R\subseteq X\times X $ 是 $X$ 上的二元关系。称 $ R $ 为 $ X $ 上的等价关系，当且仅当，对任意 $ x,y,z\in X $，$ R $ 满足：
+    \begin{enumerate}
+        \item 自反性 Reflexivity：$ (x,x)\in R $
+        \item 对称性 Symmetry：若 $ (x,y)\in R $，则 $ (y,x)\in R $
+        \item 传递性 Transitivity：若 $ (x,y)\in R $ 且 $ (y,z)\in R $，则 $ (x,z)\in R $
+    \end{enumerate}
+    对于任意 $ x,y\in X $，若 $ (x,y)\in R $，则称 $ x $ 与 $ y $ 关于关系 $ R $ 等价，记为 $ x\sim y $。可以根据等价关系，将集合划分为若干个互不相交的子集，每个子集称为一个等价类。
+\end{definition}
+
+\begin{note}
+    等价关系是一种特殊的二元关系，需要满足自反性、对称性和传递性。
+\end{note}
+\vspace{1em}
+
+\begin{example}
+    定义在有限集 $X=\{1,2,\cdots,8\}$ 上的关系 $R$：
+    \[
+        R=\{( x,y ) :x,y\in X \wedge x\equiv y(\mathrm{mod}\ 3)\}
+    \]
+    $ x\equiv y(\mathrm{mod}\ 3) $ 称为 $ x,y $ 模 3 相等，不难验证该关系是自反的、对称的和传递的。其中 1、4、7 模 3 等于 1；2、5、8 模 3 等于 2；3、6 模 3 等于 0
+    \label{ex:mod3_equivalence}
+\end{example}
+\vspace{1em}
+
+\begin{definition}[等价类 Equivalence Class]
+    设 $ R $ 为集合 $ X $ 上的等价关系。对于任意 $ x\in X $，定义 $ x $ 的等价类为
+    \[
+        [x]_R = \{y\in X : (x,y)\in R\}
+    \]
+    或简记为
+    \[
+        [x] = \{y\in X : y\sim x\}
+    \]
+    称 $ [x] $ 为包含元素 $ x $ 的等价类。
+    
+\end{definition}
+\begin{note}
+    $ x $ 的等价类是$ A $中所有与 $ x $ 等价的元素构成的集合。在例 \ref{ex:mod3_equivalence} 中，1 的等价类为 $ [1]=\{1,4,7\} $；2 的等价类为 $ [2]=\{2,5,8\} $；3 的等价类为 $ [3]=\{3,6\} $。这三个等价类，互相没有交集，用关系图表示为：
+    \begin{center}
+        \begin{tikzpicture}[
+                >=Stealth,                 % 箭头样式
+                node/.style = {draw, circle, minimum size=8mm}, % 节点样式
+                every edge/.style={draw, -{Stealth}}            % 边为箭头
+            ]
+
+            % 等价类 {1,4,7}
+            \begin{scope}[xshift=0cm]
+                \node[node] (1) at (0,0) {1};
+                \node[node] (4) at (1.2,2.0) {4};
+                \node[node] (7) at (2.4,0) {7};
+                % 自反性（自环）
+                \draw[->] (1) to [loop above] (1);
+                \draw[->] (4) to [loop above] (4);
+                \draw[->] (7) to [loop above] (7);
+                % 对称性（双向箭头）
+                \draw[<->] (1) -- (4);
+                \draw[<->] (4) -- (7);
+                \draw[<->] (1) -- (7);
+            \end{scope}
+
+            % 等价类 {2,5,8}
+            \begin{scope}[xshift=5.0cm]
+                \node[node] (2) at (0,0) {2};
+                \node[node] (5) at (1.2,2.0) {5};
+                \node[node] (8) at (2.4,0) {8};
+                % 自反性（自环）
+                \draw[->] (2) to [loop above] (2);
+                \draw[->] (5) to [loop above] (5);
+                \draw[->] (8) to [loop above] (8);
+                % 对称性（双向箭头）
+                \draw[<->] (2) -- (5);
+                \draw[<->] (5) -- (8);
+                \draw[<->] (2) -- (8);
+            \end{scope}
+
+            % 等价类 {3,6}
+            \begin{scope}[xshift=10.0cm]
+                \node[node] (3) at (0,1.0) {3};
+                \node[node] (6) at (2.4,1.0) {6};
+                % 自反性（自环）
+                \draw[->] (3) to [loop above] (3);
+                \draw[->] (6) to [loop above] (6);
+                % 对称性（双向箭头）
+                \draw[<->] (3) -- (6);
+            \end{scope}
+            
+        \end{tikzpicture}
+    \end{center}
+\end{note}
+\vspace{1em}
+
+\begin{definition}[商集 Quotient Set]
+    设 $ R $ 为集合 $ X $ 上的等价关系。$ X $ 关于 $ R $ 的商集定义为
+    \[
+        X/R = \{[x] : x\in X\}
+    \]
+    称 $ X/R $ 为集合 $ X $ 关于等价关系 $ R $ 的商集。
+    
+\end{definition}
+\begin{note}
+    在例 \ref{ex:mod3_equivalence} 中，商集为
+    \[
+        X/R = \{[1], [2], [3]\} = \{\{1,4,7\}, \{2,5,8\}, \{3,6\}\}
+    \]
+\end{note}
+\vspace{1em}
+
+\subsection{划分}
+\begin{definition}[划分 Partition]
+    设 $ X $ 为非空集合，$ \mathcal{P} $ 是 $ X $ 的幂集。子集族 $\mathcal{S}\subseteq \mathcal{P}$ 称为 $ X $ 的一个划分，当且仅当，$ \mathcal{S} $ 满足：
+    \begin{enumerate}
+        \item 非空性 Non-emptiness：对任意 $ \varnothing \notin \mathcal{S} $
+        \item 覆盖性 Coverage：$ \bigcup_{A\in \mathcal{S}} A = X $
+        \item 互斥性 Mutual Exclusion：对任意 $ A,B\in \mathcal{S} $，若 $ A\neq B $，则 $ A\cap B = \varnothing $
+    \end{enumerate}
+\end{definition}
+
+\begin{note}
+    划分中，每一个元素是都是一个非空子集，这些子集是互不相交的，且它们的并集为整个集合。商集是根据等价关系得到的对集合的划分，不同的等价关系会得到不同的划分。
+\end{note}
+
+\newpage
