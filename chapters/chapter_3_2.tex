@@ -1,0 +1,177 @@
+\section{有理数}
+\begin{definition}[有理数 Rational Number]
+    有序对 $(a,b)\in\mathbb{Z}^2$ 记为 $a/b$，其中，
+    \begin{enumerate}
+        \item 约定 $b\neq 0$。
+        \item 等于关系：$a/b=c/d \iff ad=bc$
+        \item 等价类：任意 $a/b\in\mathbb{Z}^2$ 的等价类为
+        \[
+            [a/b]_{=}=\{(c,d)\in\mathbb{Z}^2:ad=bc\}
+        \]
+    \end{enumerate}
+    称 $\mathbb{Z}^2$ 关于 $=$ 关系的商集 $\mathbb{Z}^2/_{=}= \{[a/b]_{=} : a/b \in \mathbb{Z}^2\}$ 为有理数集，记为 $\mathbb{Q}$。有理数集中的元素称为有理数。
+\end{definition}
+
+\begin{note}
+    在 $a/b$ 中，$/$ 不是除号，而是一个符号，此时还没有定义除法，仅表示这是一个有序对 $(a,b)$。
+    有理数也不是有序对，而是有序对关于等于关系的等价类，比如，$1/2$ 和 $2/4$ 是不同的有序对，但它们属于同一个等价类 $[1/2]_{=}=[2/4]_{=}$，表示同一个有理数。
+    全体整数可以嵌入到有理数集中，即 $\forall n\in\mathbb{Z}$，有 $n = [n/1]_{=}\in\mathbb{Q}$。
+    例如，$0 = [0/1]_{=}$，$1 = [1/1]_{=}$，$2 = [2/1]_{=}$，$3 = [3/1]_{=}$，$\cdots$。$\complement_{\mathbb{Q}}\mathbb{Z}$ 中的元素称为真分数。
+\end{note}
+
+\begin{note}
+    有序对中要求第二个元素不为零，即 $b\neq 0$，这是因为如果 $b=0$，则等于关系将变得不合理，比如，$1/0=2/0$ 将导致 $1\cdot0=2\cdot0$，即 $0=0$，
+    这对任何 $a/0$ 和 $c/0$ 都成立，违背了等于关系的自反性，从而使得所有形如 $a/0$ 的有序对都属于同一个等价类，我们不希望这样的情况出现。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[有理数的加法 Addition of Rational Numbers]
+    设 $[a/b]_{=},[c/d]_{=}\in\mathbb{Q}$，定义加法为
+    \[
+        [a/b]_{=} + [c/d]_{=} = [(ad+bc)/(bd)]_{=}
+    \]
+\end{definition}
+
+\begin{definition}[有理数的乘法 Multiplication of Rational Numbers]
+    设 $[a/b]_{=},[c/d]_{=}\in\mathbb{Q}$，定义乘法为
+    \[
+        [a/b]_{=} \cdot [c/d]_{=} = [(ac)/(bd)]_{=}
+    \]
+\end{definition}
+
+\begin{definition}[有理数的加法逆元 Additive Inverse of Rational Numbers]
+    设 $[a/b]_{=}\in\mathbb{Q}$，定义其加法逆元为
+    \[
+        -[a/b]_{=} = [-a/b]_{=}
+    \]
+    使得，$[a/b]_{=} + -[a/b]_{=} = [0/b^2]_{=}$。
+\end{definition}
+
+\begin{definition}[有理数的减法 Subtraction of Rational Numbers]
+    设 $[a/b]_{=},[c/d]_{=}\in\mathbb{Q}$，定义减法为
+    \[
+        [a/b]_{=} - [c/d]_{=} = [a/b]_{=} + (-[c/d]_{=}) = [(ad-bc)/(bd)]_{=}
+    \]
+\end{definition}
+
+\vspace{1em}
+
+\begin{note}
+    有理数的加法、减法和乘法都是良定义（Well-defined）的，即不依赖于代表元的选取，而且是封闭的。证明略。整数的加法和乘法在有理数集中保持不变。
+    例如，$[2/1]_{=} + [3/1]_{=} = [(2\cdot1+3\cdot1)/(1\cdot1)]_{=} = [5/1]_{=}$，即 $2+3=5$。
+\end{note}
+
+\vspace{1em}
+
+\begin{definition}[有理数的乘法逆元 Multiplicative Inverse of Rational Numbers]
+    设 $[a/b]_{=}\in\mathbb{Q}$，且 $a\neq 0$，定义其乘法逆元为
+    \[
+        [a/b]_{=}^{-1} = [b/a]_{=}
+    \]
+    使得，$[a/b]_{=} \cdot [a/b]_{=}^{-1} = [ab/ab]_{=} = [1/1]_{=}$。
+\end{definition}
+
+\begin{definition}[有理数的除法 Division of Rational Numbers]
+    设 $[a/b]_{=},[c/d]_{=}\in\mathbb{Q}$，且 $c\neq [0/1]_{=}$，定义除法为
+    \[
+        [a/b]_{=} / [c/d]_{=} = [a/b]_{=} \cdot [c/d]_{=}^{-1} = [(ad)/(bc)]_{=}
+    \]
+\end{definition}
+
+\vspace{1em}
+
+\begin{definition}[有理数的整数次幂 Integer Power of Rational Numbers]
+    设 $[a/b]_{=}\in\mathbb{Q}$，$n\in\mathbb{Z}$，定义 $[a/b]_{=}$ 的整数次幂为
+    \[
+        ([a/b]_{=})^n = 
+        \begin{cases}
+            [1/1]_{=}, & n=0 \\
+            [(\prod_{i=1}^{n} a)/(\prod_{i=1}^{n}b)]_{=}, & n>0 \\
+            [(\prod_{i=1}^{-n} b)/(\prod_{i=1}^{-n}a)]_{=}, & n<0, a\neq [0/1]_{=}
+        \end{cases}
+    \]
+\end{definition}
+
+\begin{theorem}[有理数的整数次幂的性质 Properties of Integer Power of Rational Numbers]
+    设 $x,y\in\mathbb{Q}$，$m,n\in\mathbb{Z}$，则
+    \begin{enumerate}
+        \item $x^m \cdot x^n = x^{m+n}$
+        \item $(x^m)^n = x^{mn}$
+        \item 若 $x\neq [0/1]_{=}$，则 $x^m / x^n = x^{m-n}$
+        \item $(xy)^n = x^n y^n$
+    \end{enumerate}
+\end{theorem}
+
+\vspace{1em}
+
+\begin{note}
+    可以证明，任何一个非零有理数都有唯一的乘法逆元。因此，有理数的除法也是良定义的，即不依赖于代表元的选取，而且是封闭的。
+    整数集中，不存在乘法逆元，因此也不存在除法。相比整数集，有理数集扩充了乘法逆元，使得加法、减法、乘法和除法都能良定义。
+\end{note}
+
+\vspace{1em}
+
+\begin{definition}[有理数的序关系 Order Relation of Rational Numbers]
+    设 $[a/b]_{=},[c/d]_{=}\in\mathbb{Q}$，定义序关系为
+    \[
+        [a/b]_{=} \leq [c/d]_{=} \iff 
+        \begin{cases}
+            ad \leq bc, & bd > 0 \\
+            ad \geq bc, & bd < 0
+        \end{cases}
+    \]
+\end{definition}
+
+\begin{definition}[有理数的绝对值 Absolute Value of Rational Numbers]
+    设 $[a/b]_{=}\in\mathbb{Q}$，定义其绝对值为
+    \[
+        |[a/b]_{=}| = 
+        \begin{cases}
+            [a/b]_{=}, & a/b \geq [0/1]_{=} \\
+            -[a/b]_{=}, & a/b < [0/1]_{=}
+        \end{cases}
+    \]
+\end{definition}
+
+\begin{definition}[有理数的距离 Distance of Rational Numbers]
+    设 $[a/b]_{=},[c/d]_{=}\in\mathbb{Q}$，定义它们之间的距离为
+    \[
+        d([a/b]_{=},[c/d]_{=}) = |[a/b]_{=} - [c/d]_{=}|
+    \]
+\end{definition}
+
+\vspace{1em}
+
+\begin{theorem}[有理数绝对值的性质]
+    设 $x,y\in\mathbb{Q}$，则
+    \begin{enumerate}
+        \item 非负性：$|x|\geq [0/1]_{=}$，且 $|x|=[0/1]_{=} \iff x=[0/1]_{=}$
+        \item 乘积的绝对值：$|xy| = |x||y|$
+        \item 幂的绝对值：$|x^n| = |x|^n,\ n\in\mathbb{Z}$
+        \item 商的绝对值：$|x/y| = |x|/|y|,\ y\neq [0/1]_{=}$
+        \item 三角不等式：$|x+y| \leq |x| + |y|$
+        \item 反三角不等式：$||x| - |y|| \leq |x - y|$
+        \item 距离的非负性：$d(x,y) \geq [0/1]_{=}$，且 $d(x,y)=[0/1]_{=} \iff x=y$
+        \item 距离的三角不等式：$d(x,z) \leq d(x,y) + d(y,z)$
+        \item 距离的对称性：$d(x,y) = d(y,x)$
+    \end{enumerate}
+\end{theorem}
+
+\begin{note}
+    三元组 $(\mathbb{Q},+,\cdot)$ 构成一个有理数域，二元组 $(\mathbb{Q},\leq)$ 是一个全序集，二元组 $(\mathbb{Q},d)$ 是一个度量空间。
+\end{note}
+
+\vspace{1em}
+
+\begin{proposition}[有理数的稠密性 Density of Rational Numbers]
+    设 $x,y\in\mathbb{Q}$，且 $x<y$，则存在 $z\in\mathbb{Q}$，使得 $x<z<y$。例如，取 $z=(x+y)/2$。
+\end{proposition}
+
+\begin{note}
+    有理数的稠密性说明任意两个有理数之间，都有无数个有理数。尽管有理数是稠密的，但在有理数之间依然存在无限多的“空隙”，比如, 在 $1$ 和 $2$ 之间，不存在有理数 $x$ 使得 $x^2=2$，因此有理数集存在“空隙”，是“不连续的”。
+\end{note}
+
+
+
+
+\newpage

@@ -1,2 +1,127 @@
 \section{整数}
 
+\begin{definition}[整数 Integer]
+    有序对 $(a,b)\in \mathbb{N}^2$ 记为 $a-b$，其中，
+    \begin{enumerate}
+        \item 等于关系 ：$a-b=c-d \iff a+d=b+c$
+        \item 等价类：任意 $a-b\in\mathbb{N}^2$ 的等价类为
+        \[
+            [a-b]_{=} = \{(c,d)\in\mathbb{N}^2 : a+d=b+c\} 
+        \]
+    \end{enumerate}
+    称 $\mathbb{N}^2$ 关于 $=$ 关系的商集 $\mathbb{N}^2/_{=}= \{[a-b]_{=} : a-b \in \mathbb{N}^2\}= $ 为整数集，记为 $\mathbb{Z}$。
+    整数集中的元素称为整数。
+\end{definition}
+\begin{note}
+    在 $a-b$ 中，$-$ 不是减号，而是一个符号，此时还没有定义减法，仅表示这是一个有序对 $(a,b)$。
+    整数也不是有序对，而是有序对关于等于关系的等价类，比如， $3-5$ 和 $1-3$ 是不同的有序对，但它们属于同一个等价类 $[3-5]_{=}=[1-3]_{=}$，表示同一个整数。
+    全体自然数可以嵌入到整数集中，即 $\forall n\in\mathbb{N}$，有 $n = [n-0]_{=}\in\mathbb{Z}$。
+    例如，$0 = [0-0]_{=}$，$1 = [1-0]_{=}$，$2 = [2-0]_{=}$，$3 = [3-0]_{=}$，$\cdots$。$\complement_{\mathbb{Z}}\mathbb{N}$ 中的元素称为负整数。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[整数的加法 Addition of Integers]
+    设 $[a-b]_{=},[c-d]_{=}\in\mathbb{Z}$，定义加法为
+    \[
+        [a-b]_{=} + [c-d]_{=} = [(a+c)-(b+d)]_{=}
+    \]
+\end{definition}
+
+\begin{definition}[整数的乘法 Multiplication of Integers]
+    设 $[a-b]_{=},[c-d]_{=}\in\mathbb{Z}$，定义乘法为
+    \[
+        [a-b]_{=} \cdot [c-d]_{=} = [(ac+bd)-(ad+bc)]_{=}
+    \]
+\end{definition}
+
+\begin{note}
+    整数的加法和乘法都是良定义（Well-defined）的，即不依赖于代表元的选取，而且是封闭的。证明略。自然数的加法和乘法在整数集中保持不变。
+    例如，$[2-0]_{=} + [3-0]_{=} = [(2+3)-(0+0)]_{=} = [5-0]_{=}$，即 $2+3=5$。
+\end{note}
+
+\vspace{1em}
+
+\begin{definition}[整数加法的逆元 Additive Inverse of Integers]
+    设 $[a-b]_{=}\in\mathbb{Z}$，定义其加法逆元为
+    \[
+        -[a-b]_{=} = [b-a]_{=}
+    \]
+    使得，$[a-b]_{=} + [-[a-b]_{=} = [0-0]_{=}$。
+\end{definition}
+
+\begin{definition}[整数的减法 Subtraction of Integers]
+    设 $[a-b]_{=},[c-d]_{=}\in\mathbb{Z}$，定义减法为
+    \[
+        [a-b]_{=} - [c-d]_{=} = [a-b]_{=} + (-[c-d]_{=}) = [(a+d)-(b+c)]_{=}
+    \]
+\end{definition}
+
+\begin{note}
+    可以证明，任何一个整数都有唯一的加法逆元。因此，整数的减法也是良定义的，即不依赖于代表元的选取，而且是封闭的。
+    自然数集中，不存在加法逆元，因此也不存在减法。整数集相比自然数集，扩充了加法逆元，使得加法和减法都能良定义。
+\end{note}
+
+\vspace{1em}
+
+\begin{theorem}
+    设 $x,y,z\in\mathbb{Z}$，则
+    \begin{enumerate}
+        \item 交换律：$x+y=y+x$，$xy=yx$
+        \item 结合律：$(x+y)+z=x+(y+z)$，$(xy)z=x(yz)$
+        \item 分配律：$x(y+z)=xy+xz$
+        \item 存在加法单位元 $0$，使得 $\forall x\in\mathbb{Z}$，有 $x+0=0+x=x$
+        \item 存在乘法单位元 $1$，使得 $\forall x\in\mathbb{Z}$，有 $x\cdot 1 = 1\cdot x = x$
+        \item 存在加法逆元 $-x$，使得 $\forall x\in\mathbb{Z}$，有 $x+(-x)=(-x)+x=0$
+        \item 乘法对加法的零因子：$\forall x,y\in\mathbb{Z}$，若 $xy=0$，则 $x=0$ 或 $y=0$
+    \end{enumerate}
+\end{theorem}
+
+\vspace{1em}
+
+\begin{definition}[整数的序关系 Order Relation on Integers]
+    设 $[a-b]_{=},[c-d]_{=}\in\mathbb{Z}$，定义序关系为
+    \[
+        [a-b]_{=} \leq [c-d]_{=} \iff a+d \leq b+c
+    \]    
+\end{definition}
+
+\vspace{1em}
+
+\begin{definition}[整数的绝对值 Absolute Value of Integers]
+    设 $[a-b]_{=}\in\mathbb{Z}$，定义其绝对值为
+    \[
+        |[a-b]_{=}| = 
+        \begin{cases}
+            [a-b]_{=} & a\geq b \\
+            -[a-b]_{=} & a < b
+        \end{cases}
+    \]
+\end{definition}
+
+\begin{definition}[整数的绝对值距离 Distance of Absolute Value of Integers]
+    设 $x,y\in\mathbb{Z}$，定义它们的绝对值距离为
+    \[
+        d(x,y) = |x-y|
+    \]
+\end{definition}
+
+\begin{theorem}[整数绝对值的性质 Properties of Absolute Value of Integers]
+    设 $x,y\in\mathbb{Z}$，则
+    \begin{enumerate}
+        \item 非负性：$|x|\geq 0$，且 $|x|=0 \iff x=0$
+        \item 积的绝对值：$|xy|=|x||y|$
+        \item 三角不等式：$|x+y|\leq |x|+|y|$
+        \item 反三角不等式：$||x| - |y|| \leq |x - y|$
+        \item 距离的非负性：$d(x,y) \geq 0$，且 $d(x,y)=0 \iff x=y$
+        \item 距离的三角不等式：$d(x,z) \leq d(x,y) + d(y,z)$
+        \item 距离的对称性：$d(x,y) = d(y,x)$
+    \end{enumerate}
+\end{theorem}
+
+\vspace{1em}
+
+\begin{note}
+    三元组 $(\mathbb{Z},+,\cdot)$ 是一个交换整环。二元组 $(\mathbb{Z},\leq)$ 是一个全序集。二元组 $(\mathbb{Z},d)$ 是一个度量空间。
+\end{note}
+
+\newpage
