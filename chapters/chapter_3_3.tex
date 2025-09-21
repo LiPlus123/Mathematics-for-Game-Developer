@@ -104,12 +104,24 @@
 \end{note}
 \vspace{1em}
 
+\begin{lemma}
+    设 $\{a_n\},\{b_n\}$ 是柯西序列，则 $\{a_n+b_n\}$ 也是柯西序列。
+\end{lemma}
+
 \begin{definition}[实数加法 Addition of Real Numbers]
     设 $[\{a_n\}]_{=},[\{b_n\}]_{=}\in\mathbb{R}$，定义加法为
     \[
         [\{a_n\}]_{=} + [\{b_n\}]_{=} = [\{a_n+b_n\}]_{=}
     \]
 \end{definition}
+
+\begin{proposition}
+    实数加法的定义是良定义（Well-defined）的，即不依赖于代表元的选取，而且是封闭的。
+\end{proposition}
+
+\begin{lemma}
+    设 $\{a_n\},\{b_n\}$ 是柯西序列，则 $\{a_nb_n\}$ 也是柯西序列。
+\end{lemma}
 
 \begin{definition}[实数乘法 Multiplication of Real Numbers]
     设 $[\{a_n\}]_{=},[\{b_n\}]_{=}\in\mathbb{R}$，定义乘法为
@@ -119,13 +131,167 @@
 \end{definition}
 
 \begin{proposition}
-    实数加法和乘法的定义都是良定义（Well-defined）的，即不依赖于代表元的选取，而且是封闭的。
+    实数乘法的定义是良定义（Well-defined）的，即不依赖于代表元的选取，而且是封闭的。
+\end{proposition}
+
+
+\begin{lemma}
+    设 $\{a_n\}$ 是柯西序列，则 $\{-a_n\}$ 也是柯西序列。
+\end{lemma}
+
+
+\begin{definition}[实数加法逆元]
+    设 $[\{a_n\}]_{=}\in\mathbb{R}$，定义其加法逆元为
+    \[
+        -[\{a_n\}]_{=} = [\{-a_n\}]_{=}
+    \]
+    使得，$[\{a_n\}]_{=} + -[\{a_n\}]_{=} = [\{0\}]_{=}$。
+\end{definition}
+
+\begin{proposition}
+    实数的加法逆元是良定义的，任何一个实数都有唯一的加法逆元。
+\end{proposition}
+
+\begin{lemma}
+    设 $\{a_n\}$ 是柯西序列，且 $\{a_n\}\neq \{0\}$，则 $\{a_n^{-1}\}$ 也是柯西序列。
+\end{lemma}
+
+\begin{definition}[实数乘法逆元]
+    设 $[\{a_n\}]_{=}\in\mathbb{R}$，且 $[\{a_n\}]_{=}\neq [\{0\}]_{=}$，定义其乘法逆元为
+    \[
+        [\{a_n\}]_{=}^{-1} = [\{a_n^{-1}\}]_{=}
+    \]
+    使得，$[\{a_n\}]_{=} \cdot [\{a_n\}]_{=}^{-1} = [\{1\}]_{=}$。
+\end{definition}
+
+\begin{proposition}
+    乘法逆元的定义是良定义的，任意非零实数都有唯一的乘法逆元。
 \end{proposition}
 
 \begin{proof}
-    实数加法的封闭性（任意两个实数实数相加依然是实数）：
+    
 \end{proof}
 
+\begin{definition}[实数的减法和除法]
+    设 $[\{a_n\}]_{=},[\{b_n\}]_{=}\in\mathbb{R}$，定义减法为
+    \[
+        [\{a_n\}]_{=} - [\{b_n\}]_{=} = [\{a_n + (-b_n)\}]_{=}
+    \]
+    定义除法为，
+    \[
+        [\{a_n\}]_{=} / [\{b_n\}]_{=} = [\{a_n \cdot b_n^{-1}\}]_{=},\ [\{b_n\}]_{=}\neq [\{0\}]_{=}
+    \]
+\end{definition}
+\vspace{1em}
+
+\begin{definition}[实数的序 Order of Real Numbers]
+    设 $[\{a_n\}]_{=},[\{b_n\}]_{=}\in\mathbb{R}$，定义序为
+    \[
+        [\{a_n\}]_{=} \le [\{b_n\}]_{=} \iff \exists N,\ \forall n>N,\ a_n \le b_n
+    \]
+\end{definition}
+
+\begin{definition}[实数的绝对值 Absolute Value of Real Numbers]
+    设 $[\{a_n\}]_{=}\in\mathbb{R}$，定义其绝对值为
+    \[
+        |[\{a_n\}]_{=}| = 
+        \begin{cases}
+            [\{a_n\}]_{=}, & [\{a_n\}]_{=} \ge [\{0\}]_{=} \\
+            -[\{a_n\}]_{=}, & [\{a_n\}]_{=} < [\{0\}]_{=}
+        \end{cases}
+    \]
+\end{definition}
+
+\begin{definition}[实数的距离 Distance of Real Numbers]
+    设 $[\{a_n\}]_{=},[\{b_n\}]_{=}\in\mathbb{R}$，定义它们之间的距离为
+    \[
+        d([\{a_n\}]_{=},[\{b_n\}]_{=}) = |[\{a_n\}]_{=} - [\{b_n\}]_{=}|
+    \]
+\end{definition}
+
+\vspace{1em}
 \subsection{实数集的完备性}
+实数相比有理数最大的区别是“连续”，准确的说，实数集是完备的。实数的完备性使得极限运算在实数集上是良定义的。
+\vspace{1em}
+
+\begin{definition}[实数序列 sequence of real numbers]
+    函数 $f:\mathbb{N}\to\mathbb{R}$ 为实数序列，记为 $\{x_n\}$，其中 $x_n=f(n),\ n\ge m,\cdots$。
+\end{definition}
+
+\begin{definition}[实数柯西序列 Cauchy sequence of real numbers]
+    设 $\{x_n\}$ 是实数序列。$\{x_n\}$ 是柯西序列，当且仅当，对于任意给定的实数 $\epsilon>0$，都存在一个正整数 $N$，使得当 $i,j>N$ 时，有
+    \[
+        d(x_i,x_j) = |x_i - x_j| \le \epsilon
+    \]
+\end{definition}
+
+\begin{definition}[有界序列 bounded sequence of real numbers]
+    设 $\{x_n\}$ 是实数序列。如果存在实数 $M>0$，使得对任意的 $n$ 都有 $|x_n|\le M$，则称 $\{x_n\}$ 是有界序列。
+\end{definition}
+
+\begin{theorem}
+    实数柯西序列都是有界序列；有界序列不一定是柯西序列。
+\end{theorem}
+
+\begin{note}
+    实数序列的定义同有理数序列，不过序列是由实数构成的。类似地可以定义实数柯西序列和有界序列。
+    一个实数序列是柯西序列蕴含该序列是有界序列。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[收敛序列与序列极限 Convergent Sequence and Limit of Sequence]
+    设 $\{x_n\}$ 是实数序列。$\{x_n\}$ 收敛于实数 $x$，记为 $\lim_{n\to\infty} x_n = x$，当且仅当，对于任意给定的实数 $\epsilon>0$，都存在一个正整数 $N$，使得当 $n>N$ 时，有
+    \[
+        d(x_n,x) = |x_n - x| \le \epsilon
+    \]
+    此时，称 $x$ 为序列 $\{x_n\}$ 的极限。
+\end{definition}
+
+\begin{lemma}
+    收敛序列的极限是唯一。
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+\begin{theorem}[确界存在定理 Existence of Supremum and Infimum]
+    设 $A\subseteq\mathbb{R}$，$A$ 非空且有上界，则 $A$ 有最小上界（即上确界）；$A$ 非空且有下界，则 $A$ 有最大下界（即下确界）。
+\end{theorem}
+
+\begin{proof}
+    
+\end{proof}
+
+\begin{note}
+    确界存在性是实数集完备性的重要定理。有理数集则不具备这一性质。例 例 \ref{ex:sqrt2-approx} 中的两个柯西序列在有理数集上界，比如 3、2、1.5 等都是序列的上界，但没有最小上界，因为 $\sqrt{2}\notin\mathbb{Q}$。
+\end{note}
+
+
+\begin{theorem}[柯西收敛准则 Cauchy Convergence Criterion]
+    实数序列 $\{x_n\}$ 收敛的充分必要条件是：对于任给的实数 $\epsilon>0$，都存在正整数 $N$，使得当 $i,j>N$ 时，有 $d(x_i,x_j) = |x_i - x_j| \le \epsilon$。
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+
+\begin{theorem}[实数集的完备性 Completeness of Real Numbers]
+    实数集具有完备性，当且仅当，所有的实数柯西序列都是收敛实数序列。也即，在实数集中，柯西序列与收敛序列是等价的，实数集对极限运算封闭。
+\end{theorem}
+
+\begin{note}
+    确界存在定理、柯西收敛准则和实数完备性是三条条等价的定理，它们说明了实数集和有理数集的本质区别——有理数集是稠密的，而实数集是完备的。
+    稠密的有理数集对极限运算不封闭，一个有理数序柯西序列的极限可能不是有理数，
+    例 \ref{ex:sqrt2-approx} 中的两个柯西序列在有理数集上没有极限，但在实数集上都收敛于 $\sqrt{2}$。
+    完备性保证了有理数柯西列一定能收敛到一个实数，而不会收敛到一个不属于实数集的元素。换句话说，完备性保证了实数集对极限运算封闭。
+\end{note}
+
+\vspace{1em}
+
+
+
+\subsection{实数的幂运算}
+
+
 
 \newpage

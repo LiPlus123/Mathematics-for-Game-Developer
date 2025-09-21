@@ -1,3 +1,34 @@
 \section{复数}
+复数的引入源自解三次代数方程的负数平方根问题 。在实数集中，一元二次次方程 $x^2 + 1 = 0$ 无解。
+如果，令 $i^2=-1$，称为虚数单位（Imaginary Unit），定义一个全新的数集——复数集，那么任何一个代数方程在复数集中都有解，并且解的个数恰好等于方程的次数，该结论称为代数基本定理。
+
+\begin{theorem}[代数基本定理 Fundamental Theorem of Algebra]
+    每一个次数为 $n$ 的非零单变量复系数多项式 $P(z)=a_nz^n + a_{n-1}z^{n-1} + \cdots + a_1z + a_0,\ a_n\neq 0$ 在复数域上恰有 $n$ 个根（重根按重数计算）。
+\end{theorem}
+
+\vspace{1em}
+
+\subsection{复数的定义与表示}
+
+\begin{definition}[复数 Complex Number] 有序对 $(a,b)\in\mathbb{R}^2$ 记为 $a+bi$，其中，
+    \begin{enumerate}
+        \item 约定：$i^2 = -1$;
+        \item 等于关系：$a+bi = c+di \Leftrightarrow a=c \land b=d$;
+        \item 等价类：$[a+bi]_{=} = \{c+di\in\mathbb{C} : a+bi = c+di\}$;
+    \end{enumerate}
+    称 $\mathbb{R}^2$ 关于 $=$ 关系的商集 $\mathbb{R}^2/= \{[a+bi]_{=} : a+bi\in\mathbb{R}^2\}$ 为复数集，记为 $\mathbb{C}$。复数集中的元素称为复数。
+\end{definition}
+
+\begin{note}
+    复数同样是一个等价类，但集合中只有一个有序对 $(a,b)$，所以可以直接用 $a+bi$ 来表示复数。
+    在复数中，实数 $a$ 称为复数的实部（Real Part），记为 $\Re(a+bi)=a$；实数 $b$ 称为复数的虚部（Imaginary Part），记为 $\Im(a+bi)=b$。
+    全体实数可以嵌入到复数集中，即 $\forall a\in\mathbb{R}$，有 $a =a+0i \in \mathbb{C}$。
+\end{note}
+
+\vspace{1em}
+
+
+
+\subsection{复数集的完备性}
 
 \newpage
