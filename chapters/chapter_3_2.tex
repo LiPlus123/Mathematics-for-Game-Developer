@@ -77,36 +77,30 @@
         [a/b]_{=} / [c/d]_{=} = [a/b]_{=} \cdot [c/d]_{=}^{-1} = [(ad)/(bc)]_{=}
     \]
 \end{definition}
-
-\vspace{1em}
-
-\begin{definition}[有理数的整数次幂 Integer Power of Rational Numbers]
-    设 $[a/b]_{=}\in\mathbb{Q}$，$n\in\mathbb{Z}$，定义 $[a/b]_{=}$ 的整数次幂为
-    \[
-        ([a/b]_{=})^n = 
-        \begin{cases}
-            [1/1]_{=}, & n=0 \\
-            [(\prod_{i=1}^{n} a)/(\prod_{i=1}^{n}b)]_{=}, & n>0 \\
-            [(\prod_{i=1}^{-n} b)/(\prod_{i=1}^{-n}a)]_{=}, & n<0, a\neq [0/1]_{=}
-        \end{cases}
-    \]
-\end{definition}
-
-\begin{theorem}[有理数的整数次幂的性质 Properties of Integer Power of Rational Numbers]
-    设 $x,y\in\mathbb{Q}$，$m,n\in\mathbb{Z}$，则
-    \begin{enumerate}
-        \item $x^m \cdot x^n = x^{m+n}$
-        \item $(x^m)^n = x^{mn}$
-        \item 若 $x\neq [0/1]_{=}$，则 $x^m / x^n = x^{m-n}$
-        \item $(xy)^n = x^n y^n$
-    \end{enumerate}
-\end{theorem}
-
 \vspace{1em}
 
 \begin{note}
     可以证明，任何一个非零有理数都有唯一的乘法逆元。因此，有理数的除法也是良定义的，即不依赖于代表元的选取，而且是封闭的。
     整数集中，不存在乘法逆元，因此也不存在除法。相比整数集，有理数集扩充了乘法逆元，使得加法、减法、乘法和除法都能良定义。
+\end{note}
+
+\vspace{1em}
+\begin{theorem}[有理数代数运算的性质]
+    设 $x,y,z\in\mathbb{Z}$，则
+    \begin{enumerate}
+        \item 交换律：$x+y=y+x$，$xy=yx$
+        \item 结合律：$(x+y)+z=x+(y+z)$，$(xy)z=x(yz)$
+        \item 分配律：$x(y+z)=xy+xz$
+        \item 加法的单位元：存在唯一的 $0\in\mathbb{Q}$，使得 $\forall x\in\mathbb{Q}$，有 $x+[0/1]_{=}=x$
+        \item 乘法的单位元：存在唯一的 $1\in\mathbb{Q}$，使得 $\forall x\in\mathbb{Q}$，有 $x\cdot[1/1]_{=}=x$
+        \item 乘法对加法的零因子：$\forall x,y\in\mathbb{Q}$，若 $xy=[0/1]_{=}$，则 $x=[0/1]_{=}$ 或 $y=[0/1]_{=}$
+        \item 加法的逆元：$\forall x\in\mathbb{Q}$，存在唯一的 $-x\in\mathbb{Q}$，使得 $x+(-x)=[0/1]_{=}$
+        \item 乘法的逆元：$\forall x\in\mathbb{Q}, x\neq [0/1]_{=}$，存在唯一的 $x^{-1}\in\mathbb{Q}$，使得 $x\cdot x^{-1}=[1/1]_{=}$
+    \end{enumerate}
+\end{theorem}
+
+\begin{note}
+    三元组 $(\mathbb{Q},+,\cdot)$ 构成一个有理数域。
 \end{note}
 
 \vspace{1em}
@@ -154,7 +148,7 @@
 \end{theorem}
 
 \begin{note}
-    三元组 $(\mathbb{Q},+,\cdot)$ 构成一个有理数域，二元组 $(\mathbb{Q},\leq)$ 是一个全序集，二元组 $(\mathbb{Q},d)$ 是一个度量空间。
+    二元组 $(\mathbb{Q},\leq)$ 是一个全序集，二元组 $(\mathbb{Q},d)$ 是一个度量空间。
 \end{note}
 
 \vspace{1em}

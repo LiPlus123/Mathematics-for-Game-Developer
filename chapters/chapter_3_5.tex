@@ -1,1 +1,214 @@
 \section{四元数}
+
+从自然数到复数的扩充非常成功，整数的引入定义了减法，有理数的引入定义了除法，实数的引入定义了极限运算，复数的引入解决了多项式方程的根问题。
+复数的乘法可以表示二元平面内的旋转，为了表示更高维的旋转，需要引入更高维的数系，而四元数常用来表示三维空间内的旋转。
+\begin{note}
+    之所以用四元数表示三维旋转，而不是用三元数，是因为三元数无法定义封闭的乘法运算，所以不能成为一个有用的数系。
+    即便如此，四元数也不得不放弃乘法交换律。八元数甚至无法定义乘法结合律。
+\end{note}
+
+\vspace{1em}
+
+\subsection{四元数的定义}
+\begin{definition}[四元数 Quaternion]
+    有序数组 $(a, b, c, d)\in\mathbb{R}^4$ 记为 $q = a + bi + cj + dk$，其中，
+    \begin{enumerate}
+        \item 约定：$i^2 = j^2 = k^2 = ijk = -1$；
+        \item 等于关系：$a + bi + cj + dk = a' + b'i + c'j + d'k \iff a = a', b = b', c = c', d = d'$；
+        \item 等价类：$[a + bi + cj + dk]_{=}=\{(e,f,g,h)\in\mathbb{R}^4 : a + bi + cj + dk = e + fi + gj + hk\}$。
+    \end{enumerate}
+    称 $\mathbb{R}^4$ 关于 $=$ 关系的商集 $\mathbb{R}^4/_{=}= \{[a + bi + cj + dk]_{=} : a + bi + cj + dk\in\mathbb{R}^4\}$ 为四元数集，记为 $\mathbb{H}$。
+    四元数集中的元素称为四元数。
+\end{definition}
+
+\begin{note}
+    四元数是一个等价类，但集合中只有一个有序数组作为代表元，所以可以直接用 $a + bi + cj + dk$ 来表示四元数。
+    在四元数中，实数 $a$ 称为四元数的实部，$bi + cj + dk$ 称为四元数的虚部。四元数可以用一个标量和一个三维向量来表示，
+    即 $q = (a, \mathbf{v})$，其中 $\mathbf{v} = (b, c, d)$。观察四元数定义中的虚部的约定，可得下表：
+    \[
+        \begin{array}{|c|cccc|}
+            \hline
+           \times & 1 & i & j & k \\ 
+           \hline
+            1 & 1 & i & j & k \\ 
+            i & i & -1 & k & -j \\ 
+            j & j & -k & -1 & i \\ 
+            k & k & j & -i & -1\\
+            \hline
+        \end{array}
+    \]
+\end{note}
+\vspace{1em}
+
+\begin{definition}[四元数的加法]
+    设 $q_1 = a_1 + b_1 i + c_1 j + d_1 k,\ q_2 = a_2 + b_2 i + c_2 j + d_2 k\in\mathbb{H}$，定义四元数的加法：
+    \[
+        q_1 + q_2 = (a_1 + a_2) + (b_1 + b_2)i + (c_1 + c_2)j + (d_1 + d_2)k
+    \]
+\end{definition}
+\begin{definition}[四元数加法逆元与减法]
+    设 $q = a + bi + cj + dk\in\mathbb{H}$，四元数的加法逆元记为 $-q$，满足：
+    \[
+        q + (-q) = 0 + 0i + 0j + 0k
+    \]
+    那么
+    \[
+        -q := -a - bi - cj - dk
+    \]
+    四元数的减法定义为：
+    \[
+        q_1 - q_2 = q_1 + (-q_2)
+    \]
+\end{definition}
+\vspace{1em}
+
+\begin{definition}[四元数的乘法]
+    设 $q_1 = a_1 + b_1 i + c_1 j + d_1 k,\ q_2 = a_2 + b_2 i + c_2 j + d_2 k\in\mathbb{H}$，定义四元数的乘法：
+    \begin{align*}
+        q_1 q_2 &= (a_1 + b_1 i + c_1 j + d_1 k)(a_2 + b_2 i + c_2 j + d_2 k) \\
+        % &= a_1 a_2 + a_1 b_2 i + a_1 c_2 j + a_1 d_2 k \\
+        % &\quad + b_1 a_2 i + b_1 b_2 i^2 + b_1 c_2 ij + b_1 d_2 ik \\
+        % &\quad + c_1 a_2 j + c_1 b_2 ji + c_1 c_2 j^2 + c_1 d_2 jk \\
+        % &\quad + d_1 a_2 k + d_1 b_2 ki + d_1 c_2 kj + d_1 d_2 k^2 \\
+        &= (a_1 a_2 - b_1 b_2 - c_1 c_2 - d_1 d_2) \\
+        &\quad + (a_1 b_2 + b_1 a_2 + c_1 d_2 - d_1 c_2)i \\
+        &\quad + (a_1 c_2 - b_1 d_2 + c_1 a_2 + d_1 b_2)j \\
+        &\quad + (a_1 d_2 + b_1 c_2 - c_1 b_2 + d_1 a_2)k
+    \end{align*}
+    四元数的乘法还可以写成矩阵的形式：
+    \[
+        q_1 q_2 = 
+        \begin{bmatrix}
+            a_1 & -b_1 & -c_1 & -d_1 \\
+            b_1 & a_1 & -d_1 & c_1 \\
+            c_1 & d_1 & a_1 & -b_1 \\
+            d_1 & -c_1 & b_1 & a_1
+        \end{bmatrix}
+        \begin{bmatrix}
+            a_2 \\ b_2 \\ c_2 \\ d_2
+        \end{bmatrix}
+    \]
+    如果用 $q_1 = (a_1, \mathbf{v}_1),\ q_2 = (a_2, \mathbf{v}_2)$ 来表示四元数，则有：
+    \[
+        q_1 q_2 = (a_1 a_2 - \mathbf{v}_1 \cdot \mathbf{v}_2, a_1 \mathbf{v}_2 + a_2 \mathbf{v}_1 + \mathbf{v}_1 \times \mathbf{v}_2)
+    \]
+    其中， $\mathbf{v}_1 \cdot \mathbf{v}_2$ 是三维向量的点积，$\mathbf{v}_1 \times \mathbf{v}_2$ 是三维向量的叉积。
+    \[
+        \mathbf{v}_1 \cdot \mathbf{v}_2 = b_1 b_2 + c_1 c_2 + d_1 d_2
+    \]
+    \[
+        \mathbf{v}_1 \times \mathbf{v}_2 =
+        \begin{vmatrix}
+            i & j & k \\
+            b_1 & c_1 & d_1 \\
+            b_2 & c_2 & d_2
+        \end{vmatrix}
+        = (c_1 d_2 - d_1 c_2)i + (d_1 b_2 - b_1 d_2)j + (b_1 c_2 - c_1 b_2)k
+    \]
+\end{definition}
+\vspace{1em}
+\begin{note}
+    四元数的加法和乘法都是良定义的，即封闭，且与代表元的选择无关。
+    四元数加法逆元是良定义的，任意一个四元数都有唯一的加法逆元。
+    四元数的加法满足交换律和结合律，但乘法不满足交换律，只满足结合律。
+    在定义四元数除法之前，需要先定义四元数的模和共轭。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[四元数的共轭 Conjugate]
+    设 $q = a + bi + cj + dk\in\mathbb{H}$，四元数的共轭记为 $\bar{q}$ 或 $q^*$，那么：
+    \[
+        \bar{q} = a - bi - cj - dk
+    \]
+\end{definition}
+
+\begin{definition}[四元数的模 Modulus]
+    设 $q = a + bi + cj + dk\in\mathbb{H}$，四元数的模记为 $|q|$，那么：
+    \[
+        |q| = \sqrt{a^2 + b^2 + c^2 + d^2}
+    \]
+\end{definition}
+
+\begin{proposition}[四元数的共轭与模的关系]
+    设 $q = a + bi + cj + dk\in\mathbb{H}$，那么：
+    \[
+        q \bar{q} = \bar{q} q =  |q|^2
+    \]
+\end{proposition}
+
+\begin{definition}[四元数的度量]
+    设 $q_1, q_2\in\mathbb{H}$，定义四元数的度量：
+    \[
+        d(q_1, q_2) = |q_1 - q_2|
+    \]
+\end{definition}
+
+\vspace{1em}
+
+\begin{definition}[四元数的逆元与除法]
+    设 $q = a + bi + cj + dk\in\mathbb{H},\ q \neq 0$，四元数的逆元记为 $q^{-1}$，满足：
+    \[
+        q q^{-1} = q^{-1} q = 1
+    \]
+    由此可得：
+    \[
+        q^{-1} = \frac{\bar{q}}{|q|^2} = \frac{\bar{q}}{q\bar{q}} = \frac{a - bi - cj - dk}{a^2 + b^2 + c^2 + d^2}
+    \]
+    设 $q_1, q_2\in\mathbb{H},\ q_2 \neq 0$，四元数的除法定义为：
+    \[
+        q_1 / q_2 = q_1 q_2^{-1} = \frac{q_1 \bar{q_2}}{q_2 \bar{q_2}}
+    \]
+\end{definition}
+\vspace{1em}
+
+\subsection{四元数与旋转}
+\begin{definition}[单位四元数 Unit Quaternion]
+    设 $q = a + bi + cj + dk\in\mathbb{H}$，如果 $|q| = 1$，则称 $q$ 为单位四元数。
+\end{definition}
+
+% \begin{definition}[四元数的旋转]
+%     设 $q = \cos\frac{\theta}{2} + (u_x i + u_y j + u_z k)\sin\frac{\theta}{2}$ 是一个单位四元数，其中 $\mathbf{u} = (u_x, u_y, u_z)$ 是一个单位向量，$\theta$ 是旋转角度。
+%     设 $\mathbf{p} = (p_x, p_y, p_z)$ 是三维空间中的一个点，记为纯四元数 $p = 0 + p_x i + p_y j + p_z k$。
+%     那么点 $\mathbf{p}$ 绕单位向量 $\mathbf{u}$ 旋转 $\theta$ 角度后得到的点 $\mathbf{p'}$ 可以表示为纯四元数 $p' = 0 + p'_x i + p'_y j + p'_z k$，其中：
+%     \[
+%         p' = q p q^{-1}
+%     \]
+% \end{definition}
+
+
+\subsection{对偶四元数}
+\begin{definition}[对偶四元数 Dual Quaternion]
+    有序数组 $(a, b, c, d, e, f, g, h)\in\mathbb{R}^8$ 记为 $Q = a + bi + cj + dk + \epsilon(e + fi + gj + hk)$，其中，
+    \begin{enumerate}
+        \item 约定：$i^2 = j^2 = k^2 = ijk = -1,\ \epsilon^2 = 0,\ \epsilon \neq 0$；
+        \item 等于关系：$a + bi + cj + dk + \epsilon(e + fi + gj + hk) = a' + b'i + c'j + d'k + \epsilon(e' + f'i + g'j + h'k)$
+        \[
+            \iff a = a', b = b', c = c', d = d', e = e', f = f', g = g', h = h'
+        \]
+        \item 等价类：$[a + bi + cj + dk + \epsilon(e + fi + gj + hk)]_{=}=\{(l,m,n,o,p,q,r,s)\in\mathbb{R}^8 : a + bi + cj + dk + \epsilon(e + fi + gj + hk) = l + mi + nj + ok + \epsilon(p + qi + rj + sk)\}$。
+    \end{enumerate}
+    称 $\mathbb{R}^8$ 关于 $=$ 关系的商集 $\mathbb{R}^8/_{=}=$ 为对偶四元数集，记为 $\mathbb{DQ}$。
+    对偶四元数集中的元素称为对偶四元数。
+    
+\end{definition}
+
+\begin{note}
+    对偶四元数可以表示三维空间中任何刚体变换，包括旋转和平移。根据四元数虚部的约定，可得下表：
+    \[
+        \begin{array}{|c|cccccccc|}
+            \hline
+            \times & 1 & i & j & k & \epsilon & \epsilon i & \epsilon j & \epsilon k \\
+            \hline
+            1 & 1 & i & j & k & \epsilon & \epsilon i & \epsilon j & \epsilon k \\
+            i & i & -1 & k & -j & \epsilon i & -\epsilon & \epsilon k & -\epsilon j \\
+            j & j & -k & -1 & i & \epsilon j & -\epsilon k & -\epsilon & \epsilon i \\
+            k & k & j & -i & -1 & \epsilon k & \epsilon j & -\epsilon i & -\epsilon \\
+            \epsilon  & \epsilon & \epsilon i & \epsilon j & \epsilon k & 0 & 0 & 0 & 0 \\
+            \epsilon i & \epsilon i & -\epsilon & \epsilon k & -\epsilon j & 0 & 0 & 0 & 0 \\
+            \epsilon j & \epsilon j & -\epsilon k & -\epsilon & \epsilon i & 0 & 0 & 0 & 0 \\
+            \epsilon k & \epsilon k & \epsilon j & -\epsilon i & -\epsilon & 0 & 0 & 0 & 0 \\
+            \hline
+        \end{array}
+    \]
+
+\end{note}

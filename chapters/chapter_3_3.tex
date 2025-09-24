@@ -38,8 +38,8 @@
 
 \subsection{柯西序列与实数}
 
-历史上，实数的定义有多种方式，一种是通过柯西序列的方式，另一种是戴德金分割，下面主要介绍柯西序列定义实数。
-\vspace{1em}
+% 历史上，实数的定义有多种方式，一种是通过柯西序列的方式，另一种是戴德金分割，下面主要介绍柯西序列定义实数。
+% \vspace{1em}
 
 \begin{definition}[有理数序列 sequence of rational numbers]
     函数 $f:\mathbb{N}\to\mathbb{Q}$ 为有理数序列，记为 $\{a_n\}$，其中 $a_n=f(n),\ n\ge m,\cdots$。
@@ -104,10 +104,6 @@
 \end{note}
 \vspace{1em}
 
-\begin{lemma}
-    设 $\{a_n\},\{b_n\}$ 是柯西序列，则 $\{a_n+b_n\}$ 也是柯西序列。
-\end{lemma}
-
 \begin{definition}[实数加法 Addition of Real Numbers]
     设 $[\{a_n\}]_{=},[\{b_n\}]_{=}\in\mathbb{R}$，定义加法为
     \[
@@ -118,10 +114,32 @@
 \begin{proposition}
     实数加法的定义是良定义（Well-defined）的，即不依赖于代表元的选取，而且是封闭的。
 \end{proposition}
+\begin{proof}
+    先证明实数加法的封闭性，任意两个实数相加依然是实数。因为 $\{a_n\},\{b_n\}$ 是柯西序列，
+    根据柯西序列的定义，任意有理数 $\epsilon>0$，都存在一个正整数 $N_a$，使得当 $m,n>N_a$ 时，有 $|a_m - a_n| \le \epsilon/2$；
+    同理，存在一个正整数 $N_b$，使得当 $m,n>N_b$ 时，有 $|b_m - b_n| \le \epsilon/2$；设序列 $\{c_n\}=\{a_n+b_n\}$，令 $N=\max(N_a,N_b)$，则当 $m,n>N$ 时，有
+    \begin{align*}
+        |c_m-c_n| &= |a_m+b_m - (a_n+b_n)| \\
+        &= |(a_m-a_n) + (b_m-b_n)| \\
+        &\le |a_m-a_n| + |b_m-b_n| \\
+        &\le \varepsilon/2 +  \varepsilon/2 = \varepsilon
+    \end{align*}
+    所以 $\{c_n\}$ 是柯西序列。\\
+    再证明实数加法与实数代表元的选择无关。
+    设任意与 $\{a_n\},\{b_n\}$ 等价的柯西序列分别为 $\{a_n^{\prime}\},\{b_n^{\prime}\}$。
+    那么，对于任意有理数 $\epsilon>0$，都存在一个正整数 $N_a$，使得当 $i>N_a$ 时，有 $|a_i - a_i^{\prime}| \le \epsilon/2$；
+    同理，存在一个正整数 $N_b$，使得当 $j>N_b$ 时，有 $|b_j - b_j^{\prime}| \le \epsilon/2$。
+    设序列 $\{c_n^{\prime}\}=\{a_n^{\prime}+b_n^{\prime}\}$，令 $N=\max(N_a,N_b)$，则当 $n>N$ 时，有
+    \begin{align*}
+        |c^{\prime}_n-c_n| &= |a_n^{\prime}+b_n^{\prime} - (a_n+b_n)| \\
+        &= |(a_n^{\prime}-a_n)+(b_n^{\prime}-b_n)|\\
+        &\le |a_n^{\prime}-a_n|+|b_n^{\prime}-b_n|\\
+        &\le \varepsilon/2 + \varepsilon/2 = \varepsilon
+    \end{align*}
+    所以 $\{c_n^{\prime}\}$ 与 $\{c_n\}$ 等价，表示同一个实数。
+\end{proof}
 
-\begin{lemma}
-    设 $\{a_n\},\{b_n\}$ 是柯西序列，则 $\{a_nb_n\}$ 也是柯西序列。
-\end{lemma}
+\vspace{1em}
 
 \begin{definition}[实数乘法 Multiplication of Real Numbers]
     设 $[\{a_n\}]_{=},[\{b_n\}]_{=}\in\mathbb{R}$，定义乘法为
@@ -134,54 +152,89 @@
     实数乘法的定义是良定义（Well-defined）的，即不依赖于代表元的选取，而且是封闭的。
 \end{proposition}
 
-
-\begin{lemma}
-    设 $\{a_n\}$ 是柯西序列，则 $\{-a_n\}$ 也是柯西序列。
-\end{lemma}
-
-
-\begin{definition}[实数加法逆元]
-    设 $[\{a_n\}]_{=}\in\mathbb{R}$，定义其加法逆元为
-    \[
-        -[\{a_n\}]_{=} = [\{-a_n\}]_{=}
-    \]
-    使得，$[\{a_n\}]_{=} + -[\{a_n\}]_{=} = [\{0\}]_{=}$。
-\end{definition}
-
-\begin{proposition}
-    实数的加法逆元是良定义的，任何一个实数都有唯一的加法逆元。
-\end{proposition}
-
-\begin{lemma}
-    设 $\{a_n\}$ 是柯西序列，且 $\{a_n\}\neq \{0\}$，则 $\{a_n^{-1}\}$ 也是柯西序列。
-\end{lemma}
-
-\begin{definition}[实数乘法逆元]
-    设 $[\{a_n\}]_{=}\in\mathbb{R}$，且 $[\{a_n\}]_{=}\neq [\{0\}]_{=}$，定义其乘法逆元为
-    \[
-        [\{a_n\}]_{=}^{-1} = [\{a_n^{-1}\}]_{=}
-    \]
-    使得，$[\{a_n\}]_{=} \cdot [\{a_n\}]_{=}^{-1} = [\{1\}]_{=}$。
-\end{definition}
-
-\begin{proposition}
-    乘法逆元的定义是良定义的，任意非零实数都有唯一的乘法逆元。
-\end{proposition}
-
 \begin{proof}
-    
+    先证明实数乘法的封闭性，任意两个实数实数相乘依然是实数。因为 $\{a_n\},\{b_n\}$ 是柯西序列，也是有界序列，存在有理数 $M$，使得对任意的 $n$ 都有 $|a_n|\le M$ 和 $|b_n|\le M$。
+    根据柯西序列的定义，任意有理数 $\epsilon>0$，都存在一个正整数 $N_a$，使得当 $m,n>N_a$ 时，有 $|a_m - a_n| \le \epsilon/2M$；
+    同理，存在一个正整数 $N_b$，使得当 $m,n>N_b$ 时，有 $|b_m - b_n| \le \epsilon/2M$；
+    设序列 $\{c_n\}=\{a_nb_n\}$，令 $N=\max(N_a,N_b)$，则当 $m,n>N$ 时，有：
+    \begin{align*}
+        |c_m-c_n| &= |a_m*b_m-a_n*b_n| \\
+        &=|a_m*b_m - a_m*b_n + a_m*b_n-a_n*b_n|\\
+        &\le |a_m*b_m - a_m*b_n| + |a_m*b_n-a_n*b_n|\\
+        &= |a_m| |b_m-b_n|+|b_n||a_m-b_n|\\
+        &\le M \frac{\varepsilon}{2M} + M\frac{\varepsilon}{2M}\\
+        &= \varepsilon
+    \end{align*}
+    所以 $\{c_n\}$ 是柯西序列。\\
+    再证明实数乘法与实数代表元的选择无关。
+    设任意与 $\{a_n\},\{b_n\}$ 等价的柯西序列分别为 $\{a_n^{\prime}\},\{b_n^{\prime}\}$。
+    那么，对于任意有理数 $\epsilon>0$，都存在一个正整数 $N_a$，使得当 $i>N_a$ 时，有 $|a_i - a_i^{\prime}| \le \epsilon/2M$；
+    同理，存在一个正整数 $N_b$，使得当 $j>N_b$ 时，有 $|b_j - b_j^{\prime}| \le \epsilon/2M$。
+    设序列 $\{c_n^{\prime}\}=\{a_n^{\prime}b_n^{\prime}\}$，令 $N=\max(N_a,N_b)$，则当 $n>N$ 时，有
+    \begin{align*}
+        |c_m^{\prime}-c_m| &= |a^{\prime}_m*b^{\prime}_m - a_m*b_m|\\
+        & =|a^{\prime}_m*b^{\prime}_m - a^{\prime}_m*b_m + a^{\prime}_m*b_m - a_m*b_m|\\
+        &\le |a^{\prime}_m*b^{\prime}_m - a^{\prime}_m*b_m|+|a^{\prime}_m*b_m - a_m*b_m|\\
+        &= |a^{\prime}_m||b^{\prime}_m-b_m| + |b_m||a^{\prime}_m-a_m|\\
+        & \le M \frac{\varepsilon}{2M} + M \frac{\varepsilon}{2M}\\
+        &= \varepsilon
+    \end{align*}
+    所以 $\{c_n^{\prime}\}$ 与 $\{c_n\}$ 等价，表示同一个实数。
 \end{proof}
 
-\begin{definition}[实数的减法和除法]
-    设 $[\{a_n\}]_{=},[\{b_n\}]_{=}\in\mathbb{R}$，定义减法为
+\vspace{1em}
+
+\begin{definition}[实数加法逆元与减法]
+    设 $a=[\{a_n\}]_{=}\in\mathbb{R}$，加法逆元记为 $-a$，使得
     \[
-        [\{a_n\}]_{=} - [\{b_n\}]_{=} = [\{a_n + (-b_n)\}]_{=}
+        a + (-a) = [\{0\}]_{=}
     \]
-    定义除法为，
+    那么：
     \[
-        [\{a_n\}]_{=} / [\{b_n\}]_{=} = [\{a_n \cdot b_n^{-1}\}]_{=},\ [\{b_n\}]_{=}\neq [\{0\}]_{=}
+        -a:= [\{-a_n\}]_{=}
+    \]
+    设 $a_1,a_2\in\mathbb{R}$, 实数的减法定义为：
+    \[
+        a_1 - a_2 = a_1 + (-a_2)
     \]
 \end{definition}
+
+\begin{definition}[实数乘法逆元与除法]
+    设 $a=[\{a_n\}]_{=}\in\mathbb{R}$，且 $a\neq 0$，乘法逆元记为 $a^{-1}$，使得
+    \[
+        a \cdot a^{-1} = [\{1\}]_{=}
+    \]
+    那么：
+    \[
+        a^{-1} := [\{a_n^{-1}\}]_{=}
+    \]
+    设 $a_1,a_2\in\mathbb{R},\ a_2\neq 0$, 实数的除法定义为：
+    \[
+        a_1 / a_2 = a_1 \cdot a_2^{-1}
+    \]
+\end{definition}
+\vspace{1em}
+
+\begin{proposition}[实数代数运算的性质]
+    设 $a,b,c\in\mathbb{R}$，则实数的代数运算具有以下性质：
+    \begin{enumerate}
+        \item 交换律：$a+b=b+a$
+        \item 加法结合律：$(a+b)+c=a+(b+c)$;
+        \item 加法单位元：存在唯一的实数 $0$，使得 $a+0=a$;
+        \item 加法逆元：任意实数 $a$ 存在唯一的实数 $-a$，使得 $a+(-a)=0$;
+        \item 乘法交换律：$ab=ba$;
+        \item 乘法结合律：$(ab)c=a(bc)$;
+        \item 乘法单位元：存在唯一的实数 $1$，使得 $a\cdot 1=a$;
+        \item 乘法逆元：任意非零实数 $a$ 存在唯一的实数 $a^{-1}$，使得 $a\cdot a^{-1}=1$;
+        \item 乘法对加法的分配律：$a(b+c)=ab+ac$.
+        \item 乘法零元：$a\cdot 0 = 0$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{note}
+    实数的四则运算的定义都是良定义的，即不依赖于代表元的选取，而且是封闭的。实数集和加法乘法一起，构成一个数域，称为实数域，记为 $(\mathbb{R},+,\cdot)$。
+\end{note}
+
 \vspace{1em}
 
 \begin{definition}[实数的序 Order of Real Numbers]
@@ -192,22 +245,40 @@
 \end{definition}
 
 \begin{definition}[实数的绝对值 Absolute Value of Real Numbers]
-    设 $[\{a_n\}]_{=}\in\mathbb{R}$，定义其绝对值为
+    设 $a\in\mathbb{R}$，定义其绝对值为
     \[
-        |[\{a_n\}]_{=}| = 
+        |a| = 
         \begin{cases}
-            [\{a_n\}]_{=}, & [\{a_n\}]_{=} \ge [\{0\}]_{=} \\
-            -[\{a_n\}]_{=}, & [\{a_n\}]_{=} < [\{0\}]_{=}
+            a, & a \ge 0 \\
+            -a, & a < 0
         \end{cases}
     \]
 \end{definition}
 
 \begin{definition}[实数的距离 Distance of Real Numbers]
-    设 $[\{a_n\}]_{=},[\{b_n\}]_{=}\in\mathbb{R}$，定义它们之间的距离为
+    设 $a,b\in\mathbb{R}$，定义它们之间的距离为
     \[
-        d([\{a_n\}]_{=},[\{b_n\}]_{=}) = |[\{a_n\}]_{=} - [\{b_n\}]_{=}|
+        d(a,b) = |a - b|
     \]
 \end{definition}
+\vspace{1em}
+
+\begin{proposition}[实数绝对值的性质]
+    设 $a,b\in\mathbb{R}$，则有：
+    \begin{enumerate}
+        \item 非负性：$|a| \ge 0$，且 $|a| = 0 \iff a = 0$;
+        \item 乘法：$|ab| = |a||b|$;
+        \item 三角不等式：$|a+b| \le |a| + |b|$.
+        \item 反三角不等式：$||a| - |b|| \le |a - b|$.
+        \item 距离的非负性：$d(a,b) \ge 0$，且 $d(a,b) = 0 \iff a = b$;
+        \item 距离的对称性：$d(a,b) = d(b,a)$;
+        \item 距离的三角不等式：$d(a,c) \le d(a,b) + d(b,c)$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{note}
+    二元组 $(\mathbb{R},\le)$ 构成一个全序集，实数绝对值运算同样满足非负性、三角不等式、反三角不等式等，二元组 $(\mathbb{R},d)$ 构成一个度量空间。
+\end{note}
 
 \vspace{1em}
 \subsection{实数集的完备性}
@@ -247,51 +318,155 @@
     此时，称 $x$ 为序列 $\{x_n\}$ 的极限。
 \end{definition}
 
-\begin{lemma}
+\begin{proposition}
     收敛序列的极限是唯一。
-\end{lemma}
+\end{proposition}
 \begin{proof}
-    
+    使用反证法，假设实数收敛序列 $\{x_n\}$ 收敛于极限 $x$ 和 $y$。
+    那么设 $ \epsilon = \frac{|x-y|}{2} > 0 $，根据收敛序列的定义，存在正整数 $N_1$，使得当 $n>N_1$ 时，有 $|x_n - x| < \epsilon$；
+    同理，存在正整数 $N_2$，使得当 $n>N_2$ 时，有 $|x_n - y| < \epsilon$；
+    令 $N=\max(N_1,N_2)$，则当 $n>N$ 时，有
+    \begin{align*}
+        |x - y| &= |x - x_n + x_n - y| \\
+        &\le |x - x_n| + |x_n - y| \\
+        &< \epsilon + \epsilon = 2\epsilon = |x-y|
+    \end{align*}
+    这说明 $|x-y| < |x-y|$，矛盾，所以假设不成立，极限是唯一的。
 \end{proof}
+\vspace{1em}
 
-\begin{theorem}[确界存在定理 Existence of Supremum and Infimum]
-    设 $A\subseteq\mathbb{R}$，$A$ 非空且有上界，则 $A$ 有最小上界（即上确界）；$A$ 非空且有下界，则 $A$ 有最大下界（即下确界）。
+下面不加证明的给出实数集完备性的两个等价定理。
+
+\begin{theorem}[实数集的完备性 Completeness of Real Numbers]
+    实数集具有完备性，当且仅当，所有的实数柯西序列都是收敛实数序列。
 \end{theorem}
-
-\begin{proof}
-    
-\end{proof}
-
-\begin{note}
-    确界存在性是实数集完备性的重要定理。有理数集则不具备这一性质。例 例 \ref{ex:sqrt2-approx} 中的两个柯西序列在有理数集上界，比如 3、2、1.5 等都是序列的上界，但没有最小上界，因为 $\sqrt{2}\notin\mathbb{Q}$。
-\end{note}
-
 
 \begin{theorem}[柯西收敛准则 Cauchy Convergence Criterion]
     实数序列 $\{x_n\}$ 收敛的充分必要条件是：对于任给的实数 $\epsilon>0$，都存在正整数 $N$，使得当 $i,j>N$ 时，有 $d(x_i,x_j) = |x_i - x_j| \le \epsilon$。
 \end{theorem}
-\begin{proof}
+% \begin{proof}
+%     证明必要性。设实数序列 $\{x_n\}$ 收敛于实数 $x$，那么对于任意实数 $\varepsilon/2 > 0$，都存在正整数 $N$，使得当 $i,j>N$ 时，有：
+%     \[
+%         |x_i-x_j| = |x_i - x + x - x_j| \le |x_i - x| + |x_j - x| < \varepsilon/2 + \varepsilon/2 = \varepsilon
+%     \]
+%     证明充分性。设实数序列 $\{x_n\}$ 是柯西序列，那么 $\{x_n\}$ 是有界序列。定义尾部序列：
+%     \[
+%         \{E_k\} = \{x_n : n > k\},\ k=1,2,3,\cdots
+%     \]
+%     则 $\{E_k\}$ 非空且有界，根据确界存在定理，$\{E_k\}$ 有上确界 $a_k = \sup\{E_k\}$；同时，$\{E_k\}$ 有下确界 $b_k = \inf\{E_k\}$。
+%     序列 $\{a_k\}$ 单调递增有上界，序列 $\{b_k\}$ 单调递减有下界。再根据确界存在定理，令：
+%     \[
+%         s = \sup \{a_k\},\ t = \inf \{b_k\}
+%     \]
     
-\end{proof}
-
-
-\begin{theorem}[实数集的完备性 Completeness of Real Numbers]
-    实数集具有完备性，当且仅当，所有的实数柯西序列都是收敛实数序列。也即，在实数集中，柯西序列与收敛序列是等价的，实数集对极限运算封闭。
-\end{theorem}
+% \end{proof}
+% \vspace{1em}
 
 \begin{note}
-    确界存在定理、柯西收敛准则和实数完备性是三条条等价的定理，它们说明了实数集和有理数集的本质区别——有理数集是稠密的，而实数集是完备的。
+    柯西收敛准则和实数完备性是两条条等价的定理，它们说明了实数集和有理数集的本质区别。
     稠密的有理数集对极限运算不封闭，一个有理数序柯西序列的极限可能不是有理数，
     例 \ref{ex:sqrt2-approx} 中的两个柯西序列在有理数集上没有极限，但在实数集上都收敛于 $\sqrt{2}$。
-    完备性保证了有理数柯西列一定能收敛到一个实数，而不会收敛到一个不属于实数集的元素。换句话说，完备性保证了实数集对极限运算封闭。
+    完备性保证了有理数柯西列一定能收敛到一个实数，而不会收敛到一个不属于实数集的元素。
+    换句话说，在实数集中，柯西序列与收敛序列是等价的，实数集对极限运算封闭。
 \end{note}
+
+% \begin{theorem}[确界存在定理 Existence of Supremum and Infimum]
+%     设 $X\subseteq\mathbb{R}$，$X$ 非空且有上界，则 $X$ 有最小上界（即上确界）；$X$ 非空且有下界，则 $X$ 有最大下界（即下确界）。
+% \end{theorem}
+
+% \begin{proof}
+%     设 $X\subset \mathbb{R}$ 非空且有上界。则构造两个有理数集合：
+%     \begin{align*}
+%         A &= \{a\in\mathbb{Q}: \exists x\in X, x > a\} \\
+%         B &= \{b\in\mathbb{Q}: \forall x\in X, x \le b\}
+%     \end{align*}
+%     其中，$A$ 表示所有不是 $X$ 上界的有理数，$B$ 表示所有是 $X$ 上界的有理数，因此，$A = \complement_{\mathbb{Q}}B$，且对任意 $a\in A$ 和 $b\in B$，都有 $a < b$。
+%     称 $A$ 和 $B$ 构成一个对有理数集的\textbf{戴德金分割 Dedekind cut}。
+%     序列 $\{a_n\}$ 和 $\{b_n\}$ 分别定义为：
+%     \begin{align*}
+%         a_n &= \sup\{a\in A: a \le b_{n-1}\},\ n\ge 1,\ a_0\in A \\
+%         b_n &= \inf\{b\in B: b \ge a_n\},\ n\ge 1
+%     \end{align*}
+%     则 $\{a_n\}$ 和 $\{b_n\}$ 都是有理数柯西序列，且对任意 $n$，都有 $a_n \le b_n$。
+%     设 $s = [\{a_n\}]_{=} = [\{b_n\}]_{=}$，则 $s$ 是实数集 $\mathbb{R}$ 中的一个实数。
+%     对于任意 $x\in X$，因为 $b_n\in B$，所以存在 $N$，使得当 $n>N$ 时，有 $x \le b_n$，根据实数序的定义，$s \ge x$，
+%     因此，$s$ 是 $X$ 的上界。再设 $t$ 是 $X$ 的任意上界，那么因为 $b_n\in B$，所以存在 $N$，使得当 $n>N$ 时，有 $t \ge b_n$，进而说明 $t \ge s$。
+%     综上，$s$ 是 $X$ 的最小上界。\\
+%     同理，可以证明 $X$ 非空且有下界，则 $X$ 有最大下界（即下确界）。
+% \end{proof}
+
+% \begin{note}
+%     确界存在性是实数集完备性的重要定理。有理数集则不具备这一性质。例 例 \ref{ex:sqrt2-approx} 中的两个柯西序列在有理数集上界，比如 3、2、1.5 等都是序列的上界，但没有最小上界，因为 $\sqrt{2}\notin\mathbb{Q}$。
+% \end{note}
 
 \vspace{1em}
 
-
-
 \subsection{实数的幂运算}
 
+\begin{definition}[实数的自然数次幂]
+    设 $x\in\mathbb{R}$ 是实数，$n\in\mathbb{N}$ 是自然数，$x$ 的 $n$ 次幂记为 $x^n$，递归地定义：
+    \begin{enumerate}
+        \item $x^0 = 1$
+        \item $x^n = x \cdot x^{n-1},\ n\ge 1$
+    \end{enumerate}
+\end{definition}
 
+\begin{definition}[实数的负整数次幂]
+    设 $x\neq 0\in\mathbb{R}$ ，$n\in\mathbb{N}^+$ 是正整数，$x$ 的 $-n$ 次幂记为 $x^{-n}$，定义
+    \[
+        x^{-n} = \frac{1}{x^n}
+    \]
+\end{definition}
+% \begin{theorem}[实数的整数次幂的性质]
+%     设 $x,y\in\mathbb{R}$，$m,n\in\mathbb{Z}$，则
+%     \begin{enumerate}
+%         \item $x^m \cdot x^n = x^{m+n}$
+%         \item $(x^m)^n = x^{mn}$
+%         \item $(xy)^n = x^n y^n$
+%         \item 若 $x\neq 0$，则 $x^m / x^n = x^{m-n}$
+%     \end{enumerate}
+% \end{theorem}
+% \vspace{1em}
+
+\begin{definition}[正实数的真分数次幂]
+    设 $x>0\in\mathbb{R}$ 是正实数，$n\in\mathbb{N}^+$ 是正整数，$x$ 的 $\frac{1}{n}$ 次幂记为 $x^{\frac{1}{n}}$，定义
+    \[
+        x^{\frac{1}{n}} = \sup\{y\in\mathbb{R}: y\ge 0,\ y^n \le x\}
+    \]
+    $x^{\frac{1}{n}}$ 称为 $x$ 的\textbf{$n$ 次方根}，也常记为 $\sqrt[n]{x}$。
+\end{definition}
+
+\begin{proposition}[n 次方根的存在性]
+    设 $x>0\in\mathbb{R}$ 是正实数，$n\in\mathbb{N}^+$ 是正整数，则 $x$ 的 $n$ 次方根 $x^{\frac{1}{n}}$ 存在且唯一。
+\end{proposition}
+
+\begin{definition}[正实数的有理数次幂]
+    设 $x>0\in\mathbb{R}$ 是正实数，$m\in\mathbb{Z}$ 是整数，$n\in\mathbb{N}^+$ 是正整数，$x$ 的 $\frac{m}{n}$ 次幂记为 $x^{\frac{m}{n}}$，定义
+    \[
+        x^{\frac{m}{n}} = (x^{\frac{1}{n}})^m
+    \]
+\end{definition}
+\vspace{1em}
+
+\begin{theorem}[正实数的有理数次幂的性质]
+    设 $x,y>0\in\mathbb{R}$，$m,n\in\mathbb{N}^+$，$p,q\in\mathbb{Q}$ 则
+    \begin{enumerate}
+        \item $(x^{\frac{1}{n}})^n = x$
+        \item $x^{\frac{1}{m}} = (x^{\frac{1}{n}})^{\frac{n}{m}}$
+        \item $(xy)^{p} = x^{p} y^{p}$
+        \item $(x^{p})^{q} = x^{pq}$
+        \item $x^{p} \cdot x^{q} = x^{p+q}$
+        \item $x^{p} / x^{q} = x^{p-q}$
+        \item 如果 $y = x^{1/n}$，那么 $x = y^n$
+        \item 若 $x\le y$，则 $x^{\frac{1}{n}} \le y^{\frac{1}{n}}$
+    \end{enumerate}
+\end{theorem}
+
+\vspace{1em}
+\begin{note}
+    实数的有理数次幂要求底数为正实数，指数可以是任意有理数。
+    在实数集中，负实数的有理数次幂没有定义，比如 $(-1)^{\frac{1}{2}}$ 是无意义的，也即不存在实数 $x$，使得 $x^2 = -1$。
+    这说明实数集对开方运算不封闭，需要再次扩充数集，得到复数集。
+\end{note}
 
 \newpage
