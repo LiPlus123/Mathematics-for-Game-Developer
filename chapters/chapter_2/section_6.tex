@@ -50,6 +50,27 @@
 \end{note}
 
 \vspace{1em}
+\subsection{连续函数}
+\begin{definition}[连续函数 Continuous Function]
+    设 $ (X,\mathcal{T}(X)) $ 和 $ (Y,\mathcal{T}(Y)) $ 是拓扑空间，映射 $ f:X\to Y $ 称为连续函数，当且仅当，$ \forall V\in \mathcal{T}(Y) $，有 $ f^{-1}(V)\in \mathcal{T}(X) $。
+\end{definition}
+\begin{definition}[同胚 Homeomorphism]
+    设 $ (X,\mathcal{T}(X)) $ 和 $ (Y,\mathcal{T}(Y)) $ 是拓扑空间，映射 $ f:X\to Y $ 称为同胚，当且仅当，$ f $ 是双射且 $ f $ 与 $ f^{-1} $ 都是连续函数，记为 $ X \cong Y $。
+\end{definition}
+\begin{note}
+    连续函数是对几何空间中连续变化概念的抽象。连续函数保持了拓扑结构，即开集的原像仍然是开集。
+    同胚是拓扑空间之间的一种等价关系，表示两个拓扑空间在拓扑意义下是相同的。拓扑空间的同胚类似于代数结构的同构。
+\end{note}
+
+% \begin{definition}[度量空间中连续函数的$\varepsilon-\delta$定义]
+%     设 $ (X,d_X) $ 和 $ (Y,d_Y) $ 是度量空间，映射 $ f:X\to Y $ 称为连续函数，当且仅当，$ \forall x\in X $ 且 $ \forall \epsilon>0 $，存在 $ \delta>0 $，使得 $ \forall y\in X $，当 $ d_X(x,y)<\delta $ 时，有 $ d_Y(f(x),f(y))<\epsilon $。
+% \end{definition}
+
+% \begin{definition}[度量空间中连续函数的开球定义]
+%     设 $ (X,d_X) $ 和 $ (Y,d_Y) $ 是度量空间，映射 $ f:X\to Y $ 称为连续函数，当且仅当，$ \forall x\in X $ 且 $ \forall \epsilon>0 $，存在 $ \delta>0 $，使得只要 $y\in B_X(x;\delta)$，就有 $ f(y)\in B_Y(f(x);\epsilon) $。
+% \end{definition}
+
+\vspace{1em}
 
 \subsection{度量空间}
 \begin{definition}[度量空间 Metric Space]
@@ -132,27 +153,6 @@
     赋范线性空间既是线性空间又是度量空间。范数 $ \|\cdot\| $ 用来衡量向量的长度或大小。内积空间既是线性空间又是赋范线性空间。内积 $ \langle\cdot,\cdot\rangle $ 用来衡量向量之间的夹角和正交性。
 \end{note}
 
-% \vspace{1em}
-% \subsection{连续函数}
-% \begin{definition}[连续函数 Continuous Function]
-%     设 $ (X,\mathcal{T}(X)) $ 和 $ (Y,\mathcal{T}(Y)) $ 是拓扑空间，映射 $ f:X\to Y $ 称为连续函数，当且仅当，$ \forall V\in \mathcal{T}(Y) $，有 $ f^{-1}(V)\in \mathcal{T}(X) $。
-% \end{definition}
 
-% \begin{definition}[同胚 Homeomorphism]
-%     设 $ (X,\mathcal{T}(X)) $ 和 $ (Y,\mathcal{T}(Y)) $ 是拓扑空间，映射 $ f:X\to Y $ 称为同胚，当且仅当，$ f $ 是双射且 $ f $ 与 $ f^{-1} $ 都是连续函数，记为 $ X \cong Y $。
-% \end{definition}
-
-% \begin{note}
-%     连续函数是对几何空间中连续变化概念的抽象。连续函数保持了拓扑结构，即开集的原像仍然是开集。
-%     同胚是拓扑空间之间的一种等价关系，表示两个拓扑空间在拓扑意义下是相同的。拓扑空间的同胚类似于代数结构的同构。
-% \end{note}
-
-% \begin{definition}[度量空间中连续函数的$\varepsilon-\delta$定义]
-%     设 $ (X,d_X) $ 和 $ (Y,d_Y) $ 是度量空间，映射 $ f:X\to Y $ 称为连续函数，当且仅当，$ \forall x\in X $ 且 $ \forall \epsilon>0 $，存在 $ \delta>0 $，使得 $ \forall y\in X $，当 $ d_X(x,y)<\delta $ 时，有 $ d_Y(f(x),f(y))<\epsilon $。
-% \end{definition}
-
-% \begin{definition}[度量空间中连续函数的开球定义]
-%     设 $ (X,d_X) $ 和 $ (Y,d_Y) $ 是度量空间，映射 $ f:X\to Y $ 称为连续函数，当且仅当，$ \forall x\in X $ 且 $ \forall \epsilon>0 $，存在 $ \delta>0 $，使得只要 $y\in B_X(x;\delta)$，就有 $ f(y)\in B_Y(f(x);\epsilon) $。
-% \end{definition}
 
 \newpage

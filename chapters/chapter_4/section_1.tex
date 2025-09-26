@@ -1,0 +1,359 @@
+\chapter{抽象代数}
+% 抽象代数主要研究代数结构及其性质，常见的代数结构有群、环、域等。
+\section{群}
+
+% 群是包含一个二元的运算的代数结构，如果一个集合具有群结构，那么就说明它具有对称性（Symmetry）。
+% 群也是其他代数结构环、域、线性空间……的基础结构。在数学和物理学中有重要的地位。
+
+\subsection{群的定义}
+
+\begin{definition}[群 Group]
+    设 $G$ 是一个非空集合，$*$ 是定义在 $G$ 上的一个二元运算，如果对任意的 $a, b, c\in G$ 都满足以下四个条件：
+    \begin{enumerate}
+        \item 封闭性：$a * b\in G$；
+        \item 结合律：$(a * b) * c = a * (b * c)$；
+        \item 存在单位元：存在 $e\in G$，使得对任意的 $a\in G$ 都有 $e * a = a * e = a$；
+        \item 存在逆元：对任意的 $a\in G$，都存在 $b\in G$，使得 $a * b = b * a = e$，其中 $e$ 是单位元。
+    \end{enumerate}
+    那么称 $(G, *)$ 是一个群，简称群 $G$。
+    \label{def:group}
+\end{definition}
+\vspace{1em}
+
+\begin{definition}[阿贝尔群 Abelian Group]
+    如果一个群 $(G, *)$ ，任意的 $a, b\in G$ 还满足：
+    \begin{enumerate}
+        \item 交换律：$a * b = b * a$，
+    \end{enumerate}
+    那么称 $(G, *)$ 是一个阿贝尔群或交换群（Commutative Group）。
+    \label{def:abelian_group}
+\end{definition}
+
+\begin{note}
+    群的四条性质称为群公理。如果只满足前两条性质，那么称为半群（Semigroup）。
+    如果只满足前三条性质，那么称为幺半群（Monoid）。只含有单位元的群 $G=\{e\}$ 称为平凡群（Trivial Group），反之为非平凡群（Non-trivial Group）。
+    比如，整数集 $\mathbb{Z}$ 关于加法构成一个阿贝尔群 $(\mathbb{Z}, +)$，称为整数加群;
+    去零实数集 $\mathbb{R}\setminus\{0\}$ 关于乘法也构成一个阿贝尔群 $(\mathbb{R}\setminus\{0\}, *)$，称为去零实数乘群。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[群的阶]
+    设 $(G, *)$ 是一个群，如果 $G$ 是有限集，那么称 $G$ 的元素个数为群的阶，记为 $|G|$。
+    如果 $G$ 是无限集，那么称 $G$ 的阶为无穷，记为 $|G| = \infty$。
+\end{definition}
+
+\vspace{1em}
+
+\begin{proposition}[群运算的性质]
+    设 $(G, *)$ 是一个群，$a, b, c\in G$，那么：
+    \begin{enumerate}
+        \item 单位元是唯一的；
+        \item 逆元是唯一的；
+        \item $(a^{-1})^{-1} = a$；
+        \item $(a * b)^{-1} = b^{-1} * a^{-1}$。
+        \item 左消去律：如果 $a * b = a * c$，那么 $b = c$；
+        \item 右消去律：如果 $b * a = c * a$，那么 $b = c$。
+    \end{enumerate}
+\end{proposition}
+\vspace{1em}
+
+\begin{definition}[子群 Subgroup]
+    设 $(G, *)$ 是一个群，$H\subseteq G$，如果 $H$ 本身也是一个群，那么称 $H$ 是 $G$ 的子群，记为 $H \le G$。
+    \{e\} 和 $G$ 都是 $G$ 的子群，称为平凡子群（Trivial Subgroup），其他的子群称为非平凡子群（Non-trivial Subgroup）。
+\end{definition}
+
+\begin{theorem}[子群判定定理]
+    设 $(G, *)$ 是一个群，$H\subseteq G$，如果 $H$ 是 $G$ 的子群，当且仅当，
+    \begin{enumerate}
+        \item $e \in H$
+        \item 对任意的 $a, b \in H$，都有 $a * b^{-1} \in H$
+    \end{enumerate}
+\end{theorem}
+\begin{note}
+    子群是群的一个重要概念，子群也是一个群，且子群的运算与原群的运算相同。
+    子群判定定理给出了判定一个子集是否为子群的充分必要条件。
+    交换群的子群也是交换群。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[群同态与群同构 Group Homomorphism and Isomorphism]
+    设 $(G, *)$ 和 $(H, \cdot)$ 是两个群，映射 $f: G \to H$ 称为从 $G$ 到 $H$ 的一个群同态，当且仅当，对任意的 $a, b\in G$，都有
+    \[
+        f(a * b) = f(a) \cdot f(b)
+    \]
+    如果 $f$ 是单射，则称 $f$ 为\textbf{单同态 Monomorphism}；
+    如果 $f$ 是满射，则称 $f$ 为\textbf{满同态 Epimorphism}；
+    如果 $f$ 是双射，则称 $f$ 为\textbf{群同构 Isomorphism}。
+    \label{def:group_homomorphism}
+\end{definition}
+
+\begin{proposition}[群同态的性质]
+    设 $(G, *)$ 和 $(H, \cdot)$ 是两个群，映射 $f: G \to H$ 是从 $G$ 到 $H$ 的一个群同态，那么：
+    \begin{enumerate}
+        \item $f(e_G) = e_H$，其中 $e_G$ 和 $e_H$ 分别是 $G$ 和 $H$ 的单位元
+        \item 对任意的 $a\in G$，都有 $f(a^{-1}) = (f(a))^{-1}$
+    \end{enumerate}
+\end{proposition}
+
+\begin{note}
+    群同态是保持群结构的映射，它将群的运算映射到另一个群的运算，将群的单位元映射到另一个群的单位元；将群的逆元映射到另一个群的逆元；
+    而群同构还将两个群的所有元素一一对应起来，说明它们在群结构上是完全相同的。如果仅仅研究群的结构，那么同构的群可以看成是同一个群。
+\end{note}
+
+\vspace{1em}
+\subsection{幂运算与循环群}
+\begin{definition}[群元素的自然数次幂运算]
+    设 $(G, *)$ 是一个群，$a\in G$，则 $a$ 的自然数次幂运算定义为：
+    \begin{enumerate}
+        \item $a^0 = e$；
+        \item $a^n = a^{n-1} * a,\ n > 0$
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[群元素的负整数次幂运算]
+    设 $(G, *)$ 是一个群，$n\in\mathbb{N}^+$ 是正整数，$a\in G$ 的 $-n$ 次幂记为 $a^{-n}$，定义
+    \[
+        a^{-n} = (a^n)^{-1} = (a^{-1})^n
+    \]
+\end{definition}
+
+\begin{proposition}[群元素的整数次幂运算的性质]
+    设 $(G, *)$ 是一个群，$m, n\in\mathbb{Z}$，$a\in G$，那么：
+    \begin{enumerate}
+        \item $a^{m+n} = a^m * a^n$；
+        \item $(a^m)^n = a^{mn}$；
+        \item 如果 $(G, *)$ 是阿贝尔群，那么 $(a * b)^n = a^n * b^n$
+    \end{enumerate}
+\end{proposition}
+
+\begin{note}
+    整数加群 $(\mathbb{Z}, +)$ 元素的整数次幂运算就是整数的乘法运算。
+    去零实数乘群 $(\mathbb{R}\setminus\{0\}, *)$ 元素的整数次幂运算就是实数的乘方运算。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[循环群 Cyclic Group]
+    设 $(G, *)$ 是一个群，$a\in G$，如果 $G = \{a^n : n\in\mathbb{Z}\}$，那么称 $G$ 是由 $a$ 生成的循环群，记为 $\langle a \rangle$。$a$ 称为循环群的生成元。
+    \label{def:cyclic_group}
+\end{definition}
+
+\begin{definition}[模 n 剩余类加群]
+    设 $\mathbb{Z}$ 是整数集，设等价关系：
+    \[
+        \forall a,b \in \mathbb{Z},\ a\equiv b \iff a \mod n = b \mod n
+    \]
+    称为同余关系。等价类：
+    \[
+        [a] = \{b\in\mathbb{Z} : b \equiv a\}
+    \]
+    也就与 $a$ 同余的整数划到同一个等价类中。
+    令 $\mathbb{Z}_n = \{[0],[1],\ldots,[n-1]\}$，称为模 $n$ 剩余类集合。定义加法运算：
+    \[
+        [a] + [b] = [a + b]
+    \]
+    那么 $(\mathbb{Z}_n, +)$ 是一个群，称为模 $n$ 剩余类加群。
+\end{definition}
+
+\begin{proposition}[循环群的性质]
+    设 $(G, *)$ 是一个循环群，$a\in G$，是生成元，那么：
+    \begin{enumerate}
+        \item $(G, *)$ 是阿贝尔群；
+        \item 循环群的生成元不止一个，如果 $a$ 是生成元，那么 $a^{-1}$ 也是生成元；
+        \item 循环群的子群也是循环群；
+        \item 如果 $|G| = n$ 是有限的，那么对任意的 $k\in\mathbb{Z}$，都有 $a^{k+n} = a^k$；$n$ 是循环群的阶，也是生成元的循环周期；
+        \item 任意一个无限循环群都与 $(\mathbb{Z}, +)$ 同构；任意一个 $n$ 阶有限循环群都与 $(\mathbb{Z}_n, +)$ 同构。
+        % \item 如果 $|G| = n$ 是有限的，那么对任意的 $k, m\in\mathbb{Z}$，都有 $a^k = a^m$ 当且仅当 $k \equiv m \pmod{n}$。
+    \end{enumerate}
+\end{proposition}
+
+\begin{note}
+    循环群是一种特殊的群，其中的任意一个元素都可由生成元的整数次幂运算得到。比如，整数加群 $(\mathbb{Z}, +)$ 是由 $1$ 或 $-1$ 生成的无限循环群；
+    模 n 剩余加群 $(\mathbb{Z}_n,+)$ 是有限循环群，$[1]$ 和 $[n-1]$ 是它的生成元，且 $|\mathbb{Z}_n| = n$。
+    去零整数乘群 $(\mathbb{Z}\setminus\{0\}, *)$ 不是循环群，因为它没有生成元。
+\end{note}
+\vspace{1em}
+
+\subsection{变换与变换群}
+\begin{definition}[变换 Transformation]
+    设 $X$ 是一个非空集合，映射 $f: X \to X$ 称为 $X$ 上的一个变换，当且仅当，$f$ 是双射。
+\end{definition}
+\begin{note}
+    变换是一种特殊的函数，是集合到自身的双射。
+    比如，旋转和平移都可以看成是几何空间的变换。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[变换群 Transformation Group]
+    设 $X$ 是一个非空集合，$S_X$ 是 $X$ 上所有变换的集合，定义二元运算为映射的复合，满足：
+    \begin{enumerate}
+        \item 封闭性：对任意的 $f, g\in S_X$，都有 $f \circ g \in S_X$；
+        \item 结合律：对任意的 $f, g, h\in S_X$，都有 $(f \circ g) \circ h = f \circ (g \circ h)$；
+        \item 存在单位元：存在恒等映射 $\mathrm{id}_X\in S_X$，使得对任意的 $f\in S_X$，都有 $\mathrm{id}_X \circ f = f \circ \mathrm{id}_X = f$；
+        \item 存在逆元：对任意的 $f\in S_X$，都存在 $f^{-1}\in S_X$，使得 $f \circ f^{-1} = f^{-1} \circ f = \mathrm{id}_X$。
+    \end{enumerate}    
+    那么 $(S_X, \circ)$ 是一个群，称为 $X$ 上的变换群。
+\end{definition}
+
+\begin{note}
+    变换群是一种重要的群，变换群中的元素是集合到自身的双射，群运算是映射的复合。
+    变换群在数学和物理学中有广泛的应用。
+    有限集合上的变换群是对称群，置换群是对称群的子群，其中的变换称为置换。
+    线性群是线性空间上线性变换构成的群，它是线性空间上变换群的子群。
+\end{note}
+\vspace{1em}
+
+\vspace{1em}
+\subsection{置换与置换群}
+\begin{definition}[置换 Permutation]
+    设 $X$ 是一个非空有限集合，双射函数 $f: X \to X$ 称为 $X$ 上的一个置换。若 $f(x)=x$ 称为恒等置换，记为 $\mathrm{id}_X$。
+\end{definition}
+
+\begin{definition}[对称群 Symmetric Group]
+    设 $X$ 是一个非空有限集合，$|X| = n$，设 $\mathrm{Sym}(X)$ 是 $X$ 上所有置换的集合，定义二元运算为映射的复合，满足：
+    \begin{enumerate}
+        \item 封闭性：对任意的 $f, g\in \mathrm{Sym}(X)$，都有 $f \circ g \in \mathrm{Sym}(X)$；
+        \item 结合律：对任意的 $f, g, h\in \mathrm{Sym}(X)$，都有 $(f \circ g) \circ h = f \circ (g \circ h)$；
+        \item 存在单位元：存在恒等映射 $\mathrm{id}_X\in \mathrm{Sym}(X)$，使得对任意的 $f\in \mathrm{Sym}(X)$，都有 $\mathrm{id}_X \circ f = f \circ \mathrm{id}_X = f$；
+        \item 存在逆元：对任意的 $f\in \mathrm{Sym}(X)$，都存在 $f^{-1}\in \mathrm{Sym}(X)$，使得 $f \circ f^{-1} = f^{-1} \circ f = \mathrm{id}_X$。
+    \end{enumerate}
+    那么，$(\mathrm{Sym}(X),\circ)$ 是一个群，称为 $X$ 上的一般对称群。
+\end{definition}
+
+\begin{proposition}
+    设 $X$ 是一个非空有限集合，$|X| = n$，那么 $X$ 上的对称群 $(\mathrm{Sym}(X),\circ)$ 的阶为 $|\mathrm{Sym}(X)|=n!$。
+\end{proposition}
+
+\begin{definition}[置换群 Permutation Group]
+    设 $X$ 是一个非空有限集合，$G\le \mathrm{Sym}(X)$，那么称 $G$ 是 $X$ 上的置换群。
+\end{definition}
+
+\begin{note}
+    在组合数学中，置换指对一组元素重新排列。比如有限集合 $X=\{1,2,3\}$ 上的置换有 $3! = 6$ 个，分别是：
+    \[
+        \begin{aligned}
+            &\mathrm{id}_X = \begin{pmatrix}1 & 2 & 3 \\ 1 & 2 & 3\end{pmatrix},\quad
+            f_1 = \begin{pmatrix}1 & 2 & 3 \\ 1 & 3 & 2\end{pmatrix},\quad
+            f_2 = \begin{pmatrix}1 & 2 & 3 \\ 2 & 1 & 3\end{pmatrix},\\
+            &f_3 = \begin{pmatrix}1 & 2 & 3 \\ 2 & 3 & 1\end{pmatrix},\quad
+            f_4 = \begin{pmatrix}1 & 2 & 3 \\ 3 & 1 & 2\end{pmatrix},\quad
+            f_5 = \begin{pmatrix}1 & 2 & 3 \\ 3 & 2 & 1\end{pmatrix}.
+        \end{aligned}
+    \]
+    那么 $\mathrm{Sym}(X) = \{\mathrm{id}_X, f_1, f_2, f_3, f_4, f_5\}$ 是一个对称群，$| \mathrm{Sym}(X) | = 6$。
+    其中，$\{\mathrm{id}_X, f_1\}$ 和 $\{\mathrm{id}_X, f_5\}$ 都是 $\mathrm{Sym}(X)$ 的非平凡子群，是置换群。
+\end{note}
+
+\vspace{1em}
+\subsection{线性变换与线性群}
+\begin{definition}[线性变换 Linear Transformation]
+    设 $V$ 是域 $F$ 上的 $n$ 维线性空间，双射 $L:V\to V$ 称为 $V$ 上的一个线性变换，当且仅当，对任意的 $\mathbf{u}, \mathbf{v}\in V$ 和 $a, b\in F$，都有
+    \[
+        L(a\mathbf{u} + b\mathbf{v}) = aL(\mathbf{u}) + bL(\mathbf{v})
+    \]
+\end{definition}
+
+\begin{definition}[一般线性群 General Linear Group]
+    设 $V$ 是域 $F$ 上的 $n$ 维线性空间，$\mathrm{GL}_n(F)$ 是 $V$ 上所有线性变换的集合，定义二元运算为映射的复合，满足：
+    \begin{enumerate}
+        \item 封闭性：对任意的 $L_1, L_2\in \mathrm{GL}_n(F)$，都有 $L_1 \circ L_2 \in \mathrm{GL}_n(F)$；
+        \item 结合律：对任意的 $L_1, L_2, L_3\in \mathrm{GL}_n(F)$，都有 $(L_1 \circ L_2) \circ L_3 = L_1 \circ (L_2 \circ L_3)$；
+        \item 存在单位元：存在恒等映射 $\mathrm{id}_V\in \mathrm{GL}_n(F)$，使得对任意的 $L\in \mathrm{GL}_n(F)$，都有 $\mathrm{id}_V \circ L = L \circ \mathrm{id}_V = L$；
+        \item 存在逆元：对任意的 $L\in \mathrm{GL}_n(F)$，都存在 $L^{-1}\in \mathrm{GL}_n(F)$，使得 $L \circ L^{-1} = L^{-1} \circ L = \mathrm{id}_V$。
+    \end{enumerate}    
+    那么 $(\mathrm{GL}_n(F), \circ)$ 是一个群，称为 $V$ 上的一般线性群。
+\end{definition}
+
+\begin{note}
+    在 $n$ 维线性空间中，线性变换可以表示为 $n\times n$ 的可逆矩阵。
+    那么一般线性群 $\mathrm{GL}_n(F)$ 也可以表示为所有 $n\times n$ 可逆矩阵构成的群，群运算为矩阵乘法。
+    一般线性群是线性空间 $V$ 上变换群的子群 $\mathrm{GL}_n(F) \leq S_V$。
+\end{note}
+
+\vspace{0.5em}
+
+\begin{definition}[特殊线性群 Special Linear Group]
+    设 $V$ 是域 $F$ 上的 $n$ 维线性空间，$\mathrm{SL}_n(F)$ 是 $V$ 上所有行列式为 $1$ 的 $n\times n$ 矩阵构成的集合，二元运算为矩阵乘法，那么 $(\mathrm{SL}_n(F), \cdot)$ 是一个群，称为 $V$ 上的特殊线性群。
+\end{definition}
+\begin{note}
+    行列式为 1，说明该线性变换不拉伸空间（在一维空间中能保证长度不变，在二维空间中能保证面积不变，在三维空间中能保证体积不变）。特殊线性群是一般线性群的子群 $\mathrm{SL}_n(F) \leq \mathrm{GL}_n(F)$。
+\end{note}
+
+\vspace{0.5em}
+
+\begin{definition}[正交矩阵 Orthogonal Matrix]
+    设 $V$ 是实数域 $\mathbb{R}$ 上的 $n$ 维线性空间，$A$ 是 $V$ 上的一个 $n\times n$ 矩阵，如果 $A$ 满足
+    \[
+        A^T A = A A^T = I
+    \]
+    其中，$A^T$ 是 $A$ 的转置矩阵，那么称 $A$ 是一个正交矩阵。
+\end{definition}
+
+\begin{definition}[正交群 Orthogonal Group]
+    设 $V$ 是实数域 $\mathbb{R}$ 上的 $n$ 维线性空间，$\mathrm{O}_n$ 是 $V$ 上所有正交矩阵构成的集合，二元运算为矩阵乘法，那么 $(\mathrm{O}_n, \cdot)$ 是一个群，称为 $V$ 上的正交群。
+\end{definition}
+
+\begin{definition}[特殊正交群 Special Orthogonal Group]
+    设 $V$ 是实数域 $\mathbb{R}$ 上的 $n$ 维线性空间，$\mathrm{SO}_n$ 是 $V$ 上所有行列式为 $1$ 的正交矩阵构成的集合，二元运算为矩阵乘法，那么 $(\mathrm{SO}_n, \cdot)$ 是一个群，称为 $V$ 上的特殊正交群。
+\end{definition}
+\begin{note}
+    正交矩阵表示的线性变换能保持向量间的夹角不变。正交变换群是一般线性群的子群。
+    特殊正交矩阵表示的旋转变换。特殊正交矩阵群即是特殊线性群的子群，又是正交变换群的子群 $\mathrm{SO}_n \leq \mathrm{O}_n \leq \mathrm{SL}_n(\mathbb{R})\leq \mathrm{GL}_n(\mathbb{R})$。
+\end{note}
+\vspace{0.5em}
+
+\begin{definition}[酉矩阵 Unitary Matrix]
+    设 $V$ 是复数域 $\mathbb{C}$ 上的 $n$ 维线性空间，$A$ 是 $V$ 上的一个 $n\times n$ 矩阵，如果 $A$ 满足
+    \[
+        A^{\dagger} A = A A^{\dagger} = I
+    \]
+    其中，$A^{\dagger} = \overline{A^T}$ 是 $A$ 的共轭转置矩阵，那么称 $A$ 是一个酉矩阵。
+\end{definition}
+
+\begin{definition}[酉群 Unitary Group]
+    设 $V$ 是复数域 $\mathbb{C}$ 上的 $n$ 维线性空间，$\mathrm{U}_n$ 是 $V$ 上所有酉矩阵构成的集合，二元运算为矩阵乘法，那么 $(\mathrm{U}_n, \cdot)$ 是一个群，称为 $V$ 上的酉群。
+\end{definition}
+
+\begin{definition}[特殊酉群 Special Unitary Group]
+    设 $V$ 是复数域 $\mathbb{C}$ 上的 $n$ 维线性空间，$\mathrm{SU}_n$ 是 $V$ 上所有行列式为 $1$ 的酉矩阵构成的集合，二元运算为矩阵乘法，那么 $(\mathrm{SU}_n, \cdot)$ 是一个群，称为 $V$ 上的特殊酉群。
+\end{definition}
+
+\begin{note}
+    酉矩阵是正交矩阵在复数域上的推广。
+    酉矩阵表示的线性变换能保持复向量间的夹角不变。酉变换群是一般线性群的子群。
+    特殊酉矩阵表示的旋转变换。特殊酉矩阵群即是特殊线性群的子群，又是酉变换群的子群 $\mathrm{SU}_n \leq \mathrm{U}_n \leq \mathrm{SL}_n(\mathbb{C}) \leq \mathrm{GL}_n(\mathbb{C})$。
+\end{note}
+
+\vspace{1em}
+\subsection{陪集与群划分}
+\begin{definition}[左陪集 Left Coset]
+    设 $(G, *)$ 是一个群，$H \le G$ 是 $G$ 的子群。定义 $G$ 上的等价关系 $\sim$ 为：
+    \[
+        a \sim b \iff a^{-1}b \in H, \quad \forall a, b \in G
+    \]
+    等价类：
+    \begin{align*}
+        [a]_{\sim} &= \{x\in G:x\sim a\} = \{x\in G:a^{-1}x\in H\}\\
+        &=\{x\in G:a^{-1}x = h,h\in H\}\\
+        &=\{x\in G:x=ah,h\in H\}\\
+        &=\{ah:h\in H\}
+    \end{align*}
+    记为 $aH := [a]_{\sim}$，称为 $H$ 关于 $a$ 的左陪集。
+\end{definition}
+
+\begin{definition}[左商集 Left Quotient Set]
+    设 $(G, *)$ 是一个群，$H \le G$ 是 $G$ 的子群，$a\in G$，那么 $G$ 关于 $H$ 的所有左陪集的集合称为 $G$ 关于 $H$ 的左商集，记为 $(G/H)_l$，即
+    \[
+        (G/H)_l := \{aH:a\in G\}
+    \]
+\end{definition}
+
+\vspace{1em}
+\subsection{正规子群与商群}
+
+\vspace{1em}
+\subsection{群同态基本定理}
+
+\vspace{1em}
+\subsection{群的直和}
+
+\newpage
