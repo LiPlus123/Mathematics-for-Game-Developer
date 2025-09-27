@@ -1,0 +1,251 @@
+\section{域}
+
+\subsection{域的定义}
+\begin{definition}[域 Field]
+    设 $F$ 是一个非空集合，$+$ 和 $\cdot$ 是定义在 $F$ 上的两种代数运算。
+    $ (F,+,\cdot) $ 称为域，当且仅当，$(F,+,\cdot)$ 是一个交换环并且是一个除环。
+    \label{def:field}
+\end{definition}
+
+\begin{definition}[子域 Subfield]
+    设 $F$ 是一个域，$K \subseteq F$。$K$ 称为 $F$ 的一个子域，当且仅当，$K$ 在 $F$ 上关于加法和乘法是封闭的，并且 $(K,+,\cdot)$ 也是一个域。
+    \label{def:subfield}
+\end{definition}
+
+\begin{theorem}[子域判定定理]
+    设 $(F,+,\cdot)$ 是一个域，$K \subseteq F$。则 $K$ 是 $F$ 的子域的充分必要条件是：
+    \begin{enumerate}
+        \item $0,1\in K$；
+        \item $\forall a,b\in K$，$a-b\in K$；
+        \item $\forall a,b\in K\setminus\{0\}$，$a\cdot b^{-1} \in K$；
+    \end{enumerate}
+\end{theorem}
+
+\begin{note}
+    域是在环的基础上，添加了乘法交换律和乘法逆元存在性两个条件，并且域中没有零因子。
+    常见的，$(\mathbb{Q},+,\cdot)$，$(\mathbb{R},+,\cdot)$ 和 $(\mathbb{C},+,\cdot)$ 都是域。
+    $\mathbb{Q}$ 是 $\mathbb{R}$ 的子域，$\mathbb{R}$ 也是 $\mathbb{C}$ 的子域。
+\end{note}
+
+% \begin{definition}[有限域 Finite Field]
+%     如果一个域 $F$ 含有有限个元素，则称 $F$ 为有限域。
+%     \label{def:finite_field}
+% \end{definition}
+
+% \begin{definition}[有限域的特征 Characteristic of a Finite Field]
+%     设 $F$ 是一个有限域，$1_F$ 是 $F$ 的乘法单位元。
+%     如果存在一个最小的正整数 $p$，使得
+%     \[
+%         \underbrace{1_F + 1_F + \cdots + 1_F}_{p\text{ 个}} = 0_F,
+%     \]
+%     则称 $p$ 为 $F$ 的特征，记为 $\mathrm{char}(F)=p$。
+%     如果不存在这样的正整数，则称 $F$ 的特征为零，记为 $\mathrm{char}(F)=0$。
+%     \label{def:characteristic_of_finite_field}
+% \end{definition}
+
+% \begin{example}
+%     设 $F=\mathbb{Z}/5\mathbb{Z}=\{0,1,2,3,4\}$，则 $F$ 是一个有限域，并且 $\mathrm{char}(F)=5$，因为
+%     \[
+%         1_F + 1_F + 1_F + 1_F + 1_F = 5 \equiv 0 \mod 5.
+%     \]
+%     设 $F=\mathbb{Q}$，则 $F$ 是一个无限域，并且 $\mathrm{char}(F)=0$，因为不存在正整数 $p$ 使得
+%     \[
+%         \underbrace{1_F + 1_F + \cdots + 1_F}_{p\text{ 个}} = 0_F.
+%     \]
+% \end{example}
+
+\vspace{1em}
+
+\subsection{域扩张}
+
+\begin{definition}[域扩张 Field Extension]
+    设 $F$ 是一个域，如果存在一个域 $K$，使得 $F$ 是 $K$ 的一个子域，则称 $K$ 是 $F$ 的一个域扩张，记为 $K/F$。
+    \label{def:field_extension}
+\end{definition}
+\begin{note}
+    域扩张是域论中的一个重要概念，如何从一个小域构造出一个更大的域，或者研究两个域之间的关系，都是通过域扩张来实现的。
+\end{note}
+
+\begin{definition}[单扩域 Simple Extension]
+    设 $F$ 是一个域，$K/F$ 是 $F$ 的一个域扩张。
+    如果存在 $a\in K$，使得 $K=F(a)$，则称 $K/F$ 是一个单扩域。
+    这里 $F(a)$ 表示包含 $F$ 和 $a$ 的最小子域。
+    \label{def:simple_extension}
+\end{definition}
+\begin{note}
+    单扩域在 $K/F$ 所有子域中包含基域 $F$ 和另一个元素 $a\in K$ 的最小子域。
+    例如，$\mathbb{C}=\mathbb{R}(i)= \{a+bi:a,b\in \mathbb{R}\}$ 是 $\mathbb{R}$ 的一个单扩域，因为 $\mathbb{C}$ 是包含 $\mathbb{R}$ 和 $i$ 的最小子域。
+    另一个例子是 $\mathbb{Q}(\sqrt{2}) = \{a+b\sqrt{2}:a,b\in \mathbb{Q}\}$ 是 $\mathbb{Q}$ 的一个单扩域，因为它是包含 $\mathbb{Q}$ 和 $\sqrt{2}$ 的最小子域。
+\end{note}
+
+\begin{definition}[分裂域 Splitting Field]
+    设 $F$ 是一个域，$f(x)\in F[x]$ 是一个正次数多项式。
+    如果存在一个域扩张 $K/F$，使得 $f(x)$ 可以写成一系列在 $K[x]$ 中的一次多项式的乘积，也即
+    \[
+        f(x) = a(x - r_1)(x - r_2) \cdots (x - r_n),\ a,r_1,r_2,\ldots,r_n \in K,
+    \]
+    并且 $K$ 是包含所有 $f(x)$ 所有根的最小域，则称 $K$ 是 $f(x)$ 在 $F$ 上的一个分裂域。
+    \label{def:splitting_field}
+\end{definition}
+\begin{note}
+    在某个域上某个多项式方程可能没有解，因此希望通过构造一个更大的域，使得该多项式方程在这个更大的域中有解。
+    分裂域就是这样一个更大的域，它是相对特定多项式而言的，它包含了多项式的所有根，并且是包含这些根的最小域。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[有限扩张与无限扩张 Finite and Infinite Extensions]
+    设 $K/F$ 是一个域扩张，$K$ 作为 $F$ 上的一个向量空间。
+    如果 $K$ 作为 $F$ 上的向量空间是有限维的，则称 $K/F$ 是一个有限扩张，否则称 $K/F$ 是一个无限扩张。
+    $K$ 的维数称为扩张的次数，记为 $[K:F]$。
+    \label{def:finite_infinite_extension}
+\end{definition}
+
+\begin{note}
+    $\mathbb{C}$ 是 $\mathbb{R}$ 的一个有限扩展，并且 $\{1,i\}$ 是 $\mathbb{C}$ 作为 $\mathbb{R}$ 上的一个向量空间的一个基，因此 $[\mathbb{C}:\mathbb{R}]=2$。
+    $\mathbb{R}$ 是 $\mathbb{Q}$ 的一个无限扩展，因为 $\mathbb{R}$ 作为 $\mathbb{Q}$ 上的一个向量空间是无限维的。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[代数数与超越数 Algebraic and Transcendental Numbers]
+    设 $F$ 是一个域，$F[x]$ 是 $F$ 上的多项式环，$K$ 是 $F$ 的一个域扩张。
+    如果存在一个非零多项式 $f(x)\in F[x]$，使得 $f(a)=0,\ a\in K$，则称 $a$ 是 $F$ 上的一个代数数，否则称 $a$ 是 $F$ 上的一个超越数。
+    \label{def:algebraic_transcendental}
+\end{definition}
+
+\begin{definition}[代数扩张和超越扩张 Algebraic and Transcendental Extensions]
+    设 $F$ 是一个域，$K/F$ 是 $F$ 的一个域扩张。
+    如果 $K$ 中的每个元素都是 $F$ 上的代数数，则称 $K/F$ 是一个代数扩张，否则称 $K/F$ 是一个超越扩张。
+    \label{def:algebraic_transcendental_extension}
+\end{definition}
+
+\begin{note}
+    代数数是指那些可以作为某个非零多项式的根的数，而超越数则是那些不能作为任何非零多项式的根的数。
+    例如，$\sqrt{2}$ 是 $\mathbb{Q}$ 上的一个代数数，因为它是多项式 $x^2 - 2$ 的一个根。
+    另一方面，$\pi$ 是 $\mathbb{Q}$ 上的一个超越数，因为不存在任何非零多项式 $f(x)\in \mathbb{Q}[x]$ 使得 $f(\pi)=0$。
+    代数扩张是指扩张域中的每个元素都是基域上的代数数，而超越扩张则包含至少一个超越数。
+    根据代数基本定理 \ref{thm:FundamentalTheoremOfAlgebra}，$\mathbb{C}$ 中的每个元素都是 $\mathbb{R}$ 上的代数数，
+    也即任意一个实数域上的多项式方程在复数域中都有解，因此 $\mathbb{C}$ 是 $\mathbb{R}$ 的一个代数扩张。
+    $\mathbb{R}$ 是 $\mathbb{Q}$ 的一个超越扩张，存在 $\pi\in \mathbb{R}$ 是 $\mathbb{Q}$ 上的一个超越数。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[可约多项式与不可约多项式 Reducible and Irreducible Polynomials]
+    设 $F$ 是一个域，$F[x]$ 是 $F$ 上的多项式环。
+    如果存在两个次数均小于 $f(x)$ 的非零多项式 $g(x),h(x)\in F[x]$，使得 $f(x)=g(x)h(x)$，则称 $f(x)$ 在 $F$ 上是可约的，否则称 $f(x)$ 在 $F$ 上是不可约的。
+    \label{def:reducible_irreducible_polynomial}
+\end{definition}
+\begin{note}
+    则多项式 $f(x)=x^2-2$ 在 $\mathbb{Q}$ 上是不可约的，因为它不能分解为两个次数均小于 2 的有理系数多项式的乘积。
+    另一方面，多项式 $g(x)=x^2-1$ 在 $\mathbb{Q}$ 上是可约的，因为它可以分解为 $(x-1)(x+1)$。
+\end{note}
+
+\begin{definition}[可分多项式与不可分多项式 Separable and Inseparable Polynomials]
+    设 $F$ 是一个域，$F[x]$ 是 $F$ 上的多项式环。
+    如果正次数多项式 $f(x)\in F[x]$ 的每个根在其分裂域中都是单根，则称 $f(x)$ 在 $F$ 上是可分的；
+    反之，存在至少一个重根，则称 $f(x)$ 在 $F$ 上是不可分的。
+    \label{def:separable_inseparable_polynomial}
+\end{definition}
+\begin{note}
+    多项式 $f(x)=x^2-2$ 在 $\mathbb{Q}$ 上是可分的，因为它在其分裂域 $\mathbb{Q}(\sqrt{2})$ 中有两个不同的根 $\sqrt{2}$ 和 $-\sqrt{2}$。
+    另一方面，多项式 $g(x)=x^2-2x+1=(x-1)^2$ 在 $\mathbb{Q}$ 上是不可分的，因为它在其分裂域 $\mathbb{Q}$ 中只有一个根 $1$，且该根是重根。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[可分扩张 Separable Extension]
+    设 $F$ 是一个域，$K/F$ 是 $F$ 的一个代数扩张。$K/F$ 称为可分扩张，当且仅当，$K$ 中的每个元素都是 $F[x]$ 中某个不可约但可分多项式的根。
+\end{definition}
+\begin{note}
+    $\mathbb{Q}(\sqrt{2})/\mathbb{Q}$ 是一个可分扩张，其中 $\pm\sqrt{2}$ 是 $\mathbb{Q}$ 上不可约但可分多项式 $x^2-2$ 的两个单根。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[正规扩张 Normal Extension]
+    设 $F$ 是一个域，$K/F$ 是 $F$ 的一个代数扩张。$K/F$ 称为正规扩张，当且仅当，所有 $F[x]$ 中不可约多项式在 $K$ 中能完全可以分解为一次多项式的乘积。
+    也即，$K$ 是包含所有 $F[x]$ 中不可约多项式所有根。
+    \label{def:normal_extension}
+\end{definition}
+
+\begin{note}
+    $\mathbb{C}/\mathbb{R}$ 是一个正规扩张，因为 $\mathbb{C}$ 是包含所有 $\mathbb{R}[x]$ 中不可约多项式所有根的代数扩张域。
+    例如，$\mathbb{R}[x]$ 中不可约多项式 $x^2+1$ 在 $\mathbb{C}$ 中可以分解为 $(x-i)(x+i)$。
+    另一方面，$\mathbb{Q}(\sqrt[3]{2})/\mathbb{Q}$ 不是一个正规扩张，因为 $\mathbb{Q}(\sqrt[3]{2})$ 不包含不可约多项式 $x^3-2$ 的所有根。
+    $x^3-2$ 在 $\mathbb{C}$ 中有三个根，分别是 $\sqrt[3]{2}$、$\sqrt[3]{2}\omega$ 和 $\sqrt[3]{2}\omega^2$，其中 $\omega = e^{2\pi i/3}$ 是一个非实的复数。
+\end{note}
+\vspace{1em}
+
+\subsection{伽罗瓦理论}
+
+\begin{definition}[伽罗瓦扩张 Galois Extension]
+    设 $F$ 是一个域，$K/F$ 是 $F$ 的一个代数扩张。
+    如果 $K/F$ 既是正规扩张又是可分扩张，则称 $K/F$ 是一个伽罗瓦扩张。
+    \label{def:galois_extension}
+\end{definition}
+
+\begin{definition}[伽罗瓦群 Galois Group]
+    设 $F$ 是一个域，$K/F$ 是 $F$ 的一个域扩张。
+    定义 $K$ 上的一个 $F$-自同构：$\sigma:K\to K$，使得 $\sigma(a)=a,\ \forall a\in F$。
+    所有 $K$ 上的 $F$-自同构，记为 $\mathrm{Gal}(K/F)$。
+    $\mathrm{Gal}(K/F)$ 上的二元运算时函数的复合，那么 $(\mathrm{Gal}(K/F),\circ)$ 满足群公理，称为 $K/F$ 的伽罗瓦群。
+    \label{def:galois_group}
+\end{definition}
+
+\begin{note}
+    伽罗瓦群是研究域扩张对称性的重要工具。它捕捉了域扩张中元素之间的对称关系，并且与多项式方程的可解性密切相关。
+    伽罗瓦群的结构可以揭示多项式方程根的排列方式，从而帮助理解多项式方程是否可以通过根式来解。
+\end{note}
+
+\begin{definition}[伽罗瓦对应 Galois Correspondence]
+    设 $F$ 是一个域，$K/F$ 是 $F$ 的一个伽罗瓦扩张。
+    设 $H \leq \mathrm{Gal}(K/F)$ 是 $\mathrm{Gal}(K/F)$ 的一个子群，定义
+    \[
+        K^H = \{a\in K:\sigma(a)=a,\ \forall \sigma\in H\}.
+    \]
+    则 $K^H$ 是 $K/F$ 的一个子扩张域。
+    反之，设 $E$ 是 $K/F$ 的一个子扩张域，定义
+    \[
+        \mathrm{Gal}(K/E) = \{\sigma\in \mathrm{Gal}(K/F):\sigma(a)=a,\ \forall a\in E\}.
+    \]
+    则 $\mathrm{Gal}(K/E)$ 是 $\mathrm{Gal}(K/F)$ 的一个子群。
+    这两个映射 $H\mapsto K^H$ 和 $E\mapsto \mathrm{Gal}(K/E)$ 互为逆映射，并且它们之间存在包含关系的反转。
+    也即，如果 $H_1 \leq H_2 \leq \mathrm{Gal}(K/F)$，则 $K^{H_2} \leq K^{H_1}$；
+    如果 $E_1 \leq E_2$ 是 $K/F$ 的两个子扩张域，则 $\mathrm{Gal}(K/E_2) \leq \mathrm{Gal}(K/E_1)$。
+    这就是伽罗瓦对应。
+    \label{def:galois_correspondence}
+\end{definition}
+
+\begin{note}
+
+\end{note}
+
+\begin{theorem}[伽罗瓦基本定理 Fundamental Theorem of Galois Theory]
+    设 $F$ 是一个域，$K/F$ 是 $F$ 的一个伽罗瓦扩张。
+    则 $K/F$ 的子扩张域与 $\mathrm{Gal}(K/F)$ 的子群之间存在一一对应关系，这个对应关系是包含关系的反转。
+    \label{thm:FundamentalTheoremOfGaloisTheory}
+\end{theorem}
+
+\begin{note}
+    
+\end{note}
+\vspace{1em}
+
+\begin{definition}[可解群 Solvable Group]
+    设 $G$ 是一个群，如果存在一列子群
+    \[
+        \{e\} = G_0 \triangleleft G_1 \triangleleft G_2 \triangleleft \cdots \triangleleft G_n = G,
+    \]
+    使得每个商群 $G_{i+1}/G_i$ 都是阿贝尔群，则称 $G$ 是一个可解群。
+    \label{def:solvable_group}
+\end{definition}
+
+\begin{theorem}[多项式方程根式可解定理 Polynomial Equation Solvability by Radicals Theorem]
+    设 $F$ 是一个域，$f(x)\in F[x]$ 是一个正次数多项式，$K$ 是 $f(x)$ 在 $F$ 上的一个分裂域。
+    则 $f(x)$ 的根可以表示为 $F$ 中元素和根式的有限次运算的结果，当且仅当，伽罗瓦群 $\mathrm{Gal}(K/F)$ 是一个可解群。
+    \label{thm:PolynomialEquationSolvabilityByRadicals}
+\end{theorem}
+
+\begin{theorem}[阿贝尔-伽罗瓦定理 Abel Galois Theorem]
+    一般五次及以上的多项式方程没有根式解。
+    \label{thm:Abel_Galois_Theorem}
+\end{theorem}
+
+\newpage

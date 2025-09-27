@@ -1,1 +1,317 @@
 \section{环}
+
+\subsection{环的定义}
+\begin{definition}[环 Ring]
+    设 $R$ 是一个非空集合，$+$ 和 $\cdot$ 是定义在 $R$ 上的两种代数运算，如果对任意 $a,b,c \in R$，都有
+    \begin{enumerate}
+        \item $(R,+)$ 是一个交换群；
+            \begin{enumerate}
+                \item 封闭性：$a+b \in R$；
+                \item 结合律：$(a+b)+c=a+(b+c)$；
+                \item 交换律：$a+b=b+a$；
+                \item 存在加法单位元：存在 $0 \in R$，使得对任意 $a \in R$，都有 $a+0=0+a=a$；
+                \item 存在加法逆元：对任意 $a \in R$，存在 $-a \in R$，使得 $a+(-a)=(-a)+a=0$。
+            \end{enumerate}
+        \item $(R,\cdot)$ 是一个半群；
+            \begin{enumerate}
+                \item 封闭性：$a \cdot b \in R$；
+                \item 结合律：$(a \cdot b) \cdot c=a \cdot (b \cdot c)$。
+            \end{enumerate}
+        \item 乘法对加法的分配律：
+            \begin{enumerate}
+                \item 左分配律：$a \cdot (b+c)=a \cdot b + a \cdot c$；
+                \item 右分配律：$(a+b) \cdot c=a \cdot c + b \cdot c$。
+            \end{enumerate}
+    \end{enumerate}
+    则称 $(R,+,\cdot)$ 是一个\textbf{环}，$+$ 和 $\cdot$ 分别称为环的\textbf{加法}和\textbf{乘法}。
+    如果 $R=\{0\}$，则称 $(R,+,\cdot)$ 是一个\textbf{平凡环 Trivial Ring}；否则称为\textbf{非平凡环 Non-trivial Ring}。
+    \label{def:ring}
+\end{definition}
+
+\begin{definition}[交换环 Commutative Ring]
+    设 $ (R,+,\cdot) $ 为环。如果乘法 $\cdot$ 满足交换律，则称 $ (R,+,\cdot) $ 为交换环。
+    \label{def:commutative_ring}
+\end{definition}
+
+\begin{definition}[无零因子环 Ring without Zero Divisors]
+    设 $ (R,+,\cdot) $ 为环。如果对任意 $ a,b\in R $，$ a\neq 0 $，$ b\neq 0 $，均有 $ a\cdot b \neq 0 $，则称环 $ (R,+,\cdot) $ 为无零因子环。
+    \label{def:ring_without_zero_divisors}
+\end{definition}
+
+\begin{definition}[含幺环 Ring with identity]
+    设 $ (R,+,\cdot) $ 为环。如果存在乘法单位元 $1$ 并且 $1\neq 0$，则称环 $ (R,+,\cdot) $ 为含幺环。也即 $(R,\cdot)$ 是幺半群，$ (R,+,\cdot) $ 为含幺环。
+    \label{def:ring_with_identity}
+\end{definition}
+
+\begin{definition}[整环 Integral Domain]
+    设 $ (R,+,\cdot) $ 为含幺环。如果 $ (R,+,\cdot) $ 是无零因子环，则称 $ (R,+,\cdot) $ 为整环。
+    \label{def:integral_domain}
+\end{definition}
+
+\begin{definition}[除环 Division Ring]
+    设 $ (R,+,\cdot) $ 为含幺环。如果对任意 $ a\in R $，$ a\neq 0 $，均存在 $ a^{-1}\in R $，使得 $ a\cdot a^{-1} = a^{-1}\cdot a = e $，则称 $ (R,+,\cdot) $ 为除环。
+    也即  $(R\setminus\{0\},\cdot)$ 是群，$ (R,+,\cdot) $ 为含幺环。
+    \label{def:division_ring}
+\end{definition}
+
+\begin{note}
+    环在交换群的基础上，配备了第二代数运算 —— “乘法”，并且乘法对加法满足分配律。
+    对环乘法附加更多的结构，可以得到交换环、含幺环、整环、除环等。
+    比如，$(\mathbb{Z},+,\cdot)$ 是一个整环；
+    $(\mathbb{Q},+,\cdot),\ (\mathbb{R},+,\cdot),\ (\mathbb{C},+,\cdot)$ 都是除环。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[子环 Subring]
+    设 $ (R,+,\cdot) $ 为环，$ S\subseteq R $。如果 $ (S,+,\cdot) $ 也是环，则称 $ S $ 为 $ R $ 的子环。
+    ${0}$ 和 $ R $ 都是 $ R $ 的子环，称为\textbf{平凡子环 Trivial subring}，其他子环称为\textbf{非平凡子环 Non-trivial subring}。
+    \label{def:subring}
+\end{definition}
+
+\begin{theorem}[子环判定定理]
+    设 $ (R,+,\cdot) $ 为环，$ S\subseteq R $。则 $ S $ 是 $ R $ 的子环的充分必要条件是
+    \begin{enumerate}
+        \item $ 0\in S $；
+        \item $ \forall a,b\in S $，$ a-b\in S $；
+        \item $ \forall a,b\in S $，$ a\cdot b \in S $。
+    \end{enumerate}
+    \label{thm:subring_test}
+\end{theorem}
+
+\begin{note}
+    子环判定定理相比子群判定定理，多了一个关于乘法封闭性的条件。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[环同态与环同构 Ring Homomorphism and Isomorphism]
+    设 $R$ 和 $R^{\prime}$ 为环。函数 $ f:R\to R^{\prime} $ 是一个环同态，当且仅当，
+    \begin{enumerate}
+        \item $\forall a,b\in R$，$f(a+b)=f(a)+f(b)$；
+        \item $\forall a,b\in R$，$f(a\cdot b)=f(a)\cdot f(b)$；
+    \end{enumerate}
+    如果函数 $ f $ 是单射，则称 $ f $ 为单同态；
+    如果函数 $ f $ 是满射，则称 $ f $ 为满同态；
+    如果映射 $ f $ 是双射，则称 $ f $ 为环同构，记为 $ R\cong R^{\prime} $。
+    \label{def:ring_homomorphism_and_isomorphism}
+\end{definition}
+
+\begin{definition}[环同态的核 Kernel of Ring Homomorphism]
+    设 $R$ 和 $R'$ 为环，$ f:R\to R^{\prime} $ 是一个环同态。定义集合：
+    \[
+        \ker f := \{a\in R : f(a)=0\in R^{\prime}\}
+    \]
+    称为环同态 $ f $ 的核。
+    \label{def:kernel_of_ring_homomorphism}
+\end{definition}
+
+\begin{proposition}[环同态的性质]
+    设 $R$ 和 $R'$ 为环，$ f:R\to R^{\prime} $ 是一个环同态。则
+    \begin{enumerate}
+        \item $ f(0)=0 $；
+        \item $\forall a\in R$，$ f(-a)=-f(a) $；
+        \item $\ker f \leq R$
+    \end{enumerate}
+\end{proposition}
+
+\begin{note}
+    环同态与群同态类似，都是保持代数结构的映射。环同态的核表示与另一个环 $0$ 元对应的环元素的集合，它是原环的一个子环。
+\end{note}
+\vspace{1em}
+
+\subsection{多项式环}
+\begin{definition}[多项式 Polynomial]
+    设 $(R,+,\cdot)$ 为环，定义多项式：
+    \[
+        a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0
+    \]
+    其中，$x$ 称为变量，$a_i \in R$ 称为系数，$n \in \mathbb{N}$ 称为次数。
+    如果 $a_n \neq 0$ 称为变量 $x$ 的 $n$ 次多项式。
+    如果 $a_0=a_1=\cdots=a_n=0$，称为 0 多项式。
+    全体系数在环 $R$ 上的所有多项式的集合，记为 $R[x]$。
+    \label{def:polynomial}
+\end{definition}
+
+\begin{definition}[等于关系]
+    设 $(R,+,\cdot)$ 为环，$f,g\in R[x]$ 相等，记为 $f=g$，当且仅当 $f$ 和 $g$ 的对应系数相等。
+\end{definition}
+
+\begin{definition}[多项式环 Polynomial Ring]
+    设 $(R,+,\cdot)$ 为环，$R[x]$ 为全体系数在 $R$ 上的所有多项式的集合。定义 $R[x]$ 上的加法和乘法如下：
+    \begin{enumerate}
+        \item 多项式加法：设 $f(x)=a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0$，$g(x)=b_m x^m + b_{m-1} x^{m-1} + \cdots + b_1 x + b_0$，其中 $a_i,b_j \in R$，则
+            \[
+                f(x)+g(x) = \sum_{k=0}^{\max(n,m)} (a_k+b_k) x^k
+            \]
+        \item 多项式乘法：设 $f(x)=a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0$，$g(x)=b_m x^m + b_{m-1} x^{m-1} + \cdots + b_1 x + b_0$，其中 $a_i,b_j \in R$，则
+            \[
+                f(x) \cdot g(x) = \sum_{k=0}^{n+m} c_k x^k
+            \]
+    \end{enumerate}
+    其中，
+    \begin{enumerate}
+        \item $a_i = 0$ 当 $i>n$ 或 $i<0$；
+        \item $b_j = 0$ 当 $j>m$ 或 $j<0$；
+        \item $c_k = \sum_{i=0}^{k} a_i b_{k-i}$。
+    \end{enumerate}
+    则 $(R[x],+,\cdot)$ 满足环公理，称为 $R$ 上的多项式环。
+    \label{def:polynomial_ring}
+\end{definition}
+
+\vspace{1em}
+\subsection{理想与商环}
+
+环 $(R,+,\cdot)$ 的 $(R,+)$ 是一个交换群，其所有子群都是正规子群。
+而 $(R,\cdot)$ 只是一个半群，无法定义乘法的正规子群，我们可以类似地定义一种特殊的子环——理想子环，相关的结论与正规子群中的结论有相似性。
+
+\vspace{1em}
+
+\begin{definition}[左理想子环 Left Ideal]
+    设 $(R,+,\cdot)$ 为环，$I \leq R$。$I$ 是 $R$ 的一个左理想子环，当且仅当，$\forall r\in R$，$\forall i\in I$，$r\cdot i \in I$。
+\end{definition}
+
+\begin{definition}[右理想子环 Right Ideal]
+    设 $(R,+,\cdot)$ 为环，$I \leq R$。$I$ 是 $R$ 的一个右理想子环，当且仅当，$\forall r\in R$，$\forall i\in I$，$i\cdot r \in I$。
+\end{definition}
+
+\begin{definition}[理想子环 Ideal]
+    设 $(R,+,\cdot)$ 为环，$I \leq R$。$I$ 是 $R$ 的一个理想子环，当且仅当，$I$ 同时是 $R$ 的一个左理想子环和右理想子环。简称为理想。
+    \label{def:ideal}
+\end{definition}
+
+\begin{definition}[理想的等价定义]
+    设 $(R,+,\cdot)$ 为环，$I \subset S$。$I$ 是 $R$ 的理想，当且仅当，
+    \begin{enumerate}
+        \item $0\in I$；
+        \item $\forall a,b\in I$，$a-b\in I$；
+        \item $\forall r\in R$，$\forall i\in I$，$r\cdot i \in I$ 且 $i\cdot r \in I$。
+    \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    设 $(R,+,\cdot)$ 为环，存在环同态 $f$，使得 $I=\ker f$，则 $I$ 是 $R$ 的一个理想。
+\end{proposition}
+\begin{proof}
+    设 $a,b\in I$，则 $f(a)=0$，$f(b)=0$，所以
+    \[
+        f(a-b)=f(a)-f(b)=0-0=0
+    \]
+    因此 $a-b\in I$。又设 $r\in R$，$i\in I$，则 $f(i)=0$，所以
+    \[
+        f(r\cdot i)=f(r)\cdot f(i)=f(r)\cdot 0=0
+    \]
+    因此 $r\cdot i \in I$。同理可证 $i\cdot r \in I$。综上所述，$I$ 是 $R$ 的一个理想。
+\end{proof}
+
+\begin{definition}[主理想 Principal Ideal]
+    设 $(R,+,\cdot)$ 为环，$a\in R$。定义集合：
+    \[
+        (a) := \{r\cdot a : r\in R\}
+    \]
+    称为由 $a$ 生成的主理想。也即一个理想中所有的元素都可以依据子环判定定理生成，那么它是主理想。
+    \label{def:principal_ideal}
+\end{definition}
+
+\begin{example}
+    设 $(\mathbb{Z},+,\cdot)$ 为整数环，$2\mathbb{Z}=\{\ldots,-4,-2,0,2,4,\ldots\}$ 是 $\mathbb{Z}$ 的一个理想。因为
+    \begin{enumerate}
+        \item $0\in 2\mathbb{Z}$；
+        \item $\forall a,b\in 2\mathbb{Z}$，$a-b\in 2\mathbb{Z}$；
+        \item $\forall r\in \mathbb{Z}$，$\forall i\in 2\mathbb{Z}$，$r\cdot i \in 2\mathbb{Z}$ 且 $i\cdot r \in 2\mathbb{Z}$。
+    \end{enumerate}
+    $(\mathbb{Z},+,\cdot)$ 的所有理想都是主理想，并且 $n\mathbb{Z}=(n)$。
+\end{example}
+
+\begin{note}
+    理想是环的一个特殊子环，类似于群的正规子群。理想的定义中，除了满足子环的条件外，还要求对任意环元素与理想元素的乘积仍在理想中。
+    如果 $R$ 是交换环，则 $I$ 是 $R$ 的左理想子环、右理想子环和理想是等价的。
+\end{note}
+
+\vspace{1em}
+
+\begin{definition}[商环 Quotient Ring]
+    设 $(R,+,\cdot)$ 为环，$I$ 是 $R$ 的理想。定义集合：
+    \[
+        R/I := \{a+I : a\in R\}
+    \]
+    其中，$a+I := \{a+i : i\in I\}$。在 $R/I$ 上定义加法和乘法如下：
+    \begin{enumerate}
+        \item 加法：$\forall a+I,b+I\in R/I$，$(a+I)+(b+I)=(a+b)+I$；
+        \item 乘法：$\forall a+I,b+I\in R/I$，$(a+I)\cdot(b+I)=(a\cdot b)+I$。
+    \end{enumerate}
+    则 $(R/I,+,\cdot)$ 满足环公理，称为 $R$ 关于理想 $I$ 的商环。
+    \label{def:quotient_ring}
+\end{definition}
+
+\begin{proposition}[商环的性质]
+    设 $(R,+,\cdot)$ 为环，$I$ 是 $R$ 的理想，那么：
+    \begin{enumerate}
+        \item 如果 $R$ 是交换环，则 $R/I$ 也是交换环；
+        \item 如果 $R$ 是含幺环，并且 $1\in R$ 是乘法单位元，则 $R/I$ 也是含幺环，且 $(1+I)$ 是 $R/I$ 的乘法单位元；
+        \item 如果 $R$ 是除环，并且 $I\neq \{0\}$，则 $R/I$ 也是除环，那么 $a^{-1}+I$ 是 $R/I$ 中的乘法逆元。
+    \end{enumerate}
+\end{proposition}
+
+\begin{example}
+    设 $(\mathbb{Z},+,\cdot)$ 为整数环，$2\mathbb{Z} $ 是 $\mathbb{Z}$ 的一个理想。其中，
+    \begin{align*}
+        \vdots  \\
+        -2 + 2\mathbb{Z} &= \{\ldots,-4,-2,0,2,4,\ldots\} = 0 + 2\mathbb{Z} \\
+        -1 + 2\mathbb{Z} &= \{\ldots,-3,-1,1,3,5,\ldots\} = 1 + 2\mathbb{Z} \\
+        0 + 2\mathbb{Z} &= \{\ldots,-4,-2,0,2,4,\ldots\} \\
+        1 + 2\mathbb{Z} &= \{\ldots,-3,-1,1,3,5,\ldots\} \\
+        2 + 2\mathbb{Z} &= \{\ldots,-2,0,2,4,6,\ldots\} = 0 + 2\mathbb{Z} \\
+        3 + 2\mathbb{Z} &= \{\ldots,-1,1,3,5,7,\ldots\} = 1 + 2\mathbb{Z} \\
+        \vdots 
+    \end{align*}
+    那么
+    \[
+        \mathbb{Z}/2\mathbb{Z} = \{0+2\mathbb{Z}, 1+2\mathbb{Z}\}
+    \]
+\end{example}
+
+\begin{note}
+    商环的定义与商群类似，都是将原代数结构划分为若干个等价类，然后在等价类上定义新的代数运算。
+    商环的结构与原环和理想密切相关。
+\end{note}
+\vspace{1em}
+
+\subsection{环同态基本定理}
+
+\begin{theorem}[第一同构定理 First Isomorphism Theorem for Rings]
+    设 $f:R\to R'$ 是一个环同态。那么 $\ker f$ 是 $R$ 的一个理想，并且 $R/\ker f \cong \mathrm{Im} f$。
+    \label{thm:first_isomorphism_theorem_for_rings}
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+\begin{note}
+    环同态基本定理与群同态基本定理类似，都是通过同态映射将原代数结构与其像联系起来。
+    环同态基本定理说明环的任一同态像，同构于原环关于同态核的商环。
+\end{note}
+
+\vspace{1em}
+
+\begin{theorem}[第二同构定理 Second Isomorphism Theorem for Rings]
+    设 $(R,+,\cdot)$ 为环，$I,J$ 是 $R$ 的理想。那么
+    \[
+        I/(I\cap J)  \cong  (I+J)/J
+    \]
+    \label{thm:second_isomorphism_theorem_for_rings}
+\end{theorem}
+\begin{proof}
+
+\end{proof}
+
+\begin{theorem}[第三同构定理 Third Isomorphism Theorem for Rings]
+    设 $(R,+,\cdot)$ 为环，$I,J$ 是 $R$ 的理想，并且 $I\subseteq J$。那么
+    \[
+        (R/I)/(J/I) \cong R/J
+    \]
+    \label{thm:third_isomorphism_theorem_for_rings}
+\end{theorem}
+\begin{proof}
+
+\end{proof}
+
+\newpage

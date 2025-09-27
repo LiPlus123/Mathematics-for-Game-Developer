@@ -33,6 +33,7 @@
     群的四条性质称为群公理。如果只满足前两条性质，那么称为半群（Semigroup）。
     如果只满足前三条性质，那么称为幺半群（Monoid）。只含有单位元的群 $G=\{e\}$ 称为平凡群（Trivial Group），反之为非平凡群（Non-trivial Group）。
     比如，整数集 $\mathbb{Z}$ 关于加法构成一个阿贝尔群 $(\mathbb{Z}, +)$，称为整数加群;
+    $n\mathbb{Z} = \{nk : k \in \mathbb{Z}\}$ 表示自然数的 $n$ 的整数被构成的集合，$(n\mathbb{Z}, +)$ 是一个阿贝尔群;
     去零实数集 $\mathbb{R}\setminus\{0\}$ 关于乘法也构成一个阿贝尔群 $(\mathbb{R}\setminus\{0\}, *)$，称为去零实数乘群。
 \end{note}
 \vspace{1em}
@@ -60,6 +61,7 @@
 \begin{definition}[子群 Subgroup]
     设 $(G, *)$ 是一个群，$H\subseteq G$，如果 $H$ 本身也是一个群，那么称 $H$ 是 $G$ 的子群，记为 $H \le G$。
     \{e\} 和 $G$ 都是 $G$ 的子群，称为平凡子群（Trivial Subgroup），其他的子群称为非平凡子群（Non-trivial Subgroup）。
+    \label{def:subgroup}
 \end{definition}
 
 \begin{theorem}[子群判定定理]
@@ -83,8 +85,16 @@
     \]
     如果 $f$ 是单射，则称 $f$ 为\textbf{单同态 Monomorphism}；
     如果 $f$ 是满射，则称 $f$ 为\textbf{满同态 Epimorphism}；
-    如果 $f$ 是双射，则称 $f$ 为\textbf{群同构 Isomorphism}。
+    如果 $f$ 是双射，则称 $f$ 为\textbf{群同构 Isomorphism}，两个同构的群记为 $G \cong H$。
     \label{def:group_homomorphism}
+\end{definition}
+
+\begin{definition}[群同态的核 Kernel]
+    设 $(G, *)$ 和 $(H, \cdot)$ 是两个群，映射 $f: G \to H$ 是从 $G$ 到 $H$ 的一个群同态，那么称
+    \[
+        \ker f = \{g\in G : f(g) = e_H\}
+    \]
+    为群同态 $f$ 的核，其中 $e_H$ 是群 $H$ 的单位元。
 \end{definition}
 
 \begin{proposition}[群同态的性质]
@@ -92,12 +102,79 @@
     \begin{enumerate}
         \item $f(e_G) = e_H$，其中 $e_G$ 和 $e_H$ 分别是 $G$ 和 $H$ 的单位元
         \item 对任意的 $a\in G$，都有 $f(a^{-1}) = (f(a))^{-1}$
+        \item $\ker f \le G$
     \end{enumerate}
 \end{proposition}
 
 \begin{note}
-    群同态是保持群结构的映射，它将群的运算映射到另一个群的运算，将群的单位元映射到另一个群的单位元；将群的逆元映射到另一个群的逆元；
-    而群同构还将两个群的所有元素一一对应起来，说明它们在群结构上是完全相同的。如果仅仅研究群的结构，那么同构的群可以看成是同一个群。
+    群同态是保持群结构的映射，还将单位元与单位元对应、逆元与逆元对应；
+    而群同构还将两个群的所有元素一一对应起来，说明它们在群结构上是完全相同的。
+    如果仅仅研究群的结构，那么同构的群可以看成是同一个群。
+    群同态的核表示与另一个群单位元对应的群元素的集合，它是原群的一个子群。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[群的直和 Direct Sum]
+    设 $(A,\circ)$ 和 $(B,*)$ 是两个群，定义集合：
+    \[
+        A \oplus B := \{(a,b)\in A\times B:a\in A, b\in B\}
+    \]
+    在 $A \oplus B$ 上定义二元运算：
+    \[
+        (a_1,b_1) + (a_2,b_2) = (a_1 \circ a_2, b_1 * b_2)
+    \]
+    那么 $(A \oplus B, +)$ 满足群的四条公理：
+    \begin{enumerate}
+        \item 封闭性：$\forall (a_1,b_1), (a_2,b_2)\in A \oplus B$，都有 $(a_1,b_1) + (a_2,b_2) = (a_1 \circ a_2, b_1 * b_2) \in A \oplus B$；
+        \item 结合律：$\forall (a_1,b_1), (a_2,b_2), (a_3,b_3)\in A \oplus B$，都有 
+        \[
+            ((a_1,b_1)  + (a_2,b_2)) + (a_3,b_3) = (a_1 \circ (a_2 \circ a_3), b_1 * (b_2 * b_3)) = (a_1,b_1) + ((a_2,b_2) + (a_3,b_3))
+        \]
+        \item 单位元：$(e_A, e_B)$，其中 $e_A$ 和 $e_B$ 分别是 $A$ 和 $B$ 的单位元；
+        \item 存在逆元：$\forall (a,b)\in A \oplus B$，都有 $(a,b)^{-1} = (a^{-1}, b^{-1})$。
+    \end{enumerate}
+    那么 $(A \oplus B, +)$ 是一个群，称为群 $A$ 和群 $B$ 的直和。类似地，可以定义有限多个群的直和：
+    \[
+        \bigoplus^n_{i=1}G_i : = G_1\oplus G_2\oplus\cdots \oplus G_n
+    \]
+    $(\bigoplus^n_{i=1}G_i, +)$ 也是一个群，称为群 $G_1, G_2, \ldots, G_n$ 的直和。
+    \label{def:group_direct_sum}
+\end{definition}
+
+% \begin{example}
+%     设 $A = (\mathbb{Z}_2, +)$ 和 $B = (\mathbb{Z}_3, +)$，那么
+%     \[
+%         A \oplus B = \{(0,0), (0,1), (0,2), (1,0), (1,1), (1,2)\}
+%     \]
+% \end{example}
+
+\begin{note}
+    群的直和是通过将多个群的元素组合成有序对来构造的新群。
+\end{note}
+
+\vspace{1em}
+
+\begin{definition}[群作用 Group Action]
+    设 $(G, *)$ 是一个群，$X$ 是一个非空集合，函数 $f:G\times X\to X$ 称为群作用，当且仅当，
+    \begin{enumerate}
+        \item 单位元不动：$\forall x\in X,\ f(e,x) = x$，其中 $e$ 是 $G$ 的单位元；
+        \item 结合律：$\forall g_1, g_2\in G,\ \forall x\in X,\ f(g_1 * g_2, x) = f(g_1, f(g_2, x))$
+    \end{enumerate}
+    \label{def:group_action}
+\end{definition}
+
+\begin{definition}[轨道 Orbit]
+    设 $(G, *)$ 是一个群，$X$ 是一个非空集合，定义集合：
+    \[
+        \mathrm{Orb}(x) := \{f(g,x):g\in G\},\quad \forall x\in X
+    \]
+    称为轨道。表示在群作用下，能够遍历到的 $X$ 中的元素。
+\end{definition}
+
+\begin{note}
+    群作用是一个非常宽泛的框架，群作用到一个非空集合上，表示把集合中的元素进行某种变换，并且这种变换满足群公理。
+    比如，在微分流形中 $(\mathbb{R},+)$ 群作用到一个微分流形上 $M$ 可以定义一个单参变换群，可以刻画流形上点的平移；
+    轨道 $\mathrm{Orb}(x)$ 表示一条 $M$ 上一条光滑的曲线。
 \end{note}
 
 \vspace{1em}
@@ -207,6 +284,9 @@
 \begin{definition}[置换 Permutation]
     设 $X$ 是一个非空有限集合，双射函数 $f: X \to X$ 称为 $X$ 上的一个置换。若 $f(x)=x$ 称为恒等置换，记为 $\mathrm{id}_X$。
 \end{definition}
+\begin{note}
+    在组合数学中，置换指对一组元素重新排列。
+\end{note}
 
 \begin{definition}[对称群 Symmetric Group]
     设 $X$ 是一个非空有限集合，$|X| = n$，设 $\mathrm{Sym}(X)$ 是 $X$ 上所有置换的集合，定义二元运算为映射的复合，满足：
@@ -222,13 +302,14 @@
 \begin{proposition}
     设 $X$ 是一个非空有限集合，$|X| = n$，那么 $X$ 上的对称群 $(\mathrm{Sym}(X),\circ)$ 的阶为 $|\mathrm{Sym}(X)|=n!$。
 \end{proposition}
+\vspace{0.5em}
 
 \begin{definition}[置换群 Permutation Group]
     设 $X$ 是一个非空有限集合，$G\le \mathrm{Sym}(X)$，那么称 $G$ 是 $X$ 上的置换群。
 \end{definition}
 
-\begin{note}
-    在组合数学中，置换指对一组元素重新排列。比如有限集合 $X=\{1,2,3\}$ 上的置换有 $3! = 6$ 个，分别是：
+\begin{example}
+    有限集合 $X=\{1,2,3\}$ 上的置换有 $3! = 6$ 个，分别是：
     \[
         \begin{aligned}
             &\mathrm{id}_X = \begin{pmatrix}1 & 2 & 3 \\ 1 & 2 & 3\end{pmatrix},\quad
@@ -239,9 +320,23 @@
             f_5 = \begin{pmatrix}1 & 2 & 3 \\ 3 & 2 & 1\end{pmatrix}.
         \end{aligned}
     \]
-    那么 $\mathrm{Sym}(X) = \{\mathrm{id}_X, f_1, f_2, f_3, f_4, f_5\}$ 是一个对称群，$| \mathrm{Sym}(X) | = 6$。
-    其中，$\{\mathrm{id}_X, f_1\}$ 和 $\{\mathrm{id}_X, f_5\}$ 都是 $\mathrm{Sym}(X)$ 的非平凡子群，是置换群。
-\end{note}
+    那么 $\mathrm{Sym}(X) = \{\mathrm{id}_X, f_1, f_2, f_3, f_4, f_5\}$ 是一个对称群，其中
+    \begin{enumerate}
+        \item 存在单位元：$\mathrm{id}_X$
+        \item 存在逆元：
+            \begin{enumerate}
+                \item $\mathrm{id}_X^{-1} = \mathrm{id}_X$
+                \item $f_1^{-1} = f_1$
+                \item $f_2^{-1} = f_2$
+                \item $f_3^{-1} = f_4$
+                \item $f_4^{-1} = f_3$
+                \item $f_5^{-1} = f_5$
+            \end{enumerate}
+        \item 结合律：$(f_i \circ f_j) \circ f_k = f_i \circ (f_j \circ f_k),\ i,j,k=1,2,3,4,5$
+    \end{enumerate}
+    那么 $|\mathrm{Sym}(X)| = |X|! = 6$。其中， $\{\mathrm{id}_X, f_1\}$， $\{\mathrm{id}_X, f_5\}$，$\{\mathrm{id}_X, f_3, f_4\}$ 都是 $\mathrm{Sym}(X)$ 的非平凡子群，是置换群。
+    \label{ex:permutation_group_s3}
+\end{example}
 
 \vspace{1em}
 \subsection{线性变换与线性群}
@@ -347,13 +442,260 @@
     \]
 \end{definition}
 
+\begin{definition}[右陪集 Right Coset]
+    设 $(G, *)$ 是一个群，$H \le G$ 是 $G$ 的子群。定义 $G$ 上的等价关系 $\sim$ 为：
+    \[
+        a \sim b \iff ab^{-1} \in H, \quad \forall a, b \in G
+    \]
+    等价类：
+    \begin{align*}
+        [a]_{\sim} &= \{x\in G:x\sim a\} = \{x\in G:ax^{-1}\in H\}\\
+        &=\{x\in G:ax^{-1} = h,h\in H\}\\
+        &=\{x\in G:x=ha,h\in H\}\\
+        &=\{ha:h\in H\}
+    \end{align*}
+    记为 $Ha := [a]_{\sim}$，称为 $H$ 关于 $a$ 的右陪集。
+\end{definition}
+
+\begin{definition}[右商集 Right Quotient Set]
+    设 $(G, *)$ 是一个群，$H \le G$ 是 $G$ 的子群，$a\in G$，那么 $G$ 关于 $H$ 的所有右陪集的集合称为 $G$ 关于 $H$ 的右商集，记为 $(G/H)_r$，即
+    \[
+        (G/H)_r := \{Ha:a\in G\}
+    \]
+\end{definition}
+
+\begin{example}
+    整数加群 $(\mathbb{Z}, +)$ 关于 $(3\mathbb{Z},+)$ 的所有左陪集：
+    \begin{align*}
+        0+3\mathbb{Z} &= \{\cdots,-6,-3,0,3,6,\cdots\}\\
+        1+3\mathbb{Z} &= \{\cdots,-5,-2,1,4,7,\cdots\}\\
+        2+3\mathbb{Z} &= \{\cdots,-4,-1,2,5,8,\cdots\}
+    \end{align*}
+    $(\mathbb{Z},+)$ 关于 $(3\mathbb{Z},+)$ 的所有左商集：
+    \[
+        (\mathbb{Z}/3\mathbb{Z})_l = \{0+3\mathbb{Z}, 1+3\mathbb{Z}, 2+3\mathbb{Z}\}
+    \]
+    同样可以得到 $(\mathbb{Z},+)$ 关于 $(3\mathbb{Z},+)$ 的所有右陪集：
+    \begin{align*}
+        3\mathbb{Z}+0 &= \{\cdots,-6,-3,0,3,6,\cdots\}\\
+        3\mathbb{Z}+1 &= \{\cdots,-5,-2,1,4,7,\cdots\}\\
+        3\mathbb{Z}+2 &= \{\cdots,-4,-1,2,5,8,\cdots\}
+    \end{align*}
+    $(\mathbb{Z},+)$ 关于 $(3\mathbb{Z},+)$ 的所有右商集：
+    \[
+        (\mathbb{Z}/3\mathbb{Z})_r = \{3\mathbb{Z}+0, 3\mathbb{Z}+1, 3\mathbb{Z}+2\}
+    \]
+    \label{ex:cosets_of_Z_mod_3Z}
+\end{example}
+
+\begin{note}
+    左（右）陪集将群划分为若干个等价类，这些等价类构成的商集是群 $G$ 的一个划分 Partition。
+    左陪集和右陪集的定义类似，但它们的元素排列顺序不同。
+    一般情况下，左陪集和右陪集不相等，但如果子群是正规子群，那么左陪集和右陪集相等。
+\end{note}
+\vspace{1em}
+
+\begin{proposition}[陪集的性质]
+    设 $(G, *)$ 是一个群，$H \le G$ 是 $G$ 的子群，$a, b\in G$，那么：
+    \begin{enumerate}
+        \item 左商集中，$eH = H$
+        \item 右商集合，$He = H$
+        \item 左商集中，$\forall a,b\in G\ (aH = bH \leftrightarrow a^{-1}b \in H)$
+        \item 右商集中，$\forall a,b\in G\ (Ha = Hb \leftrightarrow ba^{-1} \in H)$
+        \item 左商集中，$\forall a,b\in G\ (a\neq b\to\ aH \cap bH = \varnothing)$
+        \item 右商集中，$\forall a,b\in G\ (a\neq b\to\ Ha \cap Hb= \varnothing)$
+        \item 存在一个双射 $f:H\to aH$，使得 $\forall h\in H\ (f(h) = ah)$；换句话说，左陪集与子群 $H$ 具有相同的势
+        \item 存在一个双射 $f:H\to Ha$，使得 $\forall h\in H\ (f(h) = ha)$；换句话说，右陪集与子群 $H$ 具有相同的势
+        \item 存在一个双射 $f: (G/H)_l \to (G/H)_r$，使得 $\forall a\in G\ (f(aH) = Ha)$；换句话说，左商集和右商集具有相同的势。
+    \end{enumerate}
+\end{proposition}
+
+\begin{definition}[指数 Index]
+    设 $(G, *)$ 是一个群，$H \le G$ 是 $G$ 的子群。如果左右配集是有限集，那么左右商集的势称为群 $G$ 关于子群 $H$ 的指数，记为 $[G:H]$，即
+    \[
+        [G:H] = |(G/H)_l| = |(G/H)_r|
+    \]
+\end{definition}
+
+\begin{theorem}[拉格朗日定理 Lagrange's Theorem]
+    设 $(G, *)$ 是一个有限群，$H \le G$ 是 $G$ 的子群，那么
+    \[
+        |G| = [G:H] \cdot |H|
+    \]
+    \label{thm:group_lagrange_theorem}
+\end{theorem}
+\begin{proof}
+    设 $H$ 关于 $G$ 的所有左陪集为 $a_1H, a_2H, \ldots, a_kH$，其中 $k = [G:H]$，那么
+    \[
+        G = a_1H \cup a_2H \cup \cdots \cup a_kH
+    \]
+    且 $a_iH \cap a_jH = \varnothing,\ i\neq j$。又因为对任意的 $a\in G$，都有 $|aH| = |H|$，所以
+    \[
+        |G| = |a_1H| + |a_2H| + \cdots + |a_kH| = k|H| = [G:H] \cdot |H|
+    \]
+\end{proof}
+\begin{note}
+    拉格朗日定理说明了有限群的阶与其子群的阶之间的关系。它表明，有限群的阶总是其任意子群的阶的整数倍。
+    在例 \ref{ex:permutation_group_s3} 中，$H=\{\mathrm{id}_X, f_1\} \leq \mathrm{Sym}(X)$，那么左商集：
+    \[
+        (\mathrm{Sym}(X)/H)_l = \{H, f_2H, f_3H\} = \{\{\mathrm{id}_X, f_1\}, \{f_2, f_4\}, \{f_3, f_5\}\}
+    \]
+    那么 $|\mathrm{Sym}(X)| = |H| \cdot |(\mathrm{Sym}(X)/H)_l| = 2 \cdot 3 = 6$。
+\end{note}
+
 \vspace{1em}
 \subsection{正规子群与商群}
+\begin{definition}[共轭 Conjugate]
+    设 $(G, *)$ 是一个群，$a, b\in G$，如果存在 $g\in G$，使得：
+    \[
+        b = g^{-1} * a * g
+    \]
+    那么称 $b$ 是 $a$ 的一个共轭。
+\end{definition}
+
+\begin{definition}[正规子群 Normal Subgroup]
+    设 $(G, *)$ 是一个群。$H \le G$ 是 $G$ 的正规子群，当且仅当，
+    \[
+        \forall g\in G,\ \{g^{-1}h g:h\in H\} = H
+    \]
+    记为 $H \triangleleft G$。
+\end{definition}
+
+\begin{proposition}
+    设 $(G, *)$ 是一个群，$H \le G$ 是 $G$ 的子群，那么以下命题等价：
+    \begin{enumerate}
+        \item $H \triangleleft G$
+        \item $\forall g\in G,\ gHg^{-1} = H$
+        \item $\forall g\in G,\ gH = Hg$
+        \item 存在群同态 $f:G\to G^{\prime}$，使得 $\ker(f) = H$
+    \end{enumerate}
+\end{proposition}
+
+\begin{proposition}
+    所有的交换群的子群都是正规子群。
+\end{proposition}
+\begin{proof}
+    设 $(G, *)$ 是一个交换群，$H \le G$ 是 $G$ 的子群，$\forall g\in G$，那么
+    \begin{align*}
+        \{g^{-1} * h * g:h\in H\} &= \{h * g^{-1} * g:h\in H\} \\
+        &= \{h * e:h\in H\} = \{h:h\in H\} = H
+    \end{align*}
+    所以 $H \triangleleft G$。
+\end{proof}
+
+\begin{note}
+    例 \ref{ex:cosets_of_Z_mod_3Z} 中，整数加群 $(\mathbb{Z}, +)$ 是交换群，$3\mathbb{Z} \leq \mathbb{Z}$ ，所以 $3\mathbb{Z} \triangleleft \mathbb{Z}$。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[商群 Quotient Group]
+    设 $(G, *)$ 是一个群，$H \triangleleft G$ 是 $G$ 的正规子群，定义商集：
+    \[
+        G/H:= (G/H)_l = (G/H)_r = \{aH:a\in G\} = \{Ha:a\in G\}
+    \]
+    在商集 $G/H$ 上定义二元运算：
+    \[
+        (aH) \circ (bH) = (a * b)H
+    \]
+    那么 $(G/H, \circ)$ 满足群的四条公理：
+    \begin{enumerate}
+        \item 封闭性：$\forall aH, bH\in G/H$，都有 $(aH) \circ (bH) = (a * b)H \in G/H$；
+        \item 结合律：$\forall aH, bH, cH\in G/H$，都有
+        \[
+            (aH \circ bH) \circ cH = (a * b)H \circ cH = ((a * b) * c)H = (a * (b * c))H = aH \circ (bH \circ cH)
+        \]
+        \item 单位元：$eH = H$；
+        \item 存在逆元：$\forall aH\in G/H$，都有 $(aH)^{-1} = a^{-1}H$；
+    \end{enumerate}
+    那么 $(G/H, \circ)$ 是一个群，称为 $G$ 关于 $H$ 的商群。
+\end{definition}
+
+\begin{proposition}[商群的性质]
+    设 $(G, *)$ 是一个群，$H \triangleleft G$ 是 $G$ 的正规子群，那么：
+    \begin{enumerate}
+        \item 如果 $G$ 是有限群，根据拉格朗日定理 \ref{thm:group_lagrange_theorem}，那么 $|G/H| = [G:H] = |G|/|H|$
+        \item 如果 $G$ 是交换群，那么 $G/H$ 也是交换群
+        \item 如果 $G$ 是循环群，那么 $G/H$ 也是循环群
+    \end{enumerate}
+\end{proposition}
+
+\begin{example}
+    整数加群 $(\mathbb{Z}, +)$ 关于正规子群 $(3\mathbb{Z}, +)$ 的商集为：
+    \[
+        \mathbb{Z}/3\mathbb{Z} = \{0+3\mathbb{Z}, 1+3\mathbb{Z}, 2+3\mathbb{Z}\}
+    \]
+    定义加法运算：
+    \[
+        (a+3\mathbb{Z}) + (b+3\mathbb{Z}) = (a+b)+3\mathbb{Z}
+    \]
+    满足群的四条公理：
+    \begin{enumerate}
+        \item 单位元 $0+3\mathbb{Z}$
+        \item 封闭性
+        \begin{align*}
+            (1+3\mathbb{Z}) +(2+3\mathbb{Z}) &= 3+3\mathbb{Z} = 0 +3\mathbb{Z}\\
+            (0+3\mathbb{Z})+( 1+3\mathbb{Z}) &= ( 1+3\mathbb{Z}) \\
+            (0+3\mathbb{Z})+( 2+3\mathbb{Z}) &= ( 2+3\mathbb{Z})
+        \end{align*}
+        \item 结合律
+        \begin{align*}
+            ((1+3\mathbb{Z}) +(2+3\mathbb{Z})) +(0+3\mathbb{Z}) &= (0+3\mathbb{Z}) +(0+3\mathbb{Z}) = 0+3\mathbb{Z}\\
+            (1+3\mathbb{Z}) +((2+3\mathbb{Z}) +(0+3\mathbb{Z})) &= (1+3\mathbb{Z}) +(2+3\mathbb{Z}) = 0+3\mathbb{Z}
+        \end{align*}
+        \item 逆元
+        \begin{align*}
+            (1+3\mathbb{Z})^{-1} &= 2+3\mathbb{Z}\\
+            (2+3\mathbb{Z})^{-1} &= 1+3\mathbb{Z}\\
+            (0+3\mathbb{Z})^{-1} &= 0+3\mathbb{Z}
+        \end{align*}
+    \end{enumerate}
+    那么 $(\mathbb{Z}/3\mathbb{Z}, +)$ 是一个群，且是循环群，生成元为 $1+3\mathbb{Z}$ 或 $2+3\mathbb{Z}$，$|\mathbb{Z}/3\mathbb{Z}| = 3$。
+\end{example}
+
+\begin{note}
+    商群是通过将群 $G$ 的元素划分为若干个等价类（即陪集）来构造的新群。
+    商群在群论中有重要的应用，比如在研究群的结构和分类时，商群提供了一种简化问题的方法。
+\end{note}
 
 \vspace{1em}
 \subsection{群同态基本定理}
 
-\vspace{1em}
-\subsection{群的直和}
+\begin{theorem}[第一同构定理 First Isomorphism Theorem]
+    设 $(G, *)$ 和 $(G^{\prime}, \cdot)$ 是两个群，$f:G\to G^{\prime}$ 是一个群同态，那么 $\ker(f) \triangleleft G$，且 $G/\ker(f) \cong \mathrm{im}(f)$。
+    \label{thm:first_isomorphism_theorem}
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
 
+\begin{note}
+    群同态基本定理说明群的任一同态像，同构于原群关于同态核的商群。
+\end{note}
+
+\vspace{1em}
+\begin{theorem}[第二同构定理 Second Isomorphism Theorem]
+    设 $(G, *)$ 是一个群，$H \le G$ 是 $G$ 的子群，$N \triangleleft G$ 是 $G$ 的正规子群，那么 $HN \le G$，且 $N \triangleleft HN$，并且
+    \[
+        H/(H\cap N) \cong HN/N
+    \]
+    \label{thm:second_isomorphism_theorem}
+\end{theorem}
+\begin{proof}
+\end{proof}
+\vspace{1em}
+
+\begin{theorem}[第三同构定理 Third Isomorphism Theorem]
+    设 $(G, *)$ 是一个群，$H \triangleleft G$ 和 $N \triangleleft G$ 是 $G$ 的两个正规子群，且 $H \subset N$，那么：
+    \[
+        (G/H)/(N/H) \cong G/N
+    \]
+    \label{thm:third_isomorphism_theorem}
+\end{theorem}
+\begin{proof}
+\end{proof}
+\vspace{1em}
+
+\begin{note}
+    群同态基本定理是群论的核心定理，它们建立了群同态、正规子群与商群之间的深刻联系。
+\end{note}
 \newpage
