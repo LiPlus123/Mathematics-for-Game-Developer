@@ -38,18 +38,28 @@
     线性子空间会继承原线性空间的结构，比如，二维平面 $ \mathbb{R}^2 $ 是三维空间 $ \mathbb{R}^3 $ 的线性子空间。
 \end{note}
 
-% \begin{definition}[欧几里得空间 Euclidean Space]
-%     在 $\mathbb{R}^n$ 上定义向量加法，对于任意 $\mathbf{u}=(u_1,\cdots,u_n),\mathbf{v}=(v_1,\cdots,v_n)\in \mathbb{R}^n$，有
-%     \[
-%         \mathbf{u}+\mathbf{v}:=(u_1+v_1,u_2+v_2,\cdots,u_n+v_n).
-%     \]
-%     满足交换群公理，因此 $(\mathbb{R}^n,+)$ 是一个阿贝尔群。
-%     在 $\mathbb{R}^n$ 上定义标量乘法，对于任意 $ r\in \mathbb{R} $，$ \mathbf{v}=(v_1,v_2,\cdots,v_n)\in \mathbb{R}^n $，有
-%     \[
-%         r\cdot \mathbf{v} := (r\cdot v_1,r\cdot v_2,\cdots,r\cdot v_n).
-%     \]
-%     满足线性空间公理，因此 $(\mathbb{R}^n,+,\cdot)$ 是一个 $\mathbb{R}$-线性空间，称为 $n$ 维\textbf{欧几里得空间}。
-%     \label{def:euclidean_space}
-% \end{definition}
+\vspace{1em}
+
+\begin{definition}[$F^n$ 空间]
+    设 $F$ 为一个域，$F^n$ 中的元素为 $n$ 元数组 $\mathbf{v}=(v_1,v_2,\cdots,v_n)$。$F^n$ 上定义向量加法和标量乘法：
+    \begin{enumerate}
+        \item 向量加法：对于任意 $\mathbf{u}=(u_1,\cdots,u_n),\mathbf{v}=(v_1,\cdots,v_n)\in F^n$，有
+        \[
+            \mathbf{u}+\mathbf{v}=(u_1+v_1,u_2+v_2,\cdots,u_n+v_n).
+        \]
+        \item 标量乘法：对于任意 $r\in F$，$\mathbf{v}=(v_1,v_2,\cdots,v_n)\in F^n$，有
+        \[
+            r\cdot \mathbf{v} = (r\cdot v_1,r\cdot v_2,\cdots,r\cdot v_n).
+        \]
+    \end{enumerate}
+    则 $F^n$ 是一个 $F$-线性空间。
+    \label{def:Fn_space}
+\end{definition}
+
+\begin{note}
+    $F^n$ 空间是最基础的线性空间，$F^n$ 空间的维数为 $n$，所有 $n$ 维 $F$-线性空间都与 $F^n$ 空间同构。
+    如果 $F=\mathbb{R}$，在 $\mathbb{R}^n$ 的基础上在赋予内积结构，得到\textbf{欧几里得空间 Euclidean Space}；
+    如果 $F=\mathbb{C}$，在 $\mathbb{C}^n$ 的基础上赋予内积结构，得到\textbf{酉空间 Unitary Space}。
+\end{note}
 
 \newpage

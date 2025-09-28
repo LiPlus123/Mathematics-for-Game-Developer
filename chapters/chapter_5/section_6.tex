@@ -1,3 +1,56 @@
 \section{赋范线性空间与内积空间}
 
+\subsection{赋范线性空间}
+
+\begin{definition}[赋范线性空间 Normed Linear Space]
+    设 $ V $ 是 $F$-线性空间，映射 $ \|\cdot\|:V\to \mathbb{R} $ 称为范数，当且仅当，$ \forall \mathbf{x},\mathbf{y}\in V $ 且 $ \forall \alpha\in \mathbb{F} $，有：
+    \begin{enumerate}
+        \item 非负性：$ \|\mathbf{x}\|\geq 0 $，且当且仅当 $ \mathbf{x}=0 $ 时取等号；
+        \item 齐次性：$ \|\alpha \mathbf{x}\|=|\alpha|\|\mathbf{x}\| $；
+        \item 三角不等式：$ \|\mathbf{x}+\mathbf{y}\| \leq \|\mathbf{x}\|+\|\mathbf{y}\| $。
+    \end{enumerate}
+    二元组 $ (V,\|\cdot\|) $ 称为赋范线性空间，函数 $ \|\cdot\| $ 称为 $ V $ 上的范数。
+    \label{def:normed_linear_space}
+\end{definition}
+
+\begin{proposition}[赋范线性空间诱导的度量]
+    设 $ (V,\|\cdot\|) $ 为赋范线性空间，定义 $ d:V\times V\to \mathbb{R} $：
+    \[
+        \forall \mathbf{x},\mathbf{y}\in V, d(\mathbf{x},\mathbf{y})=\|\mathbf{x}-\mathbf{y}\| 
+    \]
+    则 $ (V,d) $ 为度量空间。
+\end{proposition}
+
+\begin{note}
+    赋范线性空间是对向量空间中长度概念的抽象。范数函数 $ \|\cdot\| $ 用来衡量向量的大小或长度。
+    赋范线性空间可以诱导出度量结构，因此赋范线性空间也是度量空间。
+\end{note}
+
+\vspace{1em}
+\subsection{内积空间}
+
+\begin{definition}[内积空间 Inner Product Space]
+    设 $ V $ 是 $F$-线性空间，其中 $F$ 通常是 $\mathbb{R}$ 或 $\mathbb{C}$。映射 $ \langle\cdot,\cdot\rangle:V\times V\to F $ 称为内积，当且仅当，$ \forall \mathbf{x},\mathbf{y},\mathbf{z}\in V $ 且 $ \forall \alpha\in F $，有：
+    \begin{enumerate}
+        \item 共轭对称性：$ \langle \mathbf{x},\mathbf{y}\rangle=\overline{\langle \mathbf{y},\mathbf{x}\rangle} $；
+        \item 线性性：$ \langle \alpha \mathbf{x}+\mathbf{y},\mathbf{z}\rangle=\alpha\langle \mathbf{x},\mathbf{z}\rangle+\langle \mathbf{y},\mathbf{z}\rangle $；
+        \item 正定性：$ \langle \mathbf{x},\mathbf{x}\rangle \in \mathbb{R} \geq 0 $，且当且仅当 $ \mathbf{x}=0 $ 时取等号。
+    \end{enumerate}
+    二元组 $ (V,\langle\cdot,\cdot\rangle) $ 称为内积空间，函数 $ \langle\cdot,\cdot\rangle $ 称为 $ V $ 上的内积。
+    \label{def:inner_product_space}
+\end{definition}
+
+\begin{proposition}[内积空间诱导的赋范线性空间]
+    设 $ (V,\langle\cdot,\cdot\rangle) $ 为内积空间，定义 $ \|\cdot\|:V\to \mathbb{R} $：
+    \[
+        \forall \mathbf{x}\in V, \|\mathbf{x}\|=\sqrt{\langle \mathbf{x},\mathbf{x}\rangle}
+    \]
+    则 $ (V,\|\cdot\|) $ 为赋范线性空间。
+\end{proposition}
+
+\begin{note}
+    内积空间是对向量空间中角度和长度概念的抽象。内积函数 $ \langle\cdot,\cdot\rangle $ 用来衡量两个向量之间的夹角和长度。
+    内积空间可以诱导出赋范结构，因此内积空间也是赋范线性空间。
+\end{note}
+
 \newpage
