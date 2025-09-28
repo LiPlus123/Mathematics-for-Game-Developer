@@ -1,0 +1,642 @@
+\section{矩阵}
+
+\subsection{矩阵的定义}
+\begin{definition}[矩阵 Matrix]
+    设 $m,n\in\mathbb{N}^+$，$F$ 为域，$a_{ij}\in F,\ i=1,2,\ldots,m,\ j=1,2,\ldots,n$。称二维数表
+    \[
+        \mathbf{A} = \begin{bmatrix}
+            a_{11} & a_{12} & \cdots & a_{1n} \\
+            a_{21} & a_{22} & \cdots & a_{2n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            a_{m1} & a_{m2} & \cdots & a_{mn}
+        \end{bmatrix}
+    \]
+    为一个 $m \times n$ 的\textbf{矩阵}，全体 $m \times n$ 矩阵的集合记作 $F^{m \times n}$。
+\end{definition}
+
+\begin{definition}[方阵 Square Matrix]
+    行数等于列数的矩阵称为\textbf{方阵}，$n \times n$ 的方阵简称为 $n$ 阶方阵。
+\end{definition}
+
+\begin{definition}[对角矩阵 Diagonal Matrix]
+    如果一个方阵的非对角线元素全为零，则称该方阵为\textbf{对角矩阵}。
+\end{definition}
+
+\begin{definition}[单位矩阵 Identity Matrix]
+    主对角线上的元素全为 1 的对角矩阵，记为 $\mathbf{I}$。
+\end{definition}
+
+\begin{definition}[零矩阵 Zero Matrix]
+    所有元素全为零的矩阵，记为 $\mathbf{0}$。
+\end{definition}
+
+\begin{definition}[矩阵的加法 Matrix Addition]
+    设 $\mathbf{A} = [a_{ij}] \in F^{m \times n}$，$\mathbf{B} = [b_{ij}] \in F^{m \times n}$，两矩阵相机记为 $\mathbf{A} + \mathbf{B}$，那么：
+    \[
+       \mathbf{A} + \mathbf{B} = [a_{ij} + b_{ij}] \in F^{m \times n}
+    \]
+\end{definition}
+
+\begin{proposition}
+    矩阵的加法是良定义的，也即，$\forall \mathbf{A},\mathbf{B}\in F^{m \times n},\ \mathbf{A}+\mathbf{B}\in F^{m \times n}$。
+\end{proposition}
+
+\begin{definition}[矩阵的数乘 Scalar Multiplication of Matrix]
+    设 $\mathbf{A} = [a_{ij}] \in F^{m \times n}$，$r\in F$，矩阵 $\mathbf{A}$ 的数乘记为 $r\mathbf{A}$，那么：
+    \[
+       r\mathbf{A} = [r \cdot a_{ij}] \in F^{m \times n}
+    \]
+\end{definition}
+
+\begin{proposition}
+    矩阵的数乘是良定义的，也即，$\forall \mathbf{A}\in F^{m \times n},\ \forall r\in F,\ r\mathbf{A}\in F^{m \times n}$。
+\end{proposition}
+
+\begin{proposition}[矩阵线性空间]
+    $\forall \mathbf{A}, \mathbf{B},\mathbf{C} \in F^{m\times n}$, 那么有：
+    \begin{enumerate}
+        \item 加法交换律：$\mathbf{A} + \mathbf{B} = \mathbf{B} + \mathbf{A}$；
+        \item 加法结合律：$(\mathbf{A} + \mathbf{B}) + \mathbf{C} = \mathbf{A} + (\mathbf{B} + \mathbf{C})$；
+        \item 存在加法单位元：$\mathbf{A} + \mathbf{0} = \mathbf{A}$；
+        \item 存在加法逆元：$\mathbf{A} + (-\mathbf{A}) = \mathbf{0}$；
+        \item 数乘分配律：$r(\mathbf{A} + \mathbf{B}) = r\mathbf{A} + r\mathbf{B}$；
+        \item 数乘分配律：$(r+s)\mathbf{A} = r\mathbf{A} + s\mathbf{A}$
+        \item 数乘结合律：$(rs)\mathbf{A} = r(s\mathbf{A})$；
+        \item 数乘单位元：$1\mathbf{A} = \mathbf{A}$。
+    \end{enumerate}
+    因此，$F^{m \times n}$ 在矩阵加法和数乘下构成一个 $F$-线性空间。
+\end{proposition}
+
+\begin{proposition}[矩阵线性空间的维度]
+    $\dim F^{m \times n} = mn$
+\end{proposition}
+
+
+\begin{definition}[矩阵的乘法 Matrix Multiplication]
+    设 $\mathbf{A} = [a_{ij}] \in F^{m \times p}$，$\mathbf{B} = [b_{ij}] \in F^{p \times n}$，两矩阵的乘积记为 $\mathbf{A}\mathbf{B}$，那么：
+    \[
+       \mathbf{A}\mathbf{B} = [c_{ij}] \in F^{m \times n}
+    \]
+    其中，
+    \[
+        c_{ij} = \sum_{k=1}^{p} a_{ik} b_{kj},\ i=1,2,\ldots,m,\ j=1,2,\ldots,n
+    \]
+\end{definition}
+
+\begin{proposition}[方阵乘法的性质]
+    设 $\mathbf{A},\mathbf{B},\mathbf{C}\in F^{n \times n}$，那么有：
+    \begin{enumerate}
+        \item 结合律：$(\mathbf{A}\mathbf{B})\mathbf{C} = \mathbf{A}(\mathbf{B}\mathbf{C})$；
+        \item 左分配律：$\mathbf{A}(\mathbf{B} + \mathbf{C}) = \mathbf{A}\mathbf{B} + \mathbf{A}\mathbf{C}$；
+        \item 右分配律：$(\mathbf{A} + \mathbf{B})\mathbf{C} = \mathbf{A}\mathbf{C} + \mathbf{B}\mathbf{C}$；
+        \item 单位元：$\mathbf{I}\mathbf{A} = \mathbf{A}\mathbf{I} = \mathbf{A}$；
+        \item 数乘结合律：$r(\mathbf{A}\mathbf{B}) = (r\mathbf{A})\mathbf{B} = \mathbf{A}(r\mathbf{B})$，其中 $r\in F$；
+        \item 通常不满足交换律：$\mathbf{A}\mathbf{B} \neq \mathbf{B}\mathbf{A}$。
+    \end{enumerate}
+\end{proposition}
+\vspace{1em}
+
+对于有限维线性空间上的线性映射空间 $\mathcal{L}(V,W)$，如果 $\dim V = n$，$\dim W = m$，那么 $\mathcal{L}(V,W)$ 与 $F^{m \times n}$ 同构。
+因此可以用矩阵来表示线性映射，方阵表示线性变换。
+设 $\{\mathbf{v}_1,\cdots,\mathbf{v}_n\}$ 是一个 $V$ 的一组基，$\{\mathbf{w}_1,\cdots,\mathbf{w}_m\}$ 是一个 $W$ 的一组基，$T\in \mathcal{L}(V,W)$。$V$ 中任意一个向量可以表示为：
+\[
+    \mathbf{v} = \sum_{j=1}^{n} v_j \mathbf{v}_j
+\]
+
+$\mathbf{w} = T\mathbf{v}$ 可以表示为：
+\[
+    \mathbf{w} = T\mathbf{v} = T\left(\sum_{j=1}^{n} v_j \mathbf{v}_j\right) = \sum_{j=1}^{n} v_j T(\mathbf{v}_j)
+\]
+其中，$T(\mathbf{v}_j)$ 用 $\{\mathbf{w}_1,\cdots,\mathbf{w}_m\}$ 线性表出：
+\[
+    T(\mathbf{v}_j) = \sum_{i=1}^{m} s_{ij} \mathbf{w}_i
+\]
+于是有：
+\[
+    \mathbf{w} = \sum_{i=1}^{m} \left(\sum_{j=1}^{n} s_{ij} v_j\right) \mathbf{w}_i
+\]
+写成矩阵乘法的形式：
+\[
+    \begin{bmatrix}
+        w_1 \\ w_2 \\ \vdots \\ w_m
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        s_{11} & s_{12} & \cdots & s_{1n} \\
+        s_{21} & s_{22} & \cdots & s_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        s_{m1} & s_{m2} & \cdots & s_{mn}
+    \end{bmatrix}
+    \begin{bmatrix}
+        v_1 \\ v_2 \\ \vdots \\ v_n
+    \end{bmatrix}
+\]
+其中，$w_i$ 是 $\mathbf{w}$ 在基底 $\{\mathbf{w}_1,\cdots,\mathbf{w}_m\}$ 下的坐标，$v_j$ 是 $\mathbf{v}$ 在基底 $\{\mathbf{v}_1,\cdots,\mathbf{v}_n\}$ 下的坐标。
+$s_{ij}$ 是线性映射 $T$ 在基底 $\{\mathbf{v}_1,\cdots,\mathbf{v}_n\}$ 和 $\{\mathbf{w}_1,\cdots,\mathbf{w}_m\}$ 下的矩阵表示。
+因此，线性映射的加法、数乘和乘法可以用矩阵的加法、数乘和乘法来表示。
+矩阵乘法的定义中，要求第一个矩阵的列数要等于第二个矩阵的行数。这与线性映射的乘法是一致的，对应中介空间的维度。
+
+\vspace{1em}
+
+\subsection{矩阵的秩}
+
+\begin{definition}[向量组的秩 Rank of Set of Vectors]
+    设 $V$ 是一个 $F$-线性空间，$\{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_k\}\subseteq V$ 是 $V$ 中的一组向量，则该向量组的\textbf{秩}记为 $\mathrm{rank}\{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_k\}$，定义为该向量组的极大线性无关组的元素个数。
+\end{definition}
+
+\begin{proposition}
+    设 $V$ 是一个 $F$-线性空间，有 $\mathrm{rank}\{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_k\}= \dim \mathrm{span}\{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_k\}$。
+\end{proposition}
+
+\begin{corollary}
+    如果 $\{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_k\}\subseteq V$ 是 $V$ 中的一组基，那么 $\mathrm{rank}\{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_k\} = \dim V$。
+\end{corollary}
+
+\begin{definition}[行向量组与列向量组]
+    设 $\mathbf{A} \in F^{m \times n}$，则 $\mathbf{A}$ 的\textbf{行向量组}是指 $\mathbf{A}$ 的每一行所组成的向量组，记作 $\mathrm{Row}(\mathbf{A})$；$\mathbf{A}$ 的\textbf{列向量组}是指 $\mathbf{A}$ 的每一列所组成的向量组，记作 $\mathrm{Col}(\mathbf{A})$。
+\end{definition}
+\vspace{1em}
+
+\begin{proposition}
+    矩阵的行向量组的秩等于列向量组的秩。
+    \label{prop:row_col_rank}
+\end{proposition}
+\begin{proof}
+    设 $\mathbf{A} \in F^{m \times n}$，$\mathrm{Row}(\mathbf{A}) = \{\mathbf{r}_1,\mathbf{r}_2,\ldots,\mathbf{r}_m\}$，$\mathrm{Col}(\mathbf{A}) = \{\mathbf{c}_1,\mathbf{c}_2,\ldots,\mathbf{c}_n\}$。
+    设 $\mathrm{rank}\{\mathbf{r}_1,\mathbf{r}_2,\ldots,\mathbf{r}_m\} = r$，则存在 $r$ 个线性无关的行向量 $\mathbf{r}_{i_1},\mathbf{r}_{i_2},\ldots,\mathbf{r}_{i_r}$，使得
+    \[
+        \mathrm{span}\{\mathbf{r}_1,\mathbf{r}_2,\ldots,\mathbf{r}_m\} = \mathrm{span}\{\mathbf{r}_{i_1},\mathbf{r}_{i_2},\ldots,\mathbf{r}_{i_r}\}.
+    \]
+    设 $\mathbf{B}$ 是由 $\mathbf{A}$ 的行向量组中的 $\mathbf{r}_{i_1},\mathbf{r}_{i_2},\ldots,\mathbf{r}_{i_r}$ 组成的 $r \times n$ 矩阵，则 $\mathrm{Row}(\mathbf{B}) = \{\mathbf{r}_{i_1},\mathbf{r}_{i_2},\ldots,\mathbf{r}_{i_r}\}$。
+    因为 $\mathrm{span}\{\mathbf{r}_1,\mathbf{r}_2,\ldots,\mathbf{r}_m\} = \mathrm{span}\{\mathbf{r}_{i_1},\mathbf{r}_{i_2},\ldots,\mathbf{r}_{i_r}\}$，所以 $\mathrm{Col}(\mathbf{A})$ 中的每个向量都可以表示成 $\mathrm{Col}(\mathbf{B})$ 中向量的线性组合。
+    因此，$\mathrm{rank}\{\mathbf{c}_1,\mathbf{c}_2,\ldots,\mathbf{c}_n\} \leq r$。
+    同理，设 $\mathrm{rank}\{\mathbf{c}_1,\mathbf{c}_2,\ldots,\mathbf{c}_n\} = s$，则存在 $s$ 个线性无关的列向量 $\mathbf{c}_{j_1},\mathbf{c}_{j_2},\ldots,\mathbf{c}_{j_s}$，使得
+    \[
+        \mathrm{span}\{\mathbf{c}_1,\mathbf{c}_2,\ldots,\mathbf{c}_n\} = \mathrm{span}\{\mathbf{c}_{j_1},\mathbf{c}_{j_2},\ldots,\mathbf{c}_{j_s}\}.
+    \]
+    设 $\mathbf{C}$ 是由 $\mathbf{A}$ 的列向量组中的 $\mathbf{c}_{j_1},\mathbf{c}_{j_2},\ldots,\mathbf{c}_{j_s}$ 组成的 $m \times s$ 矩阵，则 $\mathrm{Col}(\mathbf{C}) = \{\mathbf{c}_{j_1},\mathbf{c}_{j_2},\ldots,\mathbf{c}_{j_s}\}$。
+    因为 $\mathrm{span}\{\mathbf{c}_1,\mathbf{c}_2,\ldots,\mathbf{c}_n\} = \mathrm{span}\{\mathbf{c}_{j_1},\mathbf{c}_{j_2},\ldots,\mathbf{c}_{j_s}\}$，所以 $\mathrm{Row}(\mathbf{A})$ 中的每个向量都可以表示成 $\mathrm{Row}(\mathbf{C})$ 中向量的线性组合。
+    因此，$\mathrm{rank}\{\mathbf{r}_1,\mathbf{r}_2,\ldots,\mathbf{r}_m\} \leq s$。
+    综上所述，$\mathrm{rank}\{\mathbf{r}_1,\mathbf{r}_2,\ldots,\mathbf{r}_m\} = r \leq s = \mathrm{rank}\{\mathbf{c}_1,\mathbf{c}_2,\ldots,\mathbf{c}_n\}$，且 $\mathrm{rank}\{\mathbf{c}_1,\mathbf{c}_2,\ldots,\mathbf{c}_n\} = s \leq r = \mathrm{rank}\{\mathbf{r}_1,\mathbf{r}_2,\ldots,\mathbf{r}_m\}$。
+    因此，$\mathrm{rank}\{\mathbf{r}_1,\mathbf{r}_2,\ldots,\mathbf{r}_m\} = \mathrm{rank}\{\mathbf{c}_1,\mathbf{c}_2,\ldots,\mathbf{c}_n\}$。
+\end{proof}
+\vspace{1em}
+
+\begin{definition}[矩阵的秩 Rank of Matrix]
+    根据命题 \ref{prop:row_col_rank}，矩阵的行向量组的秩等于列向量组的秩，因此可以定义矩阵的\textbf{秩}记为 $\mathrm{rank}(\mathbf{A})$，等于行向量组和列向量组的秩。
+\end{definition}
+
+\begin{proposition}[矩阵秩的性质]
+    设 $\mathbf{A},\mathbf{B} \in F^{m \times n}$，$r\in F$，那么有：
+    \begin{enumerate}
+        \item $\mathrm{rank}(\mathbf{A}) \leq \min(m,n)$；
+        \item $\mathrm{rank}(\mathbf{A} + \mathbf{B}) \leq \mathrm{rank}(\mathbf{A}) + \mathrm{rank}(\mathbf{B})$；
+        \item $\mathrm{rank}(r\mathbf{A}) = \mathrm{rank}(\mathbf{A})$，其中 $r\neq 0$；
+        \item $\mathbf{B} \in F^{n \times p}$，则 $\mathrm{rank}(\mathbf{A}\mathbf{B}) \leq \min(\mathrm{rank}(\mathbf{A}),\mathrm{rank}(\mathbf{B}))$。
+    \end{enumerate}
+\end{proposition}
+
+\vspace{1em}
+\subsection{矩阵的转置}
+\begin{definition}[矩阵的转置 Transpose of Matrix]
+    设 $\mathbf{A} = [a_{ij}] \in F^{m \times n}$，则 $\mathbf{A}$ 的\textbf{转置}记为 $\mathbf{A}^T$，定义为：
+    \[
+        \mathbf{A}^T = [a_{ji}] \in F^{n \times m}
+    \]
+    \label{def:matrix_transpose}
+\end{definition}
+
+\begin{proposition}[矩阵转置的性质]
+    设 $\mathbf{A},\mathbf{B} \in F^{m \times n}$，$r\in F$，那么有：
+    \begin{enumerate}
+        \item $(\mathbf{A}^T)^T = \mathbf{A}$；
+        \item $(\mathbf{A} + \mathbf{B})^T = \mathbf{A}^T + \mathbf{B}^T$；
+        \item $(r\mathbf{A})^T = r\mathbf{A}^T$；
+        \item 如果 $\mathbf{B} \in F^{n \times p}$，则 $(\mathbf{A}\mathbf{B})^T = \mathbf{B}^T\mathbf{A}^T$。
+        \item $\mathrm{rank}(\mathbf{A}^T) = \mathrm{rank}(\mathbf{A})$。
+    \end{enumerate}
+\end{proposition}
+
+\begin{note}
+    矩阵的转置就是将矩阵的行和列互换。
+\end{note}
+
+\vspace{1em}
+
+\begin{definition}[对称矩阵与反对称矩阵 Symmetric Matrix And Skew-Symmetric Matrix]
+    设方阵 $\mathbf{A} \in \mathbb{F}^{n \times n}$，
+    \begin{enumerate}
+        \item $\mathbf{A}$ 称为\textbf{对称矩阵}，当且仅当，$\mathbf{A} = \mathbf{A}^T$；
+        \item $\mathbf{A}$ 称为\textbf{反对称矩阵}，当且仅当，$\mathbf{A} = -\mathbf{A}^T$。
+    \end{enumerate}
+    \label{def:symmetric_skew_symmetric_matrix}
+\end{definition}
+
+\begin{proposition}
+    设方阵 $\mathbf{A} \in \mathbb{F}^{n \times n}$，则 $\mathbf{A} + \mathbf{A}^T$ 是对称矩阵，$\mathbf{A} - \mathbf{A}^T$ 是反对称矩阵。
+\end{proposition}
+
+\begin{corollary}
+    反对称矩阵的主对角线元素全为零。
+\end{corollary}
+
+\begin{corollary}[对称分解 Symmetric Decomposition]
+    设方阵 $\mathbf{A} \in \mathbb{F}^{n \times n}$，则 $\mathbf{A}$ 可以唯一表示为一个对称矩阵和一个反对称矩阵之和，即：
+    \[
+        \mathbf{A} = \frac{\mathbf{A} + \mathbf{A}^T}{2} + \frac{\mathbf{A} - \mathbf{A}^T}{2}
+    \]
+    其中，$\frac{\mathbf{A} + \mathbf{A}^T}{2}$ 是对称矩阵，$\frac{\mathbf{A} - \mathbf{A}^T}{2}$ 是反对称矩阵。
+    \label{prop:symmetric_decomposition}
+\end{corollary}
+
+% \vspace{1em}
+% \begin{definition}[正交矩阵 Orthogonal Matrix]
+%     设方阵 $\mathbf{A} \in \mathbb{R}^{n \times n}$，$\mathbf{A}$ 称为\textbf{正交矩阵}，当且仅当，$\mathbf{A}^T\mathbf{A} = \mathbf{I}$。
+%     \label{def:orthogonal_matrix}
+% \end{definition}
+
+% \begin{proposition}[酉矩阵 Unitary Matrix]
+%     设方阵 $\mathbf{A} \in \mathbb{C}^{n \times n}$，$\mathbf{A}$ 称为\textbf{酉矩阵}，当且仅当，$\mathbf{A}^{\dagger}\mathbf{A} = \mathbf{I}$，
+%     其中，$\mathbf{A}^{\dagger} = \overline{\mathbf{A}^T}$ 是 $\mathbf{A}$ 的共轭转置。
+% \end{proposition}
+
+\vspace{1em}
+\subsection{方阵的行列式}
+
+\begin{definition}[排列 Permutation]
+    设 $n\in\mathbb{N}^+$，$S_n$ 是所有 $n$ 元排列的集合，$|S_n|=n!$；
+    $\sigma \in S_n$ 是一个排列；$\sigma(i)$ 表示排列 $\sigma$ 的第 $i$ 个元素。
+    如果存在 $i,j\in\{1,2,\ldots,n\}$，$i<j$ 且 $\sigma(i)>\sigma(j)$，则称 $(i,j)$ 是排列 $\sigma$ 的一个\textbf{逆序}。
+    如果排列 $\sigma$ 的逆序个数为偶数，则称 $\sigma$ 是\textbf{偶排列}，否则称 $\sigma$ 是\textbf{奇排列}。
+\end{definition}
+
+\begin{example}
+    设 $n=3$，所有的排列为：
+    \[
+        S_3 = \{(1,2,3),(1,3,2),(2,1,3),(2,3,1),(3,1,2),(3,2,1)\}
+    \]
+    其中，
+    \begin{enumerate}
+        \item $(1,2,3)$ 是偶排列，逆序个数为 0；
+        \item $(1,3,2)$ 是奇排列，逆序个数为 1；
+        \item $(2,1,3)$ 是奇排列，逆序个数为 1；
+        \item $(2,3,1)$ 是偶排列，逆序个数为 2；
+        \item $(3,1,2)$ 是奇排列，逆序个数为 2；
+        \item $(3,2,1)$ 是偶排列，逆序个数为 3。
+    \end{enumerate}
+\end{example}
+\vspace{1em}
+
+\begin{definition}[行列式 Determinant]
+    设 $\mathbf{A} = [a_{ij}] \in F^{n \times n}$，设函数 $\det : F^{n \times n} \to F$，称为\textbf{行列式}，记为 $\det(\mathbf{A})$ 或 $|\mathbf{A}|$。
+    那么 $\det(\mathbf{A})$ 定义为矩阵 $\mathbf{A}$ 中不同行不同列的元素的乘积之和：
+    \[
+        \det(\mathbf{A}) = \sum_{\sigma \in S_n} \left( \mathrm{sgn}(\sigma) \prod_{i=1}^{n} a_{i,\sigma(i)} \right)
+    \]
+    其中，$S_n$ 是所有 $n$ 元排列的集合；$\sigma(i)$ 是排列 $\sigma$ 的第 $i$ 个元素；$\mathrm{sgn}(\sigma)$ 是排列 $\sigma$ 的符号，如果：
+    \begin{enumerate}
+        \item $\sigma$ 是偶排列，则 $\mathrm{sgn}(\sigma) = 1$；
+        \item $\sigma$ 是奇排列，则 $\mathrm{sgn}(\sigma) = -1$。
+    \end{enumerate}
+\end{definition}
+
+\begin{example}
+    设 $\mathbf{A}\in F^{2\times 2}$，那么：
+    \[
+        \det(\mathbf{A}) = \begin{vmatrix}
+            a_{11} & a_{12} \\
+            a_{21} & a_{22}
+        \end{vmatrix} = a_{11}a_{22} - a_{12}a_{21}
+    \]
+\end{example}
+
+\begin{note}
+    行列式要求从不同行和不同列中挑选元素进行相乘，因此只有方阵才有意义。
+    对于一个 $n$ 阶方阵，相乘的元素个数有 $n$ 个；这种挑选一共有 $n!$ 中方式，因此行列式中相加的项数有 $n!$ 项。
+    下面介绍行列式按一行（列）展开定理，可以简化行列式的计算。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[余子式 Minor]
+    设 $\mathbf{A} = [a_{ij}] \in F^{n \times n}$，$i,j\in\{1,2,\ldots,n\},\ n > 1$，则 $\mathbf{A}$ 的第 $i$ 行第 $j$ 列的\textbf{余子式}记为 $M_{ij}$，定义为从矩阵 $\mathbf{A}$ 中去掉第 $i$ 行和第 $j$ 列后得到的 $(n-1)$ 阶矩阵的行列式。也即：
+    \[
+        M_{ij}=\begin{vmatrix}a_{11} &\cdots & a_{1, j-1} & a_{1, j+1} & \cdots& a_{1 n} \\ \vdots &  & \vdots & \vdots & & \vdots \\ a_{i-1,1} & \cdots& a_{i-1, j-1} & a_{i-1, j+1} & \cdots & a_{i-1, n} \\ a_{i+1,1} & \cdots & a_{i+1, j-1} & a_{i+1, j+1} & \cdots & a_{i+1, n} \\ \vdots & & \vdots & \vdots & & \vdots \\ a_{n 1} & \cdots & a_{n, j-1} & a_{n, j+1} &\cdots & a_{n n} \end{vmatrix}
+    \]
+    令
+    \[
+        A_{ij} = (-1)^{i+j} M_{ij}
+    \]
+    称为 $\mathbf{A}$ 的第 $i$ 行第 $j$ 列的\textbf{代数余子式}。
+\end{definition}
+
+\begin{definition}[伴随矩阵 Adjoint Matrix]
+    设 $\mathbf{A} = [a_{ij}] \in F^{n \times n},\ n > 1$，则 $\mathbf{A}$ 的\textbf{伴随矩阵}记为 $\mathrm{adj}(\mathbf{A})$，定义为：
+    \[
+        \mathrm{adj}(\mathbf{A}) = \begin{bmatrix} A_{11} & A_{12} & \cdots & A_{1 n} \\ A_{21} & A_{22} & \cdots & A_{2 n} \\ \vdots & \vdots & & \vdots \\ A_{n 1} & A_{n 2} & & A_{n n} \end{bmatrix}
+    \]
+    其中，$A_{ij}$ 是 $\mathbf{A}$ 的第 $i$ 行第 $j$ 列的代数余子式。
+    
+\end{definition}
+
+\begin{theorem}[行列式展开定理]
+    设 $\mathbf{A} = [a_{ij}] \in F^{n \times n}$，$i,j\in\{1,2,\ldots,n\}$，那么有：
+    \begin{enumerate}
+        \item 当 $n=1$ 时，$\det(\mathbf{A}) = a_{11}$；
+        \item 当 $n>1$ 时，
+        \begin{enumerate}
+            \item 按第 $i$ 行展开：
+            \[
+                \det(\mathbf{A}) = \sum_{j=1}^{n} a_{ij} A_{ij}
+            \]
+            \item 按第 $j$ 列展开：
+            \[
+                \det(\mathbf{A}) = \sum_{i=1}^{n} a_{ij} A_{ij}
+            \]
+        \end{enumerate}
+    \end{enumerate}
+    其中，$A_{ij}$ 是 $\mathbf{A}$ 的第 $i$ 行第 $j$ 列的代数余子式。行列式展开定理还可以写成矩阵乘法的形式：
+    \[
+        \det(\mathbf{A}) \mathbf{I} = \mathbf{A}\mathrm{adj}(\mathbf{A})= \mathrm{adj}(\mathbf{A})\mathbf{A}
+    \]
+    \label{thm:determinant_expansion}
+\end{theorem}
+
+\begin{example}
+    利用行列式展开定理，设 $\mathbf{A}\in F^{3\times 3}$，那么：
+    \begin{align*}
+        \det(\mathbf{A}) &= \begin{vmatrix}
+            a_{11} & a_{12} & a_{13} \\
+            a_{21} & a_{22} & a_{23} \\
+            a_{31} & a_{32} & a_{33}
+        \end{vmatrix}\\
+        &= a_{11} (-1)^{1+1}\begin{vmatrix}
+                a_{22} & a_{23} \\
+                a_{32} & a_{33}
+            \end{vmatrix} +
+            a_{12} (-1)^{1+2}\begin{vmatrix}
+                a_{21} & a_{23} \\
+                a_{31} & a_{33}
+            \end{vmatrix} +
+            a_{13} (-1)^{1+3}\begin{vmatrix}
+                a_{21} & a_{22} \\
+                a_{31} & a_{32}
+            \end{vmatrix}\\
+        &= a_{11}a_{22}a_{33}+a_{21}a_{32}a_{13}+a_{31}a_{12}a_{23}-a_{31}a_{22}a_{13}-a_{21}a_{12}a_{33}-a_{11}a_{32}a_{23}
+    \end{align*}
+\end{example}
+
+\vspace{1em}
+
+\begin{proposition}[行列式不为零的充要条件]
+    设 $\mathbf{A} \in F^{n \times n}$，那么 $\det(\mathbf{A}) \neq 0$ 的充要条件是 $\mathrm{rank}(\mathbf{A}) = n$。
+    \label{prop:det_nonzero_iff_full_rank}
+\end{proposition}
+\begin{note}
+    行列式不为零的矩阵称为\textbf{非奇异矩阵}，行列式为零的矩阵称为\textbf{奇异矩阵}。矩阵是否奇异，与其行（列）向量组的线性相关性有关。
+    如果行（列）向量组线性无关，那么矩阵是\textbf{满秩矩阵}，行列式不为 0，矩阵非奇异。
+\end{note}
+
+\begin{corollary}
+    设 $\mathbf{A} \in F^{n \times n}$，那么
+    \begin{enumerate}
+        \item 如果 $\mathbf{A}$ 的某一行（列）全为零，则 $\det(\mathbf{A}) = 0$；
+        \item 如果 $\mathbf{A}$ 的两行（列）相等，则 $\det(\mathbf{A}) = 0$；
+        \item 如果 $\mathbf{A}$ 的某一行（列）是另一些行（列）的线性组合，则 $\det(\mathbf{A}) = 0$；
+    \end{enumerate}
+\end{corollary}
+
+\vspace{1em}
+
+\begin{proposition}[行列式的性质]
+    设 $\mathbf{A},\mathbf{B} \in F^{n \times n}$，$r\in F$，那么有：
+    \begin{enumerate}
+        \item $\det(\mathbf{I}) = 1$；
+        \item $\det(\mathbf{A}^T) = \det(\mathbf{A})$；
+        \item $\det(\mathbf{A}\mathbf{B}) = \det(\mathbf{A})\det(\mathbf{B})$；
+        \item $\det(r\mathbf{A}) = r^n \det(\mathbf{A})$；
+        \item 如果 $\mathbf{A}$ 的两行（列）互换位置，则 $\det(\mathbf{A})$ 变号；
+        \item 如果 $\mathbf{B}$ 是由 $\mathbf{A}$ 通过初等行变换得到的，那么：
+        \begin{enumerate}
+            \item 若 $\mathbf{B}$ 是通过将 $\mathbf{A}$ 的某一行（列）乘以 $r\neq 0$ 得到的，则 $\det(\mathbf{B}) = r\det(\mathbf{A})$；
+            \item 若 $\mathbf{B}$ 是通过将 $\mathbf{A}$ 的某一行（列）加上另一行（列）的 $r$ 倍得到的，则 $\det(\mathbf{B}) = \det(\mathbf{A})$。
+        \end{enumerate}
+    \end{enumerate}
+\end{proposition}
+\vspace{1em}
+
+\begin{note}
+    矩阵的行列式的几何意义是该矩阵所表示的线性变换对空间体积的缩放比例。在后续章节介绍欧几里得空间向量的内积和叉乘时详细介绍。
+\end{note}
+
+% \subsubsection{行列式的几何意义与向量的叉乘}
+% \begin{definition}[向量的叉乘 Cross Product]
+%     设 $\mathbf{a},\mathbf{b}\in \mathbb{R}^3$ 是三维空间中的两个向量，那么 $\mathbf{a}$ 和 $\mathbf{b}$ 的\textbf{叉乘}记为 $\mathbf{a} \times \mathbf{b}$，定义为：
+%     \[
+%         \mathbf{a} \times \mathbf{b} = \begin{vmatrix}
+%             \mathbf{i} & \mathbf{j} & \mathbf{k} \\
+%             a_1 & a_2 & a_3 \\
+%             b_1 & b_2 & b_3
+%         \end{vmatrix} = (a_2 b_3 - a_3 b_2)\mathbf{i} - (a_1 b_3 - a_3 b_1)\mathbf{j} + (a_1 b_2 - a_2 b_1)\mathbf{k}
+%     \]
+%     其中，$\mathbf{i},\mathbf{j},\mathbf{k}$ 分别是 $x,y,z$ 轴的单位向量，$\mathbf{a} = [a_1,a_2,a_3]^T$，$\mathbf{b} = [b_1,b_2,b_3]^T$。
+% \end{definition}
+
+% \begin{proposition}
+    
+% \end{proposition}
+
+% \begin{example}[行列式的几何意义与向量的叉乘]
+%     在 二维空间中，设 $\mathbf{a},\mathbf{b}\in \mathbb{R}^2$ 是两个向量，那么由 $\mathbf{a}$ 和 $\mathbf{b}$ 作为邻边的平行四边形的面积为：
+%     \[
+%         S = \left|\det\begin{bmatrix}
+%             a_1 & b_1 \\
+%             a_2 & b_2
+%         \end{bmatrix}\right| = |a_1 b_2 - a_2 b_1|
+%     \]
+%     其中，$\mathbf{a} = [a_1,a_2]^T$，$\mathbf{b} = [b_1,b_2]^T$。
+% \end{example}
+
+\vspace{1em}
+\subsection{方阵的逆}
+
+\begin{definition}[矩阵的逆 Inverse of Matrix]
+    设 $\mathbf{A} \in F^{n \times n}$，如果存在 $\mathbf{B} \in F^{n \times n}$，使得：
+    \[
+        \mathbf{A}\mathbf{B} = \mathbf{B}\mathbf{A} = \mathbf{I}
+    \]
+    则称 $\mathbf{A}$ 是\textbf{可逆矩阵}，$\mathbf{B}$ 是 $\mathbf{A}$ 的\textbf{逆矩阵}，记为 $\mathbf{A}^{-1}$。
+\end{definition}
+
+\begin{note}
+    根据行列式按一行展开定理：
+    \[
+        \det(\mathbf{A}) \mathbf{I} = \mathbf{A}\mathrm{adj}(\mathbf{A})
+    \]
+    等式两边同时乘以 $\mathbf{A}^{-1}$，得到：
+    \[
+        \mathbf{A}^{-1}\det(\mathbf{A}) \mathbf{I} = \mathbf{A}^{-1}\mathbf{A}\mathrm{adj}(\mathbf{A}) = \mathbf{I}\mathrm{adj}(\mathbf{A})
+    \]
+    所以，
+    \[
+        \mathbf{A}^{-1} = \frac{\mathrm{adj}(\mathbf{A})}{\det(\mathbf{A})}
+    \]
+    这说明了只有当 $\det(\mathbf{A}) \neq 0$ 时，$\mathbf{A}$ 才可逆。
+\end{note}
+
+\begin{proposition}[矩阵可逆的充要条件]
+    设 $\mathbf{A} \in F^{n \times n}$，那么 $\mathbf{A}$ 可逆的充要条件是 $\det(\mathbf{A}) \neq 0$。
+    \label{prop:matrix_invertible_iff_det_nonzero}
+\end{proposition}
+
+\begin{note}
+    根据命题 \ref{prop:det_nonzero_iff_full_rank} 和命题 \ref{prop:matrix_invertible_iff_det_nonzero}，如下结论等价：
+    \begin{enumerate}
+        \item 矩阵可逆；
+        \item 矩阵满秩；
+        \item 矩阵非奇异；
+        \item 矩阵行列式不为零；
+        \item 矩阵的行（列）向量组线性无关。
+    \end{enumerate}
+\end{note}
+
+\begin{proposition}[矩阵逆的性质]
+    设 $\mathbf{A},\mathbf{B} \in F^{n \times n}$，那么有：
+    \begin{enumerate}
+        \item $(\mathbf{A}^{-1})^{-1} = \mathbf{A}$；
+        \item $(\mathbf{A}\mathbf{B})^{-1} = \mathbf{B}^{-1}\mathbf{A}^{-1}$；
+        \item $(\mathbf{A}^T)^{-1} = (\mathbf{A}^{-1})^T$。
+    \end{enumerate}
+\end{proposition}
+
+\vspace{1em}
+
+\textbf{矩阵可逆的代数和几何意义}：任意一个 $n$ 元线性方程组：
+\[
+    \begin{cases}
+        a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n = b_1 \\
+        a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n = b_2 \\
+        \vdots \\
+        a_{n1}x_1 + a_{n2}x_2 + \cdots + a_{nn}x_n = b_n
+    \end{cases}
+\]
+可以写成矩阵乘法的形式：
+\[
+    \mathbf{A}\mathbf{x} = \begin{bmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n} \\
+        a_{21} & a_{22} & \cdots & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{n1} & a_{n2} & \cdots & a_{nn}
+    \end{bmatrix}\begin{bmatrix}
+        x_1 \\
+        x_2 \\
+        \vdots\\
+        x_n
+    \end{bmatrix}=
+    \begin{bmatrix}
+        b_1 \\
+        b_2 \\
+        \vdots\\
+        b_n
+    \end{bmatrix} = \mathbf{b}
+\]
+其中，$a_{ij}$ 和 $b_i$ 是已知的，$x_i$ 是未知数。矩阵 $\mathbf{A}$ 可逆，那么线性方程组有唯一非零解：
+\[
+    \mathbf{x} = \mathbf{A}^{-1}\mathbf{b}
+\]
+从代数角度看，设 $\mathrm{Row}(\mathbf{A}) = \{\mathbf{a}_1,\mathbf{a}_2,\ldots,\mathbf{a}_n\}$，那么方程组还可以写成
+\[
+    \mathbf{A}\mathbf{x} = \sum^n_{i=1}x_i\mathbf{a}_i
+\]
+如果 $\mathbf{A}$ 可逆，矩阵满秩且行向量组线性无关，那么 $\mathrm{span}\{\mathbf{a}_1,\mathbf{a}_2,\ldots,\mathbf{a}_n\} = F^n$，
+自然存在唯一一组系数不全为零的 $(x_1,x_2,\ldots,x_n)$ 线性表出 $\sum^n_{i=1}x_i\mathbf{a}_i = \mathbf{b}$。
+反之，如果 $\mathbf{A}$ 不可逆，那么可能不存在系数 $(x_1,x_2,\ldots,x_n)$ 线性表出 $\mathbf{b}$，也可能存在无穷多组系数 $(x_1,x_2,\ldots,x_n)$ 线性表出 $\mathbf{b}$。
+从几何角度看，假设 $n=3$，$\mathbf{A}$ 不可逆，那么 $\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3$ 共面，如果 $\mathbf{b}$ 不在该平面上，则无法通过 $\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3$ 的线性组合得到 $\mathbf{b}$；
+如果 $\mathbf{b}$ 在该平面上，则有无穷多种组合方式。
+
+\vspace{1em}
+
+\subsection{基底变换矩阵}
+
+\begin{definition}[坐标变换矩阵]
+    设 $V$ 是 $n$ 维 $F$-线性空间，$\mathcal{E} = \{\mathbf{e}_1,\mathbf{e}_2,\ldots,\mathbf{e}_n\}$ 和 $\mathcal{E}' = \{\mathbf{e}'_1,\mathbf{e}'_2,\ldots,\mathbf{e}'_n\}$ 是 $F^n$ 的两个基底。
+    两组基底之间的关系为：
+    \[
+        \begin{cases}
+            \mathbf{e}'_1 &= a_{11}\mathbf{e}_1 + a_{21}\mathbf{e}_2 + \cdots + a_{n1}\mathbf{e}_n \\
+            \mathbf{e}'_2 &= a_{12}\mathbf{e}_1 + a_{22}\mathbf{e}_2 + \cdots + a_{n2}\mathbf{e}_n \\
+            &\vdots \\
+            \mathbf{e}'_n &= a_{1n}\mathbf{e}_1 + a_{2n}\mathbf{e}_2 + \cdots + a_{nn}\mathbf{e}_n
+        \end{cases}
+    \]
+    写成矩阵乘法的形式：
+    \[
+        \begin{bmatrix}
+            \mathbf{e}'_1 \\ \mathbf{e}'_2 \\ \vdots \\ \mathbf{e}'_n
+        \end{bmatrix} =
+        \begin{bmatrix}
+            a_{11} & a_{12} & \cdots & a_{1n} \\
+            a_{21} & a_{22} & \cdots & a_{2n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            a_{n1} & a_{n2} & \cdots & a_{nn}
+        \end{bmatrix}
+        \begin{bmatrix}
+            \mathbf{e}_1 \\ \mathbf{e}_2 \\ \vdots \\ \mathbf{e}_n
+        \end{bmatrix}
+    \]
+    设 $\mathbf{v}\in V$ 分别用两组基底表示为：
+    \begin{align*}
+        \mathbf{v} &= \begin{bmatrix}
+            v_1 & v_2 & \cdots & v_n
+        \end{bmatrix}\begin{bmatrix}
+            \mathbf{e}_1 \\ \mathbf{e}_2 \\ \vdots \\ \mathbf{e}_n
+        \end{bmatrix} \\
+        &= \begin{bmatrix}
+            v'_1 & v'_2 & \cdots & v'_n
+        \end{bmatrix}\begin{bmatrix}
+            \mathbf{e}'_1 \\ \mathbf{e}'_2 \\ \vdots \\ \mathbf{e}'_n
+        \end{bmatrix}\\
+        &= \begin{bmatrix}
+            v'_1 & v'_2 & \vdots & v'_n
+        \end{bmatrix}\begin{bmatrix}
+            a_{11} & a_{12} & \cdots & a_{1n} \\
+            a_{21} & a_{22} & \cdots & a_{2n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            a_{n1} & a_{n2} & \cdots & a_{nn}
+        \end{bmatrix}
+        \begin{bmatrix}
+            \mathbf{e}_1 \\ \mathbf{e}_2 \\ \vdots \\ \mathbf{e}_n
+        \end{bmatrix}
+    \end{align*}
+    所以线性空间中元素在不同基下的变换公式为：
+    \[
+        \begin{bmatrix}
+            v_1 & v_2 & \cdots & v_n
+        \end{bmatrix} =
+        \begin{bmatrix}
+            v'_1 & v'_2 & \cdots & v'_n
+        \end{bmatrix}
+        \begin{bmatrix}
+            a_{11} & a_{12} & \cdots & a_{1n} \\
+            a_{21} & a_{22} & \cdots & a_{2n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            a_{n1} & a_{n2} & \cdots & a_{nn}
+        \end{bmatrix}
+    \]
+    \[
+        \begin{bmatrix}
+            v'_1 & v'_2 & \cdots & v'_n
+        \end{bmatrix} =
+        \begin{bmatrix}
+            v_1 & v_2 & \cdots & v_n
+        \end{bmatrix}
+        \begin{bmatrix}
+            a_{11} & a_{12} & \cdots & a_{1n} \\
+            a_{21} & a_{22} & \cdots & a_{2n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            a_{n1} & a_{n2} & \cdots & a_{nn}
+        \end{bmatrix}^{-1}
+    \]
+    其中，称可逆矩阵 $[a_{ij}]$ 为基底变换矩阵。
+\end{definition}
+
+\newpage

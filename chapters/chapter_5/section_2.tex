@@ -1,0 +1,119 @@
+\section{线性相关性与基底}
+
+\begin{definition}[线性组合]
+    设 $ (V,+,\cdot) $ 为 $ F $-线性空间，$ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\in V $，$ r_1,r_2,\ldots,r_n\in F $。称
+    \[
+        \mathbf{u} = r_1\cdot \mathbf{v}_1 + r_2\cdot \mathbf{v}_2 + \cdots + r_n\cdot \mathbf{v}_n
+    \]
+    为 $ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n $ 的\textbf{线性组合}。
+\end{definition}
+
+\begin{definition}[张成空间 Span]
+    设 $ (V,+,\cdot) $ 为 $ F $-线性空间。由 $ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\in V $ \textbf{张成的空间}记为 $\mathrm{span}(\mathbf{v}_1,\ldots,\mathbf{v}_n)$，那么：
+    \[
+        \mathrm{span}(\mathbf{v}_1,\ldots,\mathbf{v}_n) = \left\{ \sum_{i=1}^{n} r_i\cdot \mathbf{v}_i : r_i\in F \right\}
+    \]
+    \label{def:span}
+\end{definition}
+\begin{proposition}
+    设 $ (V,+,\cdot) $ 为 $ F $-线性空间。由 $ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\in V $ 张成的空间 $\mathrm{span}(\mathbf{v}_1,\ldots,\mathbf{v}_n)$ 是包含这组向量的最小线性子空间。
+\end{proposition}
+\begin{note}
+    线性组合源自线性空间对数乘和加法的封闭性，线性组合的结果仍然在该线性空间中。
+    张成空间是由一组向量通过线性组合所能生成的所有向量构成的集合，它是包含这组向量的最小线性子空间。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[线性相关性 Linear Dependence] 
+    设 $ (V,+,\cdot) $ 为 $ F $-线性空间，$ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\in V $。如果存在不全为零的 $ r_1,r_2,\ldots,r_n\in F $，使得
+    \[
+        r_1\cdot \mathbf{v}_1 + r_2\cdot \mathbf{v}_2 + \cdots + r_n\cdot \mathbf{v}_n = \mathbf{0},
+    \]
+    则称 $ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n $ 是\textbf{线性相关}的。
+    反之，如果仅当 $ r_1=r_2=\cdots=r_n=0 $ 时，上式成立，则称 $ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n $ 是\textbf{线性无关}的。
+    \label{def:linear_dependence}
+\end{definition}
+
+\begin{note}
+    一组向量 $\{\mathbf{v}_i:i=1,2,\cdots,n\}$ 线性相关，说明其中至少有一个向量可以表示成其他向量的线性组合。
+    线性相关的几何意义：在二维空间中，两个向量线性相关当且仅当它们共线，两个共线的向量可以表示为 $\mathbf{v}_2=k\cdot \mathbf{v}_1$；
+    在三维空间中，三个向量线性相关当且仅当它们共面，三个共面的向量可以表示为 $\mathbf{v}_3=k_1\cdot \mathbf{v}_1 + k_2\cdot \mathbf{v}_2$。
+    反之，在二维空间中不共线，在三维空间中不共面的向量组是线性无关的。
+\end{note}
+
+\vspace{1em}
+\begin{definition}[基底与坐标 Basis And Coordinates]
+    设 $ (V,+,\cdot) $ 为 $ F $-线性空间。如果存在一组线性无关的向量 $ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\in V $ ，
+    且 $ V=\mathrm{span}(\mathbf{v}_1,\ldots,\mathbf{v}_n) $，则称 $ \{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\} $ 为 $ V $ 的一组\textbf{基底}。
+    其中 $\forall \mathbf{v}\in V$ 都可以唯一用这一组坐标线性表出：
+    \[
+        \mathbf{v} = \sum_{i=1}^{n} v_i \mathbf{v}_i
+    \]
+    其中，$n$ 元有序数组 $(v_1,\cdots,v_n)$ 是 $\mathbf{v}$ 在基底 $\{\mathbf{v}_1,\cdots,\mathbf{v}_n\}$ 下的\textbf{坐标}。
+    \label{def:basis}
+\end{definition}
+
+\begin{proposition}
+    任意线性空间 $ (V,+,\cdot) $ 都至少存在一组基底。
+\end{proposition}
+\begin{proof}
+    设 $ (V,+,\cdot) $ 为 $ F $-线性空间。如果 $ V=\{\mathbf{0}\} $，则 $\{\mathbf{0}\}$ 是 $ V $ 的一组基底。
+    如果 $ V\neq \{\mathbf{0}\} $，则存在 $ \mathbf{v}_1\in V, \mathbf{v}_1\neq \mathbf{0} $。如果 $ V=\mathrm{span}(\mathbf{v}_1) $，则 $\{\mathbf{v}_1\}$ 是 $ V $ 的一组基底。
+    如果 $ V\neq \mathrm{span}(\mathbf{v}_1) $，则存在 $ \mathbf{v}_2\in V, \mathbf{v}_2\notin \mathrm{span}(\mathbf{v}_1) $。如果 $ V=\mathrm{span}(\mathbf{v}_1,\mathbf{v}_2) $，则 $\{\mathbf{v}_1,\mathbf{v}_2\}$ 是 $ V $ 的一组基底。
+    如果 $ V\neq \mathrm{span}(\mathbf{v}_1,\mathbf{v}_2) $，则存在 $ \mathbf{v}_3\in V, \mathbf{v}_3\notin \mathrm{span}(\mathbf{v}_1,\mathbf{v}_2) $。
+    依此类推，可以得到一组线性无关的向量 $\{\mathbf{v}_1,\mathbf{v}_2,\ldots\}$，使得
+    \[
+        V = \mathrm{span}(\mathbf{v}_1,\mathbf{v}_2,\ldots).
+    \]
+    该过程要么在有限步内终止，要么生成一个无限序列。无论哪种情况，最终都能得到一组基底。
+\end{proof}
+
+\begin{proposition}
+    如果 $ V $ 有一组有限基底，则所有基底的向量个数相同。
+\end{proposition}
+\begin{proof}
+    设 $ (V,+,\cdot) $ 为 $ F $-线性空间，$ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\in V $ 是 $ V $ 的一组基底。
+    如果存在另一组基底 $ \mathbf{u}_1,\mathbf{u}_2,\ldots,\mathbf{u}_m\in V $，且 $ m>n $，则 $\mathbf{u}_1,\mathbf{u}_2,\ldots,\mathbf{u}_m$ 线性相关，
+    即存在不全为零的 $ r_1,r_2,\ldots,r_m\in F $，使得
+    \[
+        r_1\cdot \mathbf{u}_1 + r_2\cdot \mathbf{u}_2 + \cdots + r_m\cdot \mathbf{u}_m = \mathbf{0}.
+    \]
+    因为 $ V=\mathrm{span}(\mathbf{v}_1,\ldots,\mathbf{v}_n) $，所以每个 $\mathbf{u}_i$ 都可以表示成 $\mathbf{v}_1,\ldots,\mathbf{v}_n$ 的线性组合，
+    即存在 $ s_{ij}\in F, i=1,2,\ldots,m, j=1,2,\ldots,n $，使得
+    \[
+        \mathbf{u}_i = \sum_{j=1}^{n} s_{ij}\cdot \mathbf{v}_j.
+    \]
+    将上式代入前一个等式，得到
+    \[
+        \sum_{i=1}^{m} r_i \left( \sum_{j=1}^{n} s_{ij}\cdot \mathbf{v}_j \right) = \sum_{j=1}^{n} \left( \sum_{i=1}^{m} r_i s_{ij} \right) \cdot \mathbf{v}_j = \mathbf{0}.
+    \]
+    因为 $\mathbf{v}_1,\ldots,\mathbf{v}_n$ 线性无关，所以对于每个 $ j=1,2,\ldots,n $，都有
+    \[
+        \sum_{i=1}^{m} r_i s_{ij} = 0.
+    \]
+    这构成了一个齐次线性方程组，未知数为 $ r_1,r_2,\ldots,r_m $，方程个数为 $ n $，未知数个数为 $ m $，且 $ m>n $。
+    根据线性代数的基本理论，该方程组有非零解，这与 $ r_1,r_2,\ldots,r_m $ 不全为零矛盾。
+    因此，$ m\leq n $。同理可证 $ n\leq m $，所以 $ m=n $。
+\end{proof}
+\vspace{0.5em}
+
+\begin{definition}[线性空间的维数 Dimension]
+    设 $ (V,+,\cdot) $ 为 $ F $-线性空间。如果 $ V $ 有一组基底 $ \{\mathbf{v}_1,\ldots,\mathbf{v}_n\} $，则称 $ n $ 为 $ V $ 的\textbf{维数}，记作 $\dim V = n$。
+    如果 $ V $ 没有有限基底，则称 $ V $ 为无穷维线性空间，记作 $\dim V = \infty$。
+\end{definition}
+
+\begin{note}
+    根据基底的定义，$V$ 中任意一个向量都可以唯一表示成基底向量的线性组合。
+    在 $n$ 维有限维线性空间中，任意 $n$ 个线性无关的向量都可以作为该空间的一组基底。
+\end{note}
+\vspace{1em}
+
+% \begin{definition}[向量组的秩 Rank]
+%     设 $ (V,+,\cdot) $ 为 $ F $-线性空间，$ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\in V $。
+%     向量组 $ \{\mathbf{v}_1,\ldots,\mathbf{v}_n\} $ 中线性无关向量的最大个数称为该向量组的\textbf{秩}，
+%     记作 $\mathrm{rank}(\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n)$。
+% \end{definition}
+
+
+
+\newpage

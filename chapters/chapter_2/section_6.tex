@@ -112,45 +112,45 @@
     度量空间可以诱导出拓扑结构，开球的集合构成了 $ X $ 上的一个拓扑，称为由度量 $ d $ 诱导的拓扑。
 \end{note}
 
-\vspace{1em}
-\subsection{赋范线性空间}
+% \vspace{1em}
+% \subsection{赋范线性空间}
 
-\begin{definition}[赋范线性空间 Normed Linear Space]
-    设 $ V $ 是域 $ \mathbb{F} $ 上的线性空间，映射 $ \|\cdot\|:V\to \mathbb{R} $ 称为范数，当且仅当，$ \forall x,y\in V $ 且 $ \forall \alpha\in \mathbb{F} $，有：
-    \begin{enumerate}
-        \item 非负性：$ \|x\|\geq 0 $，且当且仅当 $ x=0 $ 时取等号；
-        \item 齐次性：$ \|\alpha x\|=|\alpha|\|x\| $；
-        \item 三角不等式：$ \|x+y\|\leq \|x\|+\|y\| $。
-    \end{enumerate}
-    二元组 $ (V,\|\cdot\|) $ 称为赋范线性空间，函数 $ \|\cdot\| $ 称为 $ V $ 上的范数。
-\end{definition}
+% \begin{definition}[赋范线性空间 Normed Linear Space]
+%     设 $ V $ 是域 $ \mathbb{F} $ 上的线性空间，映射 $ \|\cdot\|:V\to \mathbb{R} $ 称为范数，当且仅当，$ \forall x,y\in V $ 且 $ \forall \alpha\in \mathbb{F} $，有：
+%     \begin{enumerate}
+%         \item 非负性：$ \|x\|\geq 0 $，且当且仅当 $ x=0 $ 时取等号；
+%         \item 齐次性：$ \|\alpha x\|=|\alpha|\|x\| $；
+%         \item 三角不等式：$ \|x+y\|\leq \|x\|+\|y\| $。
+%     \end{enumerate}
+%     二元组 $ (V,\|\cdot\|) $ 称为赋范线性空间，函数 $ \|\cdot\| $ 称为 $ V $ 上的范数。
+% \end{definition}
 
-\begin{proposition}[赋范线性空间诱导的度量]
-    设 $ (V,\|\cdot\|) $ 为赋范线性空间，定义 $ d:V\times V\to \mathbb{R} $，$ d(x,y)=\|x-y\| $，则 $ (V,d) $ 为度量空间。
-\end{proposition}
+% \begin{proposition}[赋范线性空间诱导的度量]
+%     设 $ (V,\|\cdot\|) $ 为赋范线性空间，定义 $ d:V\times V\to \mathbb{R} $，$ d(x,y)=\|x-y\| $，则 $ (V,d) $ 为度量空间。
+% \end{proposition}
 
-\vspace{1em}
+% \vspace{1em}
 
-\subsection{内积空间}
+% \subsection{内积空间}
 
-\begin{definition}[内积空间 Inner Product Space]
-    设 $ V $ 是域 $ \mathbb{F} $ 上的线性空间，映射 $ \langle\cdot,\cdot\rangle:V\times V\to \mathbb{F} $ 称为内积，当且仅当，$ \forall x,y,z\in V $ 且 $ \forall \alpha\in \mathbb{F} $，有：
-    \begin{enumerate}
-        \item 共轭对称性：$ \langle x,y\rangle=\overline{\langle y,x\rangle} $；
-        \item 线性性：$ \langle \alpha x+y,z\rangle=\alpha\langle x,z\rangle+\langle y,z\rangle $；
-        \item 正定性：$ \langle x,x\rangle\geq 0 $，且当且仅当 $ x=0 $ 时取等号。
-    \end{enumerate}
-    二元组 $ (V,\langle\cdot,\cdot\rangle) $ 称为内积空间，函数 $ \langle\cdot,\cdot\rangle $ 称为 $ V $ 上的内积。
-\end{definition}
-\vspace{1em}
+% \begin{definition}[内积空间 Inner Product Space]
+%     设 $ V $ 是域 $ \mathbb{F} $ 上的线性空间，映射 $ \langle\cdot,\cdot\rangle:V\times V\to \mathbb{F} $ 称为内积，当且仅当，$ \forall x,y,z\in V $ 且 $ \forall \alpha\in \mathbb{F} $，有：
+%     \begin{enumerate}
+%         \item 共轭对称性：$ \langle x,y\rangle=\overline{\langle y,x\rangle} $；
+%         \item 线性性：$ \langle \alpha x+y,z\rangle=\alpha\langle x,z\rangle+\langle y,z\rangle $；
+%         \item 正定性：$ \langle x,x\rangle\geq 0 $，且当且仅当 $ x=0 $ 时取等号。
+%     \end{enumerate}
+%     二元组 $ (V,\langle\cdot,\cdot\rangle) $ 称为内积空间，函数 $ \langle\cdot,\cdot\rangle $ 称为 $ V $ 上的内积。
+% \end{definition}
+% \vspace{1em}
 
-\begin{proposition}[内积空间诱导的赋范线性空间]
-    设 $ (V,\langle\cdot,\cdot\rangle) $ 为内积空间，定义 $ \|\cdot\|:V\to \mathbb{R} $，$ \|x\|=\sqrt{\langle x,x\rangle} $，则 $ (V,\|\cdot\|) $ 为赋范线性空间。
-\end{proposition}
-\vspace{1em}
+% \begin{proposition}[内积空间诱导的赋范线性空间]
+%     设 $ (V,\langle\cdot,\cdot\rangle) $ 为内积空间，定义 $ \|\cdot\|:V\to \mathbb{R} $，$ \|x\|=\sqrt{\langle x,x\rangle} $，则 $ (V,\|\cdot\|) $ 为赋范线性空间。
+% \end{proposition}
+% \vspace{1em}
 
-\begin{note}
-    赋范线性空间既是线性空间又是度量空间。范数 $ \|\cdot\| $ 用来衡量向量的长度或大小。内积空间既是线性空间又是赋范线性空间。内积 $ \langle\cdot,\cdot\rangle $ 用来衡量向量之间的夹角和正交性。
-\end{note}
+% \begin{note}
+%     赋范线性空间既是线性空间又是度量空间。范数 $ \|\cdot\| $ 用来衡量向量的长度或大小。内积空间既是线性空间又是赋范线性空间。内积 $ \langle\cdot,\cdot\rangle $ 用来衡量向量之间的夹角和正交性。
+% \end{note}
 
 \newpage

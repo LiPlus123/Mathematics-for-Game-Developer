@@ -1,0 +1,229 @@
+\section{线性映射}
+
+\subsection{线性映射与同构}
+
+\begin{definition}[线性映射 Linear Map]
+    设 $V,W$ 是两个 $F$-线性空间。函数 $T:V\to W$ 称为\textbf{线性映射}，当且仅当，对于任意 $ \mathbf{u},\mathbf{v}\in V $，$ r\in F $，满足：
+    \begin{enumerate}
+        \item $ T(\mathbf{u}+\mathbf{v}) = T(\mathbf{u}) + T(\mathbf{v}) $；
+        \item $ T(r\cdot \mathbf{u}) = r\cdot T(\mathbf{u}) $。
+    \end{enumerate}
+    线性映射也称为\textbf{线性算子 Linear Operator}，$T(u)$ 也称简记为 $Tu$；
+    如果是 $T:V\to V$，也称为\textbf{线性变换 Linear Transformation}；
+    如果 $T$ 是双射，则称 $T$ 为\textbf{线性同构 Linear Isomorphism}；
+    域 $F$ 本身也可以看成一个 $F$-线性空间，那么 $T:V\to F$ 的线性映射称为\textbf{线性泛函 Linear Functional}。
+    全体从 $V$ 到 $W$ 的线性映射构成的集合记为 $\mathcal{L}(V,W)$。
+    \label{def:linear_map}
+\end{definition}
+
+\begin{definition}[线性映射的零空间 Zero Space]
+    设 $V,W$ 是两个 $F$-线性空间，$T:V\to W$ 是一个线性映射。则称
+    \[
+        \mathrm{null}(T) := \{\mathbf{v}\in V : T(\mathbf{v}) = \mathbf{0}\}
+    \]
+    为线性映射 $T$ 的\textbf{零空间}，也称为线性映射 $T$ 的\textbf{核 Kernel}。
+    \label{def:linear_map_zero_space}
+\end{definition}
+
+\begin{proposition}[线性映射的零空间是线性子空间]
+    设 $V,W$ 是两个 $F$-线性空间，$T:V\to W$ 是一个线性映射，则 $\mathrm{null}(T)$ 是 $V$ 的线性子空间。
+\end{proposition}
+
+\begin{lemma}
+    设 $V,W$ 是两个 $F$-线性空间，$T:V\to W$ 是一个线性单射，当且仅当，$\mathrm{null}(T) = \{\mathbf{0}\}$
+    \label{lem:linear_map_injective_iff_null_space_is_zero}
+\end{lemma}
+\begin{proof}
+    充分性：设 $T$ 是单射，如果 $\mathbf{v}\in \mathrm{null}(T)$，则 $T(\mathbf{v}) = \mathbf{0} = T(\mathbf{0})$，因为 $T$ 是单射，所以 $\mathbf{v} = \mathbf{0}$，即 $\mathrm{null}(T) = \{\mathbf{0}\}$。
+    \\
+    \\
+    必要性：设 $\mathrm{null}(T) = \{\mathbf{0}\}$，如果 $T(\mathbf{u}) = T(\mathbf{v})$，则 $T(\mathbf{u}) - T(\mathbf{v}) = \mathbf{0}$，即 $T(\mathbf{u}-\mathbf{v}) = \mathbf{0}$。
+    因为 $\mathrm{null}(T) = \{\mathbf{0}\}$，所以 $\mathbf{u}-\mathbf{v} = \mathbf{0}$，即 $\mathbf{u} = \mathbf{v}$，所以 $T$ 是单射。
+\end{proof}
+\begin{note}
+    线性映射也是群同态，线性映射的零空间也是群同态的核。
+\end{note}
+\vspace{0.5em}
+
+\begin{theorem}[有限维线性空间同构的充要条件]
+    设 $V,W$ 是两个有限维 $F$-线性空间，则 $V$ 与 $W$ 同构的充分必要条件为 $\dim V = \dim W$。
+    \label{thm:finite_dimensional_linear_space_isomorphism}
+\end{theorem}
+
+\begin{proof}
+    充分性：设 $\dim V = \dim W = n$，则 $V$ 有一组基底 $\{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\}$，$W$ 有一组基底 $\{\mathbf{w}_1,\mathbf{w}_2,\ldots,\mathbf{w}_n\}$。
+    定义映射 $T:V\to W$，使得 $T(\mathbf{v}_i) = \mathbf{w}_i$，并对任意 $\mathbf{v}\in V$，如果 $\mathbf{v} = \sum_{i=1}^{n} r_i \mathbf{v}_i$，则定义
+    \[
+        T(\mathbf{v}) = \sum_{i=1}^{n} r_i \mathbf{w}_i.
+    \]
+    显然，$T$ 是线性映射。又因为 $\{\mathbf{w}_1,\mathbf{w}_2,\ldots,\mathbf{w}_n\}$ 是 $W$ 的基底，所以 $T$ 是满射。
+    如果 $T(\mathbf{v}) = \mathbf{0}$，则 $\sum_{i=1}^{n} r_i \mathbf{w}_i = \mathbf{0}$，
+    因为 $\{\mathbf{w}_1,\mathbf{w}_2,\ldots,\mathbf{w}_n\}$ 线性无关，所以 $r_i = 0$，即 $\mathbf{v} = \mathbf{0}$，
+    根据引理 \ref{lem:linear_map_injective_iff_null_space_is_zero} $T$ 是单射。
+    \\
+    \\
+    必要性：设 $V$ 与 $W$ 同构，则存在双射线性映射 $T:V\to W$。设 $\{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\}$ 是 $V$ 的一组基底，则 $\{T(\mathbf{v}_1),T(\mathbf{v}_2),\ldots,T(\mathbf{v}_n)\}$ 是 $W$ 的一组基底。
+    因为 $T$ 是单射，所以 $\{T(\mathbf{v}_1),T(\mathbf{v}_2),\ldots,T(\mathbf{v}_n)\}$ 线性无关；因为 $T$ 是满射，所以 $\{T(\mathbf{v}_1),T(\mathbf{v}_2),\ldots,T(\mathbf{v}_n)\}$ 张成 $W$。
+    因此，$\dim W = n = \dim V$。
+\end{proof}
+
+\begin{note}
+    线性映射是保持向量加法和数乘运算的映射，线性相关的向量经过线性映射后仍然线性相关，线性无关的向量经过线性映射后仍然线性无关。
+    其几何意义是：二维空间中，共线的向量经过线性映射后仍然共线，三维空间中，共面的向量经过线性映射后仍然共面。
+    线性空间也是阿贝尔群，因此线性映射也是群同态。
+    线性空间的同构意味着两个线性空间在结构上是相同的，两个同构的线性空间可以看成是同一个线性空间。
+    同构定理说明，两个有限维线性空间同构的充分必要条件是它们的维数相等。
+    那么三维几何空间与 $\mathbb{R}^3$ 是同构的，三维空间中的任意一个“有向箭头”都可以唯一地对应到 $\mathbb{R}^3$ 中的一个有序三元实数组，这是解析几何的基础。
+\end{note}
+\vspace{1em}
+
+\subsection{线性映射空间}
+
+\begin{definition}[零映射 Zero Map]
+    设 $V,W$ 是两个 $F$-线性空间。函数 $T:V\to W$ 称为\textbf{零映射}，当且仅当，$\forall \mathbf{v}\in V $，有 $ T(\mathbf{v}) = \mathbf{0} $。
+    \label{def:zero_map}
+\end{definition}
+
+\begin{definition}[恒等映射 Identity Map]
+    设 $V,W$ 是两个 $F$-线性空间。函数 $I:V\to W$ 称为\textbf{恒等映射}，当且仅当，$\forall \mathbf{v}\in V $，有 $ I(\mathbf{v}) = \mathbf{v} $。
+    \label{def:identity_map}
+\end{definition}
+
+\begin{proposition}
+    零映射和恒等映射都是线性映射。
+\end{proposition}
+
+\begin{definition}[线性映射的加法]
+    设 $V,W$ 是两个 $F$-线性空间，$T_1,T_2:V\to W$ 是两个线性映射。则称 $T_1+T_2:V\to W$ 为\textbf{线性映射的加法}，其定义为：
+    \[
+        (T_1+T_2)(\mathbf{v}) = T_1(\mathbf{v}) + T_2(\mathbf{v}), \quad \forall \mathbf{v}\in V.
+    \]
+\end{definition}
+
+\begin{proposition}
+    线性映射的加法是良定义的，也即，$\forall T_1,T_2\in \mathcal{L}(V,W),\ T_1+T_2\in \mathcal{L}(V,W)$。
+\end{proposition}
+\begin{proof}
+    $\forall T_1,T_2\in \mathcal{L}(V,W),\ \forall \mathbf{u},\mathbf{v}\in V, \forall r,s \in F$，有
+    \begin{align*}
+        (T_1+T_2)(r\mathbf{u}+s\mathbf{v}) &= T_1(r\mathbf{u}+s\mathbf{v}) + T_2(r\mathbf{u}+s\mathbf{v}) \\
+        &= rT_1(\mathbf{u}) + sT_1(\mathbf{v}) + rT_2(\mathbf{u}) + sT_2(\mathbf{v}) \\
+        &= (rT_1(\mathbf{u}) + rT_2(\mathbf{u})) + (sT_1(\mathbf{v}) + sT_2(\mathbf{v})) \\
+        &= r(T_1+T_2)(\mathbf{u}) + s(T_1+T_2)(\mathbf{v}).
+    \end{align*}
+    所以，$T_1+T_2$ 依然是一个线性映射。
+\end{proof}
+
+\begin{definition}[线性映射的数乘]
+    设 $V,W$ 是两个 $F$-线性空间，$T:V\to W$ 是一个线性映射，$r\in F$。则称 $rT:V\to W$ 为\textbf{线性映射的数乘}，其定义为：
+    \[
+        (rT)(\mathbf{v}) = r\cdot T(\mathbf{v}), \quad \forall \mathbf{v}\in V.
+    \]
+\end{definition}
+
+\begin{proposition}
+    线性映射的数乘是良定义的，也即，$\forall T\in \mathcal{L}(V,W),\ \forall r\in F,\ rT\in \mathcal{L}(V,W)$。
+\end{proposition}
+
+\begin{proof}
+    $\forall T\in \mathcal{L}(V,W),\ \forall \mathbf{u},\mathbf{v}\in V, \forall r,s,t \in F$，有
+    \begin{align*}
+        (tT)(r\mathbf{u}+s\mathbf{v}) &= tT(r\mathbf{u}+s\mathbf{v}) \\
+        &= t(rT(\mathbf{u}) + sT(\mathbf{v})) \\
+        &= trT(\mathbf{u}) + tsT(\mathbf{v}) \\
+        &= r(tT)(\mathbf{u}) + s(tT)(\mathbf{v}).
+    \end{align*}
+    所以，$tT$ 依然是一个线性映射。
+\end{proof}
+
+\begin{proposition}[线性映射的线性空间]
+    设 $V,W$ 是两个 $F$-线性空间，$T,T_1,T_2:V\to W$ 是线性映射，$r,s\in F$，则有
+    \begin{enumerate}
+        \item 加法交换律：$T_1+T_2 = T_2+T_1$；
+        \item 加法结合律：$(T_1+T_2)+T = T_1+(T_2+T)$；
+        \item 存在加法单位元：$T+\mathbf{0} = T$，其中 $\mathbf{0}$ 是零映射；
+        \item 存在加法逆元：$T+(-T) = \mathbf{0}$，其中 $-T$ 是 $T$ 的加法逆元；
+        \item 数乘结合律：$r(sT) = (rs)T$；
+        \item 数乘分配律：$ (r+s)T = rT + sT $；
+        \item 数乘分配律：$ r(T_1 + T_2) = rT_1 + rT_2 $；
+        \item 数乘单位元：$1\cdot T = T$，其中 $1\in F$ 是 $F$ 的乘法单位元。
+    \end{enumerate}
+    因此 $\mathcal{L}(V,W)$ 在映射加法和数乘下构成一个 $F$-线性空间。
+    \label{prop:linear_map_linear_space}
+\end{proposition}
+\vspace{1em}
+
+\begin{proposition}[有限维线性映射空间的维度]
+    设 $V,W$ 是两个有限维 $F$-线性空间，且 $\dim V = n$，$\dim W = m$，则 $\dim \mathcal{L}(V,W) = mn$。
+    \label{prop:finite_dimensional_linear_map_space_dimension}
+\end{proposition}
+
+\begin{definition}[线性映射的乘法]
+    设 $V,W,U$ 是三个 $F$-线性空间，$T_1:V\to W$ 和 $T_2:W\to U$ 是两个线性映射，则称 $T_2 T_1:V\to U$ 为\textbf{线性映射的乘法}，其定义为：
+    \[
+        (T_2 T_1)(\mathbf{v}) := (T_2 \circ T_1)(\mathbf{v}) = T_2(T_1(\mathbf{v})), \quad \forall \mathbf{v}\in V.
+    \]
+\end{definition}
+
+\begin{proposition}[线性映射乘法的性质]
+    设 $V,W,U,X$ 是四个 $F$-线性空间
+    \begin{enumerate}
+        \item 结合律：$T_1:V\to W$，$T_2:W\to U$，$T_3:U\to X$ 是三个线性映射，则有
+        \[
+            T_3(T_2 T_1) = (T_3 T_2) T_1.
+        \]
+        \item 左分配律：$T_1,T_2:V\to W$ 和 $S:W\to U$ 是三个线性映射，则有
+        \[
+            S(T_1 + T_2) = S T_1 + S T_2,
+        \]
+        \item 右分配律：$T:V\to W$ 和 $S_1,S_2:W\to U$ 是三个线性映射，则有
+        \[
+            (S_1 + S_2) T = S_1 T + S_2 T,
+        \]
+        \item 通常不满足交换律：$T:V\to W$ 和 $S:W\to U$ 是两个线性映射，则一般情况下
+        \[
+            ST \neq TS.
+        \]
+    \end{enumerate}
+\end{proposition}
+
+\begin{note}
+    线性映射空间说明，从一个线性空间到另一个线性空间的所有线性映射本身也构成一个线性空间。
+    对于有限维线性空间上的线性映射空间，其维度等于原空间维度的乘积，因此可以用矩阵来表示线性映射。
+    对于 $n$ 维 $F$-线性空间到自身的线性变换，在线性映射的乘法下构成一个群，称为\textbf{一般线性群 General Linear Group} \ref{def:general_linear_group}，记为 $\mathrm{GL}_n(F)$。
+\end{note}
+
+\vspace{1em}
+
+\subsection{对偶线性空间}
+
+\begin{definition}[线性泛函 Linear Functional]
+    设 $V$ 是一个 $F$-线性空间，$F$ 本身也可以看成一个 $F$-线性空间，那么 $T:V\to F$ 的线性映射称为\textbf{线性泛函}。
+    \label{def:linear_functional}
+\end{definition}
+
+\begin{definition}[对偶线性空间 Dual Linear Space]
+    设 $V$ 是一个 $F$-线性空间，则所有从 $V$ 到 $F$ 的线性泛函构成的集合 $\mathcal{L}(V,F)$ 也是个线性空间，称为 $V$ 的\textbf{对偶线性空间}，记为 $V^*$。
+    $V^*$ 中的元素称为 $V$ 的\textbf{对偶向量 Dual Vector} 或\textbf{余向量 Covector}。 
+    \label{def:dual_linear_space}
+\end{definition}
+
+\begin{proposition}
+    设 $V$ 是一个有限维 $F$-线性空间。$V^*$ 是 $V$ 的对偶空间。因为 $V^* = \mathcal{L}(V,F)$，
+    所以 $\dim V^* = \dim \mathcal{L}(V,F) = \dim V \cdot \dim F = \dim V$，也即 $V$ 与其对偶空间 $V^*$ 是同构的。
+\end{proposition}
+
+\begin{note}
+    线性空间与其对偶空间是同构的。
+    线性空间 $V$ 也是 $V^*$ 的对偶空间，我们令 $V^{**} = (V^*)^*$。比如，在矩阵乘法的定义下，有：
+    \[
+        \begin{bmatrix}
+            a_1 & a_2 & \cdots & a_n
+        \end{bmatrix}\begin{bmatrix}
+            b_1 \\ b_2 \\ \vdots \\ b_n
+        \end{bmatrix} = \sum_{i=1}^{n} a_i b_i \in F
+    \]
+    因此，$F^{n\times 1}$ 的对偶空间是 $F^{1\times n}$，$\dim F^{1\times n} = \dim F^{n\times 1} = n$。
+\end{note}
+
+\newpage
