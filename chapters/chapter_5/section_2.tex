@@ -108,10 +108,88 @@
 \end{note}
 \vspace{1em}
 
-% \begin{definition}[向量组的秩 Rank]
-%     设 $ (V,+,\cdot) $ 为 $ F $-线性空间，$ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\in V $。
-%     向量组 $ \{\mathbf{v}_1,\ldots,\mathbf{v}_n\} $ 中线性无关向量的最大个数称为该向量组的\textbf{秩}，
-%     记作 $\mathrm{rank}(\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n)$。
+% \subsection{基底变换}
+
+% \begin{definition}[坐标变换矩阵]
+%     设 $V$ 是 $n$ 维 $F$-线性空间，$\mathcal{E} = \{\mathbf{e}_1,\mathbf{e}_2,\ldots,\mathbf{e}_n\}$ 和 $\mathcal{E}' = \{\mathbf{e}'_1,\mathbf{e}'_2,\ldots,\mathbf{e}'_n\}$ 是 $F^n$ 的两个基底。
+%     两组基底之间的关系为：
+%     \[
+%         \begin{cases}
+%             \mathbf{e}'_1 &= a_{11}\mathbf{e}_1 + a_{21}\mathbf{e}_2 + \cdots + a_{n1}\mathbf{e}_n \\
+%             \mathbf{e}'_2 &= a_{12}\mathbf{e}_1 + a_{22}\mathbf{e}_2 + \cdots + a_{n2}\mathbf{e}_n \\
+%             &\vdots \\
+%             \mathbf{e}'_n &= a_{1n}\mathbf{e}_1 + a_{2n}\mathbf{e}_2 + \cdots + a_{nn}\mathbf{e}_n
+%         \end{cases}
+%     \]
+%     根据矩阵乘法的定义 \ref{def:matrix_multiplication}，可以写成矩阵乘法的形式：
+%     \[
+%         \begin{bmatrix}
+%             \mathbf{e}'_1 \\ \mathbf{e}'_2 \\ \vdots \\ \mathbf{e}'_n
+%         \end{bmatrix} =
+%         \begin{bmatrix}
+%             a_{11} & a_{12} & \cdots & a_{1n} \\
+%             a_{21} & a_{22} & \cdots & a_{2n} \\
+%             \vdots & \vdots & \ddots & \vdots \\
+%             a_{n1} & a_{n2} & \cdots & a_{nn}
+%         \end{bmatrix}
+%         \begin{bmatrix}
+%             \mathbf{e}_1 \\ \mathbf{e}_2 \\ \vdots \\ \mathbf{e}_n
+%         \end{bmatrix}
+%     \]
+%     设 $\mathbf{v}\in V$ 分别用两组基底表示为：
+%     \begin{align*}
+%         \mathbf{v} &= \begin{bmatrix}
+%             v_1 & v_2 & \cdots & v_n
+%         \end{bmatrix}\begin{bmatrix}
+%             \mathbf{e}_1 \\ \mathbf{e}_2 \\ \vdots \\ \mathbf{e}_n
+%         \end{bmatrix} \\
+%         &= \begin{bmatrix}
+%             v'_1 & v'_2 & \cdots & v'_n
+%         \end{bmatrix}\begin{bmatrix}
+%             \mathbf{e}'_1 \\ \mathbf{e}'_2 \\ \vdots \\ \mathbf{e}'_n
+%         \end{bmatrix}\\
+%         &= \begin{bmatrix}
+%             v'_1 & v'_2 & \vdots & v'_n
+%         \end{bmatrix}\begin{bmatrix}
+%             a_{11} & a_{12} & \cdots & a_{1n} \\
+%             a_{21} & a_{22} & \cdots & a_{2n} \\
+%             \vdots & \vdots & \ddots & \vdots \\
+%             a_{n1} & a_{n2} & \cdots & a_{nn}
+%         \end{bmatrix}
+%         \begin{bmatrix}
+%             \mathbf{e}_1 \\ \mathbf{e}_2 \\ \vdots \\ \mathbf{e}_n
+%         \end{bmatrix}
+%     \end{align*}
+%     所以线性空间中元素在不同基下的变换公式为：
+%     \[
+%         \begin{bmatrix}
+%             v_1 & v_2 & \cdots & v_n
+%         \end{bmatrix} =
+%         \begin{bmatrix}
+%             v'_1 & v'_2 & \cdots & v'_n
+%         \end{bmatrix}
+%         \begin{bmatrix}
+%             a_{11} & a_{12} & \cdots & a_{1n} \\
+%             a_{21} & a_{22} & \cdots & a_{2n} \\
+%             \vdots & \vdots & \ddots & \vdots \\
+%             a_{n1} & a_{n2} & \cdots & a_{nn}
+%         \end{bmatrix}
+%     \]
+%     \[
+%         \begin{bmatrix}
+%             v'_1 & v'_2 & \cdots & v'_n
+%         \end{bmatrix} =
+%         \begin{bmatrix}
+%             v_1 & v_2 & \cdots & v_n
+%         \end{bmatrix}
+%         \begin{bmatrix}
+%             a_{11} & a_{12} & \cdots & a_{1n} \\
+%             a_{21} & a_{22} & \cdots & a_{2n} \\
+%             \vdots & \vdots & \ddots & \vdots \\
+%             a_{n1} & a_{n2} & \cdots & a_{nn}
+%         \end{bmatrix}^{-1}
+%     \]
+%     其中，称可逆矩阵 $[a_{ij}]$ 为基底变换矩阵。
 % \end{definition}
 
 

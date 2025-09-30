@@ -87,11 +87,16 @@
     并且 $K$ 是包含所有 $f(x)$ 所有根的最小域，则称 $K$ 是 $f(x)$ 在 $F$ 上的一个分裂域。
     \label{def:splitting_field}
 \end{definition}
+
+
+
 \begin{note}
     在某个域上某个多项式方程可能没有解，因此希望通过构造一个更大的域，使得该多项式方程在这个更大的域中有解。
     分裂域就是这样一个更大的域，它是相对特定多项式而言的，它包含了多项式的所有根，并且是包含这些根的最小域。
 \end{note}
 \vspace{1em}
+
+
 
 \begin{definition}[有限扩张与无限扩张 Finite and Infinite Extensions]
     设 $K/F$ 是一个域扩张，$K$ 作为 $F$ 上的一个向量空间。
@@ -134,9 +139,27 @@
     如果存在两个次数均小于 $f(x)$ 的非零多项式 $g(x),h(x)\in F[x]$，使得 $f(x)=g(x)h(x)$，则称 $f(x)$ 在 $F$ 上是可约的，否则称 $f(x)$ 在 $F$ 上是不可约的。
     \label{def:reducible_irreducible_polynomial}
 \end{definition}
+
+\begin{definition}[代数闭包 Algebraic Closure]
+    设 $F$ 是一个域，$K/F$ 是 $F$ 的一个域扩张。
+    如果 $K/F$ 是一个代数扩张，并且使得 $f(x)$ 可以写成一系列在 $K[x]$ 中的一次多项式的乘积，也即
+    \[
+        f(x) = a(x - r_1)(x - r_2) \cdots (x - r_n),\ a,r_1,r_2,\ldots,r_n \in K,
+    \]
+    则称 $K$ 是 $F$ 的一个代数闭包。
+    \label{def:algebraic_closure}
+\end{definition}
+
+\begin{theorem}[广义代数基本定理 Fundamental Theorem of Algebraic Closure]
+    每个域 $F$ 都存在代数闭包，并且任何两个代数闭包都是同构的，记为 $\overline{F}$。
+    \label{thm:FundamentalTheoremOfAlgebraicClosure}
+\end{theorem}
+
 \begin{note}
-    则多项式 $f(x)=x^2-2$ 在 $\mathbb{Q}$ 上是不可约的，因为它不能分解为两个次数均小于 2 的有理系数多项式的乘积。
-    另一方面，多项式 $g(x)=x^2-1$ 在 $\mathbb{Q}$ 上是可约的，因为它可以分解为 $(x-1)(x+1)$。
+    多项式 $g(x)=x^2-1$ 在 $\mathbb{R}$ 上是可约的，因为它可以分解为 $(x-1)(x+1)$。
+    另一方面，多项式 $f(x)=x^2+1$ 在 $\mathbb{R}$ 上是不可约的，而在 $\mathbb{C}$ 上是可约的，因为它可以分解为 $(x-i)(x+i)$。
+    因此 $\mathbb{C}$ 是 $\mathbb{R}$ 的一个代数闭包。
+    广义代数基本定理是代数基本定理 \ref{thm:FundamentalTheoremOfAlgebra} 的推广版本，它适用于任意域，而不仅仅是复数域。
 \end{note}
 
 \begin{definition}[可分多项式与不可分多项式 Separable and Inseparable Polynomials]

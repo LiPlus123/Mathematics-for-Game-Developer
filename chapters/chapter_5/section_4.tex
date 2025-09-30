@@ -81,6 +81,7 @@
     \[
         c_{ij} = \sum_{k=1}^{p} a_{ik} b_{kj},\ i=1,2,\ldots,m,\ j=1,2,\ldots,n
     \]
+    \label{def:matrix_multiplication}
 \end{definition}
 
 \begin{proposition}[方阵乘法的性质]
@@ -155,7 +156,7 @@ $s_{ij}$ 是线性映射 $T$ 在基底 $\{\mathbf{v}_1,\cdots,\mathbf{v}_n\}$ �
 \begin{definition}[行向量组与列向量组]
     设 $\mathbf{A} \in F^{m \times n}$，则 $\mathbf{A}$ 的\textbf{行向量组}是指 $\mathbf{A}$ 的每一行所组成的向量组，记作 $\mathrm{Row}(\mathbf{A})$；$\mathbf{A}$ 的\textbf{列向量组}是指 $\mathbf{A}$ 的每一列所组成的向量组，记作 $\mathrm{Col}(\mathbf{A})$。
 \end{definition}
-\vspace{1em}
+% \vspace{1em}
 
 \begin{proposition}
     矩阵的行向量组的秩等于列向量组的秩。
@@ -180,7 +181,7 @@ $s_{ij}$ 是线性映射 $T$ 在基底 $\{\mathbf{v}_1,\cdots,\mathbf{v}_n\}$ �
     综上所述，$\mathrm{rank}\{\mathbf{r}_1,\mathbf{r}_2,\ldots,\mathbf{r}_m\} = r \leq s = \mathrm{rank}\{\mathbf{c}_1,\mathbf{c}_2,\ldots,\mathbf{c}_n\}$，且 $\mathrm{rank}\{\mathbf{c}_1,\mathbf{c}_2,\ldots,\mathbf{c}_n\} = s \leq r = \mathrm{rank}\{\mathbf{r}_1,\mathbf{r}_2,\ldots,\mathbf{r}_m\}$。
     因此，$\mathrm{rank}\{\mathbf{r}_1,\mathbf{r}_2,\ldots,\mathbf{r}_m\} = \mathrm{rank}\{\mathbf{c}_1,\mathbf{c}_2,\ldots,\mathbf{c}_n\}$。
 \end{proof}
-\vspace{1em}
+% \vspace{1em}
 
 \begin{definition}[矩阵的秩 Rank of Matrix]
     根据命题 \ref{prop:row_col_rank}，矩阵的行向量组的秩等于列向量组的秩，因此可以定义矩阵的\textbf{秩}记为 $\mathrm{rank}(\mathbf{A})$，等于行向量组和列向量组的秩。
@@ -195,6 +196,17 @@ $s_{ij}$ 是线性映射 $T$ 在基底 $\{\mathbf{v}_1,\cdots,\mathbf{v}_n\}$ �
         \item $\mathbf{B} \in F^{n \times p}$，则 $\mathrm{rank}(\mathbf{A}\mathbf{B}) \leq \min(\mathrm{rank}(\mathbf{A}),\mathrm{rank}(\mathbf{B}))$。
     \end{enumerate}
 \end{proposition}
+
+\begin{theorem}[秩-零化子定理 Rank-Nullity Theorem]
+    设 $\mathbf{A}\in F^{m \times n}$，那么有：
+    \[
+        \mathrm{rank}(\mathbf{A}) + \dim[\mathrm{null}(\mathbf{A})] = n
+    \]
+    \label{thm:rank_nullity_theorem}
+\end{theorem}
+% \begin{note}
+%     定理 \ref{thm:rank_nullity_theorem} 表明：矩阵的秩加上其零化子空间的维度等于矩阵的列数。
+% \end{note}
 
 \vspace{1em}
 \subsection{矩阵的转置}
@@ -488,16 +500,7 @@ $s_{ij}$ 是线性映射 $T$ 在基底 $\{\mathbf{v}_1,\cdots,\mathbf{v}_n\}$ �
     \label{prop:matrix_invertible_iff_det_nonzero}
 \end{proposition}
 
-\begin{note}
-    根据命题 \ref{prop:det_nonzero_iff_full_rank} 和命题 \ref{prop:matrix_invertible_iff_det_nonzero}，如下结论等价：
-    \begin{enumerate}
-        \item 矩阵可逆；
-        \item 矩阵满秩；
-        \item 矩阵非奇异；
-        \item 矩阵行列式不为零；
-        \item 矩阵的行（列）向量组线性无关。
-    \end{enumerate}
-\end{note}
+
 
 \begin{proposition}[矩阵逆的性质]
     设 $\mathbf{A},\mathbf{B} \in F^{n \times n}$，那么有：
@@ -510,7 +513,14 @@ $s_{ij}$ 是线性映射 $T$ 在基底 $\{\mathbf{v}_1,\cdots,\mathbf{v}_n\}$ �
 
 \vspace{1em}
 
-\textbf{矩阵可逆的代数和几何意义}：任意一个 $n$ 元线性方程组：
+\subsection{线性方程组的解}
+
+\begin{proposition}
+    非齐次线性方程组存在唯一解的充要条件是系数矩阵可逆。齐次线性方程组存在非零解的充要条件是系数矩阵不可逆。
+    \label{prop:linear_equations_solutions}
+\end{proposition}
+
+任意一个 $n$ 元\textbf{非齐次线性方程组}：
 \[
     \begin{cases}
         a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n = b_1 \\
@@ -552,91 +562,47 @@ $s_{ij}$ 是线性映射 $T$ 在基底 $\{\mathbf{v}_1,\cdots,\mathbf{v}_n\}$ �
 反之，如果 $\mathbf{A}$ 不可逆，那么可能不存在系数 $(x_1,x_2,\ldots,x_n)$ 线性表出 $\mathbf{b}$，也可能存在无穷多组系数 $(x_1,x_2,\ldots,x_n)$ 线性表出 $\mathbf{b}$。
 从几何角度看，假设 $n=3$，$\mathbf{A}$ 不可逆，那么 $\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3$ 共面，如果 $\mathbf{b}$ 不在该平面上，则无法通过 $\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3$ 的线性组合得到 $\mathbf{b}$；
 如果 $\mathbf{b}$ 在该平面上，则有无穷多种组合方式。
-
 \vspace{1em}
 
-\subsection{基底变换矩阵}
+类似地，考察任意一个 $n$ 元\textbf{齐次线性方程组}：
+\[
+    \begin{cases}
+        a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n = 0 \\
+        a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n = 0 \\
+        \vdots \\
+        a_{n1}x_1 + a_{n2}x_2 + \cdots + a_{nn}x_n = 0
+    \end{cases}
+\]
+可以写成矩阵乘法的形式：
+\[
+    \mathbf{A}\mathbf{x} = \begin{bmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n} \\
+        a_{21} & a_{22} & \cdots & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{n1} & a_{n2} & \cdots & a_{nn}
+    \end{bmatrix}\begin{bmatrix}
+        x_1 \\
+        x_2 \\
+        \vdots\\
+        x_n
+    \end{bmatrix}=
+    \begin{bmatrix}
+        0 \\
+        0 \\
+        \vdots\\
+        0
+    \end{bmatrix} = \mathbf{0}
+\]
 
-\begin{definition}[坐标变换矩阵]
-    设 $V$ 是 $n$ 维 $F$-线性空间，$\mathcal{E} = \{\mathbf{e}_1,\mathbf{e}_2,\ldots,\mathbf{e}_n\}$ 和 $\mathcal{E}' = \{\mathbf{e}'_1,\mathbf{e}'_2,\ldots,\mathbf{e}'_n\}$ 是 $F^n$ 的两个基底。
-    两组基底之间的关系为：
-    \[
-        \begin{cases}
-            \mathbf{e}'_1 &= a_{11}\mathbf{e}_1 + a_{21}\mathbf{e}_2 + \cdots + a_{n1}\mathbf{e}_n \\
-            \mathbf{e}'_2 &= a_{12}\mathbf{e}_1 + a_{22}\mathbf{e}_2 + \cdots + a_{n2}\mathbf{e}_n \\
-            &\vdots \\
-            \mathbf{e}'_n &= a_{1n}\mathbf{e}_1 + a_{2n}\mathbf{e}_2 + \cdots + a_{nn}\mathbf{e}_n
-        \end{cases}
-    \]
-    写成矩阵乘法的形式：
-    \[
-        \begin{bmatrix}
-            \mathbf{e}'_1 \\ \mathbf{e}'_2 \\ \vdots \\ \mathbf{e}'_n
-        \end{bmatrix} =
-        \begin{bmatrix}
-            a_{11} & a_{12} & \cdots & a_{1n} \\
-            a_{21} & a_{22} & \cdots & a_{2n} \\
-            \vdots & \vdots & \ddots & \vdots \\
-            a_{n1} & a_{n2} & \cdots & a_{nn}
-        \end{bmatrix}
-        \begin{bmatrix}
-            \mathbf{e}_1 \\ \mathbf{e}_2 \\ \vdots \\ \mathbf{e}_n
-        \end{bmatrix}
-    \]
-    设 $\mathbf{v}\in V$ 分别用两组基底表示为：
-    \begin{align*}
-        \mathbf{v} &= \begin{bmatrix}
-            v_1 & v_2 & \cdots & v_n
-        \end{bmatrix}\begin{bmatrix}
-            \mathbf{e}_1 \\ \mathbf{e}_2 \\ \vdots \\ \mathbf{e}_n
-        \end{bmatrix} \\
-        &= \begin{bmatrix}
-            v'_1 & v'_2 & \cdots & v'_n
-        \end{bmatrix}\begin{bmatrix}
-            \mathbf{e}'_1 \\ \mathbf{e}'_2 \\ \vdots \\ \mathbf{e}'_n
-        \end{bmatrix}\\
-        &= \begin{bmatrix}
-            v'_1 & v'_2 & \vdots & v'_n
-        \end{bmatrix}\begin{bmatrix}
-            a_{11} & a_{12} & \cdots & a_{1n} \\
-            a_{21} & a_{22} & \cdots & a_{2n} \\
-            \vdots & \vdots & \ddots & \vdots \\
-            a_{n1} & a_{n2} & \cdots & a_{nn}
-        \end{bmatrix}
-        \begin{bmatrix}
-            \mathbf{e}_1 \\ \mathbf{e}_2 \\ \vdots \\ \mathbf{e}_n
-        \end{bmatrix}
-    \end{align*}
-    所以线性空间中元素在不同基下的变换公式为：
-    \[
-        \begin{bmatrix}
-            v_1 & v_2 & \cdots & v_n
-        \end{bmatrix} =
-        \begin{bmatrix}
-            v'_1 & v'_2 & \cdots & v'_n
-        \end{bmatrix}
-        \begin{bmatrix}
-            a_{11} & a_{12} & \cdots & a_{1n} \\
-            a_{21} & a_{22} & \cdots & a_{2n} \\
-            \vdots & \vdots & \ddots & \vdots \\
-            a_{n1} & a_{n2} & \cdots & a_{nn}
-        \end{bmatrix}
-    \]
-    \[
-        \begin{bmatrix}
-            v'_1 & v'_2 & \cdots & v'_n
-        \end{bmatrix} =
-        \begin{bmatrix}
-            v_1 & v_2 & \cdots & v_n
-        \end{bmatrix}
-        \begin{bmatrix}
-            a_{11} & a_{12} & \cdots & a_{1n} \\
-            a_{21} & a_{22} & \cdots & a_{2n} \\
-            \vdots & \vdots & \ddots & \vdots \\
-            a_{n1} & a_{n2} & \cdots & a_{nn}
-        \end{bmatrix}^{-1}
-    \]
-    其中，称可逆矩阵 $[a_{ij}]$ 为基底变换矩阵。
-\end{definition}
+如果 $\mathbf{A}$ 可逆，矩阵满秩且行向量组线性无关，那么齐次线性方程组只有唯一的零解 $\mathbf{x} = \mathbf{0}$；
+如果 $\mathbf{A}$ 不可逆，矩阵不满秩且行向量组线性相关，使得 $\sum^n_{i=1}x_i\mathbf{a}_i = \mathbf{0}$ 的那么齐次线性方程组存在多组非零解。
+
+\begin{note}
+    结合命题 \ref{prop:det_nonzero_iff_full_rank}；\ref{prop:matrix_invertible_iff_det_nonzero} 和 \ref{prop:linear_equations_solutions}，有如下等价结论：
+    \begin{enumerate}
+        \item $\text{矩阵可逆}\iff \text{矩阵满秩}\iff\text{矩阵非奇异}\iff\text{矩阵行列式不为零}\iff\text{矩阵的行（列）向量组线性无关}\iff \text{非齐次线性方程组有唯一非零解}$ ；
+        \item $\text{矩阵不可逆} \iff \text{矩阵不满秩} \iff \text{矩阵奇异} \iff \text{矩阵行列式为零} \iff \text{矩阵的行（列）向量组线性相关}\iff \text{齐次线性方程组有存在非零解}$。
+    \end{enumerate}
+\end{note}
 
 \newpage

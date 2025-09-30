@@ -1,4 +1,4 @@
-\section{赋范线性空间与内积空间}
+\section{范数与内积}
 
 \subsection{赋范线性空间}
 
@@ -27,6 +27,23 @@
 \end{note}
 
 \vspace{1em}
+\subsection{常见范数的定义}
+
+\begin{definition}[$p$-范数 $p$-Norm]
+    设 $ \mathbf{v}=(v_1,v_2,\ldots,v_n)\in F^n $，其中 $F$ 是 $\mathbb{R}$ 或 $\mathbb{C}$。定义 $ \mathbf{v} $ 的\textbf{$p$-范数}为
+    \[
+        \|\mathbf{v}\|_p = \left( \sum_{i=1}^{n} |v_i|^p \right)^{\frac{1}{p}}
+    \]
+    特别地，当 $ p=2 $ 时，称为\textbf{欧几里得范数}，记为 $\|\mathbf{v}\|_2$；当 $ p=1 $ 时，称为\textbf{曼哈顿范数}，记为 $\|\mathbf{v}\|_1$；当 $ p=\infty $ 时，称为\textbf{切比雪夫范数}，记为 $\|\mathbf{v}\|_\infty$，其定义为
+    \[
+        \|\mathbf{v}\|_\infty = \max(|v_1|,|v_2|,\ldots,|v_n|)
+    \]
+    \label{def:p-norm}
+\end{definition}
+
+% \subsection{矩阵范数}
+
+\vspace{1em}
 \subsection{内积空间}
 
 \begin{definition}[内积空间 Inner Product Space]
@@ -41,7 +58,7 @@
 \end{definition}
 
 \begin{proposition}[内积空间诱导的赋范线性空间]
-    设 $ (V,\langle\cdot,\cdot\rangle) $ 为内积空间，定义 $ \|\cdot\|:V\to \mathbb{R} $：
+    设 $ (V,\langle\cdot,\cdot\rangle) $ 为 $F$-内积空间，其中 $F$ 是 $\mathbb{R}$ 或 $\mathbb{C}$。定义 $ \|\cdot\|:V\to \mathbb{R} $：
     \[
         \forall \mathbf{x}\in V, \|\mathbf{x}\|=\sqrt{\langle \mathbf{x},\mathbf{x}\rangle}
     \]
@@ -52,5 +69,10 @@
     内积空间是对向量空间中角度和长度概念的抽象。内积函数 $ \langle\cdot,\cdot\rangle $ 用来衡量两个向量之间的夹角和长度。
     内积空间可以诱导出赋范结构，因此内积空间也是赋范线性空间。
 \end{note}
+
+\begin{definition}[正交 Orthogonality]
+    设 $ (V,\langle\cdot,\cdot\rangle) $ 为 $F$-内积空间，$ \mathbf{x},\mathbf{y}\in V $。如果 $ \langle \mathbf{x},\mathbf{y}\rangle=0 $，则称 $ \mathbf{x} $ 与 $ \mathbf{y} $ 正交，记作 $ \mathbf{x}\perp \mathbf{y} $。
+    \label{def:orthogonality}
+\end{definition}
 
 \newpage

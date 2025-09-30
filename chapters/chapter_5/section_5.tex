@@ -9,15 +9,231 @@
     \label{def:eigenvalue_and_eigenvector}
 \end{definition}
 
+\begin{proposition}[特征值与特征向量的性质]
+    设 $V$ 是一个 $F$-线性空间，线性变换 $T\in \mathcal{L}(V,V)$
+    \begin{enumerate}
+        \item 如果 $\lambda$ 是 $T$ 的一个特征值，则 $k\lambda$ 也是 $T$ 的一个特征值，其中 $k\in F\setminus \{0\}$；
+        \item 如果 $\mathbf{v}$ 是 $T$ 对应于特征值 $\lambda$ 的一个特征向量，则 $k\mathbf{v}$ 也是对应于特征值 $\lambda$ 的一个特征向量，其中 $k\in F\setminus \{0\}$；
+        \item 如果 $\mathbf{v}$ 是 $T$ 对应于特征值 $\lambda$ 的一个特征向量，则对于任意正整数 $m$，$\mathbf{v}$ 也是 $T^m$ 对应于特征值 $\lambda^m$ 的一个特征向量；
+        \item 如果 $V$ 是有限维线性空间，$T$ 有 $n$ 个不同的特征值，则对应的特征向量构成 $V$ 的一个基；
+        \item 如果 $V$ 是有限维线性空间，$T$ 有 $n$ 个不同的特征值 $\lambda_1,\lambda_2,\ldots,\lambda_n$，则 $T$ 可对角化，即存在一个基，使得 $T$ 在该基下的矩阵表示为对角矩阵。
+    \end{enumerate}
+\end{proposition}
+
 \begin{note}
-    线性变换的的特征向量是一种在变换下仅改变大小而不改变方向的向量；特征值表示缩放的程度。
+    线性变换的的特征向量是一种在变换下仅改变大小而方向保持在同一直线的向量；特征值表示缩放的程度。
     不管是有限维还是无限维线性空间，特征值与特征向量的定义都是一样的。
     不过在无限维线性空间中，线性变换将不能用矩阵表示，特征值与特征向量的研究会更加困难，下面的内容主要针对有限维线性空间。
 \end{note}
 
 \vspace{1em}
 
+如果 $V$ 是 $n$ 维 $F$-线性空间，$T\in \mathcal{L}(V,V)$ 可以表示为一个 $n\times n$ 矩阵 $\mathbf{A}$。
+根据特征值和特征向量的定义 \ref{def:eigenvalue_and_eigenvector}，有：
+\[
+    \mathbf{A}\mathbf{v} = \lambda \mathbf{v} \iff \mathbf{A}\mathbf{v} - \lambda \mathbf{v} = 0 \iff (\mathbf{A} - \lambda \mathbf{I})\mathbf{v} = \mathbf{0}
+\]
+其中， $\mathbf{I}$ 是 $n\times n$ 单位矩阵，$\mathbf{v} \neq \mathbf{0}$。
+根据命题 \ref{prop:linear_equations_solutions}，齐次线性方程组 $(\mathbf{A} - \lambda \mathbf{I})\mathbf{v} = \mathbf{0}$ 存在非零解，
+当且仅当， $\mathbf{A} - \lambda \mathbf{I}$ 是奇异矩阵，即 $\det(\mathbf{A} - \lambda \mathbf{I}) = 0$，该式即\textbf{特征多项式方程}，该方程的解 $\lambda$ 即为矩阵 $\mathbf{A}$ 的特征值。
+如果已知特征值 $\lambda$，零空间 $\mathrm{null}(\mathbf{A} - \lambda \mathbf{I})$ 则是相应特征向量 $\mathbf{v}$ 所在的空间，称为 $\mathbf{A}$ 的\textbf{特征子空间}。
+
+\vspace{1em}
+
 \subsection{特征多项式}
+
+\begin{definition}[特征多项式 Characteristic Polynomial]
+    设 $\mathbf{A} \in F^{n \times n}$，定义 $\mathbf{A}$ 的\textbf{特征多项式}为
+    \begin{equation}
+        p(\lambda) = \det(\mathbf{A} - \lambda \mathbf{I})
+        \label{eq:characteristic_polynomial}
+    \end{equation}
+    其中，$\mathbf{I}$ 是 $n\times n$ 单位矩阵，$\lambda$ 是变量。
+    \label{def:characteristic_polynomial}
+\end{definition}
+
+\begin{note}
+    根据行列式的定义，行列式需要将不同行不同列的矩阵元素相乘，因此特征多项式是关于 $\lambda$ 的 $n$ 次多项式，$p(\lambda)\in F[\lambda]$。
+    $F[\lambda]$ 是域 $F$ 上的多项式环 \ref{def:polynomial_ring}。
+    根据广义代数基本定理 \ref{thm:FundamentalTheoremOfAlgebraicClosure}，设 $K$ 是 $F$ 的代数闭包，那么 $p(\lambda)=0$ 在 $K$ 中有 $n$ 个根（重根算多重），也即特征多项式可以因式分解为：
+    \begin{equation}
+        p(\lambda) = \det(\mathbf{A} - \lambda \mathbf{I}) = (\lambda-\lambda_1)^{d_1}(\lambda-\lambda_2)^{d_2}\cdots(\lambda-\lambda_m)^{d_m} =0
+        \label{eq:characteristic_polynomial_factorization}
+    \end{equation}
+    其中，
+    \begin{enumerate}
+        \item $d_m\in \mathbb{Z}^+,\ 1 \leq m \leq n$ 表示根的重数，并且 $\sum_{i=1}^{m} d_i = n$；
+        \item $\lambda_1,\lambda_2,\ldots,\lambda_m \in K$ 表示互不相等的根，这些根即为矩阵 $\mathbf{A}$ 的特征值。
+    \end{enumerate}
+\end{note}
+
+\textbf{特征多项式的展开}：将特征多项式 \ref{eq:characteristic_polynomial} 写成分量的形式：
+\[
+    p(\lambda) = \det(\mathbf{A} - \lambda \mathbf{I}) = \begin{vmatrix}
+        a_{11}-\lambda & a_{12} & \cdots & a_{1n} \\
+        a_{21} & a_{22}-\lambda & \cdots & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{n1} & a_{n2} & \cdots & a_{nn}-\lambda
+    \end{vmatrix}
+\]
+根据行列式展开定理 \ref{thm:determinant_expansion}，将特征多项式展开成标准形式：
+\begin{equation}
+    p(\lambda) = (-1)^n \lambda^n + (-1)^{n-1} c_1 \lambda^{n-1} + \cdots + (-1)^k c_k \lambda^{n-k} + \cdots +  c_n
+    \label{eq:characteristic_polynomial_expansion}
+\end{equation}
+其中，
+\begin{enumerate}
+    \item $c_1 = \sum^n_{i=1} a_{ii} $，称为矩阵的\textbf{迹 trace}，记为 $\mathrm{tr}(\mathbf{A})$；
+    \item $c_n = \det(\mathbf{A})$，是矩阵 $\mathbf{A}$ 的行列式；
+    \item $c_k,\ 1< k < n$ 是矩阵 $\mathbf{A}$ 的所有 $k$ 阶主子式之和。
+\end{enumerate}
+\vspace{1em}
+
+\begin{example}[二阶方阵的特征多项式展开]
+    设 $\mathbf{A} = \begin{bmatrix}
+        a & b \\
+        c & d
+    \end{bmatrix}$，则特征多项式为：
+    \begin{align}
+        p(\lambda) &= \det(\mathbf{A} - \lambda \mathbf{I}) = \begin{vmatrix}
+            a - \lambda & b \\
+            c & d - \lambda
+        \end{vmatrix} \\
+        &= (a - \lambda)(d - \lambda) - bc \\
+        &= \lambda^2 - (a + d)\lambda + (ad - bc)\\
+        &= \lambda^2 - \mathrm{tr}(\mathbf{A})\lambda + \det(\mathbf{A})
+        \label{eq:characteristic_polynomial_2x2}
+    \end{align}
+\end{example}
+
+\begin{example}[三阶方阵的特征多项式展开]
+    设 $\mathbf{A} = \begin{bmatrix}
+        a & b & c \\
+        d & e & f \\
+        g & h & i
+    \end{bmatrix}$，则特征多项式为：
+    \begin{align}
+        p(\lambda) &= \det(\mathbf{A} - \lambda \mathbf{I}) = \begin{vmatrix}
+            a - \lambda & b & c \\
+            d & e - \lambda & f \\
+            g & h & i - \lambda
+        \end{vmatrix} \\
+        &= (a - \lambda) \begin{vmatrix}
+            e - \lambda & f \\
+            h & i - \lambda
+        \end{vmatrix} - b \begin{vmatrix}
+            d & f \\
+            g & i - \lambda
+        \end{vmatrix} + c \begin{vmatrix}
+            d & e - \lambda \\
+            g & h
+        \end{vmatrix} \\
+        &= (a - \lambda)((e - \lambda)(i - \lambda) - fh) - b(di - fg + \lambda g) + c(dh - eg + \lambda g) \\
+        % &= -\lambda^3 + (a + e + i)\lambda^2 - (ae + ai + ei - bh - cf - dg)\lambda +\\
+        %  &(aei + bfg + cdh - afh - bdi - ceg) \\
+        &= -\lambda^3 + \mathrm{tr}(\mathbf{A})\lambda^2 - (ae + ai + ei - bh - cf - dg)\lambda + \det(\mathbf{A})
+        \label{eq:characteristic_polynomial_3x3}
+    \end{align}
+\end{example}
+\vspace{1em}
+
+\begin{theorem}[韦达定理 Vieta's Theorem]
+    设任意一个 $n$ 次多项式 $p(x)\in F[x]$：
+    \[
+        p(x) = x^n + a_1 x^{n-1} + \cdots + a_{n-1} x + a_n,\ a \neq 0
+    \]
+    如果 $K$ 是 $F$ 的代数闭包，并且 $p(x)$ 在 $K$ 中有 $m$ 个互不相等的根 $\lambda_1,\lambda_2,\ldots,\lambda_m$，并且每个根的重数分别为 $d_1,d_2,\ldots,d_m$，则有：
+    \begin{enumerate}
+        \item $\sum_{i=1}^{m} d_i = n$；
+        \item $\prod_{i=1}^{m} x_i^{d_i} = (-1)^n a_n$；
+        \item $\sum_{i=1}^{m} d_i x_i = -a_1$；
+    \end{enumerate}
+    \label{thm:VietasTheorem}
+\end{theorem}
+
+\vspace{0.5em}
+
+\textbf{特征值之间的关系}：根据特征多项式的展开式 \ref{eq:characteristic_polynomial_expansion} 和韦达定理 \ref{thm:VietasTheorem}，可以得到矩阵 $\mathbf{A}$ 的特征值之间的关系：
+\begin{enumerate}
+    \item 所有特征值之和（重根算多重）等于矩阵的迹：$\sum_{i=1}^{m} d_i \lambda_i = \mathrm{tr}(\mathbf{A})$
+    \item 所有特征值之积（重根算多重）等于矩阵的行列式：$\prod_{i=1}^{m} \lambda_i^{d_i} = \det(\mathbf{A})$
+\end{enumerate}
+
+\vspace{1em}
+
+\subsection{特征子空间}
+
+\begin{definition}[特征子空间 Eigenspace]
+    设 $V$ 是一个 $F$-线性空间，线性变换 $T\in \mathcal{L}(V,V)$，如果 $\lambda$ 是 $T$ 的一个特征值，则对应的\textbf{特征子空间}定义为
+    \begin{align*}
+        E_\lambda &:= \{\mathbf{v}\in V : T(\mathbf{v}) = \lambda \mathbf{v}\}\\
+        &= \{\mathbf{v}\in V : (T - \lambda I) \mathbf{v}= \mathbf{0}\}\\
+        &=\mathrm{null}(T - \lambda I)\\
+    \end{align*}
+    其中 $I$ 是恒等映射 \ref{def:identity_map}。
+    \label{def:eigenspace}
+\end{definition}
+
+\begin{proposition}
+    特征子空间 $E_\lambda$ 是 $V$ 的一个线性子空间。
+\end{proposition}
+
+\begin{corollary}
+    零向量属于任意特征子空间，即 $\mathbf{0}\in E_\lambda$。但零向量不是任何特征值对应的特征向量。
+\end{corollary}
+
+\begin{note}
+    如果 $V$ 是有限维空间，$T$ 用矩阵 $\mathbf{A}\in F^{n\times n}$ 表示，那么系数矩阵 $\mathbf{A} - \lambda \mathbf{I}$ 是奇异矩阵，
+    特征子空间 $E_\lambda$ 是 $n$ 元齐次线性方程组 $(\mathbf{A} - \lambda \mathbf{I})\mathbf{v} = \mathbf{0}$ 的解空间。
+    如果 $V$ 是无限维空间，比如函数空间，那么特征子空间 $E_\lambda$ 是线性微分方程 $T(\mathbf{v}) = \lambda \mathbf{v}$ 的解空间，
+    特征向量对应方程的基本解组，用于构造方程的通解。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[特征值的几何重数 Geometric Multiplicity of Eigenvalue]
+    设 $\mathbf{A}\in F^{n\times n}$ ，如果 $\lambda$ 是 $\mathbf{A}$ 的一个特征值，
+    对应的特征子空间 $E_\lambda$ 的维数 $\dim E_\lambda$ 称为 $\lambda$ 的\textbf{几何重数}。
+    根据秩-零化子定理 \ref{thm:rank_nullity_theorem}，几何重数的计算公式为：
+    \[
+        \dim E_\lambda = \dim[\mathrm{null}(\mathbf{A} - \lambda \mathbf{I})]
+    \]
+    \label{def:geometric_multiplicity_of_eigenvalue}
+\end{definition}
+
+\begin{proposition}[几何重数与代数重数的关系]
+    设 $\mathbf{A}\in F^{n\times n}$，如果 $\lambda$ 是 $\mathbf{A}$ 的一个特征值，$\lambda$ 的几何重数为 $g$，代数重数为 $d$，则有：
+    \[
+        1 \leq g \leq d
+    \]
+\end{proposition}
+\vspace{1em}
+
+\begin{proposition}[不同特征值对应的特征向量线性无关]
+    如果 $\lambda_1$ 和 $\lambda_2$ 是 $T$ 的两个不同的特征值，$\mathbf{v}_1$ 和 $\mathbf{v}_2$ 分别是对应的特征向量，则 $\mathbf{v}_1$ 和 $\mathbf{v}_2$ 线性无关；
+\end{proposition}
+
+\begin{corollary}[不同特征值的特征子空间的交集为零向量]
+    设 $\mathbf{A}\in F^{n\times n}$，如果 $\lambda_1$ 和 $\lambda_2$ 是 $\mathbf{A}$ 的两个不同的特征值，则对应的特征子空间 $E_{\lambda_1}$ 和 $E_{\lambda_2}$ 的交集为零向量，即
+    \[
+        E_{\lambda_1} \cap E_{\lambda_2} = \{\mathbf{0}\}
+    \]
+\end{corollary}
+\vspace{1em}
+
+\begin{definition}[不变子空间 Invariant Subspace]
+    设 $V$ 是一个 $F$-线性空间，线性变换 $T\in \mathcal{L}(V,V)$，如果 $W$ 是 $V$ 的一个线性子空间，并且 $\forall \mathbf{w}\in W$，有 $T(\mathbf{w})\in W$，则称 $W$ 是 $T$ 的一个\textbf{不变子空间}。
+    其中，$V$ 和 $\{\mathbf{0}\}$ 是不变子空间，称为平凡不变子空间。其余的不变子空间称为非平凡不变子空间。
+    \label{def:invariant_subspace}
+\end{definition}
+
+\begin{proposition}
+    特征子空间 $E_\lambda$ 是 $T$ 的一个非平凡不变子空间。
+\end{proposition}
+
+\begin{note}
+    不变子空间是指在对线性变换 $T$ 封闭的子空间。其作用是将高维空间的线性变换问题，转化为低维子空间的线性变换问题，从而简化问题的复杂度。
+    特征子空间是重要的不变子空间，其维数等于特征值的几何重数。比如，\textbf{主成分分析 PCA}，就是通过寻找数据空间的主成分子空间，从而实现数据降维。
+\end{note}
 
 
 

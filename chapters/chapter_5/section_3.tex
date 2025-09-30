@@ -16,6 +16,14 @@
     \label{def:linear_map}
 \end{definition}
 
+\begin{note}
+    线性映射是保持向量加法和数乘运算的映射，线性相关的向量经过线性映射后仍然线性相关，线性无关的向量经过线性映射后仍然线性无关。
+    其几何意义是：二维空间中，共线的向量经过线性映射后仍然共线，三维空间中，共面的向量经过线性映射后仍然共面。
+    线性空间的同构意味着两个线性空间在结构上是相同的，两个同构的线性空间可以看成是同一个线性空间。
+\end{note}
+
+\vspace{0.5em}
+
 \begin{definition}[线性映射的零空间 Zero Space]
     设 $V,W$ 是两个 $F$-线性空间，$T:V\to W$ 是一个线性映射。则称
     \[
@@ -29,7 +37,7 @@
     设 $V,W$ 是两个 $F$-线性空间，$T:V\to W$ 是一个线性映射，则 $\mathrm{null}(T)$ 是 $V$ 的线性子空间。
 \end{proposition}
 
-\begin{lemma}
+\begin{lemma}[线性单射的充要条件]
     设 $V,W$ 是两个 $F$-线性空间，$T:V\to W$ 是一个线性单射，当且仅当，$\mathrm{null}(T) = \{\mathbf{0}\}$
     \label{lem:linear_map_injective_iff_null_space_is_zero}
 \end{lemma}
@@ -41,7 +49,8 @@
     因为 $\mathrm{null}(T) = \{\mathbf{0}\}$，所以 $\mathbf{u}-\mathbf{v} = \mathbf{0}$，即 $\mathbf{u} = \mathbf{v}$，所以 $T$ 是单射。
 \end{proof}
 \begin{note}
-    线性映射也是群同态，线性映射的零空间也是群同态的核。
+    线性映射的零空间的零空间可以看成是所有满足齐次方程 $T(\mathbf{v}) = \mathbf{0}$ 的解构成的集合。
+    线性映射也是群同态，线性映射的零空间也是群同态的核，零空间自然也是原空间的线性子空间。
 \end{note}
 \vspace{0.5em}
 
@@ -68,10 +77,6 @@
 \end{proof}
 
 \begin{note}
-    线性映射是保持向量加法和数乘运算的映射，线性相关的向量经过线性映射后仍然线性相关，线性无关的向量经过线性映射后仍然线性无关。
-    其几何意义是：二维空间中，共线的向量经过线性映射后仍然共线，三维空间中，共面的向量经过线性映射后仍然共面。
-    线性空间也是阿贝尔群，因此线性映射也是群同态。
-    线性空间的同构意味着两个线性空间在结构上是相同的，两个同构的线性空间可以看成是同一个线性空间。
     同构定理说明，两个有限维线性空间同构的充分必要条件是它们的维数相等。
     那么三维几何空间与 $\mathbb{R}^3$ 是同构的，三维空间中的任意一个“有向箭头”都可以唯一地对应到 $\mathbb{R}^3$ 中的一个有序三元实数组，这是解析几何的基础。
 \end{note}
@@ -195,35 +200,5 @@
 
 \vspace{1em}
 
-\subsection{对偶线性空间}
-
-\begin{definition}[线性泛函 Linear Functional]
-    设 $V$ 是一个 $F$-线性空间，$F$ 本身也可以看成一个 $F$-线性空间，那么 $T:V\to F$ 的线性映射称为\textbf{线性泛函}。
-    \label{def:linear_functional}
-\end{definition}
-
-\begin{definition}[对偶线性空间 Dual Linear Space]
-    设 $V$ 是一个 $F$-线性空间，则所有从 $V$ 到 $F$ 的线性泛函构成的集合 $\mathcal{L}(V,F)$ 也是个线性空间，称为 $V$ 的\textbf{对偶线性空间}，记为 $V^*$。
-    $V^*$ 中的元素称为 $V$ 的\textbf{对偶向量 Dual Vector} 或\textbf{余向量 Covector}。 
-    \label{def:dual_linear_space}
-\end{definition}
-
-\begin{proposition}
-    设 $V$ 是一个有限维 $F$-线性空间。$V^*$ 是 $V$ 的对偶空间。因为 $V^* = \mathcal{L}(V,F)$，
-    所以 $\dim V^* = \dim \mathcal{L}(V,F) = \dim V \cdot \dim F = \dim V$，也即 $V$ 与其对偶空间 $V^*$ 是同构的。
-\end{proposition}
-
-\begin{note}
-    线性空间与其对偶空间是同构的。
-    线性空间 $V$ 也是 $V^*$ 的对偶空间，我们令 $V^{**} = (V^*)^*$。比如，在矩阵乘法的定义下，有：
-    \[
-        \begin{bmatrix}
-            a_1 & a_2 & \cdots & a_n
-        \end{bmatrix}\begin{bmatrix}
-            b_1 \\ b_2 \\ \vdots \\ b_n
-        \end{bmatrix} = \sum_{i=1}^{n} a_i b_i \in F
-    \]
-    因此，$F^{n\times 1}$ 的对偶空间是 $F^{1\times n}$，$\dim F^{1\times n} = \dim F^{n\times 1} = n$。
-\end{note}
 
 \newpage

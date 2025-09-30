@@ -72,9 +72,7 @@
     \end{enumerate}
 \end{theorem}
 \begin{note}
-    子群是群的一个重要概念，子群也是一个群，且子群的运算与原群的运算相同。
-    子群判定定理给出了判定一个子集是否为子群的充分必要条件。
-    交换群的子群也是交换群。
+    子群是原群的一个子集，它继承了原群的代数结构，包括代数运算和代数常数。
 \end{note}
 \vspace{1em}
 
@@ -89,6 +87,21 @@
     \label{def:group_homomorphism}
 \end{definition}
 
+\begin{proposition}[群同态的性质]
+    设 $(G, *)$ 和 $(H, \cdot)$ 是两个群，映射 $f: G \to H$ 是从 $G$ 到 $H$ 的一个群同态，那么：
+    \begin{enumerate}
+        \item $f(e_G) = e_H$，其中 $e_G$ 和 $e_H$ 分别是 $G$ 和 $H$ 的单位元
+        \item 对任意的 $a\in G$，都有 $f(a^{-1}) = (f(a))^{-1}$
+    \end{enumerate}
+\end{proposition}
+
+\begin{note}
+    群同态是保持群结构的映射，还将单位元与单位元对应、逆元与逆元对应；
+    而群同构还将两个群的所有元素一一对应起来，说明它们在群结构上是完全相同的。
+    如果仅仅研究群的结构，那么同构的群可以看成是同一个群。
+\end{note}
+\vspace{1em}
+
 \begin{definition}[群同态的核 Kernel]
     设 $(G, *)$ 和 $(H, \cdot)$ 是两个群，映射 $f: G \to H$ 是从 $G$ 到 $H$ 的一个群同态，那么称
     \[
@@ -97,20 +110,12 @@
     为群同态 $f$ 的核，其中 $e_H$ 是群 $H$ 的单位元。
 \end{definition}
 
-\begin{proposition}[群同态的性质]
-    设 $(G, *)$ 和 $(H, \cdot)$ 是两个群，映射 $f: G \to H$ 是从 $G$ 到 $H$ 的一个群同态，那么：
-    \begin{enumerate}
-        \item $f(e_G) = e_H$，其中 $e_G$ 和 $e_H$ 分别是 $G$ 和 $H$ 的单位元
-        \item 对任意的 $a\in G$，都有 $f(a^{-1}) = (f(a))^{-1}$
-        \item $\ker f \le G$
-    \end{enumerate}
+\begin{proposition}
+    设 $f:G\to H$ 是一个群同态，那么 $\ker f \le G$。
 \end{proposition}
 
 \begin{note}
-    群同态是保持群结构的映射，还将单位元与单位元对应、逆元与逆元对应；
-    而群同构还将两个群的所有元素一一对应起来，说明它们在群结构上是完全相同的。
-    如果仅仅研究群的结构，那么同构的群可以看成是同一个群。
-    群同态的核表示与另一个群单位元对应的群元素的集合，它是原群的一个子群。
+    群同态的核表示与另一个群单位元对应的群元素的集合，也可以看成使方程 $f(g) = e_H$ 成立的群元素的集合，它是原群的一个子群。
 \end{note}
 \vspace{1em}
 

@@ -1,0 +1,46 @@
+\section{张量代数}
+
+\subsection{多重线性泛函}
+
+\begin{definition}[线性泛函 Linear Functional]
+    设 $V$ 是一个 $F$-线性空间，$F$ 本身也可以看成一个 $F$-线性空间，那么 $T:V\to F$ 的线性映射称为\textbf{线性泛函}。
+    \label{def:linear_functional}
+\end{definition}
+
+\begin{definition}[多重线性泛函 Multilinear Functional]
+    设 $V_1,V_2,\ldots,V_n$ 是 $F$-线性空间，$F$ 本身也可以看成一个 $F$-线性空间，那么 $T:V_1\times V_2\times \cdots \times V_n \to F$ 的映射称为\textbf{多重线性泛函}，当且仅当，对于任意的 $i = 1,2,\cdots,n$，$T$ 满足：
+    \begin{enumerate}
+        \item $\forall \mathbf{v}_i,\mathbf{u}_i \in V_i,\ T(\cdots,\mathbf{v}_i+\mathbf{u}_i,\cdots) = T(\cdots,\mathbf{v}_i,\cdots)+T(\cdots,\mathbf{u}_i,\cdots)$
+        \item $\forall \mathbf{v}_i \in V_i,\ \forall r\in F,\ T(\cdots,r\mathbf{v}_i,\cdots) = rT(\cdots,\mathbf{v}_i,\cdots)$
+    \end{enumerate}
+    也即， $T$ 对每个变量都是线性的。全体多重线性泛函的集合记为 $\mathcal{L}(V_1,V_2,\ldots,V_n;F)$。
+    \label{def:multilinear_functional}
+\end{definition}
+
+\subsection{对偶线性空间}
+
+\begin{definition}[对偶线性空间 Dual Linear Space]
+    设 $V$ 是一个 $F$-线性空间，则所有从 $V$ 到 $F$ 的线性泛函构成的集合 $\mathcal{L}(V,F)$ 也是个线性空间，称为 $V$ 的\textbf{对偶线性空间}，记为 $V^*$。
+    $V^*$ 中的元素称为 $V$ 的\textbf{对偶向量 Dual Vector} 或\textbf{余向量 Covector}。 
+    \label{def:dual_linear_space}
+\end{definition}
+
+\begin{proposition}
+    设 $V$ 是一个有限维 $F$-线性空间。$V^*$ 是 $V$ 的对偶空间。因为 $V^* = \mathcal{L}(V,F)$，
+    所以 $\dim V^* = \dim \mathcal{L}(V,F) = \dim V \cdot \dim F = \dim V$，也即 $V$ 与其对偶空间 $V^*$ 是同构的。
+\end{proposition}
+
+\begin{note}
+    线性空间与其对偶空间是同构的。
+    线性空间 $V$ 也是 $V^*$ 的对偶空间，我们令 $V^{**} = (V^*)^*$。比如，在矩阵乘法的定义下，有：
+    \[
+        \begin{bmatrix}
+            a_1 & a_2 & \cdots & a_n
+        \end{bmatrix}\begin{bmatrix}
+            b_1 \\ b_2 \\ \vdots \\ b_n
+        \end{bmatrix} = \sum_{i=1}^{n} a_i b_i \in F
+    \]
+    因此，$F^{n\times 1}$ 的对偶空间是 $F^{1\times n}$，$\dim F^{1\times n} = \dim F^{n\times 1} = n$。
+\end{note}
+
+\newpage
