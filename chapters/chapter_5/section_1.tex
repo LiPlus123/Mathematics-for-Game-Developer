@@ -1,7 +1,8 @@
 \chapter{线性代数}
 
-\section{线性空间的定义}
+\section{线性空间}
 
+\subsection{线性空间的定义}
 \begin{definition}[线性空间 Linear Space]
     设 $ (F,+,\cdot) $ 为域，$ (V,+) $ 为阿贝尔群。如果存在一个标量乘法 $ \cdot: F\times V \to V $，满足以下条件：
     \begin{enumerate}
@@ -60,6 +61,291 @@
     $F^n$ 空间是最基础的线性空间，$F^n$ 空间的维数为 $n$，所有 $n$ 维 $F$-线性空间都与 $F^n$ 空间同构。
     如果 $F=\mathbb{R}$，在 $\mathbb{R}^n$ 的基础上在赋予内积结构，得到\textbf{欧几里得空间 Euclidean Space}；
     如果 $F=\mathbb{C}$，在 $\mathbb{C}^n$ 的基础上赋予内积结构，得到\textbf{酉空间 Unitary Space}。
+\end{note}
+\vspace{1em}
+
+\subsection{线性相关性}
+
+\begin{definition}[线性组合]
+    设 $ (V,+,\cdot) $ 为 $ F $-线性空间，$ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\in V $，$ r_1,r_2,\ldots,r_n\in F $。称
+    \[
+        \mathbf{u} = r_1\cdot \mathbf{v}_1 + r_2\cdot \mathbf{v}_2 + \cdots + r_n\cdot \mathbf{v}_n
+    \]
+    为 $ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n $ 的\textbf{线性组合}。
+\end{definition}
+
+\begin{definition}[张成空间 Span]
+    设 $ (V,+,\cdot) $ 为 $ F $-线性空间。由 $ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\in V $ \textbf{张成的空间}记为 $\mathrm{span}(\mathbf{v}_1,\ldots,\mathbf{v}_n)$，那么：
+    \[
+        \mathrm{span}(\mathbf{v}_1,\ldots,\mathbf{v}_n) = \left\{ \sum_{i=1}^{n} r_i\cdot \mathbf{v}_i : r_i\in F \right\}
+    \]
+    \label{def:span}
+\end{definition}
+\begin{proposition}
+    设 $ (V,+,\cdot) $ 为 $ F $-线性空间。由 $ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\in V $ 张成的空间 $\mathrm{span}(\mathbf{v}_1,\ldots,\mathbf{v}_n)$ 是包含这组向量的最小线性子空间。
+\end{proposition}
+\begin{note}
+    线性组合源自线性空间对数乘和加法的封闭性，线性组合的结果仍然在该线性空间中。
+    张成空间是由一组向量通过线性组合所能生成的所有向量构成的集合，它是包含这组向量的最小线性子空间。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[线性相关性 Linear Dependence] 
+    设 $ (V,+,\cdot) $ 为 $ F $-线性空间，$ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\in V $。如果存在不全为零的 $ r_1,r_2,\ldots,r_n\in F $，使得
+    \[
+        r_1\cdot \mathbf{v}_1 + r_2\cdot \mathbf{v}_2 + \cdots + r_n\cdot \mathbf{v}_n = \mathbf{0},
+    \]
+    则称 $ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n $ 是\textbf{线性相关}的。
+    反之，如果仅当 $ r_1=r_2=\cdots=r_n=0 $ 时，上式成立，则称 $ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n $ 是\textbf{线性无关}的。
+    \label{def:linear_dependence}
+\end{definition}
+
+\begin{note}
+    一组向量 $\{\mathbf{v}_i:i=1,2,\cdots,n\}$ 线性相关，说明其中至少有一个向量可以表示成其他向量的线性组合。
+    线性相关的几何意义：在二维空间中，两个向量线性相关当且仅当它们共线，两个共线的向量可以表示为 $\mathbf{v}_2=k\cdot \mathbf{v}_1$；
+    在三维空间中，三个向量线性相关当且仅当它们共面，三个共面的向量可以表示为 $\mathbf{v}_3=k_1\cdot \mathbf{v}_1 + k_2\cdot \mathbf{v}_2$。
+    反之，在二维空间中不共线，在三维空间中不共面的向量组是线性无关的。
+\end{note}
+
+\vspace{1em}
+
+\subsection{基底与维数}
+\begin{definition}[基底与坐标 Basis And Coordinates]
+    设 $ (V,+,\cdot) $ 为 $ F $-线性空间。如果存在一组线性无关的向量 $ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\in V $ ，
+    且 $ V=\mathrm{span}(\mathbf{v}_1,\ldots,\mathbf{v}_n) $，则称 $ \{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\} $ 为 $ V $ 的一组\textbf{基底}。
+    其中 $\forall \mathbf{v}\in V$ 都可以唯一用这一组坐标线性表出：
+    \[
+        \mathbf{v} = \sum_{i=1}^{n} v_i \mathbf{v}_i
+    \]
+    其中，$n$ 元有序数组 $(v_1,\cdots,v_n)$ 是 $\mathbf{v}$ 在基底 $\{\mathbf{v}_1,\cdots,\mathbf{v}_n\}$ 下的\textbf{坐标}。
+    \label{def:basis}
+\end{definition}
+
+\begin{proposition}
+    任意线性空间 $ (V,+,\cdot) $ 都至少存在一组基底。
+\end{proposition}
+\begin{proof}
+    设 $ (V,+,\cdot) $ 为 $ F $-线性空间。如果 $ V=\{\mathbf{0}\} $，则 $\{\mathbf{0}\}$ 是 $ V $ 的一组基底。
+    如果 $ V\neq \{\mathbf{0}\} $，则存在 $ \mathbf{v}_1\in V, \mathbf{v}_1\neq \mathbf{0} $。如果 $ V=\mathrm{span}(\mathbf{v}_1) $，则 $\{\mathbf{v}_1\}$ 是 $ V $ 的一组基底。
+    如果 $ V\neq \mathrm{span}(\mathbf{v}_1) $，则存在 $ \mathbf{v}_2\in V, \mathbf{v}_2\notin \mathrm{span}(\mathbf{v}_1) $。如果 $ V=\mathrm{span}(\mathbf{v}_1,\mathbf{v}_2) $，则 $\{\mathbf{v}_1,\mathbf{v}_2\}$ 是 $ V $ 的一组基底。
+    如果 $ V\neq \mathrm{span}(\mathbf{v}_1,\mathbf{v}_2) $，则存在 $ \mathbf{v}_3\in V, \mathbf{v}_3\notin \mathrm{span}(\mathbf{v}_1,\mathbf{v}_2) $。
+    依此类推，可以得到一组线性无关的向量 $\{\mathbf{v}_1,\mathbf{v}_2,\ldots\}$，使得
+    \[
+        V = \mathrm{span}(\mathbf{v}_1,\mathbf{v}_2,\ldots).
+    \]
+    该过程要么在有限步内终止，要么生成一个无限序列。无论哪种情况，最终都能得到一组基底。
+\end{proof}
+
+\begin{proposition}
+    如果 $ V $ 有一组有限基底，则所有基底的向量个数相同。
+\end{proposition}
+\begin{proof}
+    设 $ (V,+,\cdot) $ 为 $ F $-线性空间，$ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\in V $ 是 $ V $ 的一组基底。
+    如果存在另一组基底 $ \mathbf{u}_1,\mathbf{u}_2,\ldots,\mathbf{u}_m\in V $，且 $ m>n $，则 $\mathbf{u}_1,\mathbf{u}_2,\ldots,\mathbf{u}_m$ 线性相关，
+    即存在不全为零的 $ r_1,r_2,\ldots,r_m\in F $，使得
+    \[
+        r_1\cdot \mathbf{u}_1 + r_2\cdot \mathbf{u}_2 + \cdots + r_m\cdot \mathbf{u}_m = \mathbf{0}.
+    \]
+    因为 $ V=\mathrm{span}(\mathbf{v}_1,\ldots,\mathbf{v}_n) $，所以每个 $\mathbf{u}_i$ 都可以表示成 $\mathbf{v}_1,\ldots,\mathbf{v}_n$ 的线性组合，
+    即存在 $ s_{ij}\in F, i=1,2,\ldots,m, j=1,2,\ldots,n $，使得
+    \[
+        \mathbf{u}_i = \sum_{j=1}^{n} s_{ij}\cdot \mathbf{v}_j.
+    \]
+    将上式代入前一个等式，得到
+    \[
+        \sum_{i=1}^{m} r_i \left( \sum_{j=1}^{n} s_{ij}\cdot \mathbf{v}_j \right) = \sum_{j=1}^{n} \left( \sum_{i=1}^{m} r_i s_{ij} \right) \cdot \mathbf{v}_j = \mathbf{0}.
+    \]
+    因为 $\mathbf{v}_1,\ldots,\mathbf{v}_n$ 线性无关，所以对于每个 $ j=1,2,\ldots,n $，都有
+    \[
+        \sum_{i=1}^{m} r_i s_{ij} = 0.
+    \]
+    这构成了一个齐次线性方程组，未知数为 $ r_1,r_2,\ldots,r_m $，方程个数为 $ n $，未知数个数为 $ m $，且 $ m>n $。
+    根据线性代数的基本理论，该方程组有非零解，这与 $ r_1,r_2,\ldots,r_m $ 不全为零矛盾。
+    因此，$ m\leq n $。同理可证 $ n\leq m $，所以 $ m=n $。
+\end{proof}
+\vspace{0.5em}
+
+\begin{definition}[线性空间的维数 Dimension]
+    设 $ (V,+,\cdot) $ 为 $ F $-线性空间。如果 $ V $ 有一组基底 $ \{\mathbf{v}_1,\ldots,\mathbf{v}_n\} $，则称 $ n $ 为 $ V $ 的\textbf{维数}，记作 $\dim V = n$。
+    如果 $ V $ 没有有限基底，则称 $ V $ 为无穷维线性空间，记作 $\dim V = \infty$。
+\end{definition}
+
+\begin{note}
+    根据基底的定义，$V$ 中任意一个向量都可以唯一表示成基底向量的线性组合。
+    在 $n$ 维有限维线性空间中，任意 $n$ 个线性无关的向量都可以作为该空间的一组基底。
+\end{note}
+\vspace{1em}
+
+\subsection{赋范线性空间}
+
+\begin{definition}[赋范线性空间 Normed Linear Space]
+    设 $ V $ 是 $F$-线性空间，其中 $F$ 通常是 $\mathbb{R}$ 或 $\mathbb{C}$。映射 $ \|\cdot\|:V\to \mathbb{R} $ 称为范数，当且仅当，$ \forall \mathbf{x},\mathbf{y}\in V $ 且 $ \forall \alpha\in \mathbb{F} $，有：
+    \begin{enumerate}
+        \item 非负性：$ \|\mathbf{x}\|\geq 0 $，且当且仅当 $ \mathbf{x}=0 $ 时取等号；
+        \item 齐次性：$ \|\alpha \mathbf{x}\|=|\alpha|\|\mathbf{x}\| $；
+        \item 三角不等式：$ \|\mathbf{x}+\mathbf{y}\| \leq \|\mathbf{x}\|+\|\mathbf{y}\| $。
+    \end{enumerate}
+    二元组 $ (V,\|\cdot\|) $ 称为赋范线性空间，函数 $ \|\cdot\| $ 称为 $ V $ 上的范数。
+    \label{def:normed_linear_space}
+\end{definition}
+
+\begin{definition}[$p$-范数 $p$-Norm]
+    设 $ \mathbf{v}=(v_1,v_2,\ldots,v_n)\in F^n $，其中 $F$ 是 $\mathbb{R}$ 或 $\mathbb{C}$。定义 $ \mathbf{v} $ 的\textbf{$p$-范数}为
+    \[
+        \|\mathbf{v}\|_p = \left( \sum_{i=1}^{n} |v_i|^p \right)^{\frac{1}{p}}
+    \]
+    特别地，当 $ p=2 $ 时，称为\textbf{欧几里得范数}，记为 $\|\mathbf{v}\|_2$；当 $ p=1 $ 时，称为\textbf{曼哈顿范数}，记为 $\|\mathbf{v}\|_1$；当 $ p=\infty $ 时，称为\textbf{切比雪夫范数}，记为 $\|\mathbf{v}\|_\infty$，其定义为
+    \[
+        \|\mathbf{v}\|_\infty = \max(|v_1|,|v_2|,\ldots,|v_n|)
+    \]
+    \label{def:p-norm}
+\end{definition}
+
+\begin{proposition}[赋范线性空间诱导的度量]
+    设 $ (V,\|\cdot\|) $ 为赋范线性空间，定义 $ d:V\times V\to \mathbb{R} $：
+    \[
+        \forall \mathbf{x},\mathbf{y}\in V, d(\mathbf{x},\mathbf{y})=\|\mathbf{x}-\mathbf{y}\| 
+    \]
+    则 $ (V,d) $ 为度量空间。
+\end{proposition}
+
+\begin{note}
+    赋范线性空间是对向量空间中长度概念的抽象。范数函数 $ \|\cdot\| $ 用来衡量向量的大小或长度。
+    赋范线性空间可以诱导出度量结构，因此赋范线性空间也是度量空间。
+\end{note}
+
+\vspace{1em}
+
+\subsection{内积空间}
+
+\begin{definition}[内积空间 Inner Product Space]
+    设 $ V $ 是 $F$-线性空间，其中 $F$ 通常是 $\mathbb{R}$ 或 $\mathbb{C}$。映射 $ \langle\cdot,\cdot\rangle:V\times V\to F $ 称为内积，当且仅当，$ \forall \mathbf{x},\mathbf{y},\mathbf{z}\in V $ 且 $ \forall \alpha,\beta\in F $，有：
+    \begin{enumerate}
+        \item 共轭对称性：$ \langle \mathbf{x},\mathbf{y}\rangle=\overline{\langle \mathbf{y},\mathbf{x}\rangle} $；
+        \item 线性性：
+        \[
+            \langle \alpha \mathbf{x}+ \beta \mathbf{y},\mathbf{z}\rangle=\alpha\langle \mathbf{x},\mathbf{z}\rangle+\beta\langle \mathbf{y},\mathbf{z}\rangle
+        \]
+        \[
+            \langle \mathbf{x},\alpha \mathbf{y}+\beta \mathbf{z}\rangle=\overline{\alpha}\langle \mathbf{x},\mathbf{y}\rangle+\overline{\beta}\langle \mathbf{x},\mathbf{z}\rangle
+        \]
+        \item 正定性：$ \langle \mathbf{x},\mathbf{x}\rangle \in \mathbb{R} \geq 0 $，且当且仅当 $ \mathbf{x}=0 $ 时取等号。
+    \end{enumerate}
+    二元组 $ (V,\langle\cdot,\cdot\rangle) $ 称为内积空间，函数 $ \langle\cdot,\cdot\rangle $ 称为 $ V $ 上的内积。
+    \label{def:inner_product_space}
+\end{definition}
+
+\begin{definition}[欧几里得空间 Euclidean Space]
+    在 $\mathbb{R}^n$ 中，任意 $\mathbf{x}=(x_1,\ldots,x_n),\ \mathbf{y}=(y_1,\ldots,y_n)\in \mathbb{R}^n$，定义内积为
+    \[
+        \langle \mathbf{x},\mathbf{y}\rangle = \sum_{i=1}^{n} x_i y_i
+    \]
+    则 $ (\mathbb{R}^n,\langle\cdot,\cdot\rangle) $ 称为\textbf{欧几里得空间}。
+    \label{def:euclidean_space}
+\end{definition}
+
+\begin{definition}[酉空间 Unitary Space]
+    在 $\mathbb{C}^n$ 中，任意 $\mathbf{x}=(x_1,\ldots,x_n),\ \mathbf{y}=(y_1,\ldots,y_n)\in \mathbb{C}^n$，定义内积为
+    \[
+        \langle \mathbf{x},\mathbf{y}\rangle = \sum_{i=1}^{n} x_i \bar{y_i}
+    \]
+    其中，$ \bar{y_i} $ 是 $ y_i $ 的共轭复数。则 $ (\mathbb{C}^n,\langle\cdot,\cdot\rangle) $ 称为\textbf{酉空间}。
+    \label{def:unitary_space}
+\end{definition}
+
+\begin{proposition}[内积空间诱导的赋范线性空间]
+    设 $ (V,\langle\cdot,\cdot\rangle) $ 为 $F$-内积空间，其中 $F$ 是 $\mathbb{R}$ 或 $\mathbb{C}$。定义二范数 $ \|\cdot\|_2:V\to \mathbb{R} $：
+    \[
+        \forall \mathbf{x}\in V, \|\mathbf{x}\|_2=\sqrt{\langle \mathbf{x},\mathbf{x}\rangle}
+    \]
+    则 $ (V,\|\cdot\|) $ 为赋范线性空间。
+\end{proposition}
+
+\begin{note}
+    内积空间是对向量空间中角度和长度概念的抽象。内积函数 $ \langle\cdot,\cdot\rangle $ 用来衡量两个向量之间的夹角和长度。
+    内积空间可以诱导出赋范结构，因此内积空间也是赋范线性空间。
+\end{note}
+
+\subsection{正交性与投影}
+\begin{definition}[正交 Orthogonality]
+    设 $ (V,\langle\cdot,\cdot\rangle) $ 为 $F$-内积空间，$ \mathbf{x},\mathbf{y}\in V $。如果 $ \langle \mathbf{x},\mathbf{y}\rangle=0 $，则称 $ \mathbf{x} $ 与 $ \mathbf{y} $ 正交，记作 $ \mathbf{x}\perp \mathbf{y} $。
+    \label{def:orthogonality}
+\end{definition}
+
+\begin{proposition}
+    内积空间中，两正交非零向量线性无关。
+\end{proposition}
+
+\begin{definition}[单位正交基 Orthonormal Basis]
+    设 $ (V,\langle\cdot,\cdot\rangle) $ 为 $F$-内积空间。如果 $ V $ 有一组基底 $ \{\mathbf{e}_1,\mathbf{e}_2,\ldots,\mathbf{e}_n\} $，且对任意 $ i,j=1,2,\ldots,n $，有
+    \[
+        \langle \mathbf{e}_i,\mathbf{e}_j\rangle = \begin{cases}
+            1, & i=j \\
+            0, & i\neq j
+        \end{cases}
+    \]
+    则称 $ \{\mathbf{e}_1,\mathbf{e}_2,\ldots,\mathbf{e}_n\} $ 为 $ V $ 的一组\textbf{单位正交基}。
+    \label{def:orthonormal_basis}
+\end{definition}
+
+\textbf{施密特正交化 Schimidt Orthogonalization}： 设 $ (V,\langle\cdot,\cdot\rangle) $ 为 $F$-内积空间。
+$V$ 中任何一组基 $ \{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\} $ 通过施密特正交化都可以构造出一组单位正交基。其是一个递推过程：
+\begin{enumerate}
+    \item 设 $ \mathbf{u}_1 = \mathbf{v}_1 $，并归一化得到 $ \mathbf{e}_1 = \frac{\mathbf{u}_1}{\|\mathbf{u}_1\|_2} $；
+    \item 对于 $ k=2,3,\ldots,n $，递推公式：
+    \[
+        \mathbf{u}_k = \mathbf{v}_k - \sum_{j=1}^{k-1} r_{kj} \mathbf{e}_j
+    \]
+    其中，$ r_{kj} = \langle \mathbf{v}_k,\mathbf{e}_j\rangle $；
+    然后，归一化得到 $ \mathbf{e}_k = \frac{\mathbf{u}_k}{\|\mathbf{u}_k\|_2} $；
+\end{enumerate}
+
+
+\begin{note}
+    在三维空间中，两个向量正交的几何意义是它们垂直，即夹角为 $90^\circ$。
+    单位正交基是指基底向量不仅两两正交，而且每个向量的长度为 1。
+    单位正交基是内积空间中一组特殊的基底，使用单位正交基可以简化许多计算。
+\end{note}
+
+\vspace{1em}
+
+\begin{definition}[投影 Projection]
+    设 $ (V,\langle\cdot,\cdot\rangle) $ 为 $F$-内积空间，$ \mathbf{x},\mathbf{y}\in V $，且 $ \mathbf{y}\neq 0 $。则称
+    \[
+        \mathrm{proj}_{\mathbf{y}}\mathbf{x} = \frac{\langle \mathbf{x},\mathbf{y}\rangle}{\langle \mathbf{y},\mathbf{y}\rangle}\mathbf{y}
+    \]
+    为 $ \mathbf{x} $ 在 $ \mathbf{y} $ 上的投影。
+    \label{def:projection}
+\end{definition}
+
+\begin{definition}[正交分解 Orthogonal Decomposition]
+    设 $ (V,\langle\cdot,\cdot\rangle) $ 为 $F$-内积空间，$ \mathbf{x},\mathbf{y}\in V $，且 $ \mathbf{y}\neq 0 $。则称
+    \[
+        \mathbf{x} = \mathrm{proj}_{\mathbf{y}}\mathbf{x} + (\mathbf{x}-\mathrm{proj}_{\mathbf{y}}\mathbf{x})
+    \]
+    为 $ \mathbf{x} $ 关于 $ \mathbf{y} $ 的正交分解。
+    \label{def:orthogonal_decomposition}
+\end{definition}
+
+\begin{note}
+    根据向量线性相关性的定义 \ref{def:linear_dependence}，$ \mathrm{proj}_{\mathbf{y}}\mathbf{x} $ 与 $ \mathbf{y} $ 线性相关，几何意义是在三维空间中， $ \mathrm{proj}_{\mathbf{y}}\mathbf{x} \parallel \mathbf{y} $。
+    $ \mathbf{x}-\mathrm{proj}_{\mathbf{y}}\mathbf{x} $ 与 $ \mathbf{y} $ 线性无关且正交，几何意义是在三维空间中，$ \mathbf{x}-\mathrm{proj}_{\mathbf{y}}\mathbf{x} \perp \mathbf{y} $。
+\end{note}
+\vspace{1em}
+
+\subsection{柯西-施瓦茨不等式}
+\begin{theorem}[柯西-施瓦茨不等式 Cauchy-Schwarz Inequality]
+    设 $ V $ 为 $F$-内积空间，$ \mathbf{x},\mathbf{y}\in V $，则有：
+    \[
+        |\langle \mathbf{x},\mathbf{y}\rangle| \leq \|\mathbf{x}\|_2\cdot\|\mathbf{y}\|_2
+    \]
+    当且仅当，$ \mathbf{x} $ 与 $ \mathbf{y} $ 线性相关时取等号。
+    \label{thm:cauchy_schwarz_inequality}
+\end{theorem}
+
+\begin{note}
+    柯西-施瓦茨不等式是内积空间中的基本不等式，表明了内积与范数之间的关系。
+    并且，在两向量线性相关时，内积的绝对值等于它们范数的乘积。
 \end{note}
 
 \newpage

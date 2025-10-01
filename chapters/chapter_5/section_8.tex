@@ -1,1 +1,186 @@
-\section{矩阵分解}
+\section{张量代数}
+
+\subsection{多重线性泛函}
+
+\begin{definition}[线性泛函 Linear Functional]
+    设 $V$ 是一个 $F$-线性空间，$F$ 本身也可以看成一个 $F$-线性空间，那么 $T:V\to F$ 的线性映射称为\textbf{线性泛函}。
+    \label{def:linear_functional}
+\end{definition}
+
+\begin{definition}[多重线性泛函 Multilinear Functional]
+    设 $V_1,V_2,\ldots,V_n$ 是 $F$-线性空间，$F$ 本身也可以看成一个 $F$-线性空间，那么 $T:V_1\times V_2\times \cdots \times V_n \to F$ 的映射称为\textbf{多重线性泛函}，当且仅当，对于任意的 $i = 1,2,\cdots,n$，$T$ 满足：
+    \begin{enumerate}
+        \item $\forall \mathbf{v}_i,\mathbf{u}_i \in V_i,\ T(\cdots,\mathbf{v}_i+\mathbf{u}_i,\cdots) = T(\cdots,\mathbf{v}_i,\cdots)+T(\cdots,\mathbf{u}_i,\cdots)$
+        \item $\forall \mathbf{v}_i \in V_i,\ \forall r\in F,\ T(\cdots,r\mathbf{v}_i,\cdots) = rT(\cdots,\mathbf{v}_i,\cdots)$
+    \end{enumerate}
+    全体多重线性泛函的集合记为 $\mathcal{L}(V_1,V_2,\ldots,V_n;F)$。
+    \label{def:multilinear_functional}
+\end{definition}
+
+\begin{definition}[多重线性泛函的加法]
+    $\forall T_1,T_2\in \mathcal{L}(V_1,V_2,\ldots,V_n;F)$，定义其和为
+    \[
+        (T_1+T_2)(\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n) = T_1(\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n) + T_2(\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n)
+    \]
+    \label{def:multilinear_functional_addition}
+\end{definition}
+
+\begin{definition}[多重线性泛函的数乘]
+    $\forall T\in \mathcal{L}(V_1,V_2,\ldots,V_n;F)$，$\forall r\in F$，定义其数乘为
+    \[
+        (rT)(\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n) = rT(\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n)
+    \]
+    \label{def:multilinear_functional_scalar_multiplication}
+\end{definition}
+
+\begin{proposition}[全体多重线性泛函构成一个线性空间]
+    $\mathcal{L}(V_1,V_2,\ldots,V_n;F)$ 在加法 \ref{def:multilinear_functional_addition} 和数乘 \ref{def:multilinear_functional_scalar_multiplication} 下是一个 $F$-线性空间。
+    其维数为
+    \[
+        \dim \mathcal{L}(V_1,V_2,\ldots,V_n;F) = \dim V_1 \cdot \dim V_2 \cdots \dim V_n
+    \]
+\end{proposition}
+
+\begin{note}
+    多重线性泛函是对线性泛函的推广，它对每个变量都是线性的。全体多重线性泛函构成一个线性空间，其维数是各个线性空间维数的乘积。
+\end{note}
+
+
+\vspace{1em}
+\subsection{对偶线性空间}
+
+\begin{definition}[对偶线性空间 Dual Linear Space]
+    设 $V$ 是一个 $F$-线性空间，则所有从 $V$ 到 $F$ 的线性泛函构成的集合 $\mathcal{L}(V,F)$ 也是个线性空间，称为 $V$ 的\textbf{对偶线性空间}，记为 $V^*$。
+    $V^*$ 中的元素称为 $V$ 的\textbf{对偶向量 Dual Vector} 或\textbf{余向量 Covector}。 
+    \label{def:dual_linear_space}
+\end{definition}
+
+\begin{proposition}[线性空间与其对偶空间是自然同构的]
+    设 $V$ 是一个有限维 $F$-线性空间。$V^*$ 是 $V$ 的对偶空间。因为 $V^* = \mathcal{L}(V,F)$，
+    所以 $\dim V^* = \dim \mathcal{L}(V,F) = \dim V \cdot \dim F = \dim V$，也即 $V$ 与其对偶空间 $V^*$ 是同构的。
+\end{proposition}
+
+\begin{note}
+    线性空间与其对偶空间是自然同构的。
+    线性空间 $V$ 也是 $V^*$ 的对偶空间，我们令 $V^{**} = (V^*)^*$。比如，在矩阵乘法的定义下，有：
+    \[
+        \begin{bmatrix}
+            a_1 & a_2 & \cdots & a_n
+        \end{bmatrix}\begin{bmatrix}
+            b_1 \\ b_2 \\ \vdots \\ b_n
+        \end{bmatrix} = \sum_{i=1}^{n} a_i b_i \in F
+    \]
+    因此，$F^{n\times 1}$ 的对偶空间是 $F^{1\times n}$，$\dim F^{1\times n} = \dim F^{n\times 1} = n$。
+\end{note}
+\vspace{1em}
+
+\subsection{张量的定义}
+
+\begin{definition}[张量 Tensor]
+    设 $V$ 是一个 $F$-线性空间，$V^*$ 是 $V$ 的对偶空间。则 $V$ 的 $(r,s)$ 型张量是一个多重线性泛函 $T \in \mathcal{L}(\underbrace{V^*,V^*,\ldots,V^*}_{r\text{ 个}},\underbrace{V,V,\ldots,V}_{s\text{ 个}};F)$：
+    \[
+        T(\underbrace{\bm{\omega}^1,\bm{\omega}^2,\ldots,\bm{\omega}^r}_{r\text{ 个}},\underbrace{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_s}_{s\text{ 个}})
+    \]
+    全体 $(r,s)$ 型张量的集合记为 $V^k_s$。
+\end{definition}
+
+\begin{note}
+    张量是一种特殊的多重线性泛函，它的前 $r$ 个变量是对偶空间 $V^*$ 中的向量，后 $s$ 个变量是线性空间 $V$ 中的向量。
+    $V^k_s$ 是 $\mathcal{L}(\underbrace{V^*,V^*,\ldots,V^*}_{r\text{ 个}},\underbrace{V,V,\ldots,V}_{s\text{ 个}};F)$ 的线性子空间。
+    张量空间的维数为 $\dim V^k_s = (\dim V)^{r+s}$。如果 $\dim V = n$，则 $\dim V^k_s = n^{r+s}$。
+\end{note}
+
+\vspace{1em}
+
+\begin{definition}[张量积 Tensor Product]
+    设 $V$ 是一个 $F$-线性空间，$V^*$ 是 $V$ 的对偶空间。$T \in V^r_s$，$S \in V^p_q$，则定义 $T$ 和 $S$ 的张量积为 $T \otimes S \in V^{r+p}_{s+q}$，那么：
+    \[
+        (T \otimes S)(\underbrace{\bm{\omega}^1,\ldots,\bm{\omega}^{r+p}}_{r+p\text{ 个}},\underbrace{\mathbf{v}_1,\ldots,\mathbf{v}_{s+q}}_{s+q\text{ 个}}) = T(\bm{\omega}^1,\ldots,\bm{\omega}^r,\mathbf{v}_1,\ldots,\mathbf{v}_s) \cdot S(\bm{\omega}^{r+1},\ldots,\bm{\omega}^{r+p},\mathbf{v}_{s+1},\ldots,\mathbf{v}_{s+q})
+    \]
+    \label{def:tensor_product}
+\end{definition}
+
+\begin{proposition}[张量积的性质]
+    设 $V$ 是一个 $F$-线性空间，$V^*$ 是 $V$ 的对偶空间。$T,T_1,T_2 \in V^r_s$，$S,S_1,S_2 \in V^p_q$，$a,b\in F$，则有：
+    \begin{enumerate}
+        \item 结合律：$(T \otimes S) \otimes R = T \otimes (S \otimes R)$
+        \item 分配律：$(T_1 + T_2) \otimes S = T_1 \otimes S + T_2 \otimes S$
+        \item 分配律：$T \otimes (S_1 + S_2) = T \otimes S_1 + T \otimes S_2$
+        \item 数乘结合律：$(aT) \otimes S = a(T \otimes S) = T \otimes (aS)$
+    \end{enumerate}
+\end{proposition}
+
+\begin{definition}[简单张量 Simple Tensor]
+    设 $V$ 是一个 $F$-线性空间，$V^*$ 是 $V$ 的对偶空间。
+    如果存在 $\mathbf{u}_1,\cdots,\mathbf{u}_r\in V,\ \mathbf{u}_1^*,\cdots,\mathbf{u}_s^*\in V^*$，得到 $(r,s)$ 型张量：
+    \begin{align*}
+        \mathbf{T}(\mathbf{v}_1^*,\cdots,\mathbf{v}_r^*,\mathbf{v}_1,\cdots,\mathbf{v}_s) &:= \mathbf{u}_1\otimes \cdots \otimes\mathbf{u}_r \otimes \mathbf{u}_1^*\otimes \cdots \otimes\mathbf{u}_s^* (\mathbf{v}_1^*,\cdots,\mathbf{v}_r^*,\mathbf{v}_1,\cdots,\mathbf{v}_s)\\
+        &=\mathbf{u}_1(\mathbf{v}_1^*)\cdots\mathbf{u}_r(\mathbf{v}_r^*)\mathbf{u}_1^*(\mathbf{v}_1)\cdots\mathbf{u}_s^*(\mathbf{v}_s)
+    \end{align*}
+    则称 $T$ 为一个\textbf{简单张量}。
+\end{definition}
+
+\begin{note}
+    张量积是构造张量的一种重要方法。
+    下面介绍通过张量积构造的简单张量 —— 并矢，
+    它是一种简单 $(1,1)$ 型张量。
+\end{note}
+\vspace{1em}
+
+\begin{example}[并矢 Dyadics]
+    设 $\mathbb{R}^{1\times n}$ 与其对偶空间 $\mathbb{R}^{n\times 1}$，任意行向量：
+    \[
+        \mathbf{a} = \begin{bmatrix}
+            a_1 & a_2 & \cdots & a_n
+        \end{bmatrix} \in \mathbb{R}^{1\times n}
+    \]
+    与任意列向量：
+    \[
+        \mathbf{b}^* = \begin{bmatrix}
+            b^1 \\ b^2 \\ \vdots \\ b^n
+        \end{bmatrix} \in \mathbb{R}^{n\times 1}
+    \]
+    $\mathbf{a}, \mathbf{b}^*$ 的张量积记为 $\mathbf{a}\otimes \mathbf{b}^*$ 称为\textbf{并矢}：
+    \begin{align*}
+        \mathbf{a}\otimes \mathbf{b}^*(\mathbf{v}^*,\mathbf{u}) &= \mathbf{a}(\mathbf{v}^*)\mathbf{b}^*(\mathbf{u})\\
+        &= \begin{bmatrix}
+            v_1 & v_2 & \cdots & v_n
+        \end{bmatrix} \begin{bmatrix}
+            b^1 \\ b^2 \\ \vdots \\ b^n
+        \end{bmatrix} \cdot \begin{bmatrix}
+            a_1 & a_2 & \cdots & a_n
+        \end{bmatrix} \begin{bmatrix}
+            u^1 \\ u^2 \\ \vdots \\ u^n
+        \end{bmatrix} \\
+        &= \begin{bmatrix}
+            v_1 & v_2 & \cdots & v_n
+        \end{bmatrix} \begin{bmatrix}
+            b^1a_1 & b^1a_2 & \cdots & b^1a_n \\
+            b^2a_1 & b^2a_2 & \cdots & b^2a_n \\
+            \vdots & \vdots & \ddots & \vdots \\
+            b^na_1 & b^na_2 & \cdots & b^na_n
+        \end{bmatrix}\begin{bmatrix}
+            u^1 \\ u^2 \\ \vdots \\ u^n
+        \end{bmatrix}
+    \end{align*}
+    因此一个 $(1,1)$ 型张量 $T \in \mathbb{R}^1_1$ 可以表示为一个 $n\times n$ 的矩阵。
+    \label{ex:dyadics}
+\end{example}
+
+\vspace{1em}
+
+\subsection{协变基与逆变基}
+
+\vspace{1em}
+\subsection{张量的缩并}
+
+\vspace{1em}
+\subsection{度量张量}
+
+\vspace{1em}
+\subsection{外形式}
+
+
+
+\newpage
+

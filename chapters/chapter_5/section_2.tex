@@ -1,197 +1,204 @@
-\section{线性相关性与基底}
+\section{线性映射}
 
-\begin{definition}[线性组合]
-    设 $ (V,+,\cdot) $ 为 $ F $-线性空间，$ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\in V $，$ r_1,r_2,\ldots,r_n\in F $。称
-    \[
-        \mathbf{u} = r_1\cdot \mathbf{v}_1 + r_2\cdot \mathbf{v}_2 + \cdots + r_n\cdot \mathbf{v}_n
-    \]
-    为 $ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n $ 的\textbf{线性组合}。
-\end{definition}
+\subsection{线性映射与同构}
 
-\begin{definition}[张成空间 Span]
-    设 $ (V,+,\cdot) $ 为 $ F $-线性空间。由 $ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\in V $ \textbf{张成的空间}记为 $\mathrm{span}(\mathbf{v}_1,\ldots,\mathbf{v}_n)$，那么：
-    \[
-        \mathrm{span}(\mathbf{v}_1,\ldots,\mathbf{v}_n) = \left\{ \sum_{i=1}^{n} r_i\cdot \mathbf{v}_i : r_i\in F \right\}
-    \]
-    \label{def:span}
-\end{definition}
-\begin{proposition}
-    设 $ (V,+,\cdot) $ 为 $ F $-线性空间。由 $ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\in V $ 张成的空间 $\mathrm{span}(\mathbf{v}_1,\ldots,\mathbf{v}_n)$ 是包含这组向量的最小线性子空间。
-\end{proposition}
-\begin{note}
-    线性组合源自线性空间对数乘和加法的封闭性，线性组合的结果仍然在该线性空间中。
-    张成空间是由一组向量通过线性组合所能生成的所有向量构成的集合，它是包含这组向量的最小线性子空间。
-\end{note}
-\vspace{1em}
-
-\begin{definition}[线性相关性 Linear Dependence] 
-    设 $ (V,+,\cdot) $ 为 $ F $-线性空间，$ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\in V $。如果存在不全为零的 $ r_1,r_2,\ldots,r_n\in F $，使得
-    \[
-        r_1\cdot \mathbf{v}_1 + r_2\cdot \mathbf{v}_2 + \cdots + r_n\cdot \mathbf{v}_n = \mathbf{0},
-    \]
-    则称 $ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n $ 是\textbf{线性相关}的。
-    反之，如果仅当 $ r_1=r_2=\cdots=r_n=0 $ 时，上式成立，则称 $ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n $ 是\textbf{线性无关}的。
-    \label{def:linear_dependence}
+\begin{definition}[线性映射 Linear Map]
+    设 $V,W$ 是两个 $F$-线性空间。函数 $T:V\to W$ 称为\textbf{线性映射}，当且仅当，对于任意 $ \mathbf{u},\mathbf{v}\in V $，$ r\in F $，满足：
+    \begin{enumerate}
+        \item $ T(\mathbf{u}+\mathbf{v}) = T(\mathbf{u}) + T(\mathbf{v}) $；
+        \item $ T(r\cdot \mathbf{u}) = r\cdot T(\mathbf{u}) $。
+    \end{enumerate}
+    线性映射也称为\textbf{线性算子 Linear Operator}，$T(u)$ 简记为 $Tu$；
+    如果是 $T:V\to V$，也称为\textbf{线性变换 Linear Transformation}；
+    如果 $T$ 是双射，则称 $T$ 为\textbf{线性同构 Linear Isomorphism}；
+    域 $F$ 本身也可以看成一个 $F$-线性空间，那么 $T:V\to F$ 的线性映射称为\textbf{线性泛函 Linear Functional}。
+    全体从 $V$ 到 $W$ 的线性映射构成的集合记为 $\mathcal{L}(V;W)$。
+    \label{def:linear_map}
 \end{definition}
 
 \begin{note}
-    一组向量 $\{\mathbf{v}_i:i=1,2,\cdots,n\}$ 线性相关，说明其中至少有一个向量可以表示成其他向量的线性组合。
-    线性相关的几何意义：在二维空间中，两个向量线性相关当且仅当它们共线，两个共线的向量可以表示为 $\mathbf{v}_2=k\cdot \mathbf{v}_1$；
-    在三维空间中，三个向量线性相关当且仅当它们共面，三个共面的向量可以表示为 $\mathbf{v}_3=k_1\cdot \mathbf{v}_1 + k_2\cdot \mathbf{v}_2$。
-    反之，在二维空间中不共线，在三维空间中不共面的向量组是线性无关的。
+    线性映射是保持向量加法和数乘运算的映射，线性相关的向量经过线性映射后仍然线性相关，线性无关的向量经过线性映射后仍然线性无关。
+    其几何意义是：二维空间中，共线的向量经过线性映射后仍然共线，三维空间中，共面的向量经过线性映射后仍然共面。
+    线性空间的同构意味着两个线性空间在结构上是相同的，两个同构的线性空间可以看成是同一个线性空间。
 \end{note}
 
-\vspace{1em}
-\begin{definition}[基底与坐标 Basis And Coordinates]
-    设 $ (V,+,\cdot) $ 为 $ F $-线性空间。如果存在一组线性无关的向量 $ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\in V $ ，
-    且 $ V=\mathrm{span}(\mathbf{v}_1,\ldots,\mathbf{v}_n) $，则称 $ \{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\} $ 为 $ V $ 的一组\textbf{基底}。
-    其中 $\forall \mathbf{v}\in V$ 都可以唯一用这一组坐标线性表出：
-    \[
-        \mathbf{v} = \sum_{i=1}^{n} v_i \mathbf{v}_i
-    \]
-    其中，$n$ 元有序数组 $(v_1,\cdots,v_n)$ 是 $\mathbf{v}$ 在基底 $\{\mathbf{v}_1,\cdots,\mathbf{v}_n\}$ 下的\textbf{坐标}。
-    \label{def:basis}
-\end{definition}
-
-\begin{proposition}
-    任意线性空间 $ (V,+,\cdot) $ 都至少存在一组基底。
-\end{proposition}
-\begin{proof}
-    设 $ (V,+,\cdot) $ 为 $ F $-线性空间。如果 $ V=\{\mathbf{0}\} $，则 $\{\mathbf{0}\}$ 是 $ V $ 的一组基底。
-    如果 $ V\neq \{\mathbf{0}\} $，则存在 $ \mathbf{v}_1\in V, \mathbf{v}_1\neq \mathbf{0} $。如果 $ V=\mathrm{span}(\mathbf{v}_1) $，则 $\{\mathbf{v}_1\}$ 是 $ V $ 的一组基底。
-    如果 $ V\neq \mathrm{span}(\mathbf{v}_1) $，则存在 $ \mathbf{v}_2\in V, \mathbf{v}_2\notin \mathrm{span}(\mathbf{v}_1) $。如果 $ V=\mathrm{span}(\mathbf{v}_1,\mathbf{v}_2) $，则 $\{\mathbf{v}_1,\mathbf{v}_2\}$ 是 $ V $ 的一组基底。
-    如果 $ V\neq \mathrm{span}(\mathbf{v}_1,\mathbf{v}_2) $，则存在 $ \mathbf{v}_3\in V, \mathbf{v}_3\notin \mathrm{span}(\mathbf{v}_1,\mathbf{v}_2) $。
-    依此类推，可以得到一组线性无关的向量 $\{\mathbf{v}_1,\mathbf{v}_2,\ldots\}$，使得
-    \[
-        V = \mathrm{span}(\mathbf{v}_1,\mathbf{v}_2,\ldots).
-    \]
-    该过程要么在有限步内终止，要么生成一个无限序列。无论哪种情况，最终都能得到一组基底。
-\end{proof}
-
-\begin{proposition}
-    如果 $ V $ 有一组有限基底，则所有基底的向量个数相同。
-\end{proposition}
-\begin{proof}
-    设 $ (V,+,\cdot) $ 为 $ F $-线性空间，$ \mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\in V $ 是 $ V $ 的一组基底。
-    如果存在另一组基底 $ \mathbf{u}_1,\mathbf{u}_2,\ldots,\mathbf{u}_m\in V $，且 $ m>n $，则 $\mathbf{u}_1,\mathbf{u}_2,\ldots,\mathbf{u}_m$ 线性相关，
-    即存在不全为零的 $ r_1,r_2,\ldots,r_m\in F $，使得
-    \[
-        r_1\cdot \mathbf{u}_1 + r_2\cdot \mathbf{u}_2 + \cdots + r_m\cdot \mathbf{u}_m = \mathbf{0}.
-    \]
-    因为 $ V=\mathrm{span}(\mathbf{v}_1,\ldots,\mathbf{v}_n) $，所以每个 $\mathbf{u}_i$ 都可以表示成 $\mathbf{v}_1,\ldots,\mathbf{v}_n$ 的线性组合，
-    即存在 $ s_{ij}\in F, i=1,2,\ldots,m, j=1,2,\ldots,n $，使得
-    \[
-        \mathbf{u}_i = \sum_{j=1}^{n} s_{ij}\cdot \mathbf{v}_j.
-    \]
-    将上式代入前一个等式，得到
-    \[
-        \sum_{i=1}^{m} r_i \left( \sum_{j=1}^{n} s_{ij}\cdot \mathbf{v}_j \right) = \sum_{j=1}^{n} \left( \sum_{i=1}^{m} r_i s_{ij} \right) \cdot \mathbf{v}_j = \mathbf{0}.
-    \]
-    因为 $\mathbf{v}_1,\ldots,\mathbf{v}_n$ 线性无关，所以对于每个 $ j=1,2,\ldots,n $，都有
-    \[
-        \sum_{i=1}^{m} r_i s_{ij} = 0.
-    \]
-    这构成了一个齐次线性方程组，未知数为 $ r_1,r_2,\ldots,r_m $，方程个数为 $ n $，未知数个数为 $ m $，且 $ m>n $。
-    根据线性代数的基本理论，该方程组有非零解，这与 $ r_1,r_2,\ldots,r_m $ 不全为零矛盾。
-    因此，$ m\leq n $。同理可证 $ n\leq m $，所以 $ m=n $。
-\end{proof}
 \vspace{0.5em}
 
-\begin{definition}[线性空间的维数 Dimension]
-    设 $ (V,+,\cdot) $ 为 $ F $-线性空间。如果 $ V $ 有一组基底 $ \{\mathbf{v}_1,\ldots,\mathbf{v}_n\} $，则称 $ n $ 为 $ V $ 的\textbf{维数}，记作 $\dim V = n$。
-    如果 $ V $ 没有有限基底，则称 $ V $ 为无穷维线性空间，记作 $\dim V = \infty$。
+\begin{definition}[线性映射的零空间 Zero Space]
+    设 $V,W$ 是两个 $F$-线性空间，$T:V\to W$ 是一个线性映射。则称
+    \[
+        \mathrm{null}(T) := \{\mathbf{v}\in V : T(\mathbf{v}) = \mathbf{0}\}
+    \]
+    为线性映射 $T$ 的\textbf{零空间}，也称为线性映射 $T$ 的\textbf{核 Kernel}。
+    \label{def:linear_map_zero_space}
 \end{definition}
 
+\begin{proposition}[线性映射的零空间是线性子空间]
+    设 $V,W$ 是两个 $F$-线性空间，$T:V\to W$ 是一个线性映射，则 $\mathrm{null}(T)$ 是 $V$ 的线性子空间。
+\end{proposition}
+
+\begin{lemma}[线性单射的充要条件]
+    设 $V,W$ 是两个 $F$-线性空间，$T:V\to W$ 是一个线性单射，当且仅当，$\mathrm{null}(T) = \{\mathbf{0}\}$
+    \label{lem:linear_map_injective_iff_null_space_is_zero}
+\end{lemma}
+\begin{proof}
+    充分性：设 $T$ 是单射，如果 $\mathbf{v}\in \mathrm{null}(T)$，则 $T(\mathbf{v}) = \mathbf{0} = T(\mathbf{0})$，因为 $T$ 是单射，所以 $\mathbf{v} = \mathbf{0}$，即 $\mathrm{null}(T) = \{\mathbf{0}\}$。
+    \\
+    \\
+    必要性：设 $\mathrm{null}(T) = \{\mathbf{0}\}$，如果 $T(\mathbf{u}) = T(\mathbf{v})$，则 $T(\mathbf{u}) - T(\mathbf{v}) = \mathbf{0}$，即 $T(\mathbf{u}-\mathbf{v}) = \mathbf{0}$。
+    因为 $\mathrm{null}(T) = \{\mathbf{0}\}$，所以 $\mathbf{u}-\mathbf{v} = \mathbf{0}$，即 $\mathbf{u} = \mathbf{v}$，所以 $T$ 是单射。
+\end{proof}
 \begin{note}
-    根据基底的定义，$V$ 中任意一个向量都可以唯一表示成基底向量的线性组合。
-    在 $n$ 维有限维线性空间中，任意 $n$ 个线性无关的向量都可以作为该空间的一组基底。
+    线性映射的零空间的零空间可以看成是所有满足齐次方程 $T(\mathbf{v}) = \mathbf{0}$ 的解构成的集合。
+    线性映射也是群同态，线性映射的零空间也是群同态的核，零空间自然也是原空间的线性子空间。
+\end{note}
+\vspace{0.5em}
+
+\begin{theorem}[有限维线性空间同构的充要条件]
+    设 $V,W$ 是两个有限维 $F$-线性空间，则 $V$ 与 $W$ 同构的充分必要条件为 $\dim V = \dim W$。
+    \label{thm:finite_dimensional_linear_space_isomorphism}
+\end{theorem}
+
+\begin{proof}
+    充分性：设 $\dim V = \dim W = n$，则 $V$ 有一组基底 $\{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\}$，$W$ 有一组基底 $\{\mathbf{w}_1,\mathbf{w}_2,\ldots,\mathbf{w}_n\}$。
+    定义映射 $T:V\to W$，使得 $T(\mathbf{v}_i) = \mathbf{w}_i$，并对任意 $\mathbf{v}\in V$，如果 $\mathbf{v} = \sum_{i=1}^{n} r_i \mathbf{v}_i$，则定义
+    \[
+        T(\mathbf{v}) = \sum_{i=1}^{n} r_i \mathbf{w}_i.
+    \]
+    显然，$T$ 是线性映射。又因为 $\{\mathbf{w}_1,\mathbf{w}_2,\ldots,\mathbf{w}_n\}$ 是 $W$ 的基底，所以 $T$ 是满射。
+    如果 $T(\mathbf{v}) = \mathbf{0}$，则 $\sum_{i=1}^{n} r_i \mathbf{w}_i = \mathbf{0}$，
+    因为 $\{\mathbf{w}_1,\mathbf{w}_2,\ldots,\mathbf{w}_n\}$ 线性无关，所以 $r_i = 0$，即 $\mathbf{v} = \mathbf{0}$，
+    根据引理 \ref{lem:linear_map_injective_iff_null_space_is_zero} $T$ 是单射。
+    \\
+    \\
+    必要性：设 $V$ 与 $W$ 同构，则存在双射线性映射 $T:V\to W$。设 $\{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\}$ 是 $V$ 的一组基底，则 $\{T(\mathbf{v}_1),T(\mathbf{v}_2),\ldots,T(\mathbf{v}_n)\}$ 是 $W$ 的一组基底。
+    因为 $T$ 是单射，所以 $\{T(\mathbf{v}_1),T(\mathbf{v}_2),\ldots,T(\mathbf{v}_n)\}$ 线性无关；因为 $T$ 是满射，所以 $\{T(\mathbf{v}_1),T(\mathbf{v}_2),\ldots,T(\mathbf{v}_n)\}$ 张成 $W$。
+    因此，$\dim W = n = \dim V$。
+\end{proof}
+
+\begin{note}
+    同构定理说明，两个有限维线性空间同构的充分必要条件是它们的维数相等。
+    那么三维几何空间与 $\mathbb{R}^3$ 是同构的，三维空间中的任意一个“有向箭头”都可以唯一地对应到 $\mathbb{R}^3$ 中的一个有序三元实数组，这是解析几何的基础。
 \end{note}
 \vspace{1em}
 
-% \subsection{基底变换}
+\subsection{线性映射空间}
 
-% \begin{definition}[坐标变换矩阵]
-%     设 $V$ 是 $n$ 维 $F$-线性空间，$\mathcal{E} = \{\mathbf{e}_1,\mathbf{e}_2,\ldots,\mathbf{e}_n\}$ 和 $\mathcal{E}' = \{\mathbf{e}'_1,\mathbf{e}'_2,\ldots,\mathbf{e}'_n\}$ 是 $F^n$ 的两个基底。
-%     两组基底之间的关系为：
-%     \[
-%         \begin{cases}
-%             \mathbf{e}'_1 &= a_{11}\mathbf{e}_1 + a_{21}\mathbf{e}_2 + \cdots + a_{n1}\mathbf{e}_n \\
-%             \mathbf{e}'_2 &= a_{12}\mathbf{e}_1 + a_{22}\mathbf{e}_2 + \cdots + a_{n2}\mathbf{e}_n \\
-%             &\vdots \\
-%             \mathbf{e}'_n &= a_{1n}\mathbf{e}_1 + a_{2n}\mathbf{e}_2 + \cdots + a_{nn}\mathbf{e}_n
-%         \end{cases}
-%     \]
-%     根据矩阵乘法的定义 \ref{def:matrix_multiplication}，可以写成矩阵乘法的形式：
-%     \[
-%         \begin{bmatrix}
-%             \mathbf{e}'_1 \\ \mathbf{e}'_2 \\ \vdots \\ \mathbf{e}'_n
-%         \end{bmatrix} =
-%         \begin{bmatrix}
-%             a_{11} & a_{12} & \cdots & a_{1n} \\
-%             a_{21} & a_{22} & \cdots & a_{2n} \\
-%             \vdots & \vdots & \ddots & \vdots \\
-%             a_{n1} & a_{n2} & \cdots & a_{nn}
-%         \end{bmatrix}
-%         \begin{bmatrix}
-%             \mathbf{e}_1 \\ \mathbf{e}_2 \\ \vdots \\ \mathbf{e}_n
-%         \end{bmatrix}
-%     \]
-%     设 $\mathbf{v}\in V$ 分别用两组基底表示为：
-%     \begin{align*}
-%         \mathbf{v} &= \begin{bmatrix}
-%             v_1 & v_2 & \cdots & v_n
-%         \end{bmatrix}\begin{bmatrix}
-%             \mathbf{e}_1 \\ \mathbf{e}_2 \\ \vdots \\ \mathbf{e}_n
-%         \end{bmatrix} \\
-%         &= \begin{bmatrix}
-%             v'_1 & v'_2 & \cdots & v'_n
-%         \end{bmatrix}\begin{bmatrix}
-%             \mathbf{e}'_1 \\ \mathbf{e}'_2 \\ \vdots \\ \mathbf{e}'_n
-%         \end{bmatrix}\\
-%         &= \begin{bmatrix}
-%             v'_1 & v'_2 & \vdots & v'_n
-%         \end{bmatrix}\begin{bmatrix}
-%             a_{11} & a_{12} & \cdots & a_{1n} \\
-%             a_{21} & a_{22} & \cdots & a_{2n} \\
-%             \vdots & \vdots & \ddots & \vdots \\
-%             a_{n1} & a_{n2} & \cdots & a_{nn}
-%         \end{bmatrix}
-%         \begin{bmatrix}
-%             \mathbf{e}_1 \\ \mathbf{e}_2 \\ \vdots \\ \mathbf{e}_n
-%         \end{bmatrix}
-%     \end{align*}
-%     所以线性空间中元素在不同基下的变换公式为：
-%     \[
-%         \begin{bmatrix}
-%             v_1 & v_2 & \cdots & v_n
-%         \end{bmatrix} =
-%         \begin{bmatrix}
-%             v'_1 & v'_2 & \cdots & v'_n
-%         \end{bmatrix}
-%         \begin{bmatrix}
-%             a_{11} & a_{12} & \cdots & a_{1n} \\
-%             a_{21} & a_{22} & \cdots & a_{2n} \\
-%             \vdots & \vdots & \ddots & \vdots \\
-%             a_{n1} & a_{n2} & \cdots & a_{nn}
-%         \end{bmatrix}
-%     \]
-%     \[
-%         \begin{bmatrix}
-%             v'_1 & v'_2 & \cdots & v'_n
-%         \end{bmatrix} =
-%         \begin{bmatrix}
-%             v_1 & v_2 & \cdots & v_n
-%         \end{bmatrix}
-%         \begin{bmatrix}
-%             a_{11} & a_{12} & \cdots & a_{1n} \\
-%             a_{21} & a_{22} & \cdots & a_{2n} \\
-%             \vdots & \vdots & \ddots & \vdots \\
-%             a_{n1} & a_{n2} & \cdots & a_{nn}
-%         \end{bmatrix}^{-1}
-%     \]
-%     其中，称可逆矩阵 $[a_{ij}]$ 为基底变换矩阵。
-% \end{definition}
+\begin{definition}[零映射 Zero Map]
+    设 $V,W$ 是两个 $F$-线性空间。函数 $T:V\to W$ 称为\textbf{零映射}，当且仅当，$\forall \mathbf{v}\in V $，有 $ T(\mathbf{v}) = \mathbf{0} $。
+    \label{def:zero_map}
+\end{definition}
 
+\begin{definition}[恒等映射 Identity Map]
+    设 $V,W$ 是两个 $F$-线性空间。函数 $I:V\to W$ 称为\textbf{恒等映射}，当且仅当，$\forall \mathbf{v}\in V $，有 $ I(\mathbf{v}) = \mathbf{v} $。
+    \label{def:identity_map}
+\end{definition}
+
+\begin{proposition}
+    零映射和恒等映射都是线性映射。
+\end{proposition}
+
+\begin{definition}[线性映射的加法]
+    设 $V,W$ 是两个 $F$-线性空间，$T_1,T_2:V\to W$ 是两个线性映射。则称 $T_1+T_2:V\to W$ 为\textbf{线性映射的加法}，其定义为：
+    \[
+        (T_1+T_2)(\mathbf{v}) = T_1(\mathbf{v}) + T_2(\mathbf{v}), \quad \forall \mathbf{v}\in V.
+    \]
+\end{definition}
+
+\begin{proposition}
+    线性映射的加法是良定义的，也即，$\forall T_1,T_2\in \mathcal{L}(V;W),\ T_1+T_2\in \mathcal{L}(V;W)$。
+\end{proposition}
+\begin{proof}
+    $\forall T_1,T_2\in \mathcal{L}(V;W),\ \forall \mathbf{u},\mathbf{v}\in V, \forall r,s \in F$，有
+    \begin{align*}
+        (T_1+T_2)(r\mathbf{u}+s\mathbf{v}) &= T_1(r\mathbf{u}+s\mathbf{v}) + T_2(r\mathbf{u}+s\mathbf{v}) \\
+        &= rT_1(\mathbf{u}) + sT_1(\mathbf{v}) + rT_2(\mathbf{u}) + sT_2(\mathbf{v}) \\
+        &= (rT_1(\mathbf{u}) + rT_2(\mathbf{u})) + (sT_1(\mathbf{v}) + sT_2(\mathbf{v})) \\
+        &= r(T_1+T_2)(\mathbf{u}) + s(T_1+T_2)(\mathbf{v}).
+    \end{align*}
+    所以，$T_1+T_2$ 依然是一个线性映射。
+\end{proof}
+
+\begin{definition}[线性映射的数乘]
+    设 $V,W$ 是两个 $F$-线性空间，$T:V\to W$ 是一个线性映射，$r\in F$。则称 $rT:V\to W$ 为\textbf{线性映射的数乘}，其定义为：
+    \[
+        (rT)(\mathbf{v}) = r\cdot T(\mathbf{v}), \quad \forall \mathbf{v}\in V.
+    \]
+\end{definition}
+
+\begin{proposition}
+    线性映射的数乘是良定义的，也即，$\forall T\in \mathcal{L}(V;W),\ \forall r\in F,\ rT\in \mathcal{L}(V;W)$。
+\end{proposition}
+
+\begin{proof}
+    $\forall T\in \mathcal{L}(V;W),\ \forall \mathbf{u},\mathbf{v}\in V, \forall r,s,t \in F$，有
+    \begin{align*}
+        (tT)(r\mathbf{u}+s\mathbf{v}) &= tT(r\mathbf{u}+s\mathbf{v}) \\
+        &= t(rT(\mathbf{u}) + sT(\mathbf{v})) \\
+        &= trT(\mathbf{u}) + tsT(\mathbf{v}) \\
+        &= r(tT)(\mathbf{u}) + s(tT)(\mathbf{v}).
+    \end{align*}
+    所以，$tT$ 依然是一个线性映射。
+\end{proof}
+
+\begin{proposition}[线性映射的线性空间]
+    设 $V,W$ 是两个 $F$-线性空间，$T,T_1,T_2:V\to W$ 是线性映射，$r,s\in F$，则有
+    \begin{enumerate}
+        \item 加法交换律：$T_1+T_2 = T_2+T_1$；
+        \item 加法结合律：$(T_1+T_2)+T = T_1+(T_2+T)$；
+        \item 存在加法单位元：$T+\mathbf{0} = T$，其中 $\mathbf{0}$ 是零映射；
+        \item 存在加法逆元：$T+(-T) = \mathbf{0}$，其中 $-T$ 是 $T$ 的加法逆元；
+        \item 数乘结合律：$r(sT) = (rs)T$；
+        \item 数乘分配律：$ (r+s)T = rT + sT $；
+        \item 数乘分配律：$ r(T_1 + T_2) = rT_1 + rT_2 $；
+        \item 数乘单位元：$1\cdot T = T$，其中 $1\in F$ 是 $F$ 的乘法单位元。
+    \end{enumerate}
+    因此 $\mathcal{L}(V;W)$ 在映射加法和数乘下构成一个 $F$-线性空间。
+    \label{prop:linear_map_linear_space}
+\end{proposition}
+\vspace{1em}
+
+\begin{proposition}[有限维线性映射空间的维度]
+    设 $V,W$ 是两个有限维 $F$-线性空间，且 $\dim V = n$，$\dim W = m$，则 $\dim \mathcal{L}(V;W) = mn$。
+    \label{prop:finite_dimensional_linear_map_space_dimension}
+\end{proposition}
+
+\begin{definition}[线性映射的乘法]
+    设 $V,W,U$ 是三个 $F$-线性空间，$T_1:V\to W$ 和 $T_2:W\to U$ 是两个线性映射，则称 $T_2 T_1:V\to U$ 为\textbf{线性映射的乘法}，其定义为：
+    \[
+        (T_2 T_1)(\mathbf{v}) := (T_2 \circ T_1)(\mathbf{v}) = T_2(T_1(\mathbf{v})), \quad \forall \mathbf{v}\in V.
+    \]
+\end{definition}
+
+\begin{proposition}[线性映射乘法的性质]
+    设 $V,W,U,X$ 是四个 $F$-线性空间
+    \begin{enumerate}
+        \item 结合律：$T_1:V\to W$，$T_2:W\to U$，$T_3:U\to X$ 是三个线性映射，则有
+        \[
+            T_3(T_2 T_1) = (T_3 T_2) T_1.
+        \]
+        \item 左分配律：$T_1,T_2:V\to W$ 和 $S:W\to U$ 是三个线性映射，则有
+        \[
+            S(T_1 + T_2) = S T_1 + S T_2,
+        \]
+        \item 右分配律：$T:V\to W$ 和 $S_1,S_2:W\to U$ 是三个线性映射，则有
+        \[
+            (S_1 + S_2) T = S_1 T + S_2 T,
+        \]
+        \item 通常不满足交换律：$T:V\to W$ 和 $S:W\to U$ 是两个线性映射，则一般情况下
+        \[
+            ST \neq TS.
+        \]
+    \end{enumerate}
+\end{proposition}
+
+\begin{note}
+    线性映射空间说明，从一个线性空间到另一个线性空间的所有线性映射本身也构成一个线性空间。
+    对于有限维线性空间上的线性映射空间，其维度等于原空间维度的乘积，因此可以用矩阵来表示线性映射。
+    对于 $n$ 维 $F$-线性空间到自身的线性变换，在线性映射的乘法下构成一个群，称为\textbf{一般线性群 General Linear Group} \ref{def:general_linear_group}，记为 $\mathrm{GL}_n(F)$。
+\end{note}
+
+\vspace{1em}
 
 
 \newpage

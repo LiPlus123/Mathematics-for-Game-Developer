@@ -1,46 +1,117 @@
-\section{张量代数}
+\section{指标记号}
 
-\subsection{多重线性泛函}
+下面介绍一种简化线性元素及其运算书写的\textbf{指标记号 Indicial notation}。
 
-\begin{definition}[线性泛函 Linear Functional]
-    设 $V$ 是一个 $F$-线性空间，$F$ 本身也可以看成一个 $F$-线性空间，那么 $T:V\to F$ 的线性映射称为\textbf{线性泛函}。
-    \label{def:linear_functional}
+\subsection{自由指标}
+
+\textbf{自由指标}：在表达式的一\textbf{项 Term}中，只出现一次的指标，可以是上标，也可以是下标。表示该表达式在该指标的取值范围内都成立。
+例如：一个 $n$ 维向量 $\mathbf{v}\in F^n$ 可以写成有序数组的形式：
+\[
+    \mathbf{v} = (v_1, v_2, \ldots, v_n)
+\]
+写成自由指标的形式为：
+\[
+    v_i, \quad i = 1, 2, \ldots, n
+\]
+这里的 $i$ 就是一个自由指标，表示 $\mathbf{v}$ 的第 $i$ 个分量。再比如，一个 $m \times n$ 的矩阵 $\mathbf{A} \in F^{m \times n}$ 可以写成：
+\[
+    \mathbf{A} = \begin{bmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n} \\
+        a_{21} & a_{22} & \cdots & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{m1} & a_{m2} & \cdots & a_{mn}
+    \end{bmatrix}
+\]
+写成自由指标的形式为：
+\[
+    a_{ij} = a^{ij} = a_i^{\ j} = a_j^{\ i}, \quad i = 1, 2, \ldots, m, \quad j = 1, 2, \ldots, n
+\]
+这里的 $i$ 和 $j$ 就是自由指标，分别表示矩阵 $\mathbf{A}$ 的第 $i$ 行和第 $j$ 列的元素。
+再比如，一个三指标的张量 $\mathbf{T} \in F^{m \times n \times p}$ 用自由指标可以写成：
+\[
+    t_{ijk} = t^{ijk} = t_i^{\ jk} = t_j^{\ ik} = t_k^{\ ij} = t_{ik}^{\ j} = t_{jk}^{\ i} = t_{ij}^{\ k}
+\]
+\[
+    i = 1, 2, \ldots, m, \quad j = 1, 2, \ldots, n, \quad k = 1, 2, \ldots, p
+\]
+这里的 $i$、$j$ 和 $k$ 就是自由指标，分别表示张量 $\mathbf{T}$ 的第 $i$ 行、第 $j$ 列和第 $k$ 层的元素。
+\vspace{1em}
+
+\subsection{哑指标求和约定}
+\textbf{哑指标}：在表达式的一项中，出现两次的指标，可以是上标，也可以是下标。表示该指标在该表达式中被求和。
+哑标自动求和也称为\textbf{爱因斯坦求和约定 Einstein summation convention}。比如，一个 $n$ 维向量用基 $\mathbf{e}_i$ 线性表出：
+\[
+    \mathbf{v} = \sum^n_{i=1}v^i \mathbf{e}_i
+\]
+用哑指标求和约定可以写成：
+\[
+    \mathbf{v} = v^i \mathbf{e}_i
+\]
+这里的 $i$ 就是一个哑指标，表示对 $i$ 从 $1$ 到 $n$ 求和。省略了求和符号 $\sum$。
+再比如，在 $F^n$ 内积空间中，两个向量 $\mathbf{u}, \mathbf{v} \in F^n$ 的内积可以写成：
+\[
+    \mathbf{u} \cdot \mathbf{v} = \sum^n_{i=1} u_i v^i
+\]
+用哑指标求和约定可以写成：
+\[
+    \mathbf{u} \cdot \mathbf{v} = u_i v^i
+\]
+再比如，一个 $m \times n$ 的矩阵 $\mathbf{A} \in F^{m \times n}$ 作用在一个 $n$ 维向量 $\mathbf{v} \in F^n$ 用矩阵乘法表示为：
+\[
+    \mathbf{A} \mathbf{v} = \begin{bmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n} \\
+        a_{21} & a_{22} & \cdots & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{m1} & a_{m2} & \cdots & a_{mn}
+    \end{bmatrix}\begin{matrix}
+        v_1 \\ v_2 \\ \vdots \\ v_n
+    \end{matrix}
+\]
+用哑指标求和约定可以写成：
+\[
+    (\mathbf{A} \mathbf{v})_i = a_{ij} v^j
+\]
+这里的 $j$ 就是一个哑指标，表示对 $j$ 从 $1$ 到 $n$ 求和，省略了求和符号 $\sum$。而 $i$ 是一个自由指标，表示结果向量 $\mathbf{A} \mathbf{v}$ 的第 $i$ 个分量。
+再比如，矩阵的迹用哑指标求和约定可以写成：
+\[
+    \mathrm{tr}(\mathbf{A}) = a_i^{\ i} = a^i_{\ i} = a_{ii}
+\]
+表示对角线元素求和。
+
+\vspace{1em}
+
+\subsection{克罗内克尔符号}
+
+\begin{definition}[克罗内克尔符号 Kronecker delta]：设一个两指标的数，可以记为 $\delta_{ij} = \delta^{ij} = \delta^{i}_{\ j}= \delta^{j}_{\ i}$：
+\[
+    \delta_{ij} = \begin{cases}
+        1, & i = j \\
+        0, & i \neq j
+    \end{cases}
+\]
+\label{def:kronecker_delta}
 \end{definition}
 
-\begin{definition}[多重线性泛函 Multilinear Functional]
-    设 $V_1,V_2,\ldots,V_n$ 是 $F$-线性空间，$F$ 本身也可以看成一个 $F$-线性空间，那么 $T:V_1\times V_2\times \cdots \times V_n \to F$ 的映射称为\textbf{多重线性泛函}，当且仅当，对于任意的 $i = 1,2,\cdots,n$，$T$ 满足：
-    \begin{enumerate}
-        \item $\forall \mathbf{v}_i,\mathbf{u}_i \in V_i,\ T(\cdots,\mathbf{v}_i+\mathbf{u}_i,\cdots) = T(\cdots,\mathbf{v}_i,\cdots)+T(\cdots,\mathbf{u}_i,\cdots)$
-        \item $\forall \mathbf{v}_i \in V_i,\ \forall r\in F,\ T(\cdots,r\mathbf{v}_i,\cdots) = rT(\cdots,\mathbf{v}_i,\cdots)$
-    \end{enumerate}
-    也即， $T$ 对每个变量都是线性的。全体多重线性泛函的集合记为 $\mathcal{L}(V_1,V_2,\ldots,V_n;F)$。
-    \label{def:multilinear_functional}
+\begin{definition}[广义克罗内克尔符号 Generalized Kronecker delta]：设一个 $n$ 指标的数，可以记为 $\delta_{j_1 j_2 \ldots j_n}^{i_1 i_2 \ldots i_n}$，定义为：
+\[
+    \delta_{j_1 j_2 \ldots j_n}^{i_1 i_2 \ldots i_n} = \begin{cases}
+        +1, & (j_1, j_2, \ldots, j_n) \text{ 是 } (i_1, i_2, \ldots, i_n) \text{ 的偶排列} \\
+        -1, & (j_1, j_2, \ldots, j_n) \text{ 是 } (i_1, i_2, \ldots, i_n) \text{ 的奇排列} \\
+        0, & (j_1, j_2, \ldots, j_n) \text{ 既非偶排列也不是奇排列}
+    \end{cases}
+\]
+\label{def:generalized_kronecker_delta}
 \end{definition}
 
-\subsection{对偶线性空间}
-
-\begin{definition}[对偶线性空间 Dual Linear Space]
-    设 $V$ 是一个 $F$-线性空间，则所有从 $V$ 到 $F$ 的线性泛函构成的集合 $\mathcal{L}(V,F)$ 也是个线性空间，称为 $V$ 的\textbf{对偶线性空间}，记为 $V^*$。
-    $V^*$ 中的元素称为 $V$ 的\textbf{对偶向量 Dual Vector} 或\textbf{余向量 Covector}。 
-    \label{def:dual_linear_space}
-\end{definition}
-
-\begin{proposition}
-    设 $V$ 是一个有限维 $F$-线性空间。$V^*$ 是 $V$ 的对偶空间。因为 $V^* = \mathcal{L}(V,F)$，
-    所以 $\dim V^* = \dim \mathcal{L}(V,F) = \dim V \cdot \dim F = \dim V$，也即 $V$ 与其对偶空间 $V^*$ 是同构的。
-\end{proposition}
-
-\begin{note}
-    线性空间与其对偶空间是同构的。
-    线性空间 $V$ 也是 $V^*$ 的对偶空间，我们令 $V^{**} = (V^*)^*$。比如，在矩阵乘法的定义下，有：
-    \[
-        \begin{bmatrix}
-            a_1 & a_2 & \cdots & a_n
-        \end{bmatrix}\begin{bmatrix}
-            b_1 \\ b_2 \\ \vdots \\ b_n
-        \end{bmatrix} = \sum_{i=1}^{n} a_i b_i \in F
-    \]
-    因此，$F^{n\times 1}$ 的对偶空间是 $F^{1\times n}$，$\dim F^{1\times n} = \dim F^{n\times 1} = n$。
-\end{note}
+\begin{example}
+    通过广义克罗内克符号，行列式的展开式还可以表示为：
+    \begin{align}
+        \det(\mathbf{A}) &= \sum_{\sigma \in S_n} \left( \mathrm{sgn}(\sigma) \prod_{i=1}^{n} a_{i,\sigma(i)} \right) \\
+        &= \sum_{(j_1, \cdots, j_n)\in S_n}^{n} \delta^{1 2 \cdots n}_{j_1 j_2 \cdots j_n}  a_{1}^{\ j_1}\cdots a_{n}^{\ j_n}
+        \label{eq:generalized_kronecker_determinant}
+    \end{align}
+    其中，$(j_1,\cdots,j_n)\in S_n$ 是 $1,2,\cdots,n$ 的一个排列。
+    \label{ex:generalized_kronecker_determinant}
+\end{example}
 
 \newpage

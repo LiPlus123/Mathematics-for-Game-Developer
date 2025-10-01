@@ -1,240 +1,397 @@
-\section{特征值与特性向量}
+\section{特殊矩阵}
 
-\begin{definition}[特征值与特征向量 Eigenvalue and Eigenvector]
-    设 $V$ 是一个 $F$-线性空间，线性变换 $T\in \mathcal{L}(V,V)$，如果存在标量 $\lambda\in F$ 和非零向量 $\mathbf{v}\in V$，使得
-    \[
-        T(\mathbf{v}) = \lambda \mathbf{v}
-    \]
-    则称 $\lambda$ 为 $T$ 的\textbf{特征值}，$\mathbf{v}$ 为 $T$ 对应于特征值 $\lambda$ 的\textbf{特征向量}。
-    \label{def:eigenvalue_and_eigenvector}
+\subsection{厄米矩阵与厄米算子}
+
+\begin{definition}[对称矩阵 Symmetric Matrix]
+    设 $\mathbf{A} \in F^{n \times n}$，如果 $\mathbf{A}^T = \mathbf{A}$，则称 $\mathbf{A}$ 为\textbf{对称矩阵}。
+    \label{def:symmetric_matrix}
 \end{definition}
 
-\begin{proposition}[特征值与特征向量的性质]
-    设 $V$ 是一个 $F$-线性空间，线性变换 $T\in \mathcal{L}(V,V)$
+\begin{definition}[共轭对称矩阵 Hermitian Matrix]
+    设 $\mathbf{A} \in \mathbb{C}^{n \times n}$，如果 ，
+    \[
+        \mathbf{A}^H = \overline{\mathbf{A}^T} = \mathbf{A}
+    \]
+    则称 $\mathbf{A}$ 为\textbf{共轭对称矩阵} 或\textbf{厄米矩阵 Hermitian Matrix}。
+    \label{def:hermitian_matrix}
+\end{definition}
+
+\begin{proposition}[共轭对称矩阵的性质]
+    设 $\mathbf{A} \in \mathbb{C}^{n \times n}$ 是共轭对称矩阵，则有：
     \begin{enumerate}
-        \item 如果 $\lambda$ 是 $T$ 的一个特征值，则 $k\lambda$ 也是 $T$ 的一个特征值，其中 $k\in F\setminus \{0\}$；
-        \item 如果 $\mathbf{v}$ 是 $T$ 对应于特征值 $\lambda$ 的一个特征向量，则 $k\mathbf{v}$ 也是对应于特征值 $\lambda$ 的一个特征向量，其中 $k\in F\setminus \{0\}$；
-        \item 如果 $\mathbf{v}$ 是 $T$ 对应于特征值 $\lambda$ 的一个特征向量，则对于任意正整数 $m$，$\mathbf{v}$ 也是 $T^m$ 对应于特征值 $\lambda^m$ 的一个特征向量；
-        \item 如果 $V$ 是有限维线性空间，$T$ 有 $n$ 个不同的特征值，则对应的特征向量构成 $V$ 的一个基；
-        \item 如果 $V$ 是有限维线性空间，$T$ 有 $n$ 个不同的特征值 $\lambda_1,\lambda_2,\ldots,\lambda_n$，则 $T$ 可对角化，即存在一个基，使得 $T$ 在该基下的矩阵表示为对角矩阵。
+        \item $(\mathbf{A}+\mathbf{B})^H = \mathbf{A}^H + \mathbf{B}^H = \mathbf{A}+\mathbf{B}$
+        \item $(c\mathbf{A})^H = \bar{c} \mathbf{A}^H = \bar{c} \mathbf{A}$，其中 $c\in \mathbb{C}$
+        \item $(\mathbf{A}\mathbf{B})^H = \mathbf{B}^H \mathbf{A}^H = \mathbf{B} \mathbf{A}$
     \end{enumerate}
 \end{proposition}
-
 \begin{note}
-    线性变换的的特征向量是一种在变换下仅改变大小而方向保持在同一直线的向量；特征值表示缩放的程度。
-    不管是有限维还是无限维线性空间，特征值与特征向量的定义都是一样的。
-    不过在无限维线性空间中，线性变换将不能用矩阵表示，特征值与特征向量的研究会更加困难，下面的内容主要针对有限维线性空间。
+    实对称矩阵是实数域上的共轭对称矩阵。矩阵的共轭转置也常记为 $\mathbf{A}^{\dagger}$ 或 $\mathbf{A}^*$。
 \end{note}
-
 \vspace{1em}
 
-如果 $V$ 是 $n$ 维 $F$-线性空间，$T\in \mathcal{L}(V,V)$ 可以表示为一个 $n\times n$ 矩阵 $\mathbf{A}$。
-根据特征值和特征向量的定义 \ref{def:eigenvalue_and_eigenvector}，有：
-\[
-    \mathbf{A}\mathbf{v} = \lambda \mathbf{v} \iff \mathbf{A}\mathbf{v} - \lambda \mathbf{v} = 0 \iff (\mathbf{A} - \lambda \mathbf{I})\mathbf{v} = \mathbf{0}
-\]
-其中， $\mathbf{I}$ 是 $n\times n$ 单位矩阵，$\mathbf{v} \neq \mathbf{0}$。
-根据命题 \ref{prop:linear_equations_solutions}，齐次线性方程组 $(\mathbf{A} - \lambda \mathbf{I})\mathbf{v} = \mathbf{0}$ 存在非零解，
-当且仅当， $\mathbf{A} - \lambda \mathbf{I}$ 是奇异矩阵，即 $\det(\mathbf{A} - \lambda \mathbf{I}) = 0$，该式即\textbf{特征多项式方程}，该方程的解 $\lambda$ 即为矩阵 $\mathbf{A}$ 的特征值。
-如果已知特征值 $\lambda$，零空间 $\mathrm{null}(\mathbf{A} - \lambda \mathbf{I})$ 则是相应特征向量 $\mathbf{v}$ 所在的空间，称为 $\mathbf{A}$ 的\textbf{特征子空间}。
+\begin{definition}[伴随算子 Adjoint Operator]
+    设 $V$ 是一个内积空间，$T:V\to V$ 是一个线性变换。如果存在一个线性变换 $T^*:V\to V$，使得 $\forall \mathbf{u},\mathbf{v}\in V$，都有
+    \[
+        \langle T(\mathbf{u}),\mathbf{v} \rangle = \langle \mathbf{u},T^*(\mathbf{v}) \rangle
+    \]
+    则称 $T^*$ 为 $T$ 的\textbf{伴随算子}。
+    \label{def:adjoint_operator}
+\end{definition}
 
-\vspace{1em}
-
-\subsection{特征多项式}
-
-\begin{definition}[特征多项式 Characteristic Polynomial]
-    设 $\mathbf{A} \in F^{n \times n}$，定义 $\mathbf{A}$ 的\textbf{特征多项式}为
-    \begin{equation}
-        p(\lambda) = \det(\mathbf{A} - \lambda \mathbf{I})
-        \label{eq:characteristic_polynomial}
-    \end{equation}
-    其中，$\mathbf{I}$ 是 $n\times n$ 单位矩阵，$\lambda$ 是变量。
-    \label{def:characteristic_polynomial}
+\begin{definition}[自伴随算子 Self-Adjoint Operator]
+    设 $V$ 是一个内积空间，线性变换 $T:V\to V$ 是\textbf{自伴随算子}，当且仅当，$T = T^*$ ，也即
+    \[
+        \langle T(\mathbf{u}),\mathbf{v} \rangle = \langle \mathbf{u},T(\mathbf{v}) \rangle = \overline{\langle T(\mathbf{v}),\mathbf{u} \rangle}
+    \]
+    自伴随算子也称为\textbf{厄米算子 Hermitian Operator}。
+    \label{def:self_adjoint_operator}
 \end{definition}
 
 \begin{note}
-    根据行列式的定义，行列式需要将不同行不同列的矩阵元素相乘，因此特征多项式是关于 $\lambda$ 的 $n$ 次多项式，$p(\lambda)\in F[\lambda]$。
-    $F[\lambda]$ 是域 $F$ 上的多项式环 \ref{def:polynomial_ring}。
-    根据广义代数基本定理 \ref{thm:FundamentalTheoremOfAlgebraicClosure}，设 $K$ 是 $F$ 的代数闭包，那么 $p(\lambda)=0$ 在 $K$ 中有 $n$ 个根（重根算多重），也即特征多项式可以因式分解为：
-    \begin{equation}
-        p(\lambda) = \det(\mathbf{A} - \lambda \mathbf{I}) = (\lambda-\lambda_1)^{d_1}(\lambda-\lambda_2)^{d_2}\cdots(\lambda-\lambda_m)^{d_m} =0
-        \label{eq:characteristic_polynomial_factorization}
-    \end{equation}
-    其中，
-    \begin{enumerate}
-        \item $d_m\in \mathbb{Z}^+,\ 1 \leq m \leq n$ 表示根的重数，并且 $\sum_{i=1}^{m} d_i = n$；
-        \item $\lambda_1,\lambda_2,\ldots,\lambda_m \in K$ 表示互不相等的根，这些根即为矩阵 $\mathbf{A}$ 的特征值。
-    \end{enumerate}
+    在有限维的酉空间中，矩阵的共轭转置就是其伴随算子，共轭对称矩阵是自伴随算子。
+    需要注意，在中文翻译中，伴随算子中的 adjoint 与伴随矩阵中的 adjugate 是完全不同的概念。
 \end{note}
 
-\textbf{特征多项式的展开}：将特征多项式 \ref{eq:characteristic_polynomial} 写成分量的形式：
-\[
-    p(\lambda) = \det(\mathbf{A} - \lambda \mathbf{I}) = \begin{vmatrix}
-        a_{11}-\lambda & a_{12} & \cdots & a_{1n} \\
-        a_{21} & a_{22}-\lambda & \cdots & a_{2n} \\
-        \vdots & \vdots & \ddots & \vdots \\
-        a_{n1} & a_{n2} & \cdots & a_{nn}-\lambda
-    \end{vmatrix}
-\]
-根据行列式展开定理 \ref{thm:determinant_expansion}，将特征多项式展开成标准形式：
-\begin{equation}
-    p(\lambda) = (-1)^n \lambda^n + (-1)^{n-1} c_1 \lambda^{n-1} + \cdots + (-1)^k c_k \lambda^{n-k} + \cdots +  c_n
-    \label{eq:characteristic_polynomial_expansion}
-\end{equation}
-其中，
-\begin{enumerate}
-    \item $c_1 = \sum^n_{i=1} a_{ii} $，称为矩阵的\textbf{迹 trace}，记为 $\mathrm{tr}(\mathbf{A})$；
-    \item $c_n = \det(\mathbf{A})$，是矩阵 $\mathbf{A}$ 的行列式；
-    \item $c_k,\ 1< k < n$ 是矩阵 $\mathbf{A}$ 的所有 $k$ 阶主子式之和。
-\end{enumerate}
-\vspace{1em}
-
-\begin{example}[二阶方阵的特征多项式展开]
-    设 $\mathbf{A} = \begin{bmatrix}
-        a & b \\
-        c & d
-    \end{bmatrix}$，则特征多项式为：
-    \begin{align}
-        p(\lambda) &= \det(\mathbf{A} - \lambda \mathbf{I}) = \begin{vmatrix}
-            a - \lambda & b \\
-            c & d - \lambda
-        \end{vmatrix} \\
-        &= (a - \lambda)(d - \lambda) - bc \\
-        &= \lambda^2 - (a + d)\lambda + (ad - bc)\\
-        &= \lambda^2 - \mathrm{tr}(\mathbf{A})\lambda + \det(\mathbf{A})
-        \label{eq:characteristic_polynomial_2x2}
-    \end{align}
-\end{example}
-
-\begin{example}[三阶方阵的特征多项式展开]
-    设 $\mathbf{A} = \begin{bmatrix}
-        a & b & c \\
-        d & e & f \\
-        g & h & i
-    \end{bmatrix}$，则特征多项式为：
-    \begin{align}
-        p(\lambda) &= \det(\mathbf{A} - \lambda \mathbf{I}) = \begin{vmatrix}
-            a - \lambda & b & c \\
-            d & e - \lambda & f \\
-            g & h & i - \lambda
-        \end{vmatrix} \\
-        &= (a - \lambda) \begin{vmatrix}
-            e - \lambda & f \\
-            h & i - \lambda
-        \end{vmatrix} - b \begin{vmatrix}
-            d & f \\
-            g & i - \lambda
-        \end{vmatrix} + c \begin{vmatrix}
-            d & e - \lambda \\
-            g & h
-        \end{vmatrix} \\
-        &= (a - \lambda)((e - \lambda)(i - \lambda) - fh) - b(di - fg + \lambda g) + c(dh - eg + \lambda g) \\
-        % &= -\lambda^3 + (a + e + i)\lambda^2 - (ae + ai + ei - bh - cf - dg)\lambda +\\
-        %  &(aei + bfg + cdh - afh - bdi - ceg) \\
-        &= -\lambda^3 + \mathrm{tr}(\mathbf{A})\lambda^2 - (ae + ai + ei - bh - cf - dg)\lambda + \det(\mathbf{A})
-        \label{eq:characteristic_polynomial_3x3}
-    \end{align}
-\end{example}
-\vspace{1em}
-
-\begin{theorem}[韦达定理 Vieta's Theorem]
-    设任意一个 $n$ 次多项式 $p(x)\in F[x]$：
-    \[
-        p(x) = x^n + a_1 x^{n-1} + \cdots + a_{n-1} x + a_n,\ a \neq 0
-    \]
-    如果 $K$ 是 $F$ 的代数闭包，并且 $p(x)$ 在 $K$ 中有 $m$ 个互不相等的根 $\lambda_1,\lambda_2,\ldots,\lambda_m$，并且每个根的重数分别为 $d_1,d_2,\ldots,d_m$，则有：
+\begin{proposition}
+    复内积空间中自伴随算子不同特征值对应的特征向量是正交的；自伴随算子的特征值都是实数。
+    \label{prop:self_adjoint_operator_eigenvalue}
+\end{proposition}
+\begin{proof}
+    设 $V$ 是一个复内积空间，$T\in \mathcal{L}(V;V)$ 是一个自伴随算子，$\lambda_1,\lambda_2$ 是 $T$ 的两个特征值，$\mathbf{v}_1,\mathbf{v}_2$ 是对应的特征向量。
     \begin{enumerate}
-        \item $\sum_{i=1}^{m} d_i = n$；
-        \item $\prod_{i=1}^{m} x_i^{d_i} = (-1)^n a_n$；
-        \item $\sum_{i=1}^{m} d_i x_i = -a_1$；
+        \item 当 $\lambda_1 \neq \lambda_2$ 时，$\mathbf{v}_1 \neq \mathbf{v}_2 \neq \mathbf{0}$，则有
+        \[
+            \langle T(\mathbf{v}_1),\mathbf{v}_2 \rangle = \langle \lambda_1 \mathbf{v}_1,\mathbf{v}_2 \rangle = \lambda_1 \langle \mathbf{v}_1,\mathbf{v}_2 \rangle
+        \]
+        \[
+            \langle \mathbf{v}_1,T(\mathbf{v}_2) \rangle = \langle \mathbf{v}_1,\lambda_2 \mathbf{v}_2 \rangle = \overline{\lambda_2} \langle \mathbf{v}_1,\mathbf{v}_2 \rangle
+        \]
+        其中， $\langle T(\mathbf{v}_1),\mathbf{v}_2 \rangle = \langle \mathbf{v}_1,T(\mathbf{v}_2) \rangle$，所以
+        \[
+            (\lambda_1 - \overline{\lambda_2}) \langle \mathbf{v}_1,\mathbf{v}_2 \rangle =  0
+        \]
+        因为 $\lambda_1 - \overline{\lambda_2} \neq 0$，所以 $\langle \mathbf{v}_1,\mathbf{v}_2 \rangle = 0$，也即 $\mathbf{v}_1 \perp \mathbf{v}_2$。
+        \item 当 $\lambda_1 = \lambda_2 = \lambda$ 时，$\mathbf{v}_1 = \mathbf{v}_2 = \mathbf{v} \neq \mathbf{0}$，则有
+        \[
+            (\lambda - \overline{\lambda}) \langle \mathbf{v},\mathbf{v} \rangle =  0
+        \]
+        因为 $\langle \mathbf{v},\mathbf{v} \rangle > 0$，所以 $\lambda - \overline{\lambda} = 0$，也即 $\lambda = \overline{\lambda}$，$\lambda$ 是实数。
     \end{enumerate}
-    \label{thm:VietasTheorem}
-\end{theorem}
+\end{proof}
 
+\begin{note}
+    命题 \ref{prop:self_adjoint_operator_eigenvalue} 是量子力学的基础。
+    量子力学中，物理量对应于复内积空间（可能是有限维，也可能是无限维）的自伴随算子，
+    对物理量测量前，系统处于叠加态（特征向量所张成的特征子空间中某个向量），
+    当对物理量进行测量时，系统会坍缩到某个本征态（特征向量），
+    测量值为特征向量对应的特征值，是一个实数。
+\end{note}
+
+\vspace{1em}
+\subsection{正交矩阵与酉矩阵}
+
+\begin{definition}[正交矩阵 Orthogonal Matrix]
+    设 $\mathbf{A} \in \mathbb{R}^{n \times n}$，如果 $\mathbf{A}^T \mathbf{A} = \mathbf{A} \mathbf{A}^T = \mathbf{I}$，则称 $\mathbf{A}$ 为\textbf{正交矩阵}。
+    \label{def:orthogonal_matrix}
+\end{definition}
+
+\begin{definition}[酉矩阵 Unitary Matrix]
+    设 $\mathbf{A} \in \mathbb{C}^{n \times n}$，如果 $\mathbf{A}^H \mathbf{A} = \mathbf{A} \mathbf{A}^H = \mathbf{I}$，则称 $\mathbf{A}$ 为\textbf{酉矩阵}。
+    \label{def:unitary_matrix}
+\end{definition}
+
+\begin{note}
+    正交矩阵是实数域上的酉矩阵。根据定义，正交矩阵和酉矩阵都是可逆矩阵，并且有 $\mathbf{A}^{-1} = \mathbf{A}^T$ 或 $\mathbf{A}^{-1} = \mathbf{A}^H$。
+\end{note}
+
+\vspace{1em}
+
+\begin{proposition}[正交（酉）矩阵的乘积依然是正交（酉）矩阵]
+    设 $\mathbf{A},\mathbf{B} \in \mathbb{R}^{n \times n}$ 是两个正交矩阵，则 $\mathbf{A}\mathbf{B}$ 也是一个正交矩阵。
+    \[
+        (\mathbf{A}\mathbf{B})^T (\mathbf{A}\mathbf{B}) = \mathbf{B}^T \mathbf{A}^T \mathbf{A}\mathbf{B} = \mathbf{B}^T \mathbf{B} = \mathbf{I}
+    \]    
+    设 $\mathbf{A},\mathbf{B} \in \mathbb{C}^{n \times n}$ 是两个酉矩阵，则 $\mathbf{A}\mathbf{B}$ 也是一个酉矩阵。
+    \[
+        (\mathbf{A}\mathbf{B})^H (\mathbf{A}\mathbf{B}) = \mathbf{B}^H \mathbf{A}^H \mathbf{A}\mathbf{B} = \mathbf{B}^H \mathbf{B} = \mathbf{I}
+    \]
+\end{proposition}
+
+\begin{proposition}[正交（酉）矩阵的行列式的绝对值为 1]
+    设 $\mathbf{A} \in \mathbb{R}^{n \times n}$ 是一个正交矩阵，则有
+    \[
+        \det(\mathbf{A}^T \mathbf{A}) = \det(\mathbf{A})\det(\mathbf{A}) = \det(\mathbf{A})^2 = \det(\mathbf{I}) = 1
+    \]
+    所以 $\det(\mathbf{A}) = \pm 1$。
+    \\
+    \\
+    设 $\mathbf{A} \in \mathbb{C}^{n \times n}$ 是一个酉矩阵，则有
+    \[
+        \det(\mathbf{A}^H \mathbf{A})  = \overline{\det(\mathbf{A})} \det(\mathbf{A})  = |\det(\mathbf{A})|^2 = \det(\mathbf{I}) = 1
+    \]
+    所以 $\det(\mathbf{A}) = e^{i\theta}$。
+\end{proposition}
+
+\begin{proposition}[正交（酉）矩阵的行（列）向量组构成标准正交基]
+    设 $\mathbf{A} = [\mathbf{a}_1,\mathbf{a}_2,\ldots,\mathbf{a}_n] \in \mathbb{R}^{n \times n}$ 是一个正交矩阵，则 $\{\mathbf{a}_1,\mathbf{a}_2,\ldots,\mathbf{a}_n\}$ 是 $\mathbb{R}^n$ 的一个标准正交基。
+    设 $\mathbf{A} = [\mathbf{a}_1,\mathbf{a}_2,\ldots,\mathbf{a}_n] \in \mathbb{C}^{n \times n}$ 是一个酉矩阵，则 $\{\mathbf{a}_1,\mathbf{a}_2,\ldots,\mathbf{a}_n\}$ 是 $\mathbb{C}^n$ 的一个标准正交基。
+\end{proposition}
+
+\vspace{1em}
+\begin{proposition}[正交（酉）矩阵是保内积的线性变换]
+    设 $\mathbf{A} \in \mathbb{R}^{n \times n}$ 是一个正交矩阵，则有：
+    \[
+        \langle \mathbf{A}\mathbf{x},\mathbf{A}\mathbf{y} \rangle = (\mathbf{A}\mathbf{x})^T \mathbf{A}\mathbf{y}  = \mathbf{x}^T \mathbf{A}^T \mathbf{A} \mathbf{y} = \mathbf{x}^T \mathbf{y} = \langle \mathbf{x},\mathbf{y} \rangle
+    \]
+    设 $\mathbf{A} \in \mathbb{C}^{n \times n}$ 是一个酉矩阵，则有：
+    \[
+        \langle \mathbf{A}\mathbf{x},\mathbf{A}\mathbf{y} \rangle = (\mathbf{A}\mathbf{x})^H \mathbf{A}\mathbf{y}  = \mathbf{x}^H \mathbf{A}^H \mathbf{A} \mathbf{y} = \mathbf{x}^H \mathbf{y} = \langle \mathbf{x},\mathbf{y} \rangle
+    \]
+\end{proposition}
+
+\begin{corollary}[正交（酉）矩阵是保长度的线性变换]
+    设 $\mathbf{A}$ 是一个正交（酉）矩阵，则有：
+    \[
+        \|\mathbf{A}\mathbf{x}\|_2 = \sqrt{\langle \mathbf{A}\mathbf{x},\mathbf{A}\mathbf{x} \rangle} = \sqrt{\langle \mathbf{x},\mathbf{x} \rangle} = \|\mathbf{x}\|_2
+    \]
+\end{corollary}
+
+\begin{corollary}[正交（酉）矩阵的特征值的绝对值为 1]
+    设 $\mathbf{A}$ 是一个正交（酉）矩阵，$\lambda$ 是 $\mathbf{A}$ 的一个特征值，则有
+    \[
+        |\lambda| = 1
+    \]
+\end{corollary}
+\begin{proof}
+    设 $\mathbf{v} \neq \mathbf{0}$ 是 $\mathbf{A}$ 对应于特征值 $\lambda$ 的特征向量，则有
+    \[
+        \mathbf{A}\mathbf{v} = \lambda \mathbf{v}
+    \]
+    因为 $\mathbf{A}$ 是正交（酉）矩阵，所以 
+    \[
+        \|\mathbf{A}\mathbf{x}\|_2 = \|\lambda \mathbf{x}\|_2 = |\lambda| \|\mathbf{x}\|_2 = \|\mathbf{x}\|_2
+    \]
+    所以 $|\lambda| = 1$。
+\end{proof}
+
+\begin{note}
+    正交矩阵和酉矩阵都是保内积的线性变换，其几何意义是保持向量的长度和向量之间的夹角不变，比如旋转变化就是一种正交变换。
+    在无限维空间中，保内积的线性变换称为酉算子。
+\end{note}
 \vspace{0.5em}
 
-\textbf{特征值之间的关系}：根据特征多项式的展开式 \ref{eq:characteristic_polynomial_expansion} 和韦达定理 \ref{thm:VietasTheorem}，可以得到矩阵 $\mathbf{A}$ 的特征值之间的关系：
-\begin{enumerate}
-    \item 所有特征值之和（重根算多重）等于矩阵的迹：$\sum_{i=1}^{m} d_i \lambda_i = \mathrm{tr}(\mathbf{A})$
-    \item 所有特征值之积（重根算多重）等于矩阵的行列式：$\prod_{i=1}^{m} \lambda_i^{d_i} = \det(\mathbf{A})$
-\end{enumerate}
-
-\vspace{1em}
-
-\subsection{特征子空间}
-
-\begin{definition}[特征子空间 Eigenspace]
-    设 $V$ 是一个 $F$-线性空间，线性变换 $T\in \mathcal{L}(V,V)$，如果 $\lambda$ 是 $T$ 的一个特征值，则对应的\textbf{特征子空间}定义为
-    \begin{align*}
-        E_\lambda &:= \{\mathbf{v}\in V : T(\mathbf{v}) = \lambda \mathbf{v}\}\\
-        &= \{\mathbf{v}\in V : (T - \lambda I) \mathbf{v}= \mathbf{0}\}\\
-        &=\mathrm{null}(T - \lambda I)\\
-    \end{align*}
-    其中 $I$ 是恒等映射 \ref{def:identity_map}。
-    \label{def:eigenspace}
-\end{definition}
-
-\begin{proposition}
-    特征子空间 $E_\lambda$ 是 $V$ 的一个线性子空间。
-\end{proposition}
-
-\begin{corollary}
-    零向量属于任意特征子空间，即 $\mathbf{0}\in E_\lambda$。但零向量不是任何特征值对应的特征向量。
-\end{corollary}
-
-\begin{note}
-    如果 $V$ 是有限维空间，$T$ 用矩阵 $\mathbf{A}\in F^{n\times n}$ 表示，那么系数矩阵 $\mathbf{A} - \lambda \mathbf{I}$ 是奇异矩阵，
-    特征子空间 $E_\lambda$ 是 $n$ 元齐次线性方程组 $(\mathbf{A} - \lambda \mathbf{I})\mathbf{v} = \mathbf{0}$ 的解空间。
-    如果 $V$ 是无限维空间，比如函数空间，那么特征子空间 $E_\lambda$ 是线性微分方程 $T(\mathbf{v}) = \lambda \mathbf{v}$ 的解空间，
-    特征向量对应方程的基本解组，用于构造方程的通解。
-\end{note}
-\vspace{1em}
-
-\begin{definition}[特征值的几何重数 Geometric Multiplicity of Eigenvalue]
-    设 $\mathbf{A}\in F^{n\times n}$ ，如果 $\lambda$ 是 $\mathbf{A}$ 的一个特征值，
-    对应的特征子空间 $E_\lambda$ 的维数 $\dim E_\lambda$ 称为 $\lambda$ 的\textbf{几何重数}。
-    根据秩-零化子定理 \ref{thm:rank_nullity_theorem}，几何重数的计算公式为：
+\begin{proposition}[正交（酉）矩阵不同特征值对应的特征向量是正交的]
+    设 $\mathbf{A}$ 是一个正交（酉）矩阵，$\lambda_1,\lambda_2$ 是 $\mathbf{A}$ 的两个不同特征值，$\mathbf{v}_1,\mathbf{v}_2$ 是对应的特征向量，则有
     \[
-        \dim E_\lambda = \dim[\mathrm{null}(\mathbf{A} - \lambda \mathbf{I})]
-    \]
-    \label{def:geometric_multiplicity_of_eigenvalue}
-\end{definition}
-
-\begin{proposition}[几何重数与代数重数的关系]
-    设 $\mathbf{A}\in F^{n\times n}$，如果 $\lambda$ 是 $\mathbf{A}$ 的一个特征值，$\lambda$ 的几何重数为 $g$，代数重数为 $d$，则有：
-    \[
-        1 \leq g \leq d
+        \langle \mathbf{v}_1,\mathbf{v}_2 \rangle = 0
     \]
 \end{proposition}
-\vspace{1em}
-
-\begin{proposition}[不同特征值对应的特征向量线性无关]
-    如果 $\lambda_1$ 和 $\lambda_2$ 是 $T$ 的两个不同的特征值，$\mathbf{v}_1$ 和 $\mathbf{v}_2$ 分别是对应的特征向量，则 $\mathbf{v}_1$ 和 $\mathbf{v}_2$ 线性无关；
-\end{proposition}
-
-\begin{corollary}[不同特征值的特征子空间的交集为零向量]
-    设 $\mathbf{A}\in F^{n\times n}$，如果 $\lambda_1$ 和 $\lambda_2$ 是 $\mathbf{A}$ 的两个不同的特征值，则对应的特征子空间 $E_{\lambda_1}$ 和 $E_{\lambda_2}$ 的交集为零向量，即
+\begin{proof}
+    设 $\mathbf{A}$ 是一个正交（酉）矩阵，$\lambda_1,\lambda_2$ 是 $\mathbf{A}$ 的两个不同特征值，$\mathbf{v}_1,\mathbf{v}_2$ 是对应的特征向量，则有
     \[
-        E_{\lambda_1} \cap E_{\lambda_2} = \{\mathbf{0}\}
+        \mathbf{A}\mathbf{v}_1 = \lambda_1 \mathbf{v}_1, \quad \mathbf{A}\mathbf{v}_2 = \lambda_2 \mathbf{v}_2
     \]
-\end{corollary}
-\vspace{1em}
+    因为 $\mathbf{A}$ 是正交（酉）矩阵，所以 
+    \[
+        \langle \mathbf{A}\mathbf{v}_1,\mathbf{A}\mathbf{v}_2 \rangle = \langle \lambda_1 \mathbf{v}_1,\lambda_2 \mathbf{v}_2 \rangle = \lambda_1 \overline{\lambda_2} \langle \mathbf{v}_1,\mathbf{v}_2 \rangle = \langle \mathbf{v}_1,\mathbf{v}_2 \rangle
+    \]
+    所以 
+    \[
+        (\lambda_1 \overline{\lambda_2} - 1) \langle \mathbf{v}_1,\mathbf{v}_2 \rangle = 0
+    \]
+    因为 $\lambda_1 \neq \lambda_2$ 并且 $\lambda_1\bar{\lambda}_1 = \lambda_2\bar{\lambda}_2 = 1$，所以 $\lambda_1 \overline{\lambda_2}  \neq 1$，所以 $\langle \mathbf{v}_1,\mathbf{v}_2 \rangle = 0$。
+\end{proof}
 
-\begin{definition}[不变子空间 Invariant Subspace]
-    设 $V$ 是一个 $F$-线性空间，线性变换 $T\in \mathcal{L}(V,V)$，如果 $W$ 是 $V$ 的一个线性子空间，并且 $\forall \mathbf{w}\in W$，有 $T(\mathbf{w})\in W$，则称 $W$ 是 $T$ 的一个\textbf{不变子空间}。
-    其中，$V$ 和 $\{\mathbf{0}\}$ 是不变子空间，称为平凡不变子空间。其余的不变子空间称为非平凡不变子空间。
-    \label{def:invariant_subspace}
+\vspace{1em}
+\subsection{三角矩阵与可三角化矩阵}
+\begin{definition}[上三角矩阵 Upper Triangular Matrix]
+    设 $\mathbf{A} = [a_{ij}] \in F^{n \times n}$，如果
+    \[
+        a_{ij} = 0, \quad \forall i > j
+    \]
+    则称 $\mathbf{A}$ 为\textbf{上三角矩阵}。
+    \label{def:upper_triangular_matrix}
 \end{definition}
 
-\begin{proposition}
-    特征子空间 $E_\lambda$ 是 $T$ 的一个非平凡不变子空间。
+\begin{definition}[下三角矩阵 Lower Triangular Matrix]
+    设 $\mathbf{A} = [a_{ij}] \in F^{n \times n}$，如果
+    \[
+        a_{ij} = 0, \quad \forall i < j
+    \]
+    则称 $\mathbf{A}$ 为\textbf{下三角矩阵}。
+    \label{def:lower_triangular_matrix}
+\end{definition}
+
+\begin{proposition}[三角矩阵的主对角元素即为它的特征值]
+    设 $\mathbf{A} \in F^{n \times n}$ 是一个上三角矩阵，那么
+    \[
+        \mathbf{A} = \begin{bmatrix}
+            a_{11} & a_{12} & \cdots & a_{1n} \\
+            0 & a_{22} & \cdots & a_{2n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & a_{nn}
+        \end{bmatrix}
+    \]
+    特征多项式为：
+    \[
+        p(\lambda) = \det(\mathbf{A} - \lambda \mathbf{I}) = \begin{vmatrix}
+            a_{11} - \lambda & a_{12} & \cdots & a_{1n} \\
+            0 & a_{22} - \lambda & \cdots & a_{2n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & a_{nn} - \lambda
+        \end{vmatrix} = (a_{11} - \lambda)(a_{22} - \lambda) \cdots (a_{nn} - \lambda)
+    \]
+    则 $\mathbf{A}$ 的特征值为主对角元素，即
+    \[
+        \lambda_1 = a_{11}, \lambda_2 = a_{22}, \ldots, \lambda_n = a_{nn}
+    \]
+    同理，下三角矩阵的特征值也为其主对角元素。
+    \label{prop:triangular_matrix_eigenvalue}
 \end{proposition}
 
 \begin{note}
-    不变子空间是指在对线性变换 $T$ 封闭的子空间。其作用是将高维空间的线性变换问题，转化为低维子空间的线性变换问题，从而简化问题的复杂度。
-    特征子空间是重要的不变子空间，其维数等于特征值的几何重数。比如，\textbf{主成分分析 PCA}，就是通过寻找数据空间的主成分子空间，从而实现数据降维。
+    三角矩阵的有非常好的性质，它的特征值可以直接从对角元素中读出。
+    根据命题 \ref{prop:diagonal_matrix_eigenvalue} 和命题 \ref{prop:relationship_between_eigenvalues} 可知，三角矩阵的行列式等于其对角元素的乘积；
+    三角矩阵可逆，当且仅当，其对角元素全不为零。
 \end{note}
 
+\begin{definition}[可三角化矩阵 Triangularizable Matrix]
+    设 $\mathbf{A} \in F^{n \times n}$，如果存在一个可逆矩阵 $\mathbf{P} \in F^{n \times n}$，使得
+    \[
+        \mathbf{P}^{-1}\mathbf{A}\mathbf{P} = \mathbf{T}
+    \]
+    其中，$\mathbf{T}$ 是一个上（下）三角矩阵，则称 $\mathbf{A}$ 是\textbf{可三角化矩阵}。
+    \label{def:triangularizable_matrix}
+\end{definition}
 
+\begin{proposition}[可三角化矩阵的充要条件]
+    设 $\mathbf{A} \in F^{n \times n}$，则 $\mathbf{A}$ 可三角化的充分必要条件是 $\mathbf{A}$ 在域 $F$ 上有 $n$ 个特征值（重根算作多个特征值）。
+    \label{prop:triangularizable_matrix_necessary_sufficient_condition}
+\end{proposition}
+
+\begin{note}
+    可三角化矩阵是指可以通过相似变换将其化为三角矩阵的矩阵，也即在一组适当的基底下，线性变换可以表示为三角矩阵。
+    根据代数基本定理\ref{thm:FundamentalTheoremOfAlgebra}，在复数域上，任意 $n$ 阶方阵都有 $n$ 个特征值（重根算作多个特征值），所以任意复数域上的方阵都是可三角化的。
+    但是在实数域上，并非所有的方阵都是可三角化的，比如
+    \[
+        \mathbf{A} = \begin{bmatrix}
+            0 & -1 \\
+            1 & 0
+        \end{bmatrix}
+    \]
+    的特征多项式为 $p(\lambda) = \lambda^2 + 1$，在实数域上没有特征值，所以 $\mathbf{A}$ 在实数域上是不可三角化矩阵。
+\end{note}
+
+\vspace{1em}
+\subsection{对角矩阵与可对角化矩阵}
+
+\begin{definition}[对角矩阵 Diagonal Matrix]
+    设 $\mathbf{A} = [a_{ij}] \in F^{n \times n}$，如果
+    \[
+        a_{ij} = 0, \quad \forall i \neq j
+    \]
+    则称 $\mathbf{A}$ 为\textbf{对角矩阵}。
+    \label{def:diagonal_matrix}
+\end{definition}
+
+\begin{proposition}[对角矩阵的主对角元素即为它的特征值]
+    设 $\mathbf{A} = [a_{ij}] \in F^{n \times n}$ 是一个对角矩阵，那么 $\mathbf{A}$ 的特征值为其对角元素 $a_{11}, a_{22}, \ldots, a_{nn}$。
+    \label{prop:diagonal_matrix_eigenvalue}
+\end{proposition}
+
+\begin{note}
+    对角矩阵是特殊的三角矩阵，既可以看成是上三角矩阵，也可以看成是下三角矩阵。三角矩阵的关于特征值的性质同样适用于对角矩阵。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[可对角化矩阵 Diagonalizable Matrix]
+    设 $\mathbf{A} \in F^{n \times n}$，如果存在一个可逆矩阵 $\mathbf{P} \in F^{n \times n}$，使得
+    \[
+        \mathbf{P}^{-1}\mathbf{A}\mathbf{P} = \mathbf{D}
+    \]
+    其中，$\mathbf{D}$ 是一个对角矩阵，则称 $\mathbf{A}$ 是\textbf{可对角化矩阵}。
+    \label{def:diagonalizable_matrix}
+\end{definition}
+
+\begin{proposition}[可对角化矩阵的充要条件]
+    设 $\mathbf{A} \in F^{n \times n}$，则 $\mathbf{A}$ 可对角化的充分必要条件是 $\mathbf{A}$ 有 $n$ 个线性无关的特征向量。
+    \label{prop:diagonalizable_matrix_necessary_sufficient_condition}
+\end{proposition}
+
+\begin{proof}
+    设 $\mathbf{A} \in F^{n \times n}$ 可对角化，则存在一个可逆矩阵 $\mathbf{P} \in F^{n \times n}$，使得
+    \[
+        \mathbf{P}^{-1}\mathbf{A}\mathbf{P} = \mathbf{D} \iff \mathbf{A}\mathbf{P} = \mathbf{D}\mathbf{P}
+    \]
+    其中，$\mathbf{D}$ 是一个对角矩阵。设 $\mathbf{D}$ 的主对角元素为 $d_1,d_2,\ldots,d_n$，则根据命题 \ref{prop:diagonal_matrix_eigenvalue} 可知，$d_1,d_2,\ldots,d_n$ 是 $\mathbf{D}$ 的特征值。
+    设 $\mathbf{e}_1,\mathbf{e}_2,\ldots,\mathbf{e}_n$ 是 $F^n$ 的标准正交基，则有
+    \[
+        \mathbf{D}\mathbf{e}_i = d_i \mathbf{e}_i, \quad i = 1,2,\ldots,n
+    \]
+    令 $\mathbf{v}_i = \mathbf{P}\mathbf{e}_i$，则有
+    \[
+        \mathbf{A}\mathbf{v}_i = \mathbf{A}\mathbf{P}\mathbf{e}_i = \mathbf{P}\mathbf{D}\mathbf{e}_i = d_i \mathbf{P}\mathbf{e}_i = d_i \mathbf{v}_i, \quad i = 1,2,\ldots,n
+    \]
+    所以，$\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n$ 是 $\mathbf{A}$ 的 $n$ 个线性无关的特征向量。
+    \\
+    \\
+    反之，设 $\mathbf{A} \in F^{n \times n}$ 有 $n$ 个线性无关的特征向量 $\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n$，对应的特征值为 $\lambda_1,\lambda_2,\ldots,\lambda_n$。
+    令 $\mathbf{P} = [\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n]$，则 $\mathbf{P}$ 是一个可逆矩阵。
+    令 $\mathbf{D}$ 为对角矩阵，其主对角元素为 $\lambda_1,\lambda_2,\ldots,\lambda_n$，则有
+    \[
+        \mathbf{A}\mathbf{P} = \mathbf{A}[\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n] = [\mathbf{A}\mathbf{v}_1,\mathbf{A}\mathbf{v}_2,\ldots,\mathbf{A}\mathbf{v}_n] = [\lambda_1 \mathbf{v}_1,\lambda_2 \mathbf{v}_2,\ldots,\lambda_n \mathbf{v}_n] = \mathbf{P}\mathbf{D}
+    \]
+    所以，$\mathbf{P}^{-1}\mathbf{A}\mathbf{P} = \mathbf{D}$，即 $\mathbf{A}$ 可对角化。
+\end{proof}
+
+\begin{corollary}[矩阵可对角化的充要条件]
+    矩阵 $\mathbf{A}\in F^{n\times n}$ 可对角化，有如下等价命题：
+    \begin{enumerate}
+        \item 存在一个可逆矩阵 $\mathbf{P} \in F^{n \times n}$，使得 $\mathbf{P}^{-1}\mathbf{A}\mathbf{P} = \mathbf{D}$，其中，$\mathbf{D}$ 是一个对角矩阵
+        \item $\mathbf{A}$ 有 $n$ 个线性无关的特征向量
+        \item $\mathbf{A}$ 有 $n$ 个不同的特征值
+        \item $\mathbf{A}$ 的特征多项式无重根
+        \item $\mathbf{A}$ 的特征多项式可以分解为线性因子，即 $p(\lambda) = (\lambda - \lambda_1) \cdots (\lambda - \lambda_n)$
+        \item $\mathbf{A}$ 的每个特征值 $\lambda_i$ 的几何重数等于其代数重数
+    \end{enumerate}
+\end{corollary}
+
+\begin{note}
+    可对角化矩阵是一种特殊的可三角化矩阵，是对矩阵的进一步简化。
+    可对角化的矩阵一定是可三角化的矩阵，但反之不然。
+    例如，上三角矩阵
+    \[\begin{bmatrix}
+        1 & 1 \\
+        0 & 1
+    \end{bmatrix}\] 
+    只有一个特征值 1，对应的特征向量只有一个线性无关的向量 $(1,0)$，所以它不可对角化。
+    可对角化矩阵相比可三角化矩阵，有更强的约束条件。
+\end{note}
+\vspace{1em}
+
+\begin{proposition}[实对称矩阵是可对角化的矩阵]
+    设 $\mathbf{A} \in \mathbb{R}^{n \times n}$ 是一个实对称矩阵，则 $\mathbf{A}$ 可对角化。且存在一个正交矩阵 $\mathbf{Q} \in \mathbb{R}^{n \times n}$，使得
+    \[
+        \mathbf{Q}^T \mathbf{A} \mathbf{Q} = \mathbf{D}
+    \]
+    其中，$\mathbf{D}$ 是一个实对角矩阵。
+    \label{prop:real_symmetric_matrix_diagonalizable}
+\end{proposition}
+
+\begin{proposition}[复厄米矩阵是可对角化的矩阵]
+    设 $\mathbf{A} \in \mathbb{C}^{n \times n}$ 是一个复厄米矩阵，则 $\mathbf{A}$ 可对角化。且存在一个酉矩阵 $\mathbf{U} \in \mathbb{C}^{n \times n}$，使得
+    \[
+        \mathbf{U}^H \mathbf{A} \mathbf{U} = \mathbf{D}
+    \]
+    其中，$\mathbf{D}$ 是一个实对角矩阵。
+    \label{prop:hermitian_matrix_diagonalizable}
+\end{proposition}
+
+\begin{note}
+    实对称矩阵和复厄米矩阵都是可对角化的矩阵的充分条件，但不是必要条件。    
+\end{note}
+\vspace{1em}
+
+\subsection{半定矩阵}
 
 \newpage

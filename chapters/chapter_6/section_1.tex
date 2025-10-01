@@ -1,1 +1,33 @@
 \chapter{点集拓扑}
+
+\section{拓扑空间与开集的定义}
+
+\begin{definition}[拓扑空间 Topological Space]
+    设$ X $是一个集合，$ \mathcal{T}(X) \subseteq \mathcal{P}(X) $ 是 $ X $ 的子集族，二元组 $ (X,\mathcal{T}) $ 称为\textbf{拓扑空间}，当且仅当，$ \mathcal{T} $ 满足：
+    \begin{enumerate}
+        \item 空集与全集：$ \varnothing \in \mathcal{T} $ 且 $ X \in \mathcal{T} $；
+        \item 对任意并封闭：任意 $ \{U_i:i\in I\} \subseteq \mathcal{T} $，有 $ \bigcup_{i\in I} U_i \in \mathcal{T} $；
+        \item 对有限交封闭：有限个 $ U_1,U_2,\ldots,U_n\in \mathcal{T} $，有 $ U_1\cap U_2\cap \cdots \cap U_n \in \mathcal{T} $。
+    \end{enumerate}
+    子集族 $ \mathcal{T} $ 称为 $ X $ 上的\textbf{拓扑 Topology}，$ \mathcal{T} $ 中的元素称为\textbf{开集 Open Set}。
+\end{definition}
+
+\begin{note}
+    根据拓扑空间的的定义，幂集 $ \mathcal{P}(X) $ 和 $ \{\varnothing,X\} $ 都是 $ X $ 上的拓扑，分别称为\textbf{离散拓扑 Discrete Topology}和\textbf{平凡拓扑 Trivial Topology}。
+    给定集合 $X$，$X$ 的任意子集族并非都是 $X$ 上的拓扑，$X$ 的拓扑也非唯一。比如，设 $ X=\{a,b,c\} $，那么下面的子集族都是 $ X $ 上的拓扑：
+    \begin{align*}
+        &\mathcal{T}_1(X)=\{\varnothing,X\},\\
+        &\mathcal{T}_2(X)=\mathcal{P}(X),\\
+        &\mathcal{T}_3(X)=\{\varnothing,X,\{a\}\},\\
+        &\mathcal{T}_4(X)=\{\varnothing,X,\{a,b\}\},\\
+        &\mathcal{T}_5(X)=\{\varnothing,X,\{a\},\{a,b\}\},\\
+        &\mathcal{T}_6(X)=\{\varnothing,X,\{a,b\},\{b\},\{b,c\}\}.
+    \end{align*}
+    下面的子集族不是 $ X $ 上的拓扑：
+    \begin{align*}
+        &\mathcal{T}_7(X)=\{\varnothing,X,\{a\},\{b\}\},\\
+        &\mathcal{T}_8(X)=\{\varnothing,X,\{a,b\},\{b,c\}\}.
+    \end{align*}
+\end{note}
+
+\newpage
