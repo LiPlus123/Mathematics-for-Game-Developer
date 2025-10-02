@@ -92,6 +92,14 @@
 \label{def:kronecker_delta}
 \end{definition}
 
+\begin{example}
+    通过克罗内克符号，矩阵的迹还可以表示为：
+    \[
+        \mathrm{tr}(\mathbf{A}) = a^{ij} \delta_{ij} = a_i^{i} = a_j^j  
+    \]
+    \label{ex:kronecker_trace}
+\end{example}
+
 \begin{definition}[广义克罗内克尔符号 Generalized Kronecker delta]：设一个 $n$ 指标的数，可以记为 $\delta_{j_1 j_2 \ldots j_n}^{i_1 i_2 \ldots i_n}$，定义为：
 \[
     \delta_{j_1 j_2 \ldots j_n}^{i_1 i_2 \ldots i_n} = \begin{cases}
@@ -105,11 +113,11 @@
 
 \begin{example}
     通过广义克罗内克符号，行列式的展开式还可以表示为：
-    \begin{align}
+    \begin{align*}
         \det(\mathbf{A}) &= \sum_{\sigma \in S_n} \left( \mathrm{sgn}(\sigma) \prod_{i=1}^{n} a_{i,\sigma(i)} \right) \\
         &= \sum_{(j_1, \cdots, j_n)\in S_n}^{n} \delta^{1 2 \cdots n}_{j_1 j_2 \cdots j_n}  a_{1}^{\ j_1}\cdots a_{n}^{\ j_n}
         \label{eq:generalized_kronecker_determinant}
-    \end{align}
+    \end{align*}
     其中，$(j_1,\cdots,j_n)\in S_n$ 是 $1,2,\cdots,n$ 的一个排列。
     \label{ex:generalized_kronecker_determinant}
 \end{example}

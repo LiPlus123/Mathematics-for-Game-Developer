@@ -60,9 +60,8 @@
     所以 $\dim V^* = \dim \mathcal{L}(V,F) = \dim V \cdot \dim F = \dim V$，也即 $V$ 与其对偶空间 $V^*$ 是同构的。
 \end{proposition}
 
-\begin{note}
-    线性空间与其对偶空间是自然同构的。
-    线性空间 $V$ 也是 $V^*$ 的对偶空间，我们令 $V^{**} = (V^*)^*$。比如，在矩阵乘法的定义下，有：
+\begin{example}
+    行向量空间 $F^{1\times n}$ 通矩阵乘法可以定义一个线性泛函：
     \[
         \begin{bmatrix}
             a_1 & a_2 & \cdots & a_n
@@ -70,8 +69,35 @@
             b_1 \\ b_2 \\ \vdots \\ b_n
         \end{bmatrix} = \sum_{i=1}^{n} a_i b_i \in F
     \]
-    因此，$F^{n\times 1}$ 的对偶空间是 $F^{1\times n}$，$\dim F^{1\times n} = \dim F^{n\times 1} = n$。
+    其中，
+    \[
+        \begin{bmatrix}
+            b_1 \\ b_2 \\ \vdots \\ b_n
+        \end{bmatrix} : F^{1\times n} \to F
+    \]
+    那么全体列向量空间 $F^{n\times 1}$ 是行向量空间 $F^{1\times n}$ 的对偶空间， $F^{n\times 1} \cong (F^{1\times n})^*$。
+\end{example}
+
+\begin{example}
+    设 $(V,\langle \cdot,\cdot\rangle)$ 是一个 $n$ 维 $F$-内积空间，通过内积运算可以定义一个线性泛函：
+    \[
+        f(\mathbf{v}) = \langle \mathbf{u},\mathbf{v} \rangle,\quad \forall \mathbf{v}\in V
+    \]
+    其中，
+    \[
+        \langle \mathbf{u},\cdot \rangle : V \to F,\quad \mathbf{u}\in V
+    \]
+    是一个线性泛函，那么全体这样的线性泛函构成的集合：
+    \[
+        V^* = \{\langle \mathbf{u},\cdot \rangle:\mathbf{u}\in V\}
+    \]
+    那么 $V^*$ 就是 $V$ 的对偶空间， $V^* \cong V$。
+\end{example}
+
+\begin{note}
+    线性空间与其对偶空间是自然同构的，线性空间本也可以看成其对偶空间的对偶空间，也即 $(V^*)^* = V$。
 \end{note}
+
 \vspace{1em}
 
 \subsection{张量的定义}
@@ -81,13 +107,13 @@
     \[
         T(\underbrace{\bm{\omega}^1,\bm{\omega}^2,\ldots,\bm{\omega}^r}_{r\text{ 个}},\underbrace{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_s}_{s\text{ 个}})
     \]
-    全体 $(r,s)$ 型张量的集合记为 $V^k_s$。
+    全体 $(r,s)$ 型张量的集合记为 $V^r_s$。
 \end{definition}
 
 \begin{note}
     张量是一种特殊的多重线性泛函，它的前 $r$ 个变量是对偶空间 $V^*$ 中的向量，后 $s$ 个变量是线性空间 $V$ 中的向量。
-    $V^k_s$ 是 $\mathcal{L}(\underbrace{V^*,V^*,\ldots,V^*}_{r\text{ 个}},\underbrace{V,V,\ldots,V}_{s\text{ 个}};F)$ 的线性子空间。
-    张量空间的维数为 $\dim V^k_s = (\dim V)^{r+s}$。如果 $\dim V = n$，则 $\dim V^k_s = n^{r+s}$。
+    $V^r_s$ 是 $\mathcal{L}(\underbrace{V^*,V^*,\ldots,V^*}_{r\text{ 个}},\underbrace{V,V,\ldots,V}_{s\text{ 个}};F)$ 的线性子空间。
+    张量空间的维数为 $\dim V^r_s = (\dim V)^{r+s}$。如果 $\dim V = n$，则 $\dim V^r_s = n^{r+s}$。
 \end{note}
 
 \vspace{1em}
@@ -101,7 +127,7 @@
 \end{definition}
 
 \begin{proposition}[张量积的性质]
-    设 $V$ 是一个 $F$-线性空间，$V^*$ 是 $V$ 的对偶空间。$T,T_1,T_2 \in V^r_s$，$S,S_1,S_2 \in V^p_q$，$a,b\in F$，则有：
+    设 $V$ 是一个 $F$-线性空间，$V^*$ 是 $V$ 的对偶空间。$T,T_1,T_2 \in V^r_s$，$S,S_1,S_2 \in V^p_q$，$a\in F$，则有：
     \begin{enumerate}
         \item 结合律：$(T \otimes S) \otimes R = T \otimes (S \otimes R)$
         \item 分配律：$(T_1 + T_2) \otimes S = T_1 \otimes S + T_2 \otimes S$
@@ -121,64 +147,508 @@
 \end{definition}
 
 \begin{note}
-    张量积是构造张量的一种重要方法。
-    下面介绍通过张量积构造的简单张量 —— 并矢，
-    它是一种简单 $(1,1)$ 型张量。
+    张量积是构造张量的一种重要方法。将两个低阶张量通过张量积可以得到一个更高阶的张量。
 \end{note}
+
+\vspace{1em}
+
+\subsection{协变基与逆变基}
+\begin{definition}[协变基与逆变基 Covariant and Contravariant Basis]
+    设 $V$ 是一个 $n$ 维 $F$-线性空间，$\{\mathbf{e}_i:i=1,\cdots,n\}$ 是 $V$ 的一组基，$V^*$ 是 $V$ 的对偶空间，$\{\mathbf{e}^j:j=1,\cdots,n\}$ 是 $V^*$ 的一组基，使得 
+    \[
+        \mathbf{e}^j(\mathbf{e}_i) = \delta_i^j
+    \]
+    则称 $\mathbf{e}_i$ 为 $V$ 的\textbf{协变基 Covariant Basis}，称 $\mathbf{e}^j$ 为 $V^*$ 的\textbf{逆变基 Contravariant Basis}。
+    \label{def:covariant_contravariant_basis}
+\end{definition}
+
+\begin{note}
+    协变基是线性空间 $V$ 的任意一组基，逆变基是对偶空间中的一组基，它们满足 $\mathbf{e}^i(\mathbf{e}_j) = \delta^i_j$。
+    这里的 $\delta^i_j$ 是克罗内克尔符号 \ref{def:kronecker_delta}。$i,j$ 是自由指标，通常，我们约定下指标表示协变基， 上指标表示逆变基。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[协变分量与逆变分量 Covariant and Contravariant Components]
+    设 $V$ 是一个 $n$ 维 $F$-线性空间，$\{\mathbf{e}_i:i=1,\cdots,n\}$ 是协变基，$V^*$ 是 $V$ 的对偶空间，$\{\mathbf{e}^j:j=1,\cdots,n\}$ 是逆变基。
+    则任意 $\mathbf{v}\in V$ 和 $\bm{\omega}\in V^*$ 可以表示为：
+    \[
+        \mathbf{v} = v^i \mathbf{e}_i,\quad \bm{\omega} = \omega_j \mathbf{e}^j
+    \]
+    其中，
+    \[
+        v^i = \mathbf{e}^i(\mathbf{v}) = \mathbf{e}^i(v^k \mathbf{e}_k) = v^k \mathbf{e}^i(\mathbf{e}_k) = v^k \delta^i_k = v^i
+    \]
+    称为 $\mathbf{v}\in V$ 在协变基 $\mathbf{e}_i$ 下的\textbf{逆变分量 Contravariant Component}。
+    \[
+        \omega_j = \mathbf{e}_j(\bm\omega) = \mathbf{e}_j(\omega_k \mathbf{e}^k) = \omega_k \mathbf{e}_j(\mathbf{e}^k) = \omega_k \delta_j^k = \omega_j
+    \]
+    称为 $\bm{\omega}\in V^*$ 在逆变基 $\mathbf{e}^j$ 下的\textbf{协变分量 Covariant Component}。
+    \label{def:covariant_contravariant_components}
+\end{definition}
+
+\begin{note}
+    协变分量是对偶空间 $V^*$ 中向量在逆变基下的分量，逆变分量是线性空间 $V$ 中向量在协变基下的分量。
+    这里的 $i,j$ 是自由指标，通常，我们约定下指标表示协变分量，上指标表示逆变分量。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[张量的分量表示]
+    设 $V$ 是一个 $n$ 维 $F$-线性空间，$\{\mathbf{e}_i:i=1,\cdots,n\}$ 是协变基，$V^*$ 是 $V$ 的对偶空间，$\{\mathbf{e}^j:j=1,\cdots,n\}$ 是逆变基。
+    对于任意 $(r,s)$ 型张量 $T \in V^r_s$：
+    \[
+        T(\bm{\omega}^1,\ldots,\bm{\omega}^r,\mathbf{v}_1,\ldots,\mathbf{v}_s)
+    \]
+    其中 $\bm{\omega}^1,\ldots,\bm{\omega}^r \in V^*$ 用逆变基线性表出：
+    \begin{align*}
+        \bm{\omega}^1 &= \omega^1_{j_1} \mathbf{e}^{j_1},\quad \omega^1_{j_1} = \mathbf{e}_{j_1}(\bm{\omega}^1)\\
+        \bm{\omega}^2 &= \omega^2_{j_2} \mathbf{e}^{j_2},\quad \omega^2_{j_2} = \mathbf{e}_{j_2}(\bm{\omega}^2)\\
+        &\vdots\\
+        \bm{\omega}^r &= \omega^r_{j_r} \mathbf{e}^{j_r},\quad \omega^r_{j_r} = \mathbf{e}_{j_r}(\bm{\omega}^r)
+    \end{align*}
+    $\mathbf{v}_1,\ldots,\mathbf{v}_s \in V$ 用协变基线性表出：
+    \begin{align*}
+        \mathbf{v}_1 &= v_1^{i_1} \mathbf{e}_{i_1},\quad v_1^{i_1} = \mathbf{e}^{i_1}(\mathbf{v}_1)\\
+        \mathbf{v}_2 &= v_2^{i_2} \mathbf{e}_{i_2},\quad v_2^{i_2} = \mathbf{e}^{i_2}(\mathbf{v}_2)\\
+        &\vdots\\
+        \mathbf{v}_s &= v_s^{i_s} \mathbf{e}_{i_s},\quad v_s^{i_s} = \mathbf{e}^{i_s}(\mathbf{v}_s)
+    \end{align*}
+    代入$(r,s)$ 型张量 $T$ 中，得到：
+    \begin{align*}
+        &T(\bm{\omega}^1,\ldots,\bm{\omega}^r,\mathbf{v}_1,\ldots,\mathbf{v}_s)\\
+        =& T(\omega^1_{j_1} \mathbf{e}^{j_1},\ldots,\omega^r_{j_r} \mathbf{e}^{j_r},v_1^{i_1} \mathbf{e}_{i_1},\ldots,v_s^{i_s} \mathbf{e}_{i_s})\\
+        =& \omega^1_{j_1}\cdots \omega^r_{j_r} v_1^{i_1}\cdots v_s^{i_s} T(\mathbf{e}^{j_1},\ldots,\mathbf{e}^{j_r},\mathbf{e}_{i_1},\ldots,\mathbf{e}_{i_s})\\
+        =& \mathbf{e}_{j_1}(\bm{\omega}^1)\cdots \mathbf{e}_{j_r}(\bm{\omega}^r) \mathbf{e}^{i_1}(\mathbf{v}_1)\cdots \mathbf{e}^{i_s}(\mathbf{v}_s)T(\mathbf{e}^{j_1},\ldots,\mathbf{e}^{j_r},\mathbf{e}_{i_1},\ldots,\mathbf{e}_{i_s})\\
+        =& T(\mathbf{e}^{j_1},\ldots,\mathbf{e}^{j_r},\mathbf{e}_{i_1},\ldots,\mathbf{e}_{i_s}) \mathbf{e}_{j_1} \otimes \cdots \otimes \mathbf{e}_{j_r} \otimes \mathbf{e}^{i_1} \otimes \cdots \otimes \mathbf{e}^{i_s} (\bm{\omega}^1,\ldots,\bm{\omega}^r,\mathbf{v}_1,\ldots,\mathbf{v}_s)
+    \end{align*}
+    其中，$T(\mathbf{e}^{j_1},\ldots,\mathbf{e}^{j_r},\mathbf{e}_{i_1},\ldots,\mathbf{e}_{i_s})$ 称为
+    张量 $T$ 在基 $\mathbf{e}_{j_1} \otimes \cdots \otimes \mathbf{e}_{j_r} \otimes \mathbf{e}^{i_1} \otimes \cdots \otimes \mathbf{e}^{i_s}$ 下的\textbf{分量}，
+    记为 $T_{i_1 i_2 \cdots i_r}^{j_1 j_2 \cdots j_s}$。
+    这是一个 $r+s$ 个指标的多重数组，$i_1,i_2,\cdots,i_r$ 是上自由指标，$j_1,j_2,\cdots,j_s$ 是下自由指标，一共表示 $n^{r+s}$ 个分量。
+\end{definition}
+
+\begin{note}
+    张量的分量表示是将张量作用在基向量上得到的结果。在例 \ref{ex:dyadics} 中，
+    一个 $(1,1)$ 型张量的分量记为 $T^j_i$，可以用 $n\times n$ 的矩阵把每个分量都表示出来。
+    对于更高阶的张量，其全部分量需要一个多维数组表示，不方便书写，只能用指标记号简记。
+\end{note}
+
 \vspace{1em}
 
 \begin{example}[并矢 Dyadics]
     设 $\mathbb{R}^{1\times n}$ 与其对偶空间 $\mathbb{R}^{n\times 1}$，任意行向量：
     \[
         \mathbf{a} = \begin{bmatrix}
-            a_1 & a_2 & \cdots & a_n
+            a^1 & a^2 & \cdots & a^n
         \end{bmatrix} \in \mathbb{R}^{1\times n}
     \]
     与任意列向量：
     \[
         \mathbf{b}^* = \begin{bmatrix}
-            b^1 \\ b^2 \\ \vdots \\ b^n
+            b_1 \\ b_2 \\ \vdots \\ b_n
         \end{bmatrix} \in \mathbb{R}^{n\times 1}
     \]
     $\mathbf{a}, \mathbf{b}^*$ 的张量积记为 $\mathbf{a}\otimes \mathbf{b}^*$ 称为\textbf{并矢}：
     \begin{align*}
         \mathbf{a}\otimes \mathbf{b}^*(\mathbf{v}^*,\mathbf{u}) &= \mathbf{a}(\mathbf{v}^*)\mathbf{b}^*(\mathbf{u})\\
+        &=  \begin{bmatrix}
+            a^1 & a^2 & \cdots & a^n
+        \end{bmatrix} \begin{bmatrix}
+            v_1 \\ v_2 \\ \vdots \\ v_n
+        \end{bmatrix} \cdot 
+        \begin{bmatrix}
+            u^1 & u^2 & \cdots & u^n
+        \end{bmatrix} \begin{bmatrix}
+            b_1 \\ b_2 \\ \vdots \\ b_n
+        \end{bmatrix}  \\
         &= \begin{bmatrix}
-            v_1 & v_2 & \cdots & v_n
+            u_1 & u_2 & \cdots & u_n
         \end{bmatrix} \begin{bmatrix}
-            b^1 \\ b^2 \\ \vdots \\ b^n
-        \end{bmatrix} \cdot \begin{bmatrix}
-            a_1 & a_2 & \cdots & a_n
-        \end{bmatrix} \begin{bmatrix}
-            u^1 \\ u^2 \\ \vdots \\ u^n
-        \end{bmatrix} \\
-        &= \begin{bmatrix}
-            v_1 & v_2 & \cdots & v_n
-        \end{bmatrix} \begin{bmatrix}
-            b^1a_1 & b^1a_2 & \cdots & b^1a_n \\
-            b^2a_1 & b^2a_2 & \cdots & b^2a_n \\
+            b_1a^1 & b_1a^2 & \cdots & b_1a^n \\
+            b_2a^1 & b_2a^2 & \cdots & b_2a^n \\
             \vdots & \vdots & \ddots & \vdots \\
-            b^na_1 & b^na_2 & \cdots & b^na_n
+            b_na^1 & b_na^2 & \cdots & b_na^n
         \end{bmatrix}\begin{bmatrix}
-            u^1 \\ u^2 \\ \vdots \\ u^n
+            v_1 \\ v_2 \\ \vdots \\ v_n
         \end{bmatrix}
     \end{align*}
-    因此一个 $(1,1)$ 型张量 $T \in \mathbb{R}^1_1$ 可以表示为一个 $n\times n$ 的矩阵。
+    因此一个 $(1,1)$ 型张量 $T \in (\mathbb{R}^n)^1_1$ 可以表示为一个 $n\times n$ 的矩阵的二次型。
     \label{ex:dyadics}
 \end{example}
 
+\begin{note}
+    其中，$a^j$ 可以看成 $\mathbf{a}\in \mathbb{R}^{1\times n}$ 在协变基下的逆变分量；$b_i$ 可以看成 $\mathbf{b}^*\in \mathbb{R}^{n\times 1}$ 在逆变基下的协变分量。
+    并矢是一个 $(1,1)$ 型张量，在这组协变逆变基下，可以用 $n\times n$ 的矩阵表示，$b_ia^j$  是它的分量。
+\end{note}
+
 \vspace{1em}
 
-\subsection{协变基与逆变基}
-
-\vspace{1em}
 \subsection{张量的缩并}
+
+\begin{definition}[缩并 Contraction]
+    设 $V$ 是一个 $n$ 维 $F$-线性空间，$\{\mathbf{e}_i:i=1,\cdots,n\}$ 是协变基，$V^*$ 是 $V$ 的对偶空间，$\{\mathbf{e}^j:j=1,\cdots,n\}$ 是逆变基。
+    对于任意 $(r,s)$ 型张量 $T \in V^r_s$，用分量表示为：
+    \[
+        T(\bm{\omega}^1,\ldots,\bm{\omega}^r,\mathbf{v}_1,\ldots,\mathbf{v}_s) = 
+        T_{i_1 i_2 \cdots i_r}^{j_1 j_2 \cdots j_s} 
+        \mathbf{e}_{j_1} \otimes \cdots \otimes \mathbf{e}_{j_r} \otimes \mathbf{e}^{i_1} \otimes \cdots \otimes \mathbf{e}^{i_s}
+        (\bm{\omega}^1,\ldots,\bm{\omega}^r,\mathbf{v}_1,\ldots,\mathbf{v}_s)
+    \]
+    设函数 $C^{\mu}_{\nu}: V^r_s \to V^{r-1}_{s-1}$ 称为为\textbf{缩并操作}，其中，$\mu=1,\ldots,r,\ \nu = 1,\ldots,s$ 表示将逆变基 $\mathbf{e}^k$ 输入张量 $T$ 的第 $\mu$ 个上槽位，
+    将协变基 $\mathbf{e}_k$ 输入张量 $T$ 的第 $\nu$ 个下槽，并求和得到一个 $(r-1,s-1)$ 型张量：
+    \begin{align*}
+        C^{\mu}_{\nu}(T) &:= \sum_{r=1}^n T(\bm{\omega}^1,\ldots,\bm{\omega}^{\mu-1},\mathbf{e}^k,\bm{\omega}^{\mu+1},\ldots,\bm{\omega}^r,\mathbf{v}_1,\ldots,\mathbf{v}_{\nu-1},\mathbf{e}_k,\mathbf{v}_{\nu+1},\ldots,\mathbf{v}_s) \\
+        &= \sum_{k=1}^n T_{i_1 i_2 \cdots i_r}^{j_1 j_2 \cdots j_s} 
+        \mathbf{e}_{j_1}(\bm{\omega}^1) \cdots \mathbf{e}_{j_{\mu-1}}(\bm{\omega}^{\mu-1}) \mathbf{e}_{j_{\mu}}(\mathbf{e}^k) \mathbf{e}_{j_{\mu+1}}(\bm{\omega}^{\mu+1}) \cdots \mathbf{e}_{j_r}(\bm{\omega}^r) \\
+        &\quad \quad \quad \quad \quad \mathbf{e}^{i_1}(\mathbf{v}_1) \cdots \mathbf{e}^{i_{\nu-1}}(\mathbf{v}_{\nu-1}) \mathbf{e}^{i_{\nu}}(\mathbf{e}_k) \mathbf{e}^{i_{\nu+1}}(\mathbf{v}_{\nu+1}) \cdots \mathbf{e}^{i_s}(\mathbf{v}_s) \\
+        &= \sum_{k=1}^n T_{i_1 i_2 \cdots i_r}^{j_1 j_2 \cdots j_s}   
+        \mathbf{e}_{j_1}(\bm{\omega}^1) \cdots \mathbf{e}_{j_{\mu-1}}(\bm{\omega}^{\mu-1}) \delta_{j_{\mu}}^k\mathbf{e}_{j_{\mu+1}}(\bm{\omega}^{\mu+1}) \cdots \mathbf{e}_{j_r}(\bm{\omega}^r) \\
+        &\quad \quad \quad \quad \quad \mathbf{e}^{i_1}(\mathbf{v}_1) \cdots \mathbf{e}^{i_{\nu-1}}(\mathbf{v}_{\nu-1}) \delta_k^{i_{\nu}} \mathbf{e}^{i_{\nu+1}}(\mathbf{v}_{\nu+1}) \cdots \mathbf{e}^{i_s}(\mathbf{v}_s) \\
+        &= T_{i_1 i_2 \cdots i_r}^{j_1 j_2 \cdots j_s} \delta_{j_{\mu}}^{i_{\nu}} 
+        \mathbf{e}_{j_1}(\bm{\omega}^1) \cdots \mathbf{e}_{j_{\mu-1}}(\bm{\omega}^{\mu-1}) \mathbf{e}_{j_{\mu+1}}(\bm{\omega}^{\mu+1}) \cdots \mathbf{e}_{j_r}(\bm{\omega}^r) \\
+        &\quad \quad \quad \quad \quad \mathbf{e}^{i_1}(\mathbf{v}_1) \cdots \mathbf{e}^{i_{\nu-1}}(\mathbf{v}_{\nu-1})  \mathbf{e}^{i_{\nu+1}}(\mathbf{v}_{\nu+1}) \cdots \mathbf{e}^{i_s}(\mathbf{v}_s) \\
+        &=T_{i_1 i_2 \cdots i_r}^{j_1 j_2 \cdots j_s} \delta_{j_{\mu}}^{i_{\nu}} 
+        \mathbf{e}_{j_1} \otimes \cdots \otimes \mathbf{e}_{j_{\mu-1}} \otimes \mathbf{e}_{j_{\mu+1}} \otimes \cdots \otimes \mathbf{e}_{j_r} \\
+        &\quad \quad \quad \quad \quad \mathbf{e}^{i_1} \otimes \cdots \otimes \mathbf{e}^{i_{\nu-1}} \otimes \mathbf{e}^{i_{\nu+1}} \otimes \cdots \otimes \mathbf{e}^{i_s}\\
+        &\quad \quad \quad \quad \quad (\bm{\omega}^1,\ldots,\bm{\omega}^{\mu-1},\bm{\omega}^{\mu+1},\ldots,\bm{\omega}^r,\mathbf{v}_1,\ldots,\mathbf{v}_{\nu-1},\mathbf{v}_{\nu+1},\ldots,\mathbf{v}_s)
+    \end{align*}
+\end{definition}
+
+\begin{note}
+    张量积是构造更高阶张量的方法，缩并是将一个高阶张量降阶的方法。
+    其中，$T_{i_1 i_2 \cdots i_r}^{j_1 j_2 \cdots j_s} \delta_{j_{\mu}}^{i_{\nu}}$ 表示将张量分量中，第 $\mu$ 个上标和第 $\nu$ 个下标进行缩并。
+    每次缩并会使张量的阶数减少 $2$。
+\end{note}
+\vspace{1em}
+
+\begin{example}[并矢的缩并]
+    在例 \ref{ex:dyadics} 中，并矢是一个 $(1,1)$ 型张量 $T \in (\mathbb{R}^n)^1_1$。它只有一种缩并方式，得到一个 $(0,0)$ 型张量（标量）：
+    \[
+        C^1_1(\mathbf{a}\otimes \mathbf{b}^*) = b_ia^j \delta_j^i = b_ia^i = b_ja^j
+    \]
+    对 $(1,1)$ 型张量缩并也可以看成是并矢分量矩阵的迹；可以看成是 $\mathbf{a}$ 与 $\mathbf{b}$ 的内积。
+\end{example}
 
 \vspace{1em}
 \subsection{度量张量}
 
+\begin{definition}[度量张量 Metric Tensor]
+    设 $(V,\langle \cdot,\cdot\rangle)$ 是一个 $n$ 维 $F$-内积空间，$\{\mathbf{e}_i:i=1,\cdots,n\}$ 是协变基，$V^*$ 是 $V$ 的对偶空间，$\{\mathbf{e}^j:j=1,\cdots,n\}$ 是逆变基。
+    任意协变基用逆变基线性表出：
+    \[
+        \mathbf{e}_i = g_{ij}\mathbf{e}^j
+    \]
+    其中，
+    \[
+        g_{ij} = \mathbf{e}_i(\mathbf{e}_j) = \langle \mathbf{e}_i,\mathbf{e}_j \rangle
+    \]
+    同理，任意逆变基也可以用协变基线性表出：
+    \[
+        \mathbf{e}^j = g^{ij}\mathbf{e}_i
+    \]
+    其中，
+    \[
+        g^{ij} = \mathbf{e}^i(\mathbf{e}^j) = \langle \mathbf{e}^i,\mathbf{e}^j \rangle
+    \]
+    称二阶张量
+    \[
+        g^{ij} \mathbf{e}_i\otimes \mathbf{e}_j,\quad g_{ij} \mathbf{e}^i\otimes \mathbf{e}^j
+    \]
+    为 $V$ 上的\textbf{逆变度量张量}和\textbf{协变度量张量}。
+    \label{def:metric_tensor}
+\end{definition}
+
+\begin{definition}[格拉姆矩阵 Gram Matrix]
+    设 $(V,\langle \cdot,\cdot\rangle)$ 是一个 $n$ 维 $F$-内积空间，向量组 $\{\mathbf{u}_i\in V:i=1,2,\cdots,n\}$ 的格拉姆矩阵定义为：
+    \[
+        \mathbf{G} = \begin{bmatrix}
+            \langle \mathbf{u}_1,\mathbf{u}_1 \rangle & \langle \mathbf{u}_1,\mathbf{u}_2 \rangle & \cdots & \langle \mathbf{u}_1,\mathbf{u}_n \rangle \\
+            \langle \mathbf{u}_2,\mathbf{u}_1 \rangle & \langle \mathbf{u}_2,\mathbf{u}_2 \rangle & \cdots & \langle \mathbf{u}_2,\mathbf{u}_n \rangle \\
+            \vdots & \vdots & \ddots & \vdots \\
+            \langle \mathbf{u}_n,\mathbf{u}_1 \rangle & \langle \mathbf{u}_n,\mathbf{u}_2 \rangle & \cdots & \langle \mathbf{u}_n,\mathbf{u}_n \rangle
+        \end{bmatrix}
+    \]
+    \label{def:gram_matrix}
+\end{definition}
+
+\begin{proposition}
+    格拉姆矩阵的行列式 $\det(\mathbf{G}) \neq 0$ 当且仅当 $\{\mathbf{u}_i:i=1,2,\cdots,n\}$ 线性无关。
+\end{proposition}
+
+\begin{note}
+    在内积空间中，逆变度量张量就是协变基的格拉姆矩阵，协变度量张量就是逆变基的格拉姆矩阵。
+    协变基和逆变基都是线性无关的向量组，因此协变格拉姆矩阵和逆变格拉姆矩阵均可逆，且
+    \[
+        [g_{ij}] = [g^{ij}]^{-1}
+    \]
+    如果 $\{\mathbf{e}_i\}$ 是 $V$ 的标准正交基，度量张量是一个单位矩阵
+    \[
+        g_{ij} = g^{ij} = \delta_{ij}
+    \]
+\end{note}
+
+
 \vspace{1em}
-\subsection{外形式}
+\textbf{指标升降}：设 $(V,\langle \cdot,\cdot\rangle)$ 是一个 $n$ 维 $F$-内积空间，$\{\mathbf{e}_i:i=1,\cdots,n\}$ 是协变基，$V^*$ 是 $V$ 的对偶空间，$\{\mathbf{e}^j:j=1,\cdots,n\}$ 是逆变基。
+任意 $\mathbf{v}\in V$ 用协变基线性表出：
+\[
+    \mathbf{v} = v^i\mathbf{e}_i = v^i g_{ij} \mathbf{e}^j = v_j \mathbf{e}^j
+\]
+同理，用逆变基线性表出：
+\[
+    \mathbf{v} = v_j \mathbf{e}^j = v_j g^{ij} \mathbf{e}_i = v^i \mathbf{e}_i
+\]
+度量张量可以看成是一个协变基与逆变基之间的坐标变换矩阵。任意张量 $T\in V^r_s$ 用分量表示为：
+\[
+    T = T_{i_1 i_2 \cdots i_r}^{j_1 j_2 \cdots j_s} 
+    \mathbf{e}_{j_1} \otimes \cdots \otimes \mathbf{e}_{j_r} \otimes \mathbf{e}^{i_1} \otimes \cdots \otimes \mathbf{e}^{i_s}
+\]
+其中，任意协变基向量与逆变基向量之间的关系为：
+\[
+    \mathbf{e}_{j_n} = g_{j_n i_m} \mathbf{e}^{i_m},\quad \mathbf{e}^{i_m} = g^{i_m j_n} \mathbf{e}_{j_n},\ n=1,\ldots,r,\ m=1,\ldots,s
+\]
+因此，张量的指标可以通过度量张量进行升降，将 $\mathbf{e}_{j_1} = g_{j_1 i_m} \mathbf{e}^{i_m}$ 代入张量 $T$ 中，得到一个 $(r+1,s-1)$ 型张量：
+\begin{align*}
+    T' &= T_{i_1 i_2 \cdots i_r}^{j_1 j_2 \cdots j_s} 
+    g_{j_1 i_m} \mathbf{e}^{i_m} \otimes \cdots \otimes \mathbf{e}_{j_r} \otimes \mathbf{e}^{i_1} \otimes \cdots \otimes \mathbf{e}^{i_s}\\
+    &= T_{i_1 i_2 \cdots i_r i_m}^{j_2 \cdots j_s} \mathbf{e}_{j_2} \otimes \cdots \otimes \mathbf{e}_{j_r} \otimes \mathbf{e}^{i_1} \otimes \cdots \otimes \mathbf{e}^{i_s} \otimes \mathbf{e}^{i_m}
+\end{align*}
+
+\vspace{1em}
+
+\textbf{计算内积与范数}：设 $(V,\langle \cdot,\cdot\rangle)$ 是一个 $n$ 维 $\mathbb{C}$-内积空间，$\{\mathbf{e}_i:i=1,\cdots,n\}$ 是协变基，$V^*$ 是 $V$ 的对偶空间，$\{\mathbf{e}^j:j=1,\cdots,n\}$ 是逆变基。
+$\forall \mathbf{u},\mathbf{v}\in V$ 的内积为：
+\begin{align*}
+    \langle \mathbf{u},\mathbf{v} \rangle &= \langle u^i \mathbf{e}_i, v^j \mathbf{e}_j \rangle = u^i \langle \mathbf{e}_i, \mathbf{e}_j \rangle \overline{v^j} \\
+    & = u^i  g_{ij} \overline{v^j} = u_j \overline{v^j} 
+\end{align*}
+2-范数为：
+\[
+    ||\mathbf{u}||_2 = \sqrt{\langle \mathbf{u},\mathbf{u} \rangle} =  \sqrt{u^i  g_{ij} \overline{u^j}} = \sqrt{u_j \overline{u^j}} 
+\]
+特别地，当 $\{\mathbf{e}_i\}$ 是 $V$ 的标准正交基时，度量张量是单位矩阵，内积和范数的运算简化为酉空间 \ref{def:unitary_space} 中的内积和范数运算。
+
+\begin{note}
+    内积空间的度量张量可用于内积和范数的计算。
+    内积空间的内积运算也可以看成是一个对称、正定的 $(0,2)$ 型张量：$g_{ij} \mathbf{e}^i \otimes \mathbf{e}^j$。
+    在微分几何中，度量张量就像“尺子”，用来测量空间中向量的长度和角度。
+\end{note}
+
+\vspace{1em}
+\subsection{外形式与外积}
+
+\begin{definition}[外形式 Exterior Form]
+    设 $V$ 是一个 $n$ 维 $F$-线性空间，$V^*$ 是 $V$ 的对偶空间。
+    如果一个 $(0,s)$ 型张量 $T \in V^0_s$ 称为 $V$ 上的一个\textbf{外形式}，当且仅当，
+    $\forall \mathbf{v}_1,\cdots\mathbf{v}_s \in V$ 和 $\forall i,j = 1,\cdots,s$ 都有：
+    \[
+        T(\mathbf{v}_1,\cdots,\mathbf{v}_i,\cdots,\mathbf{v}_j,\cdots,\mathbf{v}_s) = -T(\mathbf{v}_1,\cdots,\mathbf{v}_j,\cdots,\mathbf{v}_i,\cdots,\mathbf{v}_s)
+    \]
+    也即交换任意两个下槽的输入，张量值变号。$V^0_s$ 中所有的外形式构成一个线性子空间，记为 $\bigwedge^s(V)$。
+    \label{def:exterior_form}
+\end{definition}
+
+\begin{example}[行列式是一个 n-次外形式]
+    方阵的行列式是一个 n-次外形式。设 $\mathbf{A}\in F^{n\times n}$，
+    将它的行向量（或列向量）看作 $F^n$ 中的 $n$ 个向量 $\mathbf{a}_1,\mathbf{a}_2,\cdots,\mathbf{a}_n\in F^n$，
+    则行列式 $\det(\mathbf{A})$ 可以看作 $(F^n)^0_n$ 型张量：
+    \[
+        \det(\mathbf{A}) = \det(\mathbf{a}_1,\mathbf{a}_2,\cdots,\mathbf{a}_n)
+    \]
+    并且，根据命题 \ref{prop:determinant_property}，交换任意两行（或两列），行列式的值变号，所以行列式是一个 n-次外形式。
+    \label{ex:determinant_exterior_form}
+\end{example}
+
+\begin{note}
+    外形式是张量的一种特殊类型，具有反对称性。标量可以看成是 $0$ 次外形式，对偶空间中的线性泛函 $\mathbf{v}^*\in V^*$ 可以看成是 $1$ 次外形式。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[反对称化运算]
+    任何一个 $(0,r)$ 型张量 $T\in V^0_r$ 都可以通过反对称化运算 $\mathrm{A_r}:V^0_r\to \bigwedge^rV^*$，得到一个 r-次外形式。
+    \begin{align*}
+        (\mathrm{A_r}(T))(\mathbf{v}_1,\cdots,\mathbf{v}_r) &= \frac{1}{r!}\sum_{\sigma \in S_r} \left( \mathrm{sgn}(\sigma) T(\mathbf{v}_{\sigma(1)},\cdots,\mathbf{v}_{\sigma(r)}) \right) \\
+        &= \frac{1}{r!} \delta_{1 2 \cdots n}^{j_1 j_2 \cdots j_n}  T(\mathbf{v}_{j_1},\cdots,\mathbf{v}_{j_r})
+    \end{align*}
+    其中，$S_r$ 是 $1,2,\cdots,r$ 的全排列集合，$\mathrm{sgn}(\sigma)$ 是排列 $\sigma$ 的符号，$\delta_{1 2 \cdots n}^{j_1 j_2 \cdots j_n}$ 是广义克罗内克尔符号。
+\end{definition}
+
+\begin{example}
+    设 $T\in V^0_2$，反对称化得到一个新的 2 阶协变张量 $\mathrm{A_2}(T)$ 为：
+    \[
+        \mathrm{A_2}(T)(\mathbf{u},\mathbf{v}) = \frac{1}{2}(T(\mathbf{u},\mathbf{v}) - T(\mathbf{v},\mathbf{u}))
+    \]
+    因为，$\mathrm{A_2}(T)(\mathbf{u},\mathbf{v}) = -\mathrm{A_2}(T)(\mathbf{v},\mathbf{u})$，则 $\mathrm{A_2}(T) \in \bigwedge^2 V$ 是一个 2-次外形式。
+    \label{ex:2-exterior_form}
+\end{example}
+
+\begin{note}
+    反对称化运算是将一个普通的协变张量转换为外形式的过程。
+    反对称化运算类似于行列式展开式的定义 \ref{ex:generalized_kronecker_determinant}。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[外积 Exterior Product]
+    设 V 是 F-线性空间，设函数 $\wedge : \bigwedge^rV \times \bigwedge^sV \to \bigwedge^{r+s}V$ 称为外积，
+    那么任意 $f\in \bigwedge^rV$，$g\in \bigwedge^sV$ 的外积记为 $f\wedge g \in \bigwedge^{r+s}V$ 有：
+    \[
+        f\wedge g := \frac{(r+s)!}{r!s!} \mathrm{A_{r+s}}[(f\otimes g)]
+    \]
+    其中，$f\otimes g \in V^0_{r+s}$ 是 $f,g$ 的张量积，$\mathrm{A_{r+s}}$ 是反对称化运算。
+    外积也称为\textbf{楔积 Wedge Product}。
+    \label{def:exterior_product}
+\end{definition}
+
+\begin{proposition}[外积运算的性质]
+    设 $f\in \bigwedge^rV$，$g\in \bigwedge^sV$，$h\in \bigwedge^tV$，则外积运算具有以下性质：
+    \begin{enumerate}
+        \item 反交换律：$f\wedge g = (-1)^{rs} g\wedge f$
+        \item 结合律：$(f\wedge g)\wedge h = f\wedge (g\wedge h)$
+        \item 分配律：$f\wedge (g+h) = f\wedge g + f\wedge h$
+    \end{enumerate}
+    \label{prop:exterior_product_property}
+\end{proposition}
+
+\begin{proposition}[外形式的基底]
+    设 $V$ 是一个 $n$ 维 $F$-线性空间，$\{\mathbf{e}_i:i=1,\cdots,n\}$ 是协变基，$V^*$ 是 $V$ 的对偶空间，$\{\mathbf{e}^j:j=1,\cdots,n\}$ 是逆变基。
+    那么 $\bigwedge^rV$ 的一个基底为：
+    \[
+        \{e^{i_1}\wedge e^{i_2}\wedge \cdots \wedge e^{i_r} : 1\leq i_1 < i_2 < \cdots < i_r \leq n\}
+    \]
+    其中，$1\leq i_1 < i_2 < \cdots < i_r \leq n$ 表示从 $n$ 个元素中取 $r$ 个元素的所有组合。
+    $\bigwedge^rV$ 的维数为 $\dim \bigwedge^rV = C(n,r)=\binom{n}{r} = \frac{n!}{r!(n-r)!}$。
+\end{proposition}
+
+\begin{example}[三维欧氏空间的向量外积]
+    在 $\mathbb{R}^3$ 中，设 $\{\mathbf{e}_1,\mathbf{e}_2,\mathbf{e}_3\}$ 是标准正交基，$\{\mathbf{e}^1,\mathbf{e}^2,\mathbf{e}^3\}$ 是其对偶基。
+    $\bigwedge^2(\mathbb{R}^3)$ 的维数为 $C(3,2) = 3$，$\bigwedge^2(\mathbb{R}^3)$ 的基底为：
+    \begin{align*}
+        \mathbf{e}^1\wedge \mathbf{e}^2 &= \mathbf{e}^1 \otimes \mathbf{e}^2 - \mathbf{e}^2 \otimes \mathbf{e}^1 \\
+        \mathbf{e}^2\wedge \mathbf{e}^3 &= \mathbf{e}^2 \otimes \mathbf{e}^3 - \mathbf{e}^3 \otimes \mathbf{e}^2 \\
+        \mathbf{e}^3\wedge \mathbf{e}^1 &= \mathbf{e}^3 \otimes \mathbf{e}^1 - \mathbf{e}^1 \otimes \mathbf{e}^3 \\
+    \end{align*}
+    设 $\mathbf{u}=u_i\mathbf{e}^i,\mathbf{v}=v_j\mathbf{e}^j\in \mathbb{R}^3 = \bigwedge^1(\mathbb{R}^3)$，则 $\mathbf{u}\wedge \mathbf{v} \in \bigwedge^2(\mathbb{R}^3)$ 可以表示为：
+    \begin{align*}
+        \mathbf{u}\wedge \mathbf{v} &= (u_i\mathbf{e}^i) \wedge (v_j\mathbf{e}^j) \\
+        &= 2 \mathrm{A_2}(u_i v_j \mathbf{e}^i \otimes \mathbf{e}^j) \\
+        &= u_iv_j (\mathbf{e}^i \otimes \mathbf{e}^j - \mathbf{e}^j \otimes \mathbf{e}^i) \\
+        &= (u_1v_2 - u_2v_1) \mathbf{e}^1 \wedge \mathbf{e}^2 + (u_2v_3 - u_3v_2) \mathbf{e}^2 \wedge \mathbf{e}^3 + (u_3v_1 - u_1v_3) \mathbf{e}^3 \wedge \mathbf{e}^1\\
+        &= \begin{vmatrix}
+            u_1 & u_2 \\
+            v_1 & v_2
+        \end{vmatrix} \mathbf{e}^1 \wedge \mathbf{e}^2 +
+        \begin{vmatrix}
+            u_2 & u_3 \\
+            v_2 & v_3
+        \end{vmatrix} \mathbf{e}^2 \wedge \mathbf{e}^3 +
+        \begin{vmatrix}
+            u_3 & u_1 \\
+            v_3 & v_1
+        \end{vmatrix} \mathbf{e}^3 \wedge \mathbf{e}^1
+    \end{align*}
+
+    在四元数乘法的定义 \ref{def:quaternion_multiplication} 中，首次引入了两个向量的叉乘：
+    \begin{align*}
+        \mathbf{u} \times \mathbf{v} &= \begin{vmatrix}
+            \mathbf{e}^1 & \mathbf{e}^2 & \mathbf{e}^3 \\
+            u_1 & u_2 & u_3 \\
+            v_1 & v_2 & v_3
+        \end{vmatrix}\\
+        &= \begin{vmatrix}
+            u_2 & u_3 \\
+            v_2 & v_3
+        \end{vmatrix}\mathbf{e}^1 -
+        \begin{vmatrix}
+            u_1 & u_3 \\
+            v_1 & v_3
+        \end{vmatrix}\mathbf{e}^2 +
+        \begin{vmatrix}
+            u_1 & u_2 \\
+            v_1 & v_2
+        \end{vmatrix}\mathbf{e}^3\\
+        &= (u_2v_3 - u_3v_2)\mathbf{e}^1 - (u_1v_3 - u_3v_1)\mathbf{e}^2 + (u_1v_2 - u_2v_1)\mathbf{e}^3
+    \end{align*}
+    通过对比发现，$\mathbf{u}\wedge \mathbf{v}$ 与 $\mathbf{u} \times \mathbf{v}$ 存在某种联系，称为 \textbf{Hodge 对偶}（见下文）。
+    \label{ex:exterior_product_R3}
+\end{example}
+
+\begin{note}
+    张量积和反对称化运算相结合得到外积运算。
+    外积用于构造更高阶的外形式，例如面积元素、体积元素等。
+    外形式空间的维数由组合数决定，这反映了从 $n$ 个基向量中选择 $r$ 个进行外积的不同方式。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[Hodge 对偶 Hodge Dual]
+    在 $\mathbb{R}^n$ 中，$\{\mathbf{e}_i:i=1,\cdots,n\}$ 是标准正交基，$\{\mathbf{e}^j:j=1,\cdots,n\}$ 是其对偶基。
+    设
+    \[
+        \mathrm{vol} = \mathbf{e}^1 \wedge \mathbf{e}^2 \wedge \cdots \wedge \mathbf{e}^n \in \bigwedge^n(\mathbb{R}^n)
+    \]
+    称为\textbf{体积元素 Volume Element}。设线性映射 $*: \bigwedge^r(\mathbb{R}^n) \to \bigwedge^{n-r}(\mathbb{R}^n)$ 称为 Hodge 对偶，当且仅当，满足：
+    \[
+        \forall \bm{\alpha,\beta} \in \bigwedge^r(\mathbb{R}^n),\ *\bm{\beta} \in \bigwedge^{n-r}(\mathbb{R}^n),\quad
+        \bm{\alpha} \wedge (*\bm{\beta}) = \langle \bm{\alpha},\bm{\beta} \rangle \mathrm{vol}
+    \]
+    特别地：
+    \[
+        *\mathrm{vol} = 1,\quad *1 = \mathrm{vol}
+    \]
+\end{definition}
+
+\begin{note}
+    Hodge 对偶将一个 r-次外形式映射为一个 (n-r)-次外形式。
+    在三维欧氏空间中，2-次外形式与 1-次外形式之间的 Hodge 对偶对应于向量的叉积运算。
+\end{note}
+
+\begin{example}[三维欧氏空间的向量叉积]
+    在 $\mathbb{R}^3$ 中，设 $\{\mathbf{e}_1,\mathbf{e}_2,\mathbf{e}_3\}$ 是标准正交基，$\{\mathbf{e}^1,\mathbf{e}^2,\mathbf{e}^3\}$ 是其对偶基。
+    \begin{align*}
+        *(\mathbf{e}^1\wedge \mathbf{e}^2) &= \mathbf{e}^3 \\
+        *(\mathbf{e}^2\wedge \mathbf{e}^3) &= \mathbf{e}^1 \\
+        *(\mathbf{e}^3\wedge \mathbf{e}^1) &= \mathbf{e}^2 \\
+    \end{align*}
+    那么，根据例子 \ref{ex:exterior_product_R3} 两向量的叉乘定义为：
+    \[
+        \mathbf{u} \times \mathbf{v} := *( \mathbf{u} \wedge \mathbf{v} ) \in \bigwedge^{3-2}(\mathbb{R}^3) = \mathbb{R}^3
+    \]
+    在 $\mathbb{R}^3$ 中，$\mathbf{u} \times \mathbf{v}$：
+    \[
+        ||\mathbf{u} \times \mathbf{v}||_2 = ||\mathbf{u}||_2 ||\mathbf{v}||_2 \sin \theta
+    \]
+    其中，$\theta = \angle(\mathbf{u}, \mathbf{v})$ 是两向量的夹角，那么 $\mathbf{u} \times \mathbf{v}$ 的大小表示平行四边形的面积；
+    方向表示平行四边形的法向。而 $\mathbf{u}\wedge \mathbf{v} \in \bigwedge^2(\mathbb{R}^3)$ 就表示该平行四边形本身。
+    \label{ex:cross_product_R3}
+\end{example}
+
+\vspace{1em}
+\begin{example}[向量的混合积与矩阵行列式的几何意义]
+    设 $\mathbf{u},\mathbf{v},\mathbf{w}\in \mathbb{R}^3$，它们的混合积可以表示定义为：
+    \[
+        \left[\mathbf{u},\mathbf{v},\mathbf{w}\right] := \mathbf{u} \cdot (\mathbf{v} \times \mathbf{w})
+    \]
+    在标准正交基下，$\mathbf{u},\mathbf{v},\mathbf{w}$ 分别表示为：
+    \[
+        \mathbf{u} = u_i \mathbf{e}^i,\quad \mathbf{v} = v_j \mathbf{e}^j,\quad \mathbf{w} = w_k \mathbf{e}^k
+    \]
+    根据例 \ref{ex:cross_product_R3}，混合积可以表示为：
+    \begin{align*}
+        \left[\mathbf{u},\mathbf{v},\mathbf{w}\right] &= \mathbf{u} \cdot (\mathbf{v} \times \mathbf{w}) \\
+        &= u_i \mathbf{e}^i \cdot *( (v_j \mathbf{e}^j) \wedge (w_k \mathbf{e}^k) ) \\
+        &= u_i v_j w_k (\mathbf{e}^i \cdot *(\mathbf{e}^j \wedge \mathbf{e}^k)) \\
+        &= u_i v_j w_k (\delta^{ijk}_{123})\\
+        &= u_1 v_2 w_3 + u_2 v_3 w_1 + u_3 v_1 w_2 - u_3 v_2 w_1 - u_1 v_3 w_2 - u_2 v_1 w_3 \\
+        &= \begin{vmatrix}
+            u_1 & u_2 & u_3\\
+            v_1 & v_2 & v_3\\
+            w_1 & w_2 & w_3
+        \end{vmatrix}
+    \end{align*}
+    在由 $\mathbf{u},\mathbf{v},\mathbf{w}$ 这三个向量所构成的平行六面体中，
+    $\mathbf{v} \times \mathbf{w}$ 的大小表示底面的面积，方向表示底面的法向，
+    $\mathbf{u} \cdot (\mathbf{v} \times \mathbf{w})$ 就表示该平行六面体的体积。
+    该体积也就是行列式的几何意义，表示线性变换对空间的拉伸因子。
+    \label{ex:triple_product_and_determinant}
+\end{example}
 
 
 
