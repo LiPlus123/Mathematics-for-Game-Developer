@@ -7,27 +7,256 @@
 \[
 \mathbf{A} = \mathbf{L} \mathbf{U}
 \]
-则称 $\mathbf{A}$ 有 LU 分解，$\mathbf{L}$ 和 $\mathbf{U}$ 分别称为 $\mathbf{A}$ 的下三角矩阵和上三角矩阵。
+则称 $\mathbf{A}$ 有 LU 分解。
 \end{definition}
 
-\begin{proposition}
-    
+\begin{example}[使用 LU 分解求解线性方程组]
+    设 $\mathbf{A} = \mathbf{L} \mathbf{U}$，则可以将线性方程组 $\mathbf{A}\mathbf{x} = \mathbf{b}$ 转化为两个阶段：
+    \begin{align*}
+        \mathbf{L}\mathbf{y} &= \mathbf{b}\\
+        \mathbf{U}\mathbf{x} &= \mathbf{y}
+    \end{align*}
+    先利用前向替换法求解 $\mathbf{y}$：
+    \begin{align*}
+        y_1 &= \frac{b_1}{l_{11}} \\
+        y_i &= \frac{1}{l_{ii}}\left[b_i - \sum_{j=1}^{i-1} l_{ij} y_j\right], \quad i=2,3,\cdots,n
+    \end{align*}
+    再利用后向替换法求解 $\mathbf{x}$：
+    \begin{align*}
+        x_n &= \frac{y_n}{u_{nn}} \\
+        x_i &= \frac{1}{u_{ii}}\left[y_i - \sum_{j=i+1}^{n} u_{ij} x_j\right], \quad i=n-1,n-2,\cdots,1
+    \end{align*}
+    这样就可以高效地求解线性方程组 $\mathbf{A}\mathbf{x} = \mathbf{b}$。
+    \label{ex:lu_decomposition_solve_linear_system}
+\end{example}
+
+\begin{example}[使用 LU 分解计算行列式]
+    设 $\mathbf{A} = \mathbf{L} \mathbf{U}$，则行列式可以表示为：
+    \[
+        \det(\mathbf{A}) = \det(\mathbf{L}) \cdot \det(\mathbf{U})
+    \]
+    由于 $\mathbf{L}$ 和 $\mathbf{U}$ 都是三角矩阵，所以它们的行列式等于对角线元素的乘积：
+    \[
+        \det(\mathbf{L}) = \prod_{i=1}^{n} l_{ii}, \quad \det(\mathbf{U}) = \prod_{i=1}^{n} u_{ii}
+    \]
+    因此，行列式可以简化为：
+    \[
+        \det(\mathbf{A}) = \left( \prod_{i=1}^{n} l_{ii} \right) \left( \prod_{i=1}^{n} u_{ii} \right)
+    \]
+    这样就可以高效地计算行列式。
+    \label{ex:lu_decomposition_determinant}
+\end{example}
+
+
+\begin{proposition}[LU 分解的存在性]
+    设 $\mathbf{A} \in \mathbb{R}^{n \times n}$，
+    \begin{enumerate}
+        \item 矩阵能 LU 分解的充分条件：如果主子式 $\det{\mathbf{A}_k}$ 均非零，那么 $\mathbf{A}$ 能做 LU 分解；
+        \item 矩阵能 LU 分解的必要条件：如果矩阵 $\mathbf{A}$ 能做 LU 分解，那么 $\mathbf{A}$ 可逆。
+    \end{enumerate}
 \end{proposition}
 
-\subsection{QR 分解}
+\begin{note}
+    矩阵的 LU 分解并不总是存在，但对于大多数实际应用中的矩阵，LU 分解是可行且高效的。
+    通常使用\textbf{高斯消元法}、\textbf{Doolittle 方法}或 \textbf{Crout 方法}来计算 LU 分解。
+\end{note}
+\vspace{1em}
 
-% \begin{definition}[QR 分解]
-% 设 $\mathbf{A} \in \mathbb{R}^{m \times n}$，如果存在一个正交矩阵 $\mathbf{Q} \in \mathbb{R}^{m \times m}$ 和一个上三角矩阵 $\mathbf{R} \in \mathbb{R}^{m \times n}$，使得
-% \[
-% \mathbf{A} = \mathbf{Q} \mathbf{R}
-% \]
-% 则称 $\mathbf{A}$ 有 QR 分解，$\mathbf{Q}$ 和 $\mathbf{R}$ 分别称为 $\mathbf{A}$ 的正交矩阵和上三角矩阵。
+\subsection{Cholesky 分解}
+
+\begin{proposition}[Cholesky 分解]
+    设 $\mathbf{A} \in \mathbb{R}^{n \times n}$ 是对称正定矩阵，则存在唯一的下三角矩阵 $\mathbf{L} \in \mathbb{R}^{n \times n}$，使得
+    \[
+        \mathbf{A} = \mathbf{L} \mathbf{L}^T
+    \]
+    该分解称为 \textbf{Cholesky 分解}。
+    \label{proposition:cholesky_decomposition}
+\end{proposition}
+
+\begin{note}
+    Cholesky 分解是一种特殊的 LU 分解，适用于对称正定矩阵。
+    Cholesky 分解的计算效率高于一般的 LU 分解，因为它只需要计算一半的矩阵元素。
+    Cholesky 分解分为两步：
+    \begin{enumerate}
+        \item 计算下三角矩阵 $\mathbf{L}$ 的对角线元素：
+        \[
+            l_{ii} = \sqrt{a_{ii} - \sum_{k=1}^{i-1} l_{ik}^2}, \quad i=1,2,\ldots,n
+        \]
+        \item 计算下三角矩阵 $\mathbf{L}$ 的非对角线元素：
+        \[
+            l_{ij} = \frac{1}{l_{jj}}\left(a_{ij} - \sum_{k=1}^{j-1} l_{ik} l_{jk}\right), \quad i=j+1,j+2,\ldots,n; j=1,2,\ldots,n-1
+        \]
+    \end{enumerate}
+    \label{note:cholesky_decomposition}
+\end{note}
+\vspace{1em}
+
+\subsection{QR 分解}
+\begin{proposition}[QR 分解]
+    任何矩阵 $\mathbf{A} \in \mathbb{R}^{m \times n}$ 都可以分解为一个正交矩阵 $\mathbf{Q} \in \mathbb{R}^{m \times m}$ 和一个上三角矩阵 $\mathbf{R} \in \mathbb{R}^{m \times n}$ 的乘积，即
+    \[
+        \mathbf{A} = \mathbf{Q} \mathbf{R}
+    \]
+    该分解称为 \textbf{QR 分解}。
+\end{proposition}
+
+\begin{proof}
+    设 $\mathbf{A} = [\mathbf{a}_1, \mathbf{a}_2, \ldots, \mathbf{a}_n]$，使用 Gram-Schmidt 正交化 \ref{prop:gram_schmidt} 过程构造正交矩阵 $\mathbf{Q}$：
+    \begin{align*}
+        \mathbf{u}_1 &= \mathbf{a}_1 \\
+        \mathbf{e}_1 &= \frac{\mathbf{u}_1}{\|\mathbf{u}_1\|} \\
+        \mathbf{u}_2 &= \mathbf{a}_2 - (\mathbf{a}_2 \cdot \mathbf{e}_1) \mathbf{e}_1 \\
+        \mathbf{e}_2 &= \frac{\mathbf{u}_2}{\|\mathbf{u}_2\|} \\
+        &\vdots \\
+        \mathbf{u}_n &= \mathbf{a}_n - \sum_{j=1}^{n-1} (\mathbf{a}_n \cdot \mathbf{e}_j) \mathbf{e}_j \\
+        \mathbf{e}_n &= \frac{\mathbf{u}_n}{\|\mathbf{u}_n\|}
+    \end{align*}
+    其中，$\{\mathbf{e}_1, \mathbf{e}_2, \ldots, \mathbf{e}_n\}$ 是正交归一化后的向量组，构成正交矩阵 $\mathbf{Q} = [\mathbf{e}_1, \mathbf{e}_2, \ldots, \mathbf{e}_m]$。
+    
+    接下来，构造上三角矩阵 $\mathbf{R}$：
+    \[
+        r_{ij} = 
+        \begin{cases}
+            \mathbf{a}_j \cdot \mathbf{e}_i, & i \leq j \\ 
+            0, & i > j 
+        \end{cases}
+    \]
+    这样，$\mathbf{R}$ 是一个上三角矩阵。
+    
+    最后，可以验证 $\mathbf{A} = \mathbf{Q} \mathbf{R}$：
+    \[
+        \mathbf{A} = [\mathbf{a}_1, \ldots, \mathbf{a}_n] = [\sum_{i=1}^{m} r_{i1} \mathbf{e}_i, \ldots, \sum_{i=1}^{m} r_{in} \mathbf{e}_i] = \mathbf{Q} \mathbf{R}
+    \]
+\end{proof}
+
+\vspace{1em}
 
 \subsection{特征值分解}
+\begin{definition}[特征值分解 Eigenvalue Decomposition]
+    设 $\mathbf{A} \in \mathbb{R}^{n \times n}$，如果存在一个可逆矩阵 $\mathbf{P} \in \mathbb{R}^{n \times n}$ 和一个对角矩阵 $\mathbf{D} \in \mathbb{R}^{n \times n}$，使得
+    \[
+        \mathbf{A} = \mathbf{P} \mathbf{D} \mathbf{P}^{-1}
+    \]
+    则称 $\mathbf{A}$ 有\textbf{特征值分解}。
+\end{definition}
 
+\begin{note}
+    矩阵的特征值分解与可对角化矩阵的定义 \ref{def:diagonalizable_matrix} 等价。
+    能特征值分解的矩阵与可对角化矩阵的的条件相同，即矩阵 $\mathbf{A}$ 有 $n$ 个线性无关的特征向量。
+\end{note}
+\vspace{1em}
 
 \subsection{奇异值分解}
+\begin{proposition}[奇异值分解 Singular Value Decomposition]
+    任意矩阵 $\mathbf{A} \in \mathbb{R}^{m \times n}$ 都可以分解为：
+    \[
+        \mathbf{A} = \mathbf{U} \boldsymbol{\Sigma} \mathbf{V}^T
+    \]
+    其中，
+    \begin{enumerate}
+        \item $\mathbf{U} \in \mathbb{R}^{m \times m}$ 是正交矩阵，其中的列向量称为\textbf{左奇异向量}；
+        \item $\mathbf{V} \in \mathbb{R}^{n \times n}$ 是正交矩阵，其中的列向量称为\textbf{右奇异向量}；
+        \item $\boldsymbol{\Sigma} \in \mathbb{R}^{m \times n}$ 是对角矩阵，对角线上的元素称为\textbf{奇异值}，所有奇异值均为非负实数。
+    \end{enumerate}
+\end{proposition}
 
-\subsection{极分级}
+\begin{proof}
+    $\mathbf{A}^T \mathbf{A} \in \mathbb{R}^{n\times n}$ 是一个对称矩阵，根据命题 \ref{prop:real_symmetric_matrix_diagonalizable}，
+    $\mathbf{A}^T \mathbf{A}$ 是可对角化矩阵，且存在一个正交矩阵 $\mathbf{V} \in \mathbb{R}^{n \times n}$，使得
+    \[
+        \mathbf{A}^T \mathbf{A} = \mathbf{V} \boldsymbol{\Lambda} \mathbf{V}^T
+    \]
+    其中，$\boldsymbol{\Lambda}$ 是对角矩阵，对角线上的元素为 $\mathbf{A}^T \mathbf{A}$ 的特征值。根据命题 \ref{prop:real_symmetric_matrix_positive_definite_3}，
+    $\mathbf{A}^T \mathbf{A}$ 是半正定矩阵，所以其特征值非负。设 $\boldsymbol{\Sigma} = [\sigma_{ij}] \in \mathbb{R}^{m \times n}$ 是一个对角矩阵，
+    对角线元素为 $\sigma_{ii} = \sqrt{\lambda_i}$，其中 $\lambda_i$ 是 $\mathbf{A}^T \mathbf{A}$ 的第 $i$ 个特征值，那么令矩阵 $\mathbf{U}$ 满足：
+    \begin{equation}
+        \mathbf{U}\boldsymbol{\Sigma} = \mathbf{A} \mathbf{V} \in \mathbb{R}^{m \times n}
+        \label{eq:u_sigma_av}
+    \end{equation}
+    那么：
+    \begin{equation}
+        \boldsymbol{\Sigma}^T\mathbf{U}^T = \mathbf{V}^T \mathbf{A}^T \in \mathbb{R}^{n \times m}
+        \label{eq:sigma_t_u_t_atv_t}
+    \end{equation}
+    将等式 \ref{eq:u_sigma_av} 和 \ref{eq:sigma_t_u_t_atv_t} 等式左右两边分别相乘得：
+    \begin{align*}
+        \mathbf{U}\boldsymbol{\Sigma}\boldsymbol{\Sigma}^T\mathbf{U}^T & = \mathbf{A} \mathbf{V}\mathbf{V}^T \mathbf{A}^T  \\
+        \mathbf{U}\boldsymbol{\Lambda}^{\prime}\mathbf{U}^T & = \mathbf{A} \mathbf{A}^T
+    \end{align*}
+    其中，$\boldsymbol{\Lambda}^{\prime} \in \mathbb{R}^{m\times m}$ 是对角矩阵，对角线元素为 $\sigma_{ii}^2 = \lambda_i$；
+    $\mathbf{A} \mathbf{A}^T$ 也是对称半正定矩阵，根据命题 \ref{prop:real_symmetric_matrix_diagonalizable}，$\mathbf{U}$ 是正交矩阵。
+    因此，$\mathbf{A} = \mathbf{U} \boldsymbol{\Sigma} \mathbf{V}^T$，其中 $\mathbf{U}$ 和 $\mathbf{V}$ 是正交矩阵，$\boldsymbol{\Sigma}$ 是对角矩阵，
+    并且奇异值 $\sigma_{ii} = \sqrt{\lambda_i} \geq 0$。
+\end{proof}
+
+\begin{corollary}[奇异值分解与特征值分解的关系]
+    设 $\mathbf{A} = \mathbf{U} \boldsymbol{\Sigma} \mathbf{V}^T$ 那么：
+    \begin{align*}
+        \mathbf{A}^T\mathbf{A} &= [\mathbf{U}\mathbf{\Sigma}\mathbf{V}^T]^T[\mathbf{U}\mathbf{\Sigma}\mathbf{V}^T] \\
+        &= \mathbf{V}\mathbf{\Sigma}^T\mathbf{U}^T\mathbf{U}\mathbf{\Sigma}\mathbf{V}^T \\
+        &= \mathbf{V}\mathbf{\Sigma}^T\mathbf{\Sigma}\mathbf{V}^T \\
+        &= \mathbf{V}\mathbf{\Sigma}^2\mathbf{V}^T
+    \end{align*}
+    同理可得：
+    \begin{align*}
+        \mathbf{A}\mathbf{A}^T &= [\mathbf{U}\mathbf{\Sigma}\mathbf{V}^T][\mathbf{U}\mathbf{\Sigma}\mathbf{V}^T]^T \\
+        &= \mathbf{U}\mathbf{\Sigma}\mathbf{V}^T\mathbf{V}\mathbf{\Sigma}^T\mathbf{U}^T \\
+        &= \mathbf{U}\mathbf{\Sigma}\mathbf{\Sigma}^T\mathbf{U}^T \\
+        &= \mathbf{U}\mathbf{\Sigma}^2\mathbf{U}^T
+    \end{align*}
+\end{corollary}
+
+\begin{note}
+    奇异值分解相比特征值分解更为通用，因为它适用于任意矩阵，而不仅限于方阵。
+    奇异值分解中，$\mathbf{U}$ 和 $\mathbf{V}$ 是正交矩阵，表示刚性变换，不改变向量的长度和夹角，
+    $\boldsymbol{\Sigma}$ 是对角矩阵，表示拉伸或压缩变化。
+\end{note}
+
+\vspace{1em}
+\subsection{极分解}
+
+\begin{proposition}[极分解 Polar Decomposition]
+    任意 $\mathbf{A} \in \mathbb{R}^{n \times n}$ 都可以分解为：
+    \[
+        \mathbf{A} = \mathbf{O} \mathbf{R}
+    \]
+    或
+    \[
+        \mathbf{A} = \mathbf{L} \mathbf{O}
+    \]
+    其中，$\mathbf{O} \in \mathbb{R}^{n \times n}$ 是一个正交矩阵，$\mathbf{L}, \mathbf{R} \in \mathbb{R}^{n \times n}$ 是对称半正定矩阵。
+    称为矩阵的\textbf{极分解}。
+    \label{proposition:polar_decomposition}
+\end{proposition}
+
+\begin{proof}
+    设矩阵 $\mathbf{A}$ 的奇异值 $\mathbf{A} = \mathbf{U} \boldsymbol{\Sigma} \mathbf{V}^T$，那么：
+    \[
+        \mathbf{A} = (\mathbf{U}\mathbf{V}^T) (\mathbf{V} \boldsymbol{\Sigma} \mathbf{V}^T)
+    \]
+    令，$\mathbf{O} = \mathbf{U}\mathbf{V}^T$，满足：
+    \[
+        \mathbf{O}\mathbf{O}^T = \mathbf{U}\mathbf{V}^T\mathbf{V}\mathbf{U}^T = \mathbf{I}
+    \]
+    是正交矩阵。令
+    \[
+        \mathbf{R} = \mathbf{V} \boldsymbol{\Sigma} \mathbf{V}^T
+    \]
+    则 $\mathbf{R}$ 是对称半正定矩阵。类似地，可以得到 $\mathbf{A} = \mathbf{L} \mathbf{O}$ 的分解形式。
+    其中，$\mathbf{L} = \mathbf{U} \boldsymbol{\Sigma} \mathbf{U}^T$ 也是对称半正定矩阵。
+\end{proof}
+
+\begin{proposition}
+    矩阵  $\mathbf{A}$ 的极分解中，$\mathbf{L}, \mathbf{R}$ 满足如下关系：
+    \begin{align*}
+        \mathbf{L} & = \mathbf{A}\mathbf{O}^{-1} = \mathbf{O} \mathbf{R} \mathbf{O}^T \\
+        \mathbf{R} & = \mathbf{O}^{-1}\mathbf{A} = \mathbf{O}^T \mathbf{L} \mathbf{O}
+    \end{align*}
+    因此，$\mathbf{L}$ 和 $\mathbf{R}$ 是相似矩阵。
+\end{proposition}
+
+\begin{note}
+    极分解可以看成是奇异值分解的一种特殊情况。
+\end{note}
 
 \newpage

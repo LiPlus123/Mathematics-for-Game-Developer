@@ -18,12 +18,8 @@
     行数等于列数的矩阵称为\textbf{方阵}，$n \times n$ 的方阵简称为 $n$ 阶方阵。
 \end{definition}
 
-\begin{definition}[对角矩阵 Diagonal Matrix]
-    如果一个方阵的非对角线元素全为零，则称该方阵为\textbf{对角矩阵}。
-\end{definition}
-
 \begin{definition}[单位矩阵 Identity Matrix]
-    主对角线上的元素全为 1 的对角矩阵，记为 $\mathbf{I}$。
+    对角线上的元素全为 1，其他元素全为 0 的方阵，记为 $\mathbf{I}$。
 \end{definition}
 
 \begin{definition}[零矩阵 Zero Matrix]
@@ -64,13 +60,9 @@
         \item 数乘结合律：$(rs)\mathbf{A} = r(s\mathbf{A})$；
         \item 数乘单位元：$1\mathbf{A} = \mathbf{A}$。
     \end{enumerate}
-    因此，$F^{m \times n}$ 在矩阵加法和数乘下构成一个 $F$-线性空间。
+    因此，$F^{m \times n}$ 在矩阵加法和数乘下构成一个 $F$-线性空间。矩阵线性空间的维度为 $\dim F^{m \times n} = mn$。
 \end{proposition}
-
-\begin{proposition}[矩阵线性空间的维度]
-    $\dim F^{m \times n} = mn$
-\end{proposition}
-
+\vspace{1em}
 
 \begin{definition}[矩阵的乘法 Matrix Multiplication]
     设 $\mathbf{A} = [a_{ij}] \in F^{m \times p}$，$\mathbf{B} = [b_{ij}] \in F^{p \times n}$，两矩阵的乘积记为 $\mathbf{A}\mathbf{B}$，那么：

@@ -288,18 +288,20 @@
     \label{def:orthonormal_basis}
 \end{definition}
 
-\textbf{施密特正交化 Schimidt Orthogonalization}： 设 $ (V,\langle\cdot,\cdot\rangle) $ 为 $F$-内积空间。
-$V$ 中任何一组基 $ \{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\} $ 通过施密特正交化都可以构造出一组单位正交基。其是一个递推过程：
-\begin{enumerate}
-    \item 设 $ \mathbf{u}_1 = \mathbf{v}_1 $，并归一化得到 $ \mathbf{e}_1 = \frac{\mathbf{u}_1}{\|\mathbf{u}_1\|_2} $；
-    \item 对于 $ k=2,3,\ldots,n $，递推公式：
-    \[
-        \mathbf{u}_k = \mathbf{v}_k - \sum_{j=1}^{k-1} r_{kj} \mathbf{e}_j
-    \]
-    其中，$ r_{kj} = \langle \mathbf{v}_k,\mathbf{e}_j\rangle $；
-    然后，归一化得到 $ \mathbf{e}_k = \frac{\mathbf{u}_k}{\|\mathbf{u}_k\|_2} $；
-\end{enumerate}
-
+\begin{proposition}[Gram-Schmidt 正交化]
+    设 $ (V,\langle\cdot,\cdot\rangle) $ 为 $F$-内积空间。$V$ 中任何一组基 $ \{\mathbf{v}_1,\ldots,\mathbf{v}_n\} $ 
+    通过 Gram-Schmidt 正交化都可以构造出一组单位正交基。其是一个递推过程：
+    \begin{enumerate}
+        \item 设 $ \mathbf{u}_1 = \mathbf{v}_1 $，并归一化得到 $ \mathbf{e}_1 = \frac{\mathbf{u}_1}{\|\mathbf{u}_1\|_2} $；
+        \item 对于 $ k=2,3,\ldots,n $，递推公式：
+        \[
+            \mathbf{u}_k = \mathbf{v}_k - \sum_{j=1}^{k-1} r_{kj} \mathbf{e}_j
+        \]
+        其中，$ r_{kj} = \langle \mathbf{v}_k,\mathbf{e}_j\rangle $；
+        然后，归一化得到 $ \mathbf{e}_k = \frac{\mathbf{u}_k}{\|\mathbf{u}_k\|_2} $；
+    \end{enumerate}
+    \label{prop:gram_schmidt}
+\end{proposition}
 
 \begin{note}
     在三维空间中，两个向量正交的几何意义是它们垂直，即夹角为 $90^\circ$。

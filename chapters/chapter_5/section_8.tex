@@ -388,7 +388,9 @@
 
 
 \vspace{1em}
-\textbf{指标升降}：设 $(V,\langle \cdot,\cdot\rangle)$ 是一个 $n$ 维 $F$-内积空间，$\{\mathbf{e}_i:i=1,\cdots,n\}$ 是协变基，$V^*$ 是 $V$ 的对偶空间，$\{\mathbf{e}^j:j=1,\cdots,n\}$ 是逆变基。
+
+\begin{example}[指标升降]
+\textbf{}：设 $(V,\langle \cdot,\cdot\rangle)$ 是一个 $n$ 维 $F$-内积空间，$\{\mathbf{e}_i:i=1,\cdots,n\}$ 是协变基，$V^*$ 是 $V$ 的对偶空间，$\{\mathbf{e}^j:j=1,\cdots,n\}$ 是逆变基。
 任意 $\mathbf{v}\in V$ 用协变基线性表出：
 \[
     \mathbf{v} = v^i\mathbf{e}_i = v^i g_{ij} \mathbf{e}^j = v_j \mathbf{e}^j
@@ -412,20 +414,23 @@
     g_{j_1 i_m} \mathbf{e}^{i_m} \otimes \cdots \otimes \mathbf{e}_{j_r} \otimes \mathbf{e}^{i_1} \otimes \cdots \otimes \mathbf{e}^{i_s}\\
     &= T_{i_1 i_2 \cdots i_r i_m}^{j_2 \cdots j_s} \mathbf{e}_{j_2} \otimes \cdots \otimes \mathbf{e}_{j_r} \otimes \mathbf{e}^{i_1} \otimes \cdots \otimes \mathbf{e}^{i_s} \otimes \mathbf{e}^{i_m}
 \end{align*}
+\end{example}
 
 \vspace{1em}
 
-\textbf{计算内积与范数}：设 $(V,\langle \cdot,\cdot\rangle)$ 是一个 $n$ 维 $\mathbb{C}$-内积空间，$\{\mathbf{e}_i:i=1,\cdots,n\}$ 是协变基，$V^*$ 是 $V$ 的对偶空间，$\{\mathbf{e}^j:j=1,\cdots,n\}$ 是逆变基。
-$\forall \mathbf{u},\mathbf{v}\in V$ 的内积为：
-\begin{align*}
-    \langle \mathbf{u},\mathbf{v} \rangle &= \langle u^i \mathbf{e}_i, v^j \mathbf{e}_j \rangle = u^i \langle \mathbf{e}_i, \mathbf{e}_j \rangle \overline{v^j} \\
-    & = u^i  g_{ij} \overline{v^j} = u_j \overline{v^j} 
-\end{align*}
-2-范数为：
-\[
-    ||\mathbf{u}||_2 = \sqrt{\langle \mathbf{u},\mathbf{u} \rangle} =  \sqrt{u^i  g_{ij} \overline{u^j}} = \sqrt{u_j \overline{u^j}} 
-\]
-特别地，当 $\{\mathbf{e}_i\}$ 是 $V$ 的标准正交基时，度量张量是单位矩阵，内积和范数的运算简化为酉空间 \ref{def:unitary_space} 中的内积和范数运算。
+\begin{example}[计算内积与范数]
+    设 $(V,\langle \cdot,\cdot\rangle)$ 是一个 $n$ 维 $\mathbb{C}$-内积空间，$\{\mathbf{e}_i:i=1,\cdots,n\}$ 是协变基，$V^*$ 是 $V$ 的对偶空间，$\{\mathbf{e}^j:j=1,\cdots,n\}$ 是逆变基。
+    $\forall \mathbf{u},\mathbf{v}\in V$ 的内积为：
+    \begin{align*}
+        \langle \mathbf{u},\mathbf{v} \rangle &= \langle u^i \mathbf{e}_i, v^j \mathbf{e}_j \rangle = u^i \langle \mathbf{e}_i, \mathbf{e}_j \rangle \overline{v^j} \\
+        & = u^i  g_{ij} \overline{v^j} = u_j \overline{v^j} 
+    \end{align*}
+    2-范数为：
+    \[
+        ||\mathbf{u}||_2 = \sqrt{\langle \mathbf{u},\mathbf{u} \rangle} =  \sqrt{u^i  g_{ij} \overline{u^j}} = \sqrt{u_j \overline{u^j}} 
+    \]
+    特别地，当 $\{\mathbf{e}_i\}$ 是 $V$ 的标准正交基时，度量张量是单位矩阵，内积和范数的运算简化为欧氏空间或酉空间 \ref{def:unitary_space} 中的内积和范数运算。
+\end{example}
 
 \begin{note}
     内积空间的度量张量可用于内积和范数的计算。

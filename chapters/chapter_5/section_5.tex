@@ -205,7 +205,7 @@
 \vspace{1em}
 \subsection{三角矩阵与可三角化矩阵}
 \begin{definition}[上三角矩阵 Upper Triangular Matrix]
-    设 $\mathbf{A} = [a_{ij}] \in F^{n \times n}$，如果
+    设 $\mathbf{A} = [a_{ij}] \in F^{m \times n}$，如果
     \[
         a_{ij} = 0, \quad \forall i > j
     \]
@@ -214,7 +214,7 @@
 \end{definition}
 
 \begin{definition}[下三角矩阵 Lower Triangular Matrix]
-    设 $\mathbf{A} = [a_{ij}] \in F^{n \times n}$，如果
+    设 $\mathbf{A} = [a_{ij}] \in F^{m \times n}$，如果
     \[
         a_{ij} = 0, \quad \forall i < j
     \]
@@ -286,7 +286,7 @@
 \subsection{对角矩阵与可对角化矩阵}
 
 \begin{definition}[对角矩阵 Diagonal Matrix]
-    设 $\mathbf{A} = [a_{ij}] \in F^{n \times n}$，如果
+    设 $\mathbf{A} = [a_{ij}] \in F^{m \times n}$，如果
     \[
         a_{ij} = 0, \quad \forall i \neq j
     \]
@@ -460,6 +460,7 @@
         \item $\mathbf{A}$ 是\textbf{对称负定 Symmetric Negative Definite} 的，当且仅当，
         $\forall \mathbf{x} \neq \mathbf{0} \in \mathbb{R}^n$，有 $\mathbf{x}^T\mathbf{A}\mathbf{x} < 0$。
     \end{enumerate}
+    \label{def:symmetric_positive_definite_matrix}
 \end{definition}
 
 \begin{note}
@@ -470,7 +471,7 @@
 \end{note}
 \vspace{1em}
 
-\begin{proposition}[实对称矩阵的正定性特征值判定法]
+\begin{proposition}[实对称矩阵的正定性的特征值判定法]
     设 $\mathbf{A}\in \mathbb{R}^{n\times n}$ 是一个实对称矩阵，$\lambda_1,\ldots,\lambda_n$ 是 $\mathbf{A}$ 的 $n$ 个特征值（重根算作多个特征值），则有：
     \begin{enumerate}
         \item $\mathbf{A}$ 是对称半正定的，当且仅当，$\forall i=1,2,\ldots,n$，有 $\lambda_i \geq 0$；
@@ -489,6 +490,7 @@
     实对称矩阵的正定性与其特征值的关系，是判断实对称矩阵正定性的一个重要方法。
     此外还可以通过实对称矩阵的主子式判定法来判断实对称矩阵的正定性。
 \end{note}
+\vspace{1em}
 
 \begin{definition}[顺序主子矩阵 Leading Principal Submatrix]
     设 $\mathbf{A} = [a_{ij}] \in F^{n \times n}$，则 $\mathbf{A}$ 的 $k$ 阶\textbf{顺序主子矩阵}为
@@ -505,7 +507,7 @@
     \label{def:leading_principal_submatrix}
 \end{definition}
 
-\begin{proposition}[实对称矩阵的正定性顺序主子式判定法]
+\begin{proposition}[实对称矩阵的正定性的顺序主子式判定法]
     设 $\mathbf{A}\in \mathbb{R}^{n\times n}$ 是一个实对称矩阵，$\mathbf{A}_k$ 是 $\mathbf{A}$ 的 $k$ 阶顺序主子矩阵，则有：
     \begin{enumerate}
         \item $\mathbf{A}$ 是对称正定的，当且仅当，$\forall k=1,2,\ldots,n$，有 $\det(\mathbf{A}_k) > 0$；
@@ -515,6 +517,32 @@
     \end{enumerate}
     \label{prop:real_symmetric_matrix_positive_definite_leading_principal_minor}
 \end{proposition}
+\begin{proof}
+    
+\end{proof}
+\vspace{2em}
+
+\begin{proposition}[实对称矩阵的正定性的判定法 3]
+    设 $\mathbf{A}\in \mathbb{R}^{n\times n}$ 是一个实对称矩阵，那么：
+    \begin{enumerate}
+        \item $\mathbf{A}$ 是对称正定的，当且仅当，存在一个可逆矩阵 $\mathbf{P} \in \mathbb{R}^{n \times n}$，使得 $\mathbf{A} = \mathbf{P}^T \mathbf{P}$；
+        \item $\mathbf{A}$ 是对称半正定的，当且仅当，存在一个矩阵 $\mathbf{P} \in \mathbb{R}^{m \times n}$，使得 $\mathbf{A} = \mathbf{P}^T \mathbf{P}$；
+        \item $\mathbf{A}$ 是对称负定的，当且仅当，存在一个可逆矩阵 $\mathbf{P} \in \mathbb{R}^{n \times n}$，使得 $\mathbf{A} = -\mathbf{P}^T \mathbf{P}$；
+        \item $\mathbf{A}$ 是对称半负定的，当且仅当，存在一个矩阵 $\mathbf{P} \in \mathbb{R}^{m \times n}$，使得 $\mathbf{A} = -\mathbf{P}^T \mathbf{P}$。
+    \end{enumerate}
+    \label{prop:real_symmetric_matrix_positive_definite_3}
+\end{proposition}
+
+\begin{proof}
+    只证明命题 \ref{prop:real_symmetric_matrix_positive_definite_3} 中第 1 条，第 2、3、4 的证明类似。
+    \begin{align*}
+        \mathbf{x}^T\mathbf{A}\mathbf{x} & = \mathbf{x}^T \mathbf{P}^T \mathbf{P} \mathbf{x} \\
+        & = (\mathbf{P}\mathbf{x})^T (\mathbf{P}\mathbf{x}) \\
+        & = \|\mathbf{P}\mathbf{x}\|_2^2
+    \end{align*}
+    因为 $\mathbf{P}$ 是可逆矩阵，并且 $\mathbf{x}\neq \mathbf{0}$，所以 $\mathbf{P}\mathbf{x} \neq \mathbf{0}$，并且 $\|\mathbf{P}\mathbf{x}\|_2^2 > 0$。
+    根据定义 \ref{def:symmetric_positive_definite_matrix}，$\mathbf{A}$ 是对称正定的。
+\end{proof}
 
 % \begin{example}[二次型与二阶线性偏微分方程]
 %     二阶线性偏微分方程的一般形式为：
