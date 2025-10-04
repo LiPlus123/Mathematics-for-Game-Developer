@@ -1,0 +1,381 @@
+\chapter{点集拓扑}
+
+\section{拓扑空间的定义}
+
+\subsection{开集与闭集}
+\begin{definition}[拓扑空间 Topological Space]
+    设 $ X $ 是一个集合，$ \mathcal{T}(X) \subseteq \mathcal{P}(X) $ 是 $ X $ 的子集族，二元组 $ (X,\mathcal{T}) $ 称为\textbf{拓扑空间}，当且仅当，$ \mathcal{T} $ 满足：
+    \begin{enumerate}
+        \item 空集与全集：$ \varnothing \in \mathcal{T} $ 且 $ X \in \mathcal{T} $；
+        \item 对任意并封闭：任意 $ \{U_i:i\in I\} \subseteq \mathcal{T} $，有 $ \bigcup_{i\in I} U_i \in \mathcal{T} $；
+        \item 对有限交封闭：有限个 $ U_1,U_2,\ldots,U_n\in \mathcal{T} $，有 $ U_1\cap U_2\cap \cdots \cap U_n \in \mathcal{T} $。
+    \end{enumerate}
+    子集族 $ \mathcal{T} $ 称为 $ X $ 上的\textbf{拓扑 Topology}，$ \mathcal{T} $ 中的元素称为\textbf{开集 Open Set}。
+    \label{definition:topological_space}
+\end{definition}
+
+\begin{note}
+    根据拓扑空间的的定义，幂集 $ \mathcal{P}(X) $ 和 $ \{\varnothing,X\} $ 都是 $ X $ 上的拓扑，分别称为\textbf{离散拓扑 Discrete Topology}和\textbf{平凡拓扑 Trivial Topology}。
+    给定集合 $X$，$X$ 的任意子集族并非都是 $X$ 上的拓扑，$X$ 的拓扑也非唯一。比如，设 $ X=\{a,b,c\} $，那么下面的子集族都是 $ X $ 上的拓扑：
+    \begin{align*}
+        &\mathcal{T}_1(X)=\{\varnothing,X\},\\
+        &\mathcal{T}_2(X)=\mathcal{P}(X),\\
+        &\mathcal{T}_3(X)=\{\varnothing,X,\{a\}\},\\
+        &\mathcal{T}_4(X)=\{\varnothing,X,\{a,b\}\},\\
+        &\mathcal{T}_5(X)=\{\varnothing,X,\{a\},\{a,b\}\},\\
+        &\mathcal{T}_6(X)=\{\varnothing,X,\{a,b\},\{b\},\{b,c\}\}.
+    \end{align*}
+    下面的子集族不是 $ X $ 上的拓扑：
+    \begin{align*}
+        &\mathcal{T}_7(X)=\{\varnothing,X,\{a\},\{b\}\},\\
+        &\mathcal{T}_8(X)=\{\varnothing,X,\{a,b\},\{b,c\}\}.
+    \end{align*}
+\end{note}
+\vspace{1em}
+
+\begin{definition}[闭集 Closed Set]
+    设 $ (X,\mathcal{T}) $ 是拓扑空间，$ X $ 的子集 $ A\subseteq X $ 称为\textbf{闭集}，当且仅当 $ \complement_X A \in \mathcal{T} $。
+    \label{definition:closed_set}
+\end{definition}
+
+\begin{proposition}[闭集的性质]
+    设 $ (X,\mathcal{T}(X)) $ 为拓扑空间，则有：
+    \begin{enumerate}
+        \item 空集与全集：$ \varnothing $ 与 $ X $ 是闭集；
+        \item 对任意交封闭：$ \bigcap_{i\in I} A_i $ 是闭集，其中 $ \{A_i:i\in I\}$ 是闭集；
+        \item 对有限并封闭：$ A_1\cup A_2\cup \cdots \cup A_n $ 是闭集，其中 $ A_1,A_2,\ldots,A_n $ 是闭集。
+    \end{enumerate}
+\end{proposition}
+\vspace{1em}
+
+\begin{example}[实数集的拓扑]
+    设 $(\mathbb{R},\mathcal{T})$，则实数集上的拓扑为：
+    \[
+        \mathcal{T}(\mathbb{R}) = \{U \subseteq \mathbb{R} : U \text{ 是开区间的任意并集}\} \cup \{\varnothing,\mathbb{R}\}.
+    \]
+    其中，
+    \begin{enumerate}
+        \item 任意开区间 $ (a,b) $ 是开集；$(a,+\infty)$ 和 $(-\infty,b)$ 也是开集;
+        \item 任意闭区间 $ [a,b] $ 是闭集，它是开区间 $(-\infty,b)\cap(a,+\infty)$ 的补集；
+        \item 有限集是闭集，比如 $\{a\}$ 是闭集，因为它是开集 $(-\infty,a)\cap(a,+\infty)$ 的补集；
+        \item $\mathbb{R}$ 和 $\varnothing$ 既是开集也是闭集
+        \item 任意半开半闭区间 $ [a,b) $ 和 $ (a,b] $ 既不是开集也不是闭集。
+    \end{enumerate}
+    \label{ex:topology_on_real_numbers}
+\end{example}
+
+\begin{note}
+    在拓扑空间，开集的补集就是闭集，闭集的补集是开集。
+    开集是对几何空间中开区间、开球等概念的抽象;
+    闭集是对几何空间中闭区间、闭球等概念的抽象。
+    空集和全集既是开集又是闭集，当然也存在既非开集也非闭集的集合。
+\end{note}
+
+\vspace{1em}
+\subsection{领域和聚点}
+
+\begin{definition}[领域 Neighborhood]
+    设 $(X,\mathcal{T})$ 是拓扑空间，$x\in X$ 的\textbf{领域}记为 $N(x)\subseteq X$，定义为：存在开集 $U\in\mathcal{T}$，使得：
+    \[
+        x\in U \subseteq N(x) \subseteq X
+    \]
+    领域 $N(x)$ 不一定是开集。如果 $N(x)\in\mathcal{T}$ 是开集，则称为\textbf{开领域}。
+    \label{def:neighborhood}
+\end{definition}
+\begin{example}
+    在 $(\mathbb{R},\mathcal{T})$ 中，设 $x=0$，则
+    \begin{enumerate}
+        \item $N_1(0)=(-1,1)$ 是 $0$ 的开领域，因为 $(-1,1)$ 是开集，且 $0\in(-0.5,0.5)\subseteq(-1,1)$；
+        \item $N_2(0)=[-1,1]$ 是 $0$ 的领域，因为存在开集 $(-0.5,0.5)$，使得 $0\in(-0.5,0.5)\subseteq[-1,1]$，但 $[-1,1]$ 不是开集，所以不是开领域；
+        \item $N_3(0)=\{0\}\cup(1,2)$ 不是 $0$ 的领域，因为不存在开集 $U$，使得 $0\in U \subseteq \{0\}\cup(1,2)$。
+    \end{enumerate}
+\end{example}
+
+\begin{note}
+    领域就是拓扑空间中对点“附近”的一种抽象描述。
+\end{note}
+\vspace{1em}
+
+\begin{definition}[聚点 Accumulation Point]
+    设 $(X,\mathcal{T})$ 是拓扑空间，$A\subseteq X$，点 $x\in X$ 称为 $A$ 的\textbf{聚点}，当且仅当，$x$ 的每个领域 $N(x)$ 都与 $A$ 有交集，且
+    \[
+        N(x) \cap (A\setminus\{x\}) \neq \varnothing.
+    \]
+    \label{def:accumulation_point}
+\end{definition}
+
+\begin{example}
+    在 $(\mathbb{R},\mathcal{T})$ 中，设 $A=\{1/n:n\in\mathbb{Z}^+\}$，则
+    \begin{enumerate}
+        \item $0$ 是 $A$ 的聚点，因为 $0$ 的每个领域都与 $A$ 有交集；
+        \item $1$ 不是 $A$ 的聚点，因为存在开领域 $(0.5,1.5)$，使得 $(0.5,1.5)\cap (A\setminus\{1\})=\varnothing$；
+        \item $1/2$ 不是 $A$ 的聚点，因为存在开领域 $(0.4,0.6)$，使得 $(0.4,0.6)\cap (A\setminus\{1/2\})=\varnothing$。
+    \end{enumerate}
+    在实数集中，柯西序列的极限都是聚点。
+\end{example}
+
+\begin{note}
+    $x$ 是 $A$ 的聚点，并不需要 $x\in A$，只需要 $x$ 的每个领域与 $A\setminus\{x\}$ 有交集即可。
+    比如，在例 \ref{ex:sqrt2-approx} 中，设 $A=\{x\in\mathbb{Q}:x=1,1.4,1.41,1.414,1.4142,\ldots\}$ 是一个有理柯西序列，
+    $\sqrt{2}$ 是 $A$ 的聚点，但 $\sqrt{2}\notin A$。
+\end{note}
+\vspace{1em}
+
+\begin{proposition}[闭集判定的充要条件]
+    设 $(X,\mathcal{T})$ 是拓扑空间，$A\subseteq X$，则 $A$ 是闭集当且仅当 $A$ 的每个聚点都属于 $A$。
+    \label{prop:closed_set_criteria_1}
+\end{proposition}
+
+\begin{proof}
+    必要性：设 $A$ 是闭集，$x$ 是 $A$ 的聚点，若 $x\notin A$，则 $x\in \complement_X A$。因为 $A$ 是闭集，所以 $\complement_X A$ 是开集，因此，存在开集 $U\in \mathcal{T}$，使得
+    \[
+        x\in U \subseteq \complement_X A.
+    \]
+    这就说明 $U$ 与 $A\setminus\{x\}$ 没有交集，这与 $x$ 是 $A$ 的聚点矛盾，所以 $x\in A$。
+
+    充分性：设 $A$ 的每个聚点都属于 $A$，若 $A$ 不是闭集，则 $\complement_X A$ 不是开集，所以存在点 $x\in \complement_X A$，使得对任意开集 $U\in \mathcal{T}$，只要 $x\in U$，就有
+    \[
+        U \cap A \neq \varnothing.
+    \]
+    这就说明 $x$ 的每个领域都与 $A\setminus\{x\}$ 有交集，所以 $x$ 是 $A$ 的聚点，由假设可知，$x\in A$，这与 $x\in \complement_X A$ 矛盾，所以 $A$ 是闭集。
+\end{proof}
+
+\vspace{1em}
+
+\subsection{集合的内部与闭包}
+
+\begin{definition}[集合的内部与闭包]
+    设 $(X,\mathcal{T})$ 是拓扑空间，$A\subseteq X$，$A$ 的内部记为 $\operatorname{int}(A)$，定义为：
+    \[
+        \operatorname{int}(A) = \bigcup \{U \in \mathcal{T} : U \subseteq A\} 
+    \]
+    也即 $A$ 的内部是所有包含于 $A$ 的开集的并。
+    \label{def:set_interior}
+\end{definition}
+
+\begin{proposition}
+    设 $(X,\mathcal{T})$ 是拓扑空间，$A\subseteq X$，则 $\operatorname{int}(A)$ 是包含于 $A$ 的最大开集。
+\end{proposition}
+\vspace{1em}
+
+\begin{definition}[集合的闭包 Closure]
+    设 $(X,\mathcal{T})$ 是拓扑空间，$A\subseteq X$，$A$ 的闭包记为 $\operatorname{cl}(A)$ 或 $\overline{A}$，定义为：
+    \[
+        \operatorname{cl}(A) = \bigcap \{F \subseteq X : F \text{ 是闭集且 } A \subseteq F\}
+    \]
+    也即 $A$ 的闭包是所有包含 $A$ 的闭集的交。
+    \label{def:set_closure}
+\end{definition}
+
+\begin{proposition}
+    设 $(X,\mathcal{T})$ 是拓扑空间，$A\subseteq X$，则 $\operatorname{cl}(A)$ 是包含 $A$ 的最小闭集。
+\end{proposition}
+\vspace{1em}
+
+\begin{proposition}[开集和闭集判定的充要条件]
+    设 $(X,\mathcal{T})$ 是拓扑空间，$A\subseteq X$，则
+    \begin{enumerate}
+        \item $A$ 是开集当且仅当 $\operatorname{int}(A) = A$；
+        \item $A$ 是闭集当且仅当 $\operatorname{cl}(A) = A$。
+    \end{enumerate}
+    \label{prop:open_closed_set_criteria_1}
+\end{proposition}
+
+\begin{proposition}[集合内部与闭包的关系]
+    设 $(X,\mathcal{T})$ 是拓扑空间，$A\subseteq X$，则
+    \[
+        \operatorname{cl}(A) = A \cup \{\text{$A$ 的所有聚点}\}.
+    \]
+\end{proposition}
+
+\begin{proof}
+    设 $F = A \cup \{\text{$A$ 的所有聚点}\}$，则 $A \subseteq F$。若 $x \in F$ 的补集 $\complement_X F$，则 $x \notin A$ 且 $x$ 不是 $A$ 的聚点，所以存在开集 $U \in \mathcal{T}$，使得
+    \[
+        x \in U \subseteq \complement_X A.
+    \]
+    这就说明 $\complement_X F$ 是开集，所以 $F$ 是闭集，因此，$\operatorname{cl}(A) \subseteq F$。若 $F \not\subseteq \operatorname{cl}(A)$，则存在 $x \in F$，使得 $x \notin \operatorname{cl}(A)$，所以 $x \in \complement_X \operatorname{cl}(A)$。因为 $\operatorname{cl}(A)$ 是闭集，所以 $\complement_X \operatorname{cl}(A)$ 是开集，因此，存在开集 $V \in \mathcal{T}$，使得
+    \[
+        x \in V \subseteq \complement_X \operatorname{cl}(A).
+    \]
+    这就说明 $V$ 与 $A\setminus\{x\}$ 没有交集，所以 $x$ 不是 $A$ 的聚点，由假设可知，$x\in A$，这与 $x\notin \operatorname{cl}(A)$ 矛盾，
+    所以 $F \subseteq \operatorname{cl}(A)$。综上所述，$\operatorname{cl}(A) = F = A \cup \{\text{$A$ 的所有聚点}\}$。
+\end{proof}
+\vspace{1em}
+
+\begin{example}
+    在 $(\mathbb{R},\mathcal{T})$ 中，设 $A=(1,2]$，则
+    \begin{enumerate}
+        \item $A$ 的内部为 $\operatorname{int}(A)=(1,2)$，它是包含于 $A$ 的最大开集；
+        \item $A$ 的闭包为 $\operatorname{cl}(A)=(1,2) \cup \{1,2\} = [1,2]$，它是包含 $A$ 的最小闭集。
+    \end{enumerate}
+\end{example}
+
+\begin{note}
+    集合内部中的点称为集合的\textbf{内点}，根据命题 \ref{prop:open_closed_set_criteria_1} 可知，开集中的点都是内点。
+\end{note}
+
+\vspace{1em}
+
+\subsection{集合的边界与外部}
+\begin{definition}[集合的边界 Boundary]
+    设 $(X,\mathcal{T})$ 是拓扑空间，$A\subseteq X$，$A$ 的\textbf{边界}记为 $\partial A$，定义为：
+    \[
+        \partial A = \operatorname{cl}(A) \setminus \operatorname{int}(A)
+    \]
+    \label{def:set_boundary}
+\end{definition}
+
+\begin{proposition}[闭包分解]
+    设 $(X,\mathcal{T})$ 是拓扑空间，$A\subseteq X$，则 $\operatorname{cl}(A) = \operatorname{int}(A) \cup \partial(A) = A \cup \partial(A) $。
+    \label{prop:closure_decomposition}
+\end{proposition}
+\begin{proof}
+    因为 $\operatorname{int}(A)\subseteq A \subseteq \operatorname{cl}(A)$，所以只需证明 $\operatorname{cl}(A) = \operatorname{int}(A) \cup \partial(A)$。
+    根据定义，$\partial A = \operatorname{cl}(A) \setminus \operatorname{int}(A) = \complement_{\operatorname{cl}(A)} \operatorname{int}(A)$，所以，
+    \[
+        \operatorname{int}(A) \cup \partial(A) = \operatorname{int}(A) \cup (\complement_{\operatorname{cl}(A)} \operatorname{int}(A)) = \operatorname{cl}(A)
+    \]
+\end{proof}
+\vspace{1em}
+
+\begin{definition}[集合的外部 Exterior]
+    设 $(X,\mathcal{T})$ 是拓扑空间，$A\subseteq X$，$A$ 的\textbf{外部}记为 $\operatorname{ext}(A)$，定义为：
+    \[
+        \operatorname{ext}(A) = \complement_X \operatorname{cl}(A).
+    \]
+    \label{def:set_exterior}
+\end{definition}
+
+\begin{proposition}[集合的外部是开集]
+    设 $(X,\mathcal{T})$ 是拓扑空间，$A\subseteq X$，则 $\operatorname{ext}(A)$ 是开集，并且
+    \[
+        \operatorname{ext}(A) = \complement_X \operatorname{cl}(A) = \operatorname{int}(\complement_X A)
+    \]
+    \label{prop:exterior_is_open}
+\end{proposition}
+\begin{proof}
+    因为 $\operatorname{cl}(A)$ 是闭集，所以 $\complement_X \operatorname{cl}(A)$ 是开集，因此，$\operatorname{ext}(A)$ 是开集。
+    根据集合外部的定义，$\operatorname{ext}(A) = \complement_X \operatorname{cl}(A) = \{x\in X : x \notin A \text{并且} x\notin \{A \text{\ 的所有聚点}\}\}$。
+    因为 $\forall x \in \operatorname{int}(\complement_X A) \subseteq \complement_X A$，所以 $x \notin A$；又因为，$\forall x\in \operatorname{int}(\complement_X A)$，
+    存在 $ x\in U \subseteq \complement_X A$，根据集合的矛盾律 \ref{prop:sets_laws} $ \complement_X A \cap A = \varnothing$ 所以 $U \cap A = \varnothing$，说明 $x$ 不是 $A$ 的聚点。
+    那么 $\forall x\in \operatorname{int}(\complement_X A),\ x\in \{x\in X : x \notin A \text{并且} x\notin \{A \text{\ 的所有聚点}\}\} = \complement_X \operatorname{cl}(A)$，
+\end{proof}
+\vspace{1em}
+
+\begin{proposition}
+    设 $(X,\mathcal{T})$ 是拓扑空间，$A\subseteq X$，则
+    \[
+        X = \operatorname{int}(A) \cup \partial(A) \cup \operatorname{ext}(A)
+    \]
+    并且，
+    \begin{align*}
+        \operatorname{int}(A) \cap \partial(A) &= \varnothing,\\
+        \operatorname{int}(A) \cap \operatorname{ext}(A) &= \varnothing,\\
+        \partial(A) \cap \operatorname{ext}(A) &= \varnothing
+    \end{align*}
+    \label{prop:topology_space_decomposition}
+\end{proposition}
+\begin{proof}
+    根据边界 \ref{def:set_boundary} 和外部 \ref{def:set_exterior} 的定义，以及命题 \ref{prop:closure_decomposition} 和 \ref{prop:exterior_is_open} 可以非常容易证明。
+\end{proof}
+
+\begin{note}
+    集合的内部，边界和外部，将全集划分为三个互不相交的部分。
+\end{note}
+\vspace{1em}
+
+\begin{example}
+    在 $(\mathbb{R},\mathcal{T})$ 中，设 $A=(1,2]$，则
+    \begin{enumerate}
+        \item $A$ 的边界为 $\partial A= [1,2]\setminus (1,2) = \{1,2\}$；
+        \item $A$ 的外部为 $\operatorname{ext}(A) = (-\infty,+\infty) \setminus [1,2] = (-\infty,1)\cup(2,+\infty)$。
+    \end{enumerate}
+\end{example}
+\vspace{1em}
+
+\begin{proposition}
+    设 $(X,\mathcal{T})$ 是拓扑空间，$A\subseteq X$，则有：
+    \[
+        \complement_X(\operatorname{int}(A)) = \operatorname{cl}(\complement_X A)
+    \]
+    \label{prop:complement_interior_closure}
+\end{proposition}
+
+\begin{proof}
+    根据内部 \ref{def:set_interior} 的定义，$\operatorname{int}(A) = \bigcup \{U \in \mathcal{T} : U \subseteq A\}$。根据德摩根律 \ref{prop:sets_laws} 有：
+    \[
+        \complement_X(\operatorname{int}(A)) = \complement_X\left(\bigcup \{U \in \mathcal{T} : U \subseteq A\}\right) = \bigcap \{\complement_X U : U \in \mathcal{T} \text{且} U \subseteq A\}.
+    \]
+    因为 $U$ 是开集，所以 $\complement_X U$ 是闭集，并且 $A\subseteq U$ 等价于 $\complement_X U \subseteq \complement_X A$，根据闭包 \ref{def:set_closure} 的定义，有：
+    \[
+        \complement_X(\operatorname{int}(A)) = \bigcap \{\complement_X U : U \in \mathcal{T} \text{且} A\subseteq U\}  = \operatorname{cl}(\complement_X A).
+    \]
+\end{proof}
+
+\begin{corollary}
+    设 $(X,\mathcal{T})$ 是拓扑空间，$A\subseteq X$，则 。
+    \begin{enumerate}
+        \item 集合的边界等于补集的边界：$\partial A = \partial (\complement_X A)$
+        \item 集合的边界等于闭包与补集闭包的交：$\partial A = \operatorname{cl}(A) \cap \operatorname{cl}(\complement_X A)$；
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+    推论 1：根据命题 \ref{prop:topology_space_decomposition} 有：
+    \[
+        \complement_X(\operatorname{int}(A)) = \partial(A) \cup \operatorname{ext}(A)
+    \]
+    根据命题 \ref{prop:closure_decomposition} 有：
+    \[
+        \operatorname{cl}(\complement_X A) = \partial(\complement_X A) \cup \operatorname{int}(\complement_X A)
+    \]
+    根据命题 \ref{prop:complement_interior_closure} $\complement_X(\operatorname{int}(A)) = \operatorname{cl}(\complement_X A)$，那么：
+    \[
+        \partial(A) \cup \operatorname{ext}(A) = \partial(\complement_X A) \cup \operatorname{int}(\complement_X A)
+    \]
+    根据命题 \ref{prop:exterior_is_open} $\operatorname{ext}(A) = \operatorname{int}(\complement_X A)$。
+    并且 $\partial A \cap \operatorname{ext}(A) = \varnothing,\ \partial(\complement_X A) \cap \operatorname{int}(\complement_X A) = \varnothing$，所以：
+    \[
+        \partial A = \partial (\complement_X A) = \partial (\complement_X A)
+    \]
+    推论 2：
+    \[
+        \operatorname{cl}(A) \cap \operatorname{cl}(\complement_X A) =\operatorname{cl}(A) \cap \complement_X \operatorname{int}(A) = \operatorname{cl}(A) \cap [\partial(A) \cup \operatorname{ext}(A)]
+    \]
+    根据集合交并的分配律 \ref{prop:sets_laws} 有：
+    \[
+        \operatorname{cl}(A) \cap [\partial(A) \cup \operatorname{ext}(A)] = [\operatorname{cl}(A) \cap \partial(A)] \cup [\operatorname{cl}(A) \cap \operatorname{ext}(A)]
+    \]
+    其中，$\operatorname{cl}(A) \cap \partial(A) = \varnothing,\ \operatorname{cl}(A) \cap \partial(A) = \partial A$，所以：
+    \[
+        \operatorname{cl}(A) \cap \operatorname{cl}(\complement_X A) = [\operatorname{cl}(A) \cap \partial(A)] \cup [\operatorname{cl}(A) \cap \operatorname{ext}(A)] = \partial A
+    \]
+\end{proof} 
+
+\begin{note}
+    总结一下，在拓扑空间 $(X,\mathcal{T})$ 中，子集 $A\subseteq X$ 的内部、闭包、边界和外部的关系如下：
+    \begin{enumerate}
+        \item 内部：$\operatorname{int}(A)$ 是包含于 $A$ 的最大开集；
+        \item 闭包：$\operatorname{cl}(A)$ 是包含 $A$ 的最小闭集，并且 $\operatorname{cl}(A) = A \cup \{\text{$A$ 的所有聚点}\}$；
+        \item 边界：$\partial A = \operatorname{cl}(A) \setminus \operatorname{int}(A) = \operatorname{cl}(A) \cap \operatorname{cl}(\complement_X A)  = \partial (\complement_X A)$；
+        \item 外部：$\operatorname{ext}(A) = \complement_X \operatorname{cl}(A) = \operatorname{int}(\complement_X A)$；
+        \item 补集：$\complement_X(\operatorname{int}(A)) = \operatorname{cl}(\complement_X A)$；
+        \item 分解：$X = \operatorname{int}(A) \cup \partial(A) \cup \operatorname{ext}(A)$，并且 $\operatorname{int}(A)$、$\partial(A)$ 和 $\operatorname{ext}(A)$ 互不相交。
+    \end{enumerate}
+    比如，在 $(\mathbb{R},\mathcal{T})$ 中，设 $A=(1,2]$，则
+    \begin{enumerate}
+        \item $A$ 的补集为 $\complement_{\mathbb{R}} A = (-\infty,1] \cup (2,+\infty)$；
+        \item $A$ 的内部为 $\operatorname{int}(A)=(1,2)$；
+        \item $A$ 的闭包为 $\operatorname{cl}(A)=[1,2]$；
+        \item $A$ 的边界为 $\partial A= [1,2]\setminus (1,2) = \{1,2\}$；
+        \item $A$ 的外部为 $\operatorname{ext}(A) = (-\infty,+\infty) \setminus [1,2] = (-\infty,1)\cup(2,+\infty)$。
+    \end{enumerate}
+\end{note}
+
+\vspace{1em}
+
+\subsection{拓扑基}
+
+\vspace{1em}
+\subsection{子空间拓扑}
+
+\newpage
